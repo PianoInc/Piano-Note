@@ -17,26 +17,26 @@ internal extension Uploadable where Self: ErrorHandleable {
     
     internal func cache(_ insertedObjects: Set<NSManagedObject> = Set<NSManagedObject>(), _ updatedObjects: Set<NSManagedObject> = Set<NSManagedObject>(), _ deletedObjects: Set<NSManagedObject> = Set<NSManagedObject>()) {
         for insertedObject in insertedObjects {
-            guard let record = insertedObject.record else {continue}
+            guard let record = insertedObject.makeRecordIfNeeded() else {continue}
             let managedUnit = ManagedUnit(record: record, object: insertedObject)
             recordsToSave.append(RecordCache(database(for: record.recordID), managedUnit))
         }
         for updatedObject in updatedObjects {
-            guard let record = updatedObject.record else {continue}
+            guard let record = updatedObject.makeRecordIfNeeded() else {continue}
             let managedUnit = ManagedUnit(record: record, object: updatedObject)
             recordsToSave.append(RecordCache(database(for: record.recordID), managedUnit))
         }
         for deletedObject in deletedObjects {
-            guard let record = deletedObject.record else {continue}
+            guard let record = deletedObject.makeRecordIfNeeded() else {continue}
             let managedUnit = ManagedUnit(record: record, object: nil)
             recordIDsToDelete.append(RecordCache(database(for: record.recordID), managedUnit))
         }
     }
     
     internal func upload() {
+        let converter = Converter()
         for (idx, cache) in recordsToSave.enumerated() {
-            let managedUnit = DataConvert.objectToRecordBlock?(cache.managedUnit) ?? cache.managedUnit
-            recordsToSave[idx] = RecordCache(cache.database, managedUnit)
+            recordsToSave[idx] = RecordCache(cache.database, converter.object(toRecord: cache.managedUnit))
         }
         var datasource = [DatabaseCache]()
         for recordCache in recordsToSave {
