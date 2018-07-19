@@ -1,0 +1,7 @@
+Pods
+*.DS_Store
+*.lock
+*.xcuserdatad
+*/xcuserdata/*
+.idea/*
+Block.xcworkspace/xcshareddata
