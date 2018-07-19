@@ -44,7 +44,8 @@ internal extension Modify {
     private func modify(from record: CKRecord, to object: NSManagedObject) {
         object.setValue(record.metadata, forKey: KEY_RECORD_DATA)
         object.setValue(record.recordID.recordName, forKey: KEY_RECORD_NAME)
-        DataConvert.recordToObjectBlock?(ManagedUnit(record: record, object: object))
+        let converter = Converter()
+        converter.record(toObject: ManagedUnit(record: record, object: object))
     }
     
 }

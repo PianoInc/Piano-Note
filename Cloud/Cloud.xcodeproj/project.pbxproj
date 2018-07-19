@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1601721E20F6E9D000E43EB2 /* DataConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1601721D20F6E9D000E43EB2 /* DataConvert.swift */; };
-		1603E7D720F5ECC9002D6797 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603E7D620F5ECC9002D6797 /* Util.swift */; };
-		16190AC320F82C6800BF2323 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16190AC220F82C6800BF2323 /* Upload.swift */; };
 		16190AC720F830F500BF2323 /* NSPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16190AC620F830F500BF2323 /* NSPersistentContainer.swift */; };
 		162A721220F485A600D59E2A /* Cloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 162A721020F4855400D59E2A /* Cloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		162A721320F485A700D59E2A /* Cloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 162A721020F4855400D59E2A /* Cloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,12 +60,17 @@
 		162A727720F4866400D59E2A /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162A723B20F4863600D59E2A /* Typealias.swift */; };
 		162A727820F4866800D59E2A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 162A721620F4863600D59E2A /* Localizable.strings */; };
 		162A727920F4866800D59E2A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 162A721620F4863600D59E2A /* Localizable.strings */; };
+		1660CCF52100927200D5BEAE /* NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660CCF42100927200D5BEAE /* NSRange.swift */; };
+		1660CCF62100927200D5BEAE /* NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660CCF42100927200D5BEAE /* NSRange.swift */; };
+		1660CCF92100929300D5BEAE /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660CCF72100929300D5BEAE /* Diff.swift */; };
+		1660CCFA2100929300D5BEAE /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660CCF72100929300D5BEAE /* Diff.swift */; };
+		1660CCFB2100929300D5BEAE /* Diff3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660CCF82100929300D5BEAE /* Diff3.swift */; };
+		1660CCFC2100929300D5BEAE /* Diff3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660CCF82100929300D5BEAE /* Diff3.swift */; };
+		1660CCFE2100939E00D5BEAE /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660CCFD2100939E00D5BEAE /* Converter.swift */; };
+		1660CCFF2100939E00D5BEAE /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660CCFD2100939E00D5BEAE /* Converter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1601721D20F6E9D000E43EB2 /* DataConvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvert.swift; sourceTree = "<group>"; };
-		1603E7D620F5ECC9002D6797 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		16190AC220F82C6800BF2323 /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		16190AC620F830F500BF2323 /* NSPersistentContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSPersistentContainer.swift; sourceTree = "<group>"; };
 		162A71F720F4853700D59E2A /* Cloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		162A720720F4854500D59E2A /* Cloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +102,10 @@
 		162A723920F4863600D59E2A /* DatabaseCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseCache.swift; sourceTree = "<group>"; };
 		162A723A20F4863600D59E2A /* CloudToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudToken.swift; sourceTree = "<group>"; };
 		162A723B20F4863600D59E2A /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
+		1660CCF42100927200D5BEAE /* NSRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRange.swift; sourceTree = "<group>"; };
+		1660CCF72100929300D5BEAE /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
+		1660CCF82100929300D5BEAE /* Diff3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff3.swift; sourceTree = "<group>"; };
+		1660CCFD2100939E00D5BEAE /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,7 +192,6 @@
 				162A722420F4863600D59E2A /* Modify.swift */,
 				162A722320F4863600D59E2A /* Purge.swift */,
 				162A721F20F4863600D59E2A /* Sync.swift */,
-				16190AC220F82C6800BF2323 /* Upload.swift */,
 			);
 			path = CoreDataOperation;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 				162A722620F4863600D59E2A /* NSEntityDescription.swift */,
 				162A722820F4863600D59E2A /* NSManagedObject.swift */,
 				16190AC620F830F500BF2323 /* NSPersistentContainer.swift */,
+				1660CCF42100927200D5BEAE /* NSRange.swift */,
 				162A722A20F4863600D59E2A /* String.swift */,
 			);
 			path = Extension;
@@ -222,11 +228,12 @@
 			children = (
 				162A723A20F4863600D59E2A /* CloudToken.swift */,
 				162A723820F4863600D59E2A /* Constant.swift */,
+				1660CCFD2100939E00D5BEAE /* Converter.swift */,
 				162A723920F4863600D59E2A /* DatabaseCache.swift */,
-				1601721D20F6E9D000E43EB2 /* DataConvert.swift */,
+				1660CCF72100929300D5BEAE /* Diff.swift */,
+				1660CCF82100929300D5BEAE /* Diff3.swift */,
 				162A723720F4863600D59E2A /* RecordCache.swift */,
 				162A723B20F4863600D59E2A /* Typealias.swift */,
-				1603E7D620F5ECC9002D6797 /* Util.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -349,15 +356,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16190AC320F82C6800BF2323 /* Upload.swift in Sources */,
 				162A726320F4866400D59E2A /* Sync.swift in Sources */,
 				162A726D20F4866400D59E2A /* String.swift in Sources */,
 				16190AC720F830F500BF2323 /* NSPersistentContainer.swift in Sources */,
 				162A727520F4866400D59E2A /* DatabaseCache.swift in Sources */,
 				162A727720F4866400D59E2A /* Typealias.swift in Sources */,
+				1660CCF92100929300D5BEAE /* Diff.swift in Sources */,
 				162A725F20F4866400D59E2A /* Fetch.swift in Sources */,
 				162A726220F4866400D59E2A /* AccountChanged.swift in Sources */,
-				1603E7D720F5ECC9002D6797 /* Util.swift in Sources */,
 				162A727020F4866400D59E2A /* ErrorHandleable.swift in Sources */,
 				162A726420F4866400D59E2A /* ContextSave.swift in Sources */,
 				162A726120F4866400D59E2A /* Share.swift in Sources */,
@@ -366,17 +372,19 @@
 				162A726820F4866400D59E2A /* Modify.swift in Sources */,
 				162A726520F4866400D59E2A /* Delete.swift in Sources */,
 				162A725D20F4866400D59E2A /* Zone.swift in Sources */,
+				1660CCF52100927200D5BEAE /* NSRange.swift in Sources */,
 				162A725A20F4866400D59E2A /* CloudManager.swift in Sources */,
 				162A726B20F4866400D59E2A /* NSManagedObject.swift in Sources */,
 				162A727620F4866400D59E2A /* CloudToken.swift in Sources */,
 				162A727320F4866400D59E2A /* RecordCache.swift in Sources */,
 				162A727420F4866400D59E2A /* Constant.swift in Sources */,
 				162A726720F4866400D59E2A /* Purge.swift in Sources */,
-				1601721E20F6E9D000E43EB2 /* DataConvert.swift in Sources */,
 				162A725C20F4866400D59E2A /* LongLive.swift in Sources */,
 				162A725E20F4866400D59E2A /* Subscription.swift in Sources */,
 				162A726E20F4866400D59E2A /* CKRecord.swift in Sources */,
+				1660CCFB2100929300D5BEAE /* Diff3.swift in Sources */,
 				162A727220F4866400D59E2A /* Uploadable.swift in Sources */,
+				1660CCFE2100939E00D5BEAE /* Converter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,11 +396,13 @@
 				162A724F20F4866300D59E2A /* String.swift in Sources */,
 				162A725720F4866300D59E2A /* DatabaseCache.swift in Sources */,
 				162A725920F4866300D59E2A /* Typealias.swift in Sources */,
+				1660CCFC2100929300D5BEAE /* Diff3.swift in Sources */,
 				162A724120F4866300D59E2A /* Fetch.swift in Sources */,
 				162A724420F4866300D59E2A /* AccountChanged.swift in Sources */,
 				162A725220F4866300D59E2A /* ErrorHandleable.swift in Sources */,
 				162A724620F4866300D59E2A /* ContextSave.swift in Sources */,
 				162A724320F4866300D59E2A /* Share.swift in Sources */,
+				1660CCFF2100939E00D5BEAE /* Converter.swift in Sources */,
 				162A724B20F4866300D59E2A /* NSEntityDescription.swift in Sources */,
 				162A723D20F4866300D59E2A /* AcceptShared.swift in Sources */,
 				162A724A20F4866300D59E2A /* Modify.swift in Sources */,
@@ -400,12 +410,14 @@
 				162A723F20F4866300D59E2A /* Zone.swift in Sources */,
 				162A723C20F4866300D59E2A /* CloudManager.swift in Sources */,
 				162A724D20F4866300D59E2A /* NSManagedObject.swift in Sources */,
+				1660CCFA2100929300D5BEAE /* Diff.swift in Sources */,
 				162A725820F4866300D59E2A /* CloudToken.swift in Sources */,
 				162A725520F4866300D59E2A /* RecordCache.swift in Sources */,
 				162A725620F4866300D59E2A /* Constant.swift in Sources */,
 				162A724920F4866300D59E2A /* Purge.swift in Sources */,
 				162A723E20F4866300D59E2A /* LongLive.swift in Sources */,
 				162A724020F4866300D59E2A /* Subscription.swift in Sources */,
+				1660CCF62100927200D5BEAE /* NSRange.swift in Sources */,
 				162A725020F4866300D59E2A /* CKRecord.swift in Sources */,
 				162A725420F4866300D59E2A /* Uploadable.swift in Sources */,
 			);
