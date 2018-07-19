@@ -84,29 +84,9 @@ internal extension ErrorHandleable where Self: ContextSave {
     private func conflict(_ error: CKError) {
         guard let ancestorRecord = error.ancestorRecord, let serverRecord = error.serverRecord, let clientRecord = error.clientRecord else {return}
         serverRecord.syncMetaData(using: self.container.coreData)
-        let conflictRecord = ConflictRecord(ancestor: ancestorRecord, server: serverRecord, client: clientRecord)
-        DataConvert.conflictBlock?(conflictRecord)
-    }
-    
-}
-
-internal extension ErrorHandleable where Self: Upload {
-    
-    internal func errorHandle(upload error: Error?) {
-        guard let error = error as? CKError else {return}
-        switch error.code {
-        case .zoneNotFound: Sync(with: container).operate()
-        case .operationCancelled: break
-        case .serverRecordChanged: conflict(error)
-        default: break
-        }
-    }
-    
-    private func conflict(_ error: CKError) {
-        guard let ancestorRecord = error.ancestorRecord, let serverRecord = error.serverRecord, let clientRecord = error.clientRecord else {return}
-        serverRecord.syncMetaData(using: self.container.coreData)
-        let conflictRecord = ConflictRecord(ancestor: ancestorRecord, server: serverRecord, client: clientRecord)
-        DataConvert.conflictBlock?(conflictRecord)
+        let record = ConflictRecord(ancestor: ancestorRecord, server: serverRecord, client: clientRecord)
+        let converter = Converter()
+        converter.cloud(conflict: record)
     }
     
 }
