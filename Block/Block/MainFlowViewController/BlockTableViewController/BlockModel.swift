@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol Uniquable {
     var identifier: String { get }
@@ -27,8 +28,6 @@ protocol TableDatable: Uniquable {
 protocol TableDataAcceptable {
     var data: TableDatable? { get set }
 }
-
-
 
 extension Note: TableDatable {
     
@@ -55,8 +54,6 @@ extension Note: TableDatable {
         
     }
 }
-
-
 
 extension Folder: TableDatable {
     
@@ -101,10 +98,6 @@ extension Block: TableDatable {
         case orderedText
         case unOrderedText
         case checklistText
-        case calendarText
-        case contactText
-        case addressText
-        case linkText
         case imageCollection
         case drawing
         case file
@@ -129,11 +122,7 @@ extension Block: TableDatable {
         case .plainText,
              .orderedText,
              .unOrderedText,
-             .checklistText,
-             .calendarText,
-             .contactText,
-             .addressText,
-             .linkText:
+             .checklistText:
             return "TextBlockTableViewCell"
         case .drawing:
             return "DrawingBlockTableViewCell"
@@ -152,22 +141,38 @@ extension Block: TableDatable {
     
     var isText: Bool {
         switch self.type {
-        case .addressText,
-             .calendarText,
-             .checklistText,
-             .contactText,
-             .linkText,
+        case .checklistText,
              .orderedText,
              .plainText,
              .unOrderedText:
             return true
-            
-        case .drawing,
-             .file,
-             .imageCollection,
-             .imagePicker,
-             .separator,
-             .comment:
+        default:
+            return false
+        }
+    }
+    
+    var text: String? {
+        switch self.type {
+        case .plainText:
+            return plainTextBlock?.text
+        case .checklistText:
+            return checklistTextBlock?.text
+        case .unOrderedText:
+            return unOrderedTextBlock?.text
+        case .orderedText:
+            return orderedTextBlock?.text
+        default:
+            return nil
+        }
+    }
+    
+    var hasFormat: Bool {
+        switch self.type {
+        case .checklistText,
+             .orderedText,
+             .unOrderedText:
+            return true
+        default:
             return false
         }
     }
