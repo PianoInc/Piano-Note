@@ -7,7 +7,6 @@
 
 /**
  Cloud & CoreData sync기능을 제공하는 CloudManager.
- - warning: set DataConvert, call setup() 필수.
  */
 public class CloudManager {
     

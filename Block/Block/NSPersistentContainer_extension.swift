@@ -101,7 +101,7 @@ extension NSPersistentContainer {
                 note1.modifiedDate = Date()
                 
                 
-                for i in 0...100000 {
+                for i in 0...3 {
                     let Block1 = Block(context: viewContext)
                     Block1.order = Double(i)
                     Block1.type = .plainText
@@ -112,7 +112,7 @@ extension NSPersistentContainer {
                     plainTextBlock1.addToBlockCollection(Block1)
                 }
                 
-                for i in 1...1000 {
+                for i in 1...3 {
                     let note2 = Note(context: viewContext)
                     note2.folder = allFolder
                     note2.modifiedDate = Date(timeIntervalSinceNow: -60 * Double(i))

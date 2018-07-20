@@ -64,25 +64,19 @@ internal class Converter {
     
     internal func object(toRecord unit: ManagedUnit) -> ManagedUnit {
         guard let object = unit.object, let record = unit.record else {return unit}
-        print(" ")
-        print(" ")
-        print(object)
-        print(Array(object.changedValues().keys))
-        print(object.committedValues(forKeys: Array(object.changedValues().keys)))
-        let keys = Array(object.changedValues().keys)
-        for (key, value) in object.committedValues(forKeys: keys) {
+        for key in object.entity.attributesByName.keys {
+            let value = object.value(forKey: key)
             if key == "imageData" {
                 record.setValue(createAsset(for: value), forKey: key)
             } else {
                 guard key != KEY_RECORD_NAME, key != KEY_RECORD_DATA else {continue}
-                print(key, value)
                 record.setValue(value, forKey: key)
             }
         }
         return ManagedUnit(record: record, object: nil)
     }
     
-    private func createAsset(for any: Any)-> CKAsset? {
+    private func createAsset(for any: Any?)-> CKAsset? {
         let fileName = UUID().uuidString.lowercased() + ".jpg"
         let fullURL = URL(fileURLWithPath: fileName, relativeTo: FileManager.default.temporaryDirectory)
         do {
@@ -96,7 +90,7 @@ internal class Converter {
     
     internal func record(toObject unit: ManagedUnit) {
         guard let record = unit.record, let object = unit.object else {return}
-        for key in record.changedKeys() where !systemField(key) {
+        for key in record.allKeys() where !systemField(key) {
             if key == "imageData" {
                 guard let asset = record.value(forKey: key) as? CKAsset else {continue}
                 object.setValue(try? Data(contentsOf: asset.fileURL), forKey: key)

@@ -32,7 +32,7 @@ protocol TableDataAcceptable {
 
 extension Note: TableDatable {
     
-    enum NoteType: Int16 {
+    enum NoteType: Int64 {
         case pin = 0
         case shared = 1
         case normal = 2
@@ -60,7 +60,7 @@ extension Note: TableDatable {
 
 extension Folder: TableDatable {
     
-    enum FolderType: Int16 {
+    enum FolderType: Int64 {
         case all = 0
         case custom = 1
         case locked = 2
@@ -75,7 +75,7 @@ extension Folder: TableDatable {
         }
     }
     
-    enum SortType: Int16 {
+    enum SortType: Int64 {
         case modified = 0
         case created = 1
         case name = 2
@@ -96,7 +96,7 @@ extension Folder: TableDatable {
 
 extension Block: TableDatable {
     
-    enum BlockType: Int16 {
+    enum BlockType: Int64 {
         case plainText
         case orderedText
         case unOrderedText
@@ -209,7 +209,7 @@ extension Block: TableDatable {
     
 }
 
-enum TextStyle: Int16 {
+enum TextStyle: Int64 {
     case body = 0
     case title1 = 1
     case title2 = 2
