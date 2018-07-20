@@ -139,12 +139,127 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A14859DDDB3ABB86377328B30388A42 /* PlatformConvertible */ = {
+			isa = PBXGroup;
+			children = (
+				08A7918D3F3A8E3018AC5C35D414949C /* iOS.swift */,
+			);
+			path = PlatformConvertible;
+			sourceTree = "<group>";
+		};
 		0BC09F83C4BE7821BE0A1A0089E40F42 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				9EFC7EB31AA8299C3D2FB5188EFCC0AA /* Block.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1B3E93BF92F2FB3F0886FAC55C9F420D /* FolderTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7428876D175DBA2A4BC03CEA11974EAA /* FolderTableViewCell.swift */,
+				CE84097EC525FA2FF1E2D667E27DB047 /* FolderTableViewController.swift */,
+			);
+			path = FolderTableViewController;
+			sourceTree = "<group>";
+		};
+		1E00F1598E7CFF8759DA1247055CA88C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				99F740AC6F1CD900544EA0E007D600A3 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		24680454F328F0DFC33D8C16932BBB23 /* FacebookTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				815389907A9E81E80CA7A11F77A407E8 /* FacebookTableViewController.swift */,
+			);
+			path = FacebookTableViewController;
+			sourceTree = "<group>";
+		};
+		2DB5B67C4D5988FF123D09EF064A94B3 /* SubFlowViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F6E10DF5642BF13DEA7755CCC4103334 /* FacebookDetailCollectionViewController */,
+				24680454F328F0DFC33D8C16932BBB23 /* FacebookTableViewController */,
+				37C0A05F75F570C2C6E14E21F124C7CB /* FolderPickerTableViewController */,
+				50EB84BCC5388A3424CC8039B9244454 /* ImagePickerCollectionViewController */,
+				AE1A6AB3E5D71281005FBFFA0F2E181F /* SettingTableViewController */,
+				CA07FC51466F88440B8C4C0432BED192 /* SortTableViewController */,
+			);
+			path = SubFlowViewController;
+			sourceTree = "<group>";
+		};
+		30499FF9F05302C366E7890857CEEA46 /* BlockComponent */ = {
+			isa = PBXGroup;
+			children = (
+				F9E2468E3775C4FE51083F488B6CDC3C /* BlockTextView.swift */,
+			);
+			path = BlockComponent;
+			sourceTree = "<group>";
+		};
+		37C0A05F75F570C2C6E14E21F124C7CB /* FolderPickerTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D2B2C61D4789A041B2E70B8BC2FCFEA6 /* FolderPickerTableViewController.swift */,
+			);
+			path = FolderPickerTableViewController;
+			sourceTree = "<group>";
+		};
+		50EB84BCC5388A3424CC8039B9244454 /* ImagePickerCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				96F4B6EE9252B27973283E18C84C9A0D /* ImagePickerCollectionViewCell.swift */,
+				A75DB09068450206331BDD46B51479C5 /* ImagePickerCollectionViewController.swift */,
+			);
+			path = ImagePickerCollectionViewController;
+			sourceTree = "<group>";
+		};
+		520218EA9B51B84DD6C32B12E8B2A4FB = {
+			isa = PBXGroup;
+			children = (
+				77E843F33F4BA30297508451072421CC /* Block */,
+				1E00F1598E7CFF8759DA1247055CA88C /* Frameworks */,
+				0BC09F83C4BE7821BE0A1A0089E40F42 /* Products */,
+				CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */,
+			);
+			sourceTree = "<group>";
+		};
+		646C949F6535E40A0F8296345248905B /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				849A28FF124594ADCAF89ACE77B7D427 /* BlockCell */,
+				30499FF9F05302C366E7890857CEEA46 /* BlockComponent */,
+			);
+			path = Block;
+			sourceTree = "<group>";
+		};
+		6944E1A674B664BAB6DEB92204150418 /* MainFlowViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BF7FC98E7A4A574C94A7980874E0C967 /* BlockTableViewController */,
+				1B3E93BF92F2FB3F0886FAC55C9F420D /* FolderTableViewController */,
+				FC4E3FF8E5E84E148495022F60C9E8BD /* New Group */,
+			);
+			path = MainFlowViewController;
+			sourceTree = "<group>";
+		};
+		72B1AD043929504F1A24D277C8EB5288 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BD278F32DBF6B4BE70808EAE6449EBA5 /* Block_extension.swift */,
+				AC1836D0A2BFDE8DD6AF375F658868F9 /* DateFormatter_extension.swift */,
+				17DAA29DC735CABAB107CA113D60E199 /* Font_extension.swift */,
+				F50E6CB5CB0524DDCDD15CF9F9DF3A70 /* NSManagedObjectContext_extension.swift */,
+				BCEB35F3DD462F6D397C35C69B0D217F /* NSPersistentContainer_extension.swift */,
+				A1F4CACC111028587B83CB4B70640E99 /* Note_extension.swift */,
+				F8F56D14895B13D3D84D9041A47D3993 /* PieceExtension.swift */,
+				560E10E6EF2E369606A544E9898D2C62 /* View_extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		77E843F33F4BA30297508451072421CC /* Block */ = {
@@ -166,31 +281,27 @@
 			path = Block;
 			sourceTree = "<group>";
 		};
-		6944E1A674B664BAB6DEB92204150418 /* MainFlowViewController */ = {
+		849A28FF124594ADCAF89ACE77B7D427 /* BlockCell */ = {
 			isa = PBXGroup;
 			children = (
-				BF7FC98E7A4A574C94A7980874E0C967 /* BlockTableViewController */,
-				1B3E93BF92F2FB3F0886FAC55C9F420D /* FolderTableViewController */,
-				FC4E3FF8E5E84E148495022F60C9E8BD /* New Group */,
+				9DB6666AFC040604C5EFDBE7BC532A00 /* DrawingBlockTableViewCell.swift */,
+				8EE972EAD7524620DB26765DD8060D95 /* FileBlockTableViewCell.swift */,
+				2F410F0C09B96D64CEFABF5824E369DF /* ImageBlockCollectionViewCell.swift */,
+				500F0D5E2A58A154378222C92AD3BC98 /* ImageCollectionBlockTableViewCell.swift */,
+				B97372403413CBBF44E6D2AEE2195C9C /* ImagePickerBlockTableViewCell.swift */,
+				BD837C9E546932A462E38CA6FE392B3F /* SeparatorBlockTableViewCell.swift */,
+				A9F1E879BE8F68435F6491E85B20CFCB /* TextBlockTableViewCell.swift */,
 			);
-			path = MainFlowViewController;
+			path = BlockCell;
 			sourceTree = "<group>";
 		};
-		1B3E93BF92F2FB3F0886FAC55C9F420D /* FolderTableViewController */ = {
+		AE1A6AB3E5D71281005FBFFA0F2E181F /* SettingTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				20DEF5D7118FEDCA5F97ED91F195952C /* CategoryCell */,
-				7428876D175DBA2A4BC03CEA11974EAA /* FolderTableViewCell.swift */,
-				CE84097EC525FA2FF1E2D667E27DB047 /* FolderTableViewController.swift */,
+				CFCEF150F52E137528C93BC9507A1D14 /* SettingDetailTableViewController.swift */,
+				23BB4A0854718BD99247A748525886A6 /* SettingTableViewController.swift */,
 			);
-			path = FolderTableViewController;
-			sourceTree = "<group>";
-		};
-		20DEF5D7118FEDCA5F97ED91F195952C /* CategoryCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CategoryCell;
+			path = SettingTableViewController;
 			sourceTree = "<group>";
 		};
 		BF7FC98E7A4A574C94A7980874E0C967 /* BlockTableViewController */ = {
@@ -212,116 +323,6 @@
 			path = BlockTableViewController;
 			sourceTree = "<group>";
 		};
-		646C949F6535E40A0F8296345248905B /* Block */ = {
-			isa = PBXGroup;
-			children = (
-				849A28FF124594ADCAF89ACE77B7D427 /* BlockCell */,
-				30499FF9F05302C366E7890857CEEA46 /* BlockComponent */,
-			);
-			path = Block;
-			sourceTree = "<group>";
-		};
-		849A28FF124594ADCAF89ACE77B7D427 /* BlockCell */ = {
-			isa = PBXGroup;
-			children = (
-				9DB6666AFC040604C5EFDBE7BC532A00 /* DrawingBlockTableViewCell.swift */,
-				8EE972EAD7524620DB26765DD8060D95 /* FileBlockTableViewCell.swift */,
-				2F410F0C09B96D64CEFABF5824E369DF /* ImageBlockCollectionViewCell.swift */,
-				500F0D5E2A58A154378222C92AD3BC98 /* ImageCollectionBlockTableViewCell.swift */,
-				B97372403413CBBF44E6D2AEE2195C9C /* ImagePickerBlockTableViewCell.swift */,
-				BD837C9E546932A462E38CA6FE392B3F /* SeparatorBlockTableViewCell.swift */,
-				A9F1E879BE8F68435F6491E85B20CFCB /* TextBlockTableViewCell.swift */,
-			);
-			path = BlockCell;
-			sourceTree = "<group>";
-		};
-		30499FF9F05302C366E7890857CEEA46 /* BlockComponent */ = {
-			isa = PBXGroup;
-			children = (
-				F9E2468E3775C4FE51083F488B6CDC3C /* BlockTextView.swift */,
-			);
-			path = BlockComponent;
-			sourceTree = "<group>";
-		};
-		FC4E3FF8E5E84E148495022F60C9E8BD /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				91F05ACE8EA8A289829288EEA3DA78C2 /* NoteTableViewCell.swift */,
-				911D2A9673C9EC541B5CD2F37768EFE0 /* NoteTableViewController.swift */,
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
-		72B1AD043929504F1A24D277C8EB5288 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				BD278F32DBF6B4BE70808EAE6449EBA5 /* Block_extension.swift */,
-				AC1836D0A2BFDE8DD6AF375F658868F9 /* DateFormatter_extension.swift */,
-				17DAA29DC735CABAB107CA113D60E199 /* Font_extension.swift */,
-				F50E6CB5CB0524DDCDD15CF9F9DF3A70 /* NSManagedObjectContext_extension.swift */,
-				BCEB35F3DD462F6D397C35C69B0D217F /* NSPersistentContainer_extension.swift */,
-				A1F4CACC111028587B83CB4B70640E99 /* Note_extension.swift */,
-				F8F56D14895B13D3D84D9041A47D3993 /* PieceExtension.swift */,
-				560E10E6EF2E369606A544E9898D2C62 /* View_extension.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
-		0A14859DDDB3ABB86377328B30388A42 /* PlatformConvertible */ = {
-			isa = PBXGroup;
-			children = (
-				08A7918D3F3A8E3018AC5C35D414949C /* iOS.swift */,
-			);
-			path = PlatformConvertible;
-			sourceTree = "<group>";
-		};
-		2DB5B67C4D5988FF123D09EF064A94B3 /* SubFlowViewController */ = {
-			isa = PBXGroup;
-			children = (
-				F6E10DF5642BF13DEA7755CCC4103334 /* FacebookDetailCollectionViewController */,
-				24680454F328F0DFC33D8C16932BBB23 /* FacebookTableViewController */,
-				37C0A05F75F570C2C6E14E21F124C7CB /* FolderPickerTableViewController */,
-				50EB84BCC5388A3424CC8039B9244454 /* ImagePickerCollectionViewController */,
-				AE1A6AB3E5D71281005FBFFA0F2E181F /* SettingTableViewController */,
-				CA07FC51466F88440B8C4C0432BED192 /* SortTableViewController */,
-			);
-			path = SubFlowViewController;
-			sourceTree = "<group>";
-		};
-		50EB84BCC5388A3424CC8039B9244454 /* ImagePickerCollectionViewController */ = {
-			isa = PBXGroup;
-			children = (
-				96F4B6EE9252B27973283E18C84C9A0D /* ImagePickerCollectionViewCell.swift */,
-				A75DB09068450206331BDD46B51479C5 /* ImagePickerCollectionViewController.swift */,
-			);
-			path = ImagePickerCollectionViewController;
-			sourceTree = "<group>";
-		};
-		37C0A05F75F570C2C6E14E21F124C7CB /* FolderPickerTableViewController */ = {
-			isa = PBXGroup;
-			children = (
-				D2B2C61D4789A041B2E70B8BC2FCFEA6 /* FolderPickerTableViewController.swift */,
-			);
-			path = FolderPickerTableViewController;
-			sourceTree = "<group>";
-		};
-		24680454F328F0DFC33D8C16932BBB23 /* FacebookTableViewController */ = {
-			isa = PBXGroup;
-			children = (
-				815389907A9E81E80CA7A11F77A407E8 /* FacebookTableViewController.swift */,
-			);
-			path = FacebookTableViewController;
-			sourceTree = "<group>";
-		};
-		AE1A6AB3E5D71281005FBFFA0F2E181F /* SettingTableViewController */ = {
-			isa = PBXGroup;
-			children = (
-				CFCEF150F52E137528C93BC9507A1D14 /* SettingDetailTableViewController.swift */,
-				23BB4A0854718BD99247A748525886A6 /* SettingTableViewController.swift */,
-			);
-			path = SettingTableViewController;
-			sourceTree = "<group>";
-		};
 		CA07FC51466F88440B8C4C0432BED192 /* SortTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,22 +339,13 @@
 			path = FacebookDetailCollectionViewController;
 			sourceTree = "<group>";
 		};
-		1E00F1598E7CFF8759DA1247055CA88C /* Frameworks */ = {
+		FC4E3FF8E5E84E148495022F60C9E8BD /* New Group */ = {
 			isa = PBXGroup;
 			children = (
-				99F740AC6F1CD900544EA0E007D600A3 /* CloudKit.framework */,
+				91F05ACE8EA8A289829288EEA3DA78C2 /* NoteTableViewCell.swift */,
+				911D2A9673C9EC541B5CD2F37768EFE0 /* NoteTableViewController.swift */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		520218EA9B51B84DD6C32B12E8B2A4FB = {
-			isa = PBXGroup;
-			children = (
-				77E843F33F4BA30297508451072421CC /* Block */,
-				1E00F1598E7CFF8759DA1247055CA88C /* Frameworks */,
-				0BC09F83C4BE7821BE0A1A0089E40F42 /* Products */,
-				CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */,
-			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
