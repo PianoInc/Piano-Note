@@ -35,18 +35,16 @@ extension BlockTableViewController: UITextViewDelegate {
     }
     
     internal func moveCellIfNeeded(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        guard let block = (textView.superview?.superview as? TableDataAcceptable)?.data as? Block,
-            let indexPath = resultsController?.indexPath(forObject: block) else { return true }
+        guard let block = (textView.superview?.superview as? TableDataAcceptable)?.data as? Block
+            else { return true }
         
         switch typingSituation(textView, block: block, replacementText: text) {
         case .resetForm:
-            //서식을 reset 시킨다.
             replaceToPlain(block: block)
             
-            
-            
         case .movePrevious:
-            ()
+            movePrevious(block: block)
+            return false
         case .stayCurrent:
             ()
         case .moveNext:
@@ -121,7 +119,7 @@ extension BlockTableViewController: UITextViewDelegate {
                 num != orderedTextBlock.num else { return }
             
             orderedTextBlock.num = num
-            update(block: block, selectedRangeLocationOffset: nil)
+            update(block: block, deletedFormatLength: nil)
         }
     }
     

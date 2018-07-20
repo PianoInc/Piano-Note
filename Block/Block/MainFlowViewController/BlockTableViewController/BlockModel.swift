@@ -139,7 +139,7 @@ extension Block: TableDatable {
         }
     }
     
-    var isText: Bool {
+    var isTextType: Bool {
         switch self.type {
         case .checklistText,
              .orderedText,
@@ -189,6 +189,25 @@ extension Block: TableDatable {
             return self.orderedTextBlock?.textStyle
         default:
             return nil
+        }
+    }
+    
+    internal func append(text: String) {
+        switch self.type {
+        case .plainText:
+            guard let originText = plainTextBlock?.text else { return }
+            plainTextBlock?.text = originText + text
+        case .checklistText:
+            guard let originText = checklistTextBlock?.text else { return }
+            checklistTextBlock?.text = originText + text
+        case .unOrderedText:
+            guard let originText = unOrderedTextBlock?.text else { return }
+            unOrderedTextBlock?.text = originText + text
+        case .orderedText:
+            guard let originText = orderedTextBlock?.text else { return }
+            orderedTextBlock?.text = originText + text
+        default:
+            return
         }
     }
     

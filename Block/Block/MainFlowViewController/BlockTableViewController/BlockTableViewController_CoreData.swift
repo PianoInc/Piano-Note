@@ -49,7 +49,7 @@ extension BlockTableViewController {
         block.type = .orderedText
         
         //6. UI Update
-        update(block: block, selectedRangeLocationOffset: nil)
+        update(block: block, deletedFormatLength: -bullet.baselineIndex)
     }
     
     internal func replacePlainWithUnOrdered(block: Block, bullet: PianoBullet) {
@@ -81,7 +81,7 @@ extension BlockTableViewController {
         block.type = .unOrderedText
         
         //6. UI Update
-        update(block: block, selectedRangeLocationOffset: nil)
+        update(block: block, deletedFormatLength: -bullet.baselineIndex)
     }
     
     internal func replacePlainWithCheck(block: Block, bullet: PianoBullet) {
@@ -112,7 +112,7 @@ extension BlockTableViewController {
         block.type = .checklistText
         
         //6. UI Update
-        update(block: block, selectedRangeLocationOffset: nil)
+        update(block: block, deletedFormatLength: -bullet.baselineIndex)
     }
     
     internal func replaceToPlain(block: Block) {
@@ -153,7 +153,38 @@ extension BlockTableViewController {
         block.type = .plainText
         
         //6. UI Update
-        update(block: block, selectedRangeLocationOffset: nil)
+        update(block: block, deletedFormatLength: nil)
+    }
+    
+    internal func movePrevious(block: Block) {
+        guard var indexPath = resultsController?.indexPath(forObject: block),
+            let text = block.text else { return }
+        
+        while indexPath.row > 0 {
+            indexPath.row -= 1
+            
+            guard let previousBlock = resultsController?.object(at: indexPath),
+                previousBlock.isTextType,
+                let cell = tableView.cellForRow(at: indexPath) as? TextBlockTableViewCell else { continue }
+            
+            let selectedRange = NSMakeRange(previousBlock.text?.count ?? 0, 0)
+            cell.ibTextView.selectedRange = selectedRange
+            cell.ibTextView.isEditable = true
+            cell.ibTextView.becomeFirstResponder()
+            
+            tableView.performBatchUpdates({
+                previousBlock.append(text: text)
+                update(block: previousBlock, deletedFormatLength: nil)
+                delete(block: block)
+            }, completion: nil)
+            
+            
+            
+            return
+            
+        }
+
+        
     }
     
     internal func delete(block: Block) {
@@ -221,15 +252,15 @@ extension BlockTableViewController {
         }
     }
     
-    //MARK: layout을 업데이트 하기 위한 메서드.
-    internal func update(block: Block, selectedRangeLocationOffset: Int?) {
+    //MARK: typing할 때 서식화 될 때 업데이트 메서드로 퍼포먼스를 위해 TableView UI Animation을 진행하지 않는다.
+    internal func update(block: Block, deletedFormatLength: Int?) {
         guard let indexPath = resultsController?.indexPath(forObject: block),
             let cell = tableView.cellForRow(at: indexPath) as? TableDataAcceptable & TextBlockTableViewCell else { return }
         
         var selectedRange = cell.ibTextView.selectedRange
         cell.data = block
         
-        if let offset = selectedRangeLocationOffset {
+        if let offset = deletedFormatLength {
             selectedRange.location += offset
         }
         
@@ -253,5 +284,7 @@ extension BlockTableViewController {
         }
         tableView.reloadRows(at: [indexPath], with: .none)
     }
+    
+
     
 }

@@ -42,11 +42,12 @@ extension BlockTableViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let title1Action = UIContextualAction(style: .normal, title:  "대제목", handler: {[weak self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             print("OK, marked as Closed")
-            guard let block = self?.resultsController?.object(at: indexPath) else { return }
+            guard let `self` = self,
+                let block = self.resultsController?.object(at: indexPath) else { return }
             
             success(true)
             
-            self?.update(block: block, textStyle: .title1)
+            self.update(block: block, textStyle: .title1)
 
         })
         //        title1Action.image
@@ -54,20 +55,22 @@ extension BlockTableViewController {
         
         let title2Action = UIContextualAction(style: .normal, title:  "소제목", handler: {[weak self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             print("OK, marked as Closed")
-            guard let block = self?.resultsController?.object(at: indexPath) else { return }
+            guard let `self` = self,
+                let block = self.resultsController?.object(at: indexPath) else { return }
             success(true)
             
-            self?.update(block: block, textStyle: .title2)
+            self.update(block: block, textStyle: .title2)
             
             
         })
         //        title1Action.image
         title2Action.backgroundColor = UIColor(red: 253/255, green: 170/255, blue: 86/255, alpha: 1)
         let bodyAction = UIContextualAction(style: .normal, title:  "본문", handler: {[weak self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            guard let block = self?.resultsController?.object(at: indexPath) else { return }
+            guard let `self` = self,
+                let block = self.resultsController?.object(at: indexPath) else { return }
             success(true)
             
-            self?.update(block: block, textStyle: .body)
+            self.update(block: block, textStyle: .body)
             
         })
         //        title1Action.image
@@ -85,7 +88,9 @@ extension BlockTableViewController {
         copyAction.backgroundColor = blueColor
         
         let deleteAction = UIContextualAction(style: .normal, title:  "삭제", handler: {[weak self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            guard let `self` = self, let block = self.resultsController?.object(at: indexPath) else { return }
+            guard let `self` = self,
+                let block = self.resultsController?.object(at: indexPath) else { return }
+            
             self.delete(block)
             
             success(true)
