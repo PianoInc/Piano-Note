@@ -41,8 +41,8 @@ extension BlockTableViewController: UITextViewDelegate {
         switch typingSituation(textView, block: block, replacementText: text) {
         case .resetForm:
             //서식을 reset 시킨다.
-            block.revertToPlain()
-            update(indexPath: indexPath, selectedRangeLocationOffset: nil)
+            replaceToPlain(block: block)
+            
             
             
         case .movePrevious:
@@ -88,16 +88,13 @@ extension BlockTableViewController: UITextViewDelegate {
             
             let correctNum = modifyNumIfNeeded(num, indexPath)
             bullet.string = "\(correctNum)"
-            block.replacePlainWithOrdered(bullet: bullet)
-            update(indexPath: indexPath, selectedRangeLocationOffset: -bullet.baselineIndex)
+            replacePlainWithOrdered(block: block, bullet: bullet)
             adjustAfterOrder(correctNum, indexPath)
             
         case .unOrderedlist:
-            block.replacePlainWithUnOrdered(bullet: bullet)
-            update(indexPath: indexPath, selectedRangeLocationOffset: -bullet.baselineIndex)
+            replacePlainWithUnOrdered(block: block, bullet: bullet)
         case .checkist:
-            block.replacePlainWithCheck(bullet: bullet)
-            update(indexPath: indexPath, selectedRangeLocationOffset: -bullet.baselineIndex)
+            replacePlainWithCheck(block: block, bullet: bullet)
         }
     }
     
@@ -122,8 +119,9 @@ extension BlockTableViewController: UITextViewDelegate {
                 let block = resultsController?.object(at: indexPath),
                 let orderedTextBlock = block.orderedTextBlock,
                 num != orderedTextBlock.num else { return }
+            
             orderedTextBlock.num = num
-            update(indexPath: indexPath, selectedRangeLocationOffset: nil)
+            update(block: block, selectedRangeLocationOffset: nil)
         }
     }
     

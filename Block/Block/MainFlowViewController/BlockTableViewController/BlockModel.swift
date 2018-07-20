@@ -177,7 +177,7 @@ extension Block: TableDatable {
         }
     }
     
-    var textStyle: TextStyle? {
+    var textStyle: FontTextStyle? {
         switch type {
         case .plainText:
             return self.plainTextBlock?.textStyle
@@ -192,21 +192,6 @@ extension Block: TableDatable {
         }
     }
     
-    func set(textStyle: TextStyle) {
-        
-        switch type {
-        case .plainText:
-            self.plainTextBlock?.textStyle = textStyle
-        case .checklistText:
-            self.checklistTextBlock?.textStyle = textStyle
-        case .unOrderedText:
-            self.unOrderedTextBlock?.textStyle = textStyle
-        case .orderedText:
-            self.orderedTextBlock?.textStyle = textStyle
-        default:
-            ()
-        }
-    }
     
     func didSelectItem(fromVC viewController: ViewController) {
         
@@ -214,37 +199,37 @@ extension Block: TableDatable {
     
 }
 
-enum TextStyle: Int64 {
-    case body = 0
-    case title1 = 1
-    case title2 = 2
-    case title3 = 3
-    
-    var font: Font {
-        switch self {
-        case .body:
-            return Font.preferredFont(forTextStyle: .body)
-            
-        case .title1:
-            return Font.preferredFont(forTextStyle: .title1).bold()
-            
-        case .title2:
-            return Font.preferredFont(forTextStyle: .title2).bold()
-            
-        case .title3:
-            return Font.preferredFont(forTextStyle: .title3).bold()
-            
-        }
-    }
-}
-
 extension PlainTextBlock {
     
-    var textStyle: TextStyle {
+    
+    //0 = body, 1 = title1, 2 = title2, 3 = title3
+    var textStyle: FontTextStyle {
         get {
-            return TextStyle(rawValue: textStyleInteger) ?? TextStyle.body
+            switch textStyleInteger {
+            case 0:
+                return .body
+            case 1:
+                return .title1
+            case 2:
+                return .title2
+            case 3:
+                return .title3
+            default:
+                return .body
+            }
         } set {
-            textStyleInteger = newValue.rawValue
+            switch newValue {
+            case .body:
+                textStyleInteger = 0
+            case .title1:
+                textStyleInteger = 1
+            case .title2:
+                textStyleInteger = 2
+            case .title3:
+                textStyleInteger = 3
+            default:
+                textStyleInteger = 0
+            }
         }
     }
 
@@ -252,33 +237,102 @@ extension PlainTextBlock {
 
 extension OrderedTextBlock {
     
-    var textStyle: TextStyle {
+    //0 = body, 1 = title1, 2 = title2, 3 = title3
+    var textStyle: FontTextStyle {
         get {
-            return TextStyle(rawValue: textStyleInteger) ?? TextStyle.body
+            switch textStyleInteger {
+            case 0:
+                return .body
+            case 1:
+                return .title1
+            case 2:
+                return .title2
+            case 3:
+                return .title3
+            default:
+                return .body
+            }
         } set {
-            textStyleInteger = newValue.rawValue
+            switch newValue {
+            case .body:
+                textStyleInteger = 0
+            case .title1:
+                textStyleInteger = 1
+            case .title2:
+                textStyleInteger = 2
+            case .title3:
+                textStyleInteger = 3
+            default:
+                textStyleInteger = 0
+            }
         }
     }
 }
 
 extension UnOrderedTextBlock {
     
-    var textStyle: TextStyle {
+    //0 = body, 1 = title1, 2 = title2, 3 = title3
+    var textStyle: FontTextStyle {
         get {
-            return TextStyle(rawValue: textStyleInteger) ?? TextStyle.body
+            switch textStyleInteger {
+            case 0:
+                return .body
+            case 1:
+                return .title1
+            case 2:
+                return .title2
+            case 3:
+                return .title3
+            default:
+                return .body
+            }
         } set {
-            textStyleInteger = newValue.rawValue
+            switch newValue {
+            case .body:
+                textStyleInteger = 0
+            case .title1:
+                textStyleInteger = 1
+            case .title2:
+                textStyleInteger = 2
+            case .title3:
+                textStyleInteger = 3
+            default:
+                textStyleInteger = 0
+            }
         }
     }
 }
 
 extension ChecklistTextBlock {
     
-    var textStyle: TextStyle {
+    //0 = body, 1 = title1, 2 = title2, 3 = title3
+    var textStyle: FontTextStyle {
         get {
-            return TextStyle(rawValue: textStyleInteger) ?? TextStyle.body
+            switch textStyleInteger {
+            case 0:
+                return .body
+            case 1:
+                return .title1
+            case 2:
+                return .title2
+            case 3:
+                return .title3
+            default:
+                return .body
+            }
         } set {
-            textStyleInteger = newValue.rawValue
+            switch newValue {
+            case .body:
+                textStyleInteger = 0
+            case .title1:
+                textStyleInteger = 1
+            case .title2:
+                textStyleInteger = 2
+            case .title3:
+                textStyleInteger = 3
+            default:
+                textStyleInteger = 0
+            }
         }
     }
 }

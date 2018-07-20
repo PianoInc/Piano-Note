@@ -52,23 +52,6 @@ class BlockTableViewController: UITableViewController {
             
         }
     }
-    
-    //MARK: layout을 업데이트 하기 위한 메서드.
-    internal func update(indexPath: IndexPath, selectedRangeLocationOffset: Int?) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? TableDataAcceptable & TextBlockTableViewCell,
-            let block = resultsController?.object(at: indexPath) else { return }
-        
-        var selectedRange = cell.ibTextView.selectedRange
-        cell.data = block
-        
-        if let offset = selectedRangeLocationOffset {
-            selectedRange.location += offset
-        }
-        
-        cell.ibTextView.selectedRange = selectedRange
-        
-        
-    }
 
 }
 

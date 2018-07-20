@@ -30,8 +30,9 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 self.ibLabel.isHidden = false
                 self.ibLabel.text = ""
                 
-                self.ibTextView.font = plainTextBlock.textStyle.font
-                self.ibLabel.font = plainTextBlock.textStyle.font
+                let font = UIFont.preferredFont(forTextStyle: plainTextBlock.textStyle)
+                self.ibTextView.font = font
+                self.ibLabel.font = font
                 self.ibTextView.text = plainTextBlock.text
                 
                 /*
@@ -46,13 +47,14 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 self.ibLabel.isHidden = true
                 self.ibLabel.text = ""
                 
-                self.ibTextView.font = checklistTextBlock.textStyle.font
-                self.ibLabel.font = checklistTextBlock.textStyle.font
+                let font = UIFont.preferredFont(forTextStyle: checklistTextBlock.textStyle)
+                self.ibTextView.font = font
+                self.ibLabel.font = font
                 self.ibTextView.text = checklistTextBlock.text
                 self.ibButton.isSelected = checklistTextBlock.isSelected
                 
                 if let whitespaceStr = checklistTextBlock.frontWhitespaces as NSString? {
-                    let width = whitespaceStr.size(withAttributes: [.font : checklistTextBlock.textStyle.font]).width
+                    let width = whitespaceStr.size(withAttributes: [.font : font]).width
                     self.whitespaceConstraint.constant += width
                 }
                 
@@ -70,14 +72,14 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibLabel.isHidden = false
                 ibLabel.text = ""
                 
-                
-                ibTextView.font = orderedTextBlock.textStyle.font
-                ibLabel.font = orderedTextBlock.textStyle.font
+                let font = UIFont.preferredFont(forTextStyle: orderedTextBlock.textStyle)
+                ibTextView.font = font
+                ibLabel.font = font
                 ibTextView.text = orderedTextBlock.text
                 ibLabel.text = "\(orderedTextBlock.num)."
                 
                 if let whitespaceStr = orderedTextBlock.frontWhitespaces as NSString? {
-                    let width = whitespaceStr.size(withAttributes: [.font : orderedTextBlock.textStyle.font]).width
+                    let width = whitespaceStr.size(withAttributes: [.font : font]).width
                     self.whitespaceConstraint.constant += width
                 }
                 
@@ -95,13 +97,14 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibLabel.isHidden = false
                 ibLabel.text = ""
                 
-                ibTextView.font = unOrderedTextBlock.textStyle.font
-                ibLabel.font = unOrderedTextBlock.textStyle.font
+                let font = UIFont.preferredFont(forTextStyle: unOrderedTextBlock.textStyle)
+                ibTextView.font = font
+                ibLabel.font = font
                 ibTextView.text = unOrderedTextBlock.text
                 ibLabel.text = "•"  //TODO: 이거 나중에 얼마든지 바뀔 수 있기 때문에 리펙토링 할 것
                 
                 if let whitespaceStr = unOrderedTextBlock.frontWhitespaces as NSString? {
-                    let width = whitespaceStr.size(withAttributes: [.font : unOrderedTextBlock.textStyle.font]).width
+                    let width = whitespaceStr.size(withAttributes: [.font : font]).width
                     self.whitespaceConstraint.constant += width
                 }
                 

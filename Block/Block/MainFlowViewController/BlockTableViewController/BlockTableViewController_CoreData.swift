@@ -1,20 +1,28 @@
 //
-//  Block_extension.swift
+//  BlockTableViewController_CoreData.swift
 //  Block
 //
-//  Created by Kevin Kim on 2018. 7. 19..
+//  Created by Kevin Kim on 2018. 7. 20..
 //  Copyright © 2018년 Piano. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreData
 
-//CoreData 값 변경
-extension Block {
-    internal func replacePlainWithOrdered(bullet: PianoBullet) {
-        guard let plainTextBlock = plainTextBlock,
+/**
+ 
+ <Model Action>
+ 1. replace
+ 2. update
+ 3. delete
+ 4. insert
+ 
+ */
+extension BlockTableViewController {
+    internal func replacePlainWithOrdered(block: Block, bullet: PianoBullet) {
+        guard let plainTextBlock = block.plainTextBlock,
             let num = Int64(bullet.string),
-            let context = managedObjectContext else { return }
+            let context = block.managedObjectContext else { return }
         
         //1. orderedText를 생성하고
         let orderedTextBlock = OrderedTextBlock(context: context)
@@ -23,10 +31,10 @@ extension Block {
         orderedTextBlock.text = (bullet.text as NSString).substring(from: bullet.baselineIndex)
         orderedTextBlock.textStyle = plainTextBlock.textStyle
         //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
-//        orderedTextBlock.attributes
+        //        orderedTextBlock.attributes
         
         //2. 이를 block에 연결시킨다.
-        orderedTextBlock.addToBlockCollection(self)
+        orderedTextBlock.addToBlockCollection(block)
         
         //3. plainText의 count가 1개이면 자신을 코어데이터에서 삭제
         if let plainTextBlockCollection = plainTextBlock.blockCollection,
@@ -35,15 +43,18 @@ extension Block {
         }
         
         //4. plainTextBlock 연결 끊기
-        self.plainTextBlock = nil
+        block.plainTextBlock = nil
         
         //5. 타입을 지정하고
-        type = .orderedText
+        block.type = .orderedText
+        
+        //6. UI Update
+        update(block: block, selectedRangeLocationOffset: nil)
     }
     
-    internal func replacePlainWithUnOrdered(bullet: PianoBullet) {
-        guard let plainTextBlock = plainTextBlock,
-            let context = managedObjectContext else { return }
+    internal func replacePlainWithUnOrdered(block: Block, bullet: PianoBullet) {
+        guard let plainTextBlock = block.plainTextBlock,
+            let context = block.managedObjectContext else { return }
         
         //1. unOrderedText를 생성하고
         let unOrderedTextBlock = UnOrderedTextBlock(context: context)
@@ -52,10 +63,10 @@ extension Block {
         unOrderedTextBlock.text = (bullet.text as NSString).substring(from: bullet.baselineIndex)
         unOrderedTextBlock.textStyle = plainTextBlock.textStyle
         //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
-//        orderedTextBlock.attributes
+        //        orderedTextBlock.attributes
         
         //2. 이를 block에 연결시킨다.
-        unOrderedTextBlock.addToBlockCollection(self)
+        unOrderedTextBlock.addToBlockCollection(block)
         
         //3. plainText의 count가 1개이면 자신을 코어데이터에서 삭제
         if let plainTextBlockCollection = plainTextBlock.blockCollection,
@@ -64,15 +75,18 @@ extension Block {
         }
         
         //4. plainTextBlock 연결 끊기
-        self.plainTextBlock = nil
+        block.plainTextBlock = nil
         
         //5. 타입을 지정해준다
-        type = .unOrderedText
+        block.type = .unOrderedText
+        
+        //6. UI Update
+        update(block: block, selectedRangeLocationOffset: nil)
     }
     
-    internal func replacePlainWithCheck(bullet: PianoBullet) {
-        guard let plainTextBlock = plainTextBlock,
-            let context = managedObjectContext else { return }
+    internal func replacePlainWithCheck(block: Block, bullet: PianoBullet) {
+        guard let plainTextBlock = block.plainTextBlock,
+            let context = block.managedObjectContext else { return }
         
         //1. checklistText를 생성하고
         let checklistTextBlock = ChecklistTextBlock(context: context)
@@ -80,10 +94,10 @@ extension Block {
         checklistTextBlock.text = (bullet.text as NSString).substring(from: bullet.baselineIndex)
         checklistTextBlock.textStyle = plainTextBlock.textStyle
         //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
-//        orderedTextBlock.attributes
+        //        orderedTextBlock.attributes
         
         //2. 이를 block에 연결시킨다.
-        checklistTextBlock.addToBlockCollection(self)
+        checklistTextBlock.addToBlockCollection(block)
         
         //3. plainText의 count가 1개이면 자신을 코어데이터에서 삭제
         if let plainTextBlockCollection = plainTextBlock.blockCollection,
@@ -92,79 +106,85 @@ extension Block {
         }
         
         //4. plainTextBlock 연결 끊기
-        self.plainTextBlock = nil
+        block.plainTextBlock = nil
         
         //5. 타입을 지정해준다
-        type = .checklistText
+        block.type = .checklistText
+        
+        //6. UI Update
+        update(block: block, selectedRangeLocationOffset: nil)
     }
     
-    internal func revertToPlain() {
-        guard let context = managedObjectContext else { return }
+    internal func replaceToPlain(block: Block) {
+        guard let context = block.managedObjectContext else { return }
         
         
         //1. plainText를 생성하고
         let plainTextBlock = PlainTextBlock(context: context)
-        plainTextBlock.text = self.text
-        plainTextBlock.textStyle = self.textStyle ?? .body
+        plainTextBlock.text = block.text
+        plainTextBlock.textStyle = block.textStyle ?? .body
         //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
-//        orderedTextBlock.attributes
+        //        orderedTextBlock.attributes
         
         //2. 이를 block에 연결시킨다.
-        plainTextBlock.addToBlockCollection(self)
+        plainTextBlock.addToBlockCollection(block)
         
         //3.
-        if let checklistTextBlock = checklistTextBlock,
+        if let checklistTextBlock = block.checklistTextBlock,
             let collection = checklistTextBlock.blockCollection,
             collection.count < 2 {
             context.delete(checklistTextBlock)
-        } else if let unOrderedTextBlock = unOrderedTextBlock,
+        } else if let unOrderedTextBlock = block.unOrderedTextBlock,
             let collection = unOrderedTextBlock.blockCollection,
             collection.count < 2 {
             context.delete(unOrderedTextBlock)
-        } else if let orderedTextBlock = orderedTextBlock,
+        } else if let orderedTextBlock = block.orderedTextBlock,
             let collection = orderedTextBlock.blockCollection,
             collection.count < 2 {
             context.delete(orderedTextBlock)
         }
         
         //4. 나머지 것들 연결 끊기
-        self.checklistTextBlock = nil
-        self.unOrderedTextBlock = nil
-        self.orderedTextBlock = nil
+        block.checklistTextBlock = nil
+        block.unOrderedTextBlock = nil
+        block.orderedTextBlock = nil
         
         //5. 타입을 지정한다
-        type = .plainText
+        block.type = .plainText
+        
+        //6. UI Update
+        update(block: block, selectedRangeLocationOffset: nil)
     }
     
-    internal func deleteSelf() {
-        guard let context = managedObjectContext else { return }
+    internal func delete(block: Block) {
+        guard let context = block.managedObjectContext else { return }
         
         //1. 자신과 연결된 블록을 체크하여 삭제한다.
-        if let plainTextBlock = plainTextBlock,
+        if let plainTextBlock = block.plainTextBlock,
             let collection = plainTextBlock.blockCollection,
             collection.count < 2 {
             context.delete(plainTextBlock)
-        } else if let checklistTextBlock = checklistTextBlock,
+        } else if let checklistTextBlock = block.checklistTextBlock,
             let collection = checklistTextBlock.blockCollection,
             collection.count < 2 {
             context.delete(checklistTextBlock)
-        } else if let unOrderedTextBlock = unOrderedTextBlock,
+        } else if let unOrderedTextBlock = block.unOrderedTextBlock,
             let collection = unOrderedTextBlock.blockCollection,
             collection.count < 2 {
             context.delete(unOrderedTextBlock)
-        } else if let orderedTextBlock = orderedTextBlock,
+        } else if let orderedTextBlock = block.orderedTextBlock,
             let collection = orderedTextBlock.blockCollection,
             collection.count < 2 {
             context.delete(orderedTextBlock)
-        } else if let drawingBlock = drawingBlock,
+        } else if let drawingBlock = block.drawingBlock,
             let collection = drawingBlock.blockCollection,
             collection.count < 2 {
             context.delete(drawingBlock)
-        } else if let fileBlock = fileBlock,
+        } else if let fileBlock = block.fileBlock,
             let collection = fileBlock.blockCollection,
             collection.count < 2 {
             context.delete(fileBlock)
-        } else if let imageCollectionBlock = imageCollectionBlock,
+        } else if let imageCollectionBlock = block.imageCollectionBlock,
             let collection = imageCollectionBlock.blockCollection,
             collection.count < 2 {
             
@@ -180,10 +200,7 @@ extension Block {
                     context.delete(imageID)
                 }
             }
-
-            
             context.delete(imageCollectionBlock)
-            
         } else {
             //나머지 추가로 추가될 것들
         }
@@ -193,9 +210,48 @@ extension Block {
         
         
         //3. 나 자신을 지워야함
-        context.delete(self)
+        context.delete(block)
         
+        //4. UI update
+        //Auto
+        do {
+            try context.save()
+        } catch {
+            print("delete(block: Block) 에러: \(error.localizedDescription)")
+        }
     }
     
+    //MARK: layout을 업데이트 하기 위한 메서드.
+    internal func update(block: Block, selectedRangeLocationOffset: Int?) {
+        guard let indexPath = resultsController?.indexPath(forObject: block),
+            let cell = tableView.cellForRow(at: indexPath) as? TableDataAcceptable & TextBlockTableViewCell else { return }
+        
+        var selectedRange = cell.ibTextView.selectedRange
+        cell.data = block
+        
+        if let offset = selectedRangeLocationOffset {
+            selectedRange.location += offset
+        }
+        
+        cell.ibTextView.selectedRange = selectedRange
+    }
+    
+    internal func update(block: Block, textStyle: FontTextStyle) {
+        guard let indexPath = resultsController?.indexPath(forObject: block) else { return }
+        
+        switch block.type {
+        case .plainText:
+            block.plainTextBlock?.textStyle = textStyle
+        case .checklistText:
+            block.checklistTextBlock?.textStyle = textStyle
+        case .unOrderedText:
+            block.unOrderedTextBlock?.textStyle = textStyle
+        case .orderedText:
+            block.orderedTextBlock?.textStyle = textStyle
+        default:
+            ()
+        }
+        tableView.reloadRows(at: [indexPath], with: .none)
+    }
     
 }
