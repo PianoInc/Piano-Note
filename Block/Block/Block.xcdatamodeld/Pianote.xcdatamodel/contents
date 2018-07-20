@@ -5,7 +5,7 @@
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="typeInteger" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="typeInteger" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="checklistTextBlock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChecklistTextBlock" inverseName="blockCollection" inverseEntity="ChecklistTextBlock" syncable="YES"/>
         <relationship name="commentBlock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Comment" inverseName="block" inverseEntity="Comment" syncable="YES"/>
         <relationship name="drawingBlock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DrawingBlock" inverseName="blockCollection" inverseEntity="DrawingBlock" syncable="YES"/>
@@ -25,7 +25,7 @@
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tagStr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="textStyleInteger" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="textStyleInteger" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="blockCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Block" inverseName="checklistTextBlock" inverseEntity="Block" syncable="YES"/>
     </entity>
     <entity name="Comment" representedClassName="Comment" syncable="YES" codeGenerationType="class">
@@ -61,8 +61,8 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sortTypeInteger" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="typeInteger" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sortTypeInteger" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="typeInteger" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="noteCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="folder" inverseEntity="Note" syncable="YES"/>
     </entity>
     <entity name="ImageBlock" representedClassName="ImageBlock" syncable="YES" codeGenerationType="class">
@@ -93,7 +93,7 @@
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="552911580" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" defaultValueString="New Note" syncable="YES"/>
-        <attribute name="typeInteger" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="typeInteger" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="blockCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Block" inverseName="note" inverseEntity="Block" syncable="YES"/>
         <relationship name="folder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="noteCollection" inverseEntity="Folder" syncable="YES"/>
         <relationship name="tagCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="noteCollection" inverseEntity="Tag" syncable="YES"/>
@@ -108,7 +108,7 @@
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tagStr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="textStyleInteger" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="textStyleInteger" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="blockCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Block" inverseName="orderedTextBlock" inverseEntity="Block" syncable="YES"/>
     </entity>
     <entity name="PlainTextBlock" representedClassName="PlainTextBlock" syncable="YES" codeGenerationType="class">
@@ -119,12 +119,12 @@
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tagStr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="textStyleInteger" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="textStyleInteger" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="blockCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Block" inverseName="plainTextBlock" inverseEntity="Block" syncable="YES"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="colorIntegerType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="colorIntegerType" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="noteCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="tagCollection" inverseEntity="Note" syncable="YES"/>
@@ -138,7 +138,7 @@
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tagStr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="textStyleInteger" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="textStyleInteger" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="blockCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Block" inverseName="unOrderedTextBlock" inverseEntity="Block" syncable="YES"/>
     </entity>
     <elements>

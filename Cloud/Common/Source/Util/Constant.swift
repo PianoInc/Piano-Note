@@ -5,28 +5,28 @@
 //  Created by JangDoRi on 2018. 7. 4..
 //
 
-/// "PianoZone"
-public let ZONE_ID = CKRecordZoneID(zoneName: "PianoZone", ownerName: CKCurrentUserDefaultName)
+/// "BlockZone"
+public let ZONE_ID = CKRecordZoneID(zoneName: "BlockZone", ownerName: CKCurrentUserDefaultName)
 
 /// "UserKey"
 internal let USER_KEY = "UserKey"
 
-/// "PrivatePianoDatabase"
-internal let PRIVATE_DB_ID = "PrivatePianoDatabase"
-/// "SharedPianoDatabase"
-internal let SHARED_DB_ID = "SharedPianoDatabase"
-/// "DatabasePianoDatabase"
-internal let DATABASE_DB_ID = "DatabasePianoDatabase"
+/// "PrivateBlockDatabase"
+internal let PRIVATE_DB_ID = "PrivateBlockDatabase"
+/// "SharedBlockDatabase"
+internal let SHARED_DB_ID = "SharedDatabase"
+/// "DatabaseBlockDatabase"
+internal let DATABASE_DB_ID = "DatabaseBlockDatabase"
 
-/// "PianoFetchContext"
-internal let FETCH_CONTEXT = "PianoFetchContext"
+/// "BlockFetchContext"
+internal let FETCH_CONTEXT = "BlockFetchContext"
 
 /// "recordData"
-public let KEY_RECORD_DATA = "recordData"
+public let KEY_RECORD_DATA = "ckMetaData"
 /// "recordName"
 public let KEY_RECORD_NAME = "recordName"
 /// "cloudkit.share"
 internal let SHARE_RECORD_TYPE = "cloudkit.share"
 
-/// "PianoCloudToken"
-internal let KEY_TOKEN = "PianoCloudToken"
+/// "BlockCloudToken"
+internal let KEY_TOKEN = "BlockCloudToken"

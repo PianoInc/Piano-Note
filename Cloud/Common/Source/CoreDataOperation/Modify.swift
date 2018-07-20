@@ -17,10 +17,10 @@ internal class Modify {
     }
     
     internal func operate(_ record: CKRecord) {
-        let fetchContext = container.coreData.fetchBackgroundContext
-        fetch(with: record, using: fetchContext)
-        fetchContext.perform {
-            if fetchContext.hasChanges {try? fetchContext.save()}
+        container.coreData.performBackgroundTask { context in
+            context.name = FETCH_CONTEXT
+            self.fetch(with: record, using: context)
+            if context.hasChanges {try? context.save()}
         }
     }
     

@@ -12,7 +12,6 @@ internal class CloudToken: NSObject, NSCoding {
         didSet {
             let cloudTokenData = NSKeyedArchiver.archivedData(withRootObject: self)
             UserDefaults.standard.set(cloudTokenData, forKey: KEY_TOKEN)
-            UserDefaults.standard.synchronize()
         }
     }
     

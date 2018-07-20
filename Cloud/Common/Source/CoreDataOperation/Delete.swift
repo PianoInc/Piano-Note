@@ -16,12 +16,12 @@ internal class Delete {
     }
     
     internal func operate(_ recordID: CKRecordID) {
-        let fetchContext = container.coreData.fetchBackgroundContext
-        for entity in container.coreData.managedObjectModel.entities where entity.isCloudable {
-            delete(entity.name!, with: recordID, using: fetchContext)
-        }
-        fetchContext.perform {
-            if fetchContext.hasChanges {try? fetchContext.save()}
+        container.coreData.performBackgroundTask { context in
+            context.name = FETCH_CONTEXT
+            for entity in self.container.coreData.managedObjectModel.entities where entity.isCloudable {
+                self.delete(entity.name!, with: recordID, using: context)
+            }
+            if context.hasChanges {try? context.save()}
         }
     }
     
