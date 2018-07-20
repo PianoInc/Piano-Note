@@ -16,15 +16,15 @@ internal class Purge {
     }
     
     internal func operate() {
-        let fetchContext = container.coreData.fetchBackgroundContext
-        for entity in container.coreData.managedObjectModel.entities where entity.isCloudable {
-            let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
-            request.includesPropertyValues = false
-            guard let objects = try? fetchContext.fetch(request) as? [NSManagedObject], let strongObjects = objects else {continue}
-            strongObjects.forEach {fetchContext.delete($0)}
-        }
-        fetchContext.perform {
-            if fetchContext.hasChanges {try? fetchContext.save()}
+        container.coreData.performBackgroundTask { context in
+            context.name = FETCH_CONTEXT
+            for entity in self.container.coreData.managedObjectModel.entities where entity.isCloudable {
+                let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
+                request.includesPropertyValues = false
+                guard let objects = try? context.fetch(request) as? [NSManagedObject], let strongObjects = objects else {continue}
+                strongObjects.forEach {context.delete($0)}
+            }
+            if context.hasChanges {try? context.save()}
         }
     }
     

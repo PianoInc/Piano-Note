@@ -46,9 +46,8 @@ internal extension Subscription {
         operation.modifySubscriptionsCompletionBlock = {
             if let error = $2 as? CKError, let partialError = error.partialErrorsByItemID?.values {
                 partialError.forEach {self.errorBlock?($0)}
-            } else {
-                completion()
             }
+            completion()
         }
         container.cloud.privateCloudDatabase.add(operation)
     }
@@ -63,9 +62,8 @@ internal extension Subscription {
         operation.modifySubscriptionsCompletionBlock = {
             if let error = $2 as? CKError, let partialError = error.partialErrorsByItemID?.values {
                 partialError.forEach {self.errorBlock?($0)}
-            } else {
-                completion()
             }
+            completion()
         }
         container.cloud.sharedCloudDatabase.add(operation)
     }
