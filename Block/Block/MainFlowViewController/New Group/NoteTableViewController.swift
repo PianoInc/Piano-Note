@@ -12,7 +12,6 @@ import CoreData
 class NoteTableViewController: UITableViewController {
     
     var persistentContainer: NSPersistentContainer!
-    var context: NSManagedObjectContext!
     
 
     var resultsController: NSFetchedResultsController<Note>?
@@ -35,10 +34,7 @@ class NoteTableViewController: UITableViewController {
         if persistentContainer == nil {
             
         }
-        
     }
-    
-    
     
     @IBAction func tapNewNote(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "DetailNavigationController", sender: nil)
@@ -58,15 +54,11 @@ class NoteTableViewController: UITableViewController {
             
             vc.persistentContainer = persistentContainer
             
-            persistentContainer.performBackgroundTask { [weak self] (context) in
-                guard let `self` = self else { return }
-                //컨텍스트를 멤버변수로 갖고 있게 하여, 나중에 저장할 때 사용한다.
-                vc.context = context
-                let resultsController = self.persistentContainer.blockResultsController(context: context, with: note)
+            persistentContainer.performBackgroundTask { (context) in
+                let resultsController = context.blockResultsController(note: note)
                 vc.resultsController = resultsController
-                self.persistentContainer.perform(resultsController: resultsController, tableVC: vc)
+                context.perform(resultsController: resultsController, tableVC: vc)
             }
-            
             
         } else if let nav = segue.destination as? UINavigationController,
             let vc = nav.topViewController as? SortTableViewController  {

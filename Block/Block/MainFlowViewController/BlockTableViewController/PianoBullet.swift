@@ -24,9 +24,10 @@ public struct PianoBullet {
     
     public let type: PianoBulletType
     public let whitespaces: (string: String, range: NSRange)
-    public let string: String
+    public var string: String
     public let range: NSRange
     public let paraRange: NSRange
+    public let text: String
     
     
     public var baselineIndex: Int {
@@ -44,6 +45,7 @@ public struct PianoBullet {
         for (type, regex) in regexs {
             if let (string, range) = text.detect(searchRange: paraRange, regex: regex) {
                 self.type = type
+                self.text = text
                 self.string = string
                 self.range = range
                 let wsRange = NSMakeRange(paraRange.location, range.location - paraRange.location)
@@ -68,6 +70,7 @@ public struct PianoBullet {
         for (type, regex) in regexs {
             if let (string, range) = text.detect(searchRange: lineRange, regex: regex) {
                 self.type = type
+                self.text = text
                 self.string = string
                 self.range = range
                 let wsRange = NSMakeRange(paraRange.location, range.location - paraRange.location)

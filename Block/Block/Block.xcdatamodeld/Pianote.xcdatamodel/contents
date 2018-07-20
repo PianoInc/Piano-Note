@@ -124,7 +124,7 @@
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="colorIntegerType" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="colorIntegerType" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="noteCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="tagCollection" inverseEntity="Note" syncable="YES"/>

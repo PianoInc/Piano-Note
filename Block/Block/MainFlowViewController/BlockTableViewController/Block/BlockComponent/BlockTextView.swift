@@ -15,8 +15,23 @@ class BlockTextView: UITextView {
         layoutManager.delegate = self
     }
     
-    internal func switchKeyboardIfNeeded() {
+    //TODO: 여기서 해당 지점의 attrText의 attr에 링크가 있는 지 판단하는게 옳은것인가?
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        guard let point = touches.first?.location(in: self) else { return }
+        let index = layoutManager.glyphIndex(for: point, in: textContainer)
         
+        if index < 0 {
+            print("에러!!! textView에서 touchesEnd에 음수이면 안되는 index가 입력되었다!")
+        }
+        
+        if attributedText.attribute(.link, at: index, effectiveRange: nil) != nil {
+            return
+        } else {
+            selectedRange.location = index
+            isEditable = true
+            becomeFirstResponder()
+        }
     }
 
 }

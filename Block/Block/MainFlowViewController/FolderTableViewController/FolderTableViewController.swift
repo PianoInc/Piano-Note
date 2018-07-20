@@ -13,11 +13,8 @@ class FolderTableViewController: UITableViewController {
     
     var persistentContainer: NSPersistentContainer!
     var resultsController: NSFetchedResultsController<Folder>?
-    var context: NSManagedObjectContext!
     
     
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,13 +31,10 @@ class FolderTableViewController: UITableViewController {
             
             vc.persistentContainer = persistentContainer
             
-            persistentContainer.performBackgroundTask { [weak self] (context) in
-                guard let `self` = self else { return }
-                //컨텍스트를 멤버변수로 갖고 있게 하여, 나중에 저장할 때 사용한다.
-                vc.context = context
-                let resultsController = self.persistentContainer.noteResultsController(context: context, with: folder)
+            persistentContainer.performBackgroundTask { (context) in
+                let resultsController = context.noteResultsController(folder: folder)
                 vc.resultsController = resultsController
-                self.persistentContainer.perform(resultsController: resultsController, tableVC: vc)
+                context.perform(resultsController: resultsController, tableVC: vc)
             }
         }
     }
