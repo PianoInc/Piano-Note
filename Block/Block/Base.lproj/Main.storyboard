@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -1522,8 +1521,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="지금부터 나는 메모를 할 것이다. 너도 동참하거라 zpffoffofoffoff" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19r-16-iHh" customClass="BlockTextView" customModule="Block" customModuleProvider="target">
-                                            <rect key="frame" x="30" y="0.0" width="325" height="94"/>
+                                        <textView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="지금부터 나는 메모를 할 것이다. 너도 동참하거라 zpffoffofoffoff" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19r-16-iHh" customClass="BlockTextView" customModule="Block" customModuleProvider="target">
+                                            <rect key="frame" x="30" y="5" width="325" height="84"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -1532,7 +1531,7 @@
                                             </connections>
                                         </textView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygv-Xp-KGN">
-                                            <rect key="frame" x="10" y="13" width="20" height="22"/>
+                                            <rect key="frame" x="10" y="5" width="20" height="22"/>
                                             <inset key="titleEdgeInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="unCheck"/>
                                             <state key="selected" image="check"/>
@@ -1541,22 +1540,22 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0X-5a-Aap">
-                                            <rect key="frame" x="0.0" y="13" width="30" height="21"/>
+                                            <rect key="frame" x="0.0" y="5" width="30" height="21"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="ygv-Xp-KGN" firstAttribute="top" secondItem="r6S-Eb-bms" secondAttribute="top" constant="13" id="Hcm-wj-7dF"/>
+                                        <constraint firstItem="ygv-Xp-KGN" firstAttribute="top" secondItem="r6S-Eb-bms" secondAttribute="top" constant="5" id="Hcm-wj-7dF"/>
                                         <constraint firstItem="W0X-5a-Aap" firstAttribute="leading" secondItem="r6S-Eb-bms" secondAttribute="leadingMargin" constant="-16" id="Kgd-vE-1us"/>
-                                        <constraint firstItem="19r-16-iHh" firstAttribute="top" secondItem="r6S-Eb-bms" secondAttribute="top" id="Llc-KF-QNY"/>
-                                        <constraint firstAttribute="bottom" secondItem="19r-16-iHh" secondAttribute="bottom" id="O9L-J5-pUT"/>
+                                        <constraint firstItem="19r-16-iHh" firstAttribute="top" secondItem="r6S-Eb-bms" secondAttribute="top" constant="5" id="Llc-KF-QNY"/>
+                                        <constraint firstAttribute="bottom" secondItem="19r-16-iHh" secondAttribute="bottom" constant="5" id="O9L-J5-pUT"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="19r-16-iHh" secondAttribute="trailing" constant="4" id="RkZ-iY-TP9"/>
                                         <constraint firstItem="19r-16-iHh" firstAttribute="leading" secondItem="W0X-5a-Aap" secondAttribute="trailing" id="YOw-R2-Yl1"/>
                                         <constraint firstItem="19r-16-iHh" firstAttribute="leading" secondItem="ygv-Xp-KGN" secondAttribute="trailing" id="rp3-hz-wxh"/>
                                         <constraint firstItem="19r-16-iHh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="r6S-Eb-bms" secondAttribute="leadingMargin" constant="14" id="uDc-Za-Zoa"/>
-                                        <constraint firstItem="W0X-5a-Aap" firstAttribute="top" secondItem="r6S-Eb-bms" secondAttribute="top" constant="13" id="xcQ-1V-glj"/>
+                                        <constraint firstItem="W0X-5a-Aap" firstAttribute="top" secondItem="r6S-Eb-bms" secondAttribute="top" constant="5" id="xcQ-1V-glj"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

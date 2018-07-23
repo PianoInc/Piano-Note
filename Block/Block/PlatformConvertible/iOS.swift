@@ -46,3 +46,4 @@ public typealias SplitViewController = UISplitViewController
 public typealias TableView = UITableView
 public typealias FontDescriptorSymbolicTraits = UIFontDescriptorSymbolicTraits
 public typealias TableViewController = UITableViewController
+public typealias FontTextStyle = UIFontTextStyle

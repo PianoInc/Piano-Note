@@ -16,6 +16,17 @@ public struct PianoBullet {
         case checkist
     }
     
+    var blockType: BlockType {
+        switch self.type {
+        case .checkist:
+            return .checklistText
+        case .unOrderedlist:
+            return .unOrderedText
+        case .orderedlist:
+            return .orderedText
+        }
+    }
+    
     private let regexs: [(type: PianoBulletType, regex: String)] = [
         (.orderedlist, "^\\s*(\\d+)(?=\\. )"),
         (.unOrderedlist, "^\\s*([*])(?= )"),

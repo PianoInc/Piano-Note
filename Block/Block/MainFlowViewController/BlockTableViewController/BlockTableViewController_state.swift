@@ -111,6 +111,7 @@ extension BlockTableViewController {
     }
     
     private func setViews(state: ViewControllerState) {
+        self.state = state
         
     }
     

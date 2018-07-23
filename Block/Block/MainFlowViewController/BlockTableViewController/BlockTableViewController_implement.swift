@@ -39,7 +39,9 @@ extension BlockTableViewController {
                 return
         }
         
-        tableView.performBatchUpdates(nil, completion: nil)
+        UIView.performWithoutAnimation {
+            tableView.performBatchUpdates(nil, completion: nil)
+        }
         
         
     }

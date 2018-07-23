@@ -30,12 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if let vc = (splitViewController.viewControllers.first as? UINavigationController)?.topViewController as? FolderTableViewController {
                 vc.persistentContainer = persistentContainer
-                
-                persistentContainer.performBackgroundTask { (context) in
-                    let resultsController = context.folderResultsController()
-                    vc.resultsController = resultsController
-                    context.perform(resultsController: resultsController, tableVC: vc)
-                }
+                let context = persistentContainer.viewContext
+                let resultsController = context.folderResultsController()
+                vc.resultsController = resultsController
+                context.perform(resultsController: resultsController, tableVC: vc)
+
             } else {
                 print("에러발생!! 스플릿뷰의 첫번째 컨트롤러가 폴더가 아니다!")
             }

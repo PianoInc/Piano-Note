@@ -34,7 +34,7 @@ extension NSPersistentContainer {
                 note1.modifiedDate = Date()
                 
                 
-                for i in 0...100000 {
+                for i in 0...1000 {
                     let Block1 = Block(context: viewContext)
                     Block1.order = Double(i)
                     Block1.type = .plainText
@@ -52,7 +52,7 @@ extension NSPersistentContainer {
                     note2.title = "\(i)번째 메모"
                 }
                 
-                
+                guard viewContext.hasChanges else { return }
                 try viewContext.save()
                 
             }
