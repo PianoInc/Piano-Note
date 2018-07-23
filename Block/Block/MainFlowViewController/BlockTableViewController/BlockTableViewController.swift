@@ -19,6 +19,7 @@ class BlockTableViewController: UITableViewController {
     internal var resultsController: NSFetchedResultsController<Block>?
     private var delayBlockQueue: [() -> Void] = []
     internal var selectedBlocks: [Block] = []
+    internal var cursorCache: (indexPath: IndexPath, selectedRange: NSRange)?
 
     override func viewDidLoad() {
         super.viewDidLoad()

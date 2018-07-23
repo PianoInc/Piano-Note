@@ -12,7 +12,15 @@ import CoreData
 extension BlockTableViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        updateViews(for: .typing)
+        switchKeyboardIfNeeded(textView)
+        
+        if state != .typing {
+            updateViews(for: .typing)
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textView.isEditable = false
     }
     
     
@@ -35,23 +43,52 @@ extension BlockTableViewController: UITextViewDelegate {
     }
     
     internal func moveCellIfNeeded(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        guard let block = (textView.superview?.superview as? TableDataAcceptable)?.data as? Block
+        guard let block = (textView.superview?.superview as? TableDataAcceptable)?.data as? Block,
+            let indexPath = resultsController?.indexPath(forObject: block)
             else { return true }
         
         switch typingSituation(textView, block: block, replacementText: text) {
         case .resetForm:
-            replaceToPlain(block: block)
-            
+            block.revertToPlain()
+            return true
         case .movePrevious:
-            movePrevious(block: block)
+            guard let resultsController = resultsController,
+                indexPath.row > 0 else { return false }
+            
+            var indexPath = indexPath
+            indexPath.row -= 1
+            let previousBlock = resultsController.object(at: indexPath)
+            
+            if !previousBlock.isTextType {
+                //TODO: 이미지, 파일, 등등의 타입이므로 해당 block을 지울 것인지 물어보는 얼럿 창을 띄워줘야함
+                print("TODO: 이미지, 파일, 등등의 타입이므로 해당 block을 지울 것인지 물어보는 얼럿 창을 띄워줘야함")
+                return false
+            }
+
+            let selectedRange = NSMakeRange(previousBlock.text?.count ?? 0, 0)
+            cursorCache = (indexPath, selectedRange)
+            
+            let text = block.text ?? ""
+            previousBlock.append(text: text)
+            previousBlock.modifiedDate = Date()
+            block.deleteWithRelationship()
+            
             return false
         case .stayCurrent:
-            ()
+            return true
         case .moveNext:
-            ()
+
+            var behindText: String = ""
+            block.splitTextByCursor(textView, remainText: &behindText)
+            block.insertNextBlock(with: behindText, on: resultsController)
+            
+            var indexPath = indexPath
+            indexPath.row += 1
+            let selectedRange = NSMakeRange(0, 0)
+            cursorCache = (indexPath, selectedRange)
+            
+            return false
         }
-        
-        return true
     }
     
     enum TypingSituation {
@@ -62,65 +99,30 @@ extension BlockTableViewController: UITextViewDelegate {
     }
     
     private func typingSituation(_ textView: UITextView, block: Block, replacementText text: String) -> TypingSituation {
+        
         if textView.selectedRange == NSMakeRange(0, 0) && text.count == 0 {
+            //문단 맨 앞에 커서가 있으면서 백스페이스 눌렀을 때
             return block.hasFormat ? .resetForm : .movePrevious
-        } else if textView.selectedRange == NSMakeRange(0, 0) && text == "\n" {
-            return block.hasFormat ? .resetForm : .moveNext
+        } else if textView.selectedRange == NSMakeRange(0, 0)
+            && text == "\n" && block.hasFormat {
+            //문단 맨 앞에 커서가 있으면서 개행을 눌렀고, 포멧이 있을 때
+            return .resetForm
+        } else if text == "\n" {
+            //개행을 눌렀을 때
+            return .moveNext
         } else {
             return .stayCurrent
         }
     }
     
-    
-    
     private func formatTextIfNeeded(_ textView: UITextView) {
         //PlainTextBlock이 아니라면 이 작업을 할 필요가 없음.
         guard let block = (textView.superview?.superview as? TextBlockTableViewCell)?.data as? Block,
-            let indexPath = resultsController?.indexPath(forObject: block),
-            var bullet = PianoBullet(text: textView.text, selectedRange: textView.selectedRange) else { return }
-        
-        switch bullet.type {
-        case .orderedlist:
-            guard let num = Int(bullet.string),
-                !bullet.isOverflow else { return }
-            
-            let correctNum = modifyNumIfNeeded(num, indexPath)
-            bullet.string = "\(correctNum)"
-            replacePlainWithOrdered(block: block, bullet: bullet)
-            adjustAfterOrder(correctNum, indexPath)
-            
-        case .unOrderedlist:
-            replacePlainWithUnOrdered(block: block, bullet: bullet)
-        case .checkist:
-            replacePlainWithCheck(block: block, bullet: bullet)
-        }
-    }
-    
-    private func modifyNumIfNeeded(_ num: Int, _ indexPath: IndexPath) -> Int64 {
-        var indexPath = indexPath
-        indexPath.row -= 1
-        guard indexPath.row >= 0,
-            let block = resultsController?
-                .object(at: indexPath),
-            let orderedTextBlock = block.orderedTextBlock else { return Int64(num) }
-        return orderedTextBlock.num + 1
-    }
-    
-    //CoreData 값 변경
-    private func adjustAfterOrder(_ num: Int64, _ indexPath: IndexPath) {
-        var indexPath = indexPath
-        var num = num
-        while true {
-            indexPath.row += 1
-            num += 1
-            guard indexPath.row != resultsController?.sections?[0].numberOfObjects,
-                let block = resultsController?.object(at: indexPath),
-                let orderedTextBlock = block.orderedTextBlock,
-                num != orderedTextBlock.num else { return }
-            
-            orderedTextBlock.num = num
-            update(block: block, deletedFormatLength: nil)
-        }
+            let bullet = PianoBullet(text: textView.text, selectedRange: textView.selectedRange),
+            block.plainTextBlock != nil else { return }
+        var selectedRange = textView.selectedRange
+        block.replacePlainWith(bullet, on: resultsController, selectedRange: &selectedRange)
+        textView.selectedRange = selectedRange
     }
     
 }

@@ -52,7 +52,7 @@ extension NSPersistentContainer {
                     note2.title = "\(i)번째 메모"
                 }
                 
-                
+                guard viewContext.hasChanges else { return }
                 try viewContext.save()
                 
             }

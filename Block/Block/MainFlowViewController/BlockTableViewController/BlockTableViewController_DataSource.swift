@@ -19,12 +19,12 @@ extension BlockTableViewController {
         return resultsController?.sections?[section].numberOfObjects ?? 0
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let data = resultsController?.object(at: indexPath) else { return UITableViewCell() }
         var cell = tableView.dequeueReusableCell(withIdentifier: data.identifier) as! TableDataAcceptable & UITableViewCell
         cell.data = data
+        
         return cell
     }
     
@@ -46,8 +46,8 @@ extension BlockTableViewController {
                 let block = self.resultsController?.object(at: indexPath) else { return }
             
             success(true)
-            
-            self.update(block: block, textStyle: .title1)
+            block.modifiedDate = Date()
+            block.textStyle = .title1
 
         })
         //        title1Action.image
@@ -58,8 +58,7 @@ extension BlockTableViewController {
             guard let `self` = self,
                 let block = self.resultsController?.object(at: indexPath) else { return }
             success(true)
-            
-            self.update(block: block, textStyle: .title2)
+            block.textStyle = .title2
             
             
         })
@@ -69,8 +68,7 @@ extension BlockTableViewController {
             guard let `self` = self,
                 let block = self.resultsController?.object(at: indexPath) else { return }
             success(true)
-            
-            self.update(block: block, textStyle: .body)
+            block.textStyle = .body
             
         })
         //        title1Action.image

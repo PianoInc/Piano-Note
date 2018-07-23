@@ -22,18 +22,21 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
         didSet {
             guard let block = data as? Block else { return }
             whitespaceConstraint.constant = -16
+            ibLabel.text = ""
             
             switch block.type {
             case .plainText:
                 guard let plainTextBlock = block.plainTextBlock else { return }
-                self.ibButton.isHidden = true
-                self.ibLabel.isHidden = false
-                self.ibLabel.text = ""
+                ibButton.isHidden = true
+                ibLabel.isHidden = false
+                
                 
                 let font = UIFont.preferredFont(forTextStyle: plainTextBlock.textStyle)
-                self.ibTextView.font = font
-                self.ibLabel.font = font
-                self.ibTextView.text = plainTextBlock.text
+                ibTextView.font = font
+                ibLabel.font = font
+                ibTextView.text = plainTextBlock.text ?? ""
+//                ibTextView.textStorage.replaceCharacters(in: NSMakeRange(0, ibTextView.textStorage.length),
+//                                                              with: plainTextBlock.text ?? "")
                 
                 /*
                 //이미지, json, detector은 전부 비동기
@@ -43,19 +46,24 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 */
             case .checklistText:
                 guard let checklistTextBlock = block.checklistTextBlock else { return }
-                self.ibButton.isHidden = false
-                self.ibLabel.isHidden = true
-                self.ibLabel.text = ""
+                ibButton.isHidden = false
+                ibLabel.isHidden = true
+                
                 
                 let font = UIFont.preferredFont(forTextStyle: checklistTextBlock.textStyle)
-                self.ibTextView.font = font
-                self.ibLabel.font = font
-                self.ibTextView.text = checklistTextBlock.text
+                ibTextView.font = font
+                ibLabel.font = font
+                ibTextView.text = checklistTextBlock.text ?? ""
+//                ibTextView.textStorage.replaceCharacters(in: NSMakeRange(0, ibTextView.textStorage.length),
+//                                                              with: checklistTextBlock.text ?? "")
                 self.ibButton.isSelected = checklistTextBlock.isSelected
                 
                 if let whitespaceStr = checklistTextBlock.frontWhitespaces as NSString? {
                     let width = whitespaceStr.size(withAttributes: [.font : font]).width
-                    self.whitespaceConstraint.constant += width
+                    if width > 0 {
+                        //TODO: 이거 제대로 실행되는 지 체크
+                        self.whitespaceConstraint.constant = width
+                    }
                 }
                 
                 /*
@@ -70,17 +78,21 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 
                 ibButton.isHidden = true
                 ibLabel.isHidden = false
-                ibLabel.text = ""
+                
                 
                 let font = UIFont.preferredFont(forTextStyle: orderedTextBlock.textStyle)
                 ibTextView.font = font
                 ibLabel.font = font
-                ibTextView.text = orderedTextBlock.text
+                ibTextView.text = orderedTextBlock.text ?? ""
+//                ibTextView.textStorage.replaceCharacters(in: NSMakeRange(0, ibTextView.textStorage.length),
+//                                                              with: orderedTextBlock.text ?? "")
                 ibLabel.text = "\(orderedTextBlock.num)."
                 
                 if let whitespaceStr = orderedTextBlock.frontWhitespaces as NSString? {
                     let width = whitespaceStr.size(withAttributes: [.font : font]).width
-                    self.whitespaceConstraint.constant += width
+                    if width > 0 {
+                        self.whitespaceConstraint.constant = width
+                    }
                 }
                 
                 /*
@@ -100,12 +112,17 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 let font = UIFont.preferredFont(forTextStyle: unOrderedTextBlock.textStyle)
                 ibTextView.font = font
                 ibLabel.font = font
-                ibTextView.text = unOrderedTextBlock.text
+                ibTextView.text = unOrderedTextBlock.text ?? ""
+//                ibTextView.textStorage.replaceCharacters(in: NSMakeRange(0, ibTextView.textStorage.length),
+//                                                         with: unOrderedTextBlock.text ?? "")
+                
                 ibLabel.text = "•"  //TODO: 이거 나중에 얼마든지 바뀔 수 있기 때문에 리펙토링 할 것
                 
                 if let whitespaceStr = unOrderedTextBlock.frontWhitespaces as NSString? {
                     let width = whitespaceStr.size(withAttributes: [.font : font]).width
-                    self.whitespaceConstraint.constant += width
+                    if width > 0 {
+                        self.whitespaceConstraint.constant = width
+                    }
                 }
                 
                 /*
@@ -116,7 +133,7 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                  */
                 
             default:
-                ()
+                print("cannot invoked")
             }
         }
     }
