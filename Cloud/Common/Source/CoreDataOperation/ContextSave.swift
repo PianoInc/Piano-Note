@@ -8,12 +8,14 @@
 import CoreData
 
 /// CoreData의 persistent save를 감지해서 Cloud에 upload해주는 기능.
-internal class ContextSave: Uploadable, ErrorHandleable {
+public class ContextSave: Uploadable, ErrorHandleable {
     
     internal var container: Container
     internal var recordsToSave = [RecordCache]()
     internal var recordIDsToDelete = [RecordCache]()
     internal var errorBlock: ((Error?) -> ())?
+    
+    public var didSaveBlock: (() -> ())?
     
     internal init(with container: Container) {
         self.container = container
@@ -27,7 +29,7 @@ internal class ContextSave: Uploadable, ErrorHandleable {
     
 }
 
-internal extension ContextSave {
+private extension ContextSave {
     
     @objc private func willSave(_ notification: Notification) {
         guard let context = notification.object as? NSManagedObjectContext, context.name != FETCH_CONTEXT else {return}
@@ -35,6 +37,7 @@ internal extension ContextSave {
     }
     
     @objc private func didSave(_ notification: Notification) {
+        didSaveBlock?()
         guard let context = notification.object as? NSManagedObjectContext, context.name != FETCH_CONTEXT else {return}
         upload()
         errorBlock = {self.errorHandle(observer: $0)}

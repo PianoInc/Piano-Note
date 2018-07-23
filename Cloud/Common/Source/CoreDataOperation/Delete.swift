@@ -15,19 +15,15 @@ internal class Delete {
         self.container = container
     }
     
-    internal func operate(_ recordID: CKRecordID) {
-        container.coreData.performBackgroundTask { context in
-            context.name = FETCH_CONTEXT
-            for entity in self.container.coreData.managedObjectModel.entities where entity.isCloudable {
-                self.delete(entity.name!, with: recordID, using: context)
-            }
-            if context.hasChanges {try? context.save()}
+    internal func operate(_ recordID: CKRecordID, _ context: NSManagedObjectContext) {
+        for entity in self.container.coreData.managedObjectModel.entities where entity.isCloudable {
+            delete(entity.name!, with: recordID, using: context)
         }
     }
     
 }
 
-internal extension Delete {
+private extension Delete {
     
     private func delete(_ entityName: String, with recordID: CKRecordID, using context: NSManagedObjectContext) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)

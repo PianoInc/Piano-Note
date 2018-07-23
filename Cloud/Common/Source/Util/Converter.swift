@@ -6,6 +6,8 @@
 //  Copyright © 2018년 piano. All rights reserved.
 //
 
+import CoreData
+
 internal class Converter {
     
     internal func cloud(conflict record: ConflictRecord) {
@@ -73,7 +75,33 @@ internal class Converter {
                 record.setValue(value, forKey: key)
             }
         }
+        for key in object.entity.relationshipsByName.keys {
+            guard let isToMany = object.entity.relationshipsByName[key]?.isToMany else {continue}
+            if !isToMany {
+                record.setValue(reference(forRelationship: key, with: object), forKey: key)
+            } else {
+                record.setValue(reference(forRelationships: key, with: unit), forKey: key)
+            }
+        }
         return ManagedUnit(record: record, object: nil)
+    }
+    
+    private func reference(forRelationship name: String, with object: NSManagedObject) -> CKReference? {
+        guard let rObjectID = object.objectIDs(forRelationshipNamed: name).first else {return nil}
+        guard let rObject = object.managedObjectContext?.object(with: rObjectID) else {return nil}
+        guard let rRecordName = rObject.value(forKey: KEY_RECORD_NAME) as? String else {return nil}
+        return CKReference(recordID: CKRecordID(recordName: rRecordName), action: .none)
+    }
+    
+    private func reference(forRelationships name: String, with unit: ManagedUnit) -> Array<CKReference>? {
+        guard let object = unit.object, let record = unit.record else {return nil}
+        var referArray = (record.value(forKey: name) as? Array<CKReference>) ?? [CKReference]()
+        for rObjectID in object.objectIDs(forRelationshipNamed: name) {
+            guard let rObject = object.managedObjectContext?.object(with: rObjectID) else {return nil}
+            guard let rRecordName = rObject.value(forKey: KEY_RECORD_NAME) as? String else {return nil}
+            referArray.append(CKReference(recordID: CKRecordID(recordName: rRecordName), action: .none))
+        }
+        return referArray
     }
     
     private func createAsset(for any: Any?)-> CKAsset? {
@@ -95,7 +123,20 @@ internal class Converter {
                 guard let asset = record.value(forKey: key) as? CKAsset else {continue}
                 object.setValue(try? Data(contentsOf: asset.fileURL), forKey: key)
             } else {
-                object.setValue(record.value(forKey: key), forKey: key)
+                if let ref = record.value(forKey: key) as? CKReference {
+                    guard object.value(forKey: key) == nil else {continue}
+                    object.setValue(findObject(with: ref, key, object), forKey: key)
+                } else if let refs = record.value(forKey: key) as? [CKReference] {
+                    guard object.value(forKey: key) == nil else {continue}
+                    let rObjects = NSMutableSet()
+                    for ref in refs {
+                        guard let rObject = findObject(with: ref, key, object) else {continue}
+                        rObjects.add(rObject)
+                    }
+                    object.setValue(rObjects, forKey: key)
+                } else {
+                    object.setValue(record.value(forKey: key), forKey: key)
+                }
             }
         }
     }
@@ -103,6 +144,20 @@ internal class Converter {
     private func systemField(_ key: String)-> Bool {
         return ["recordName", "createdBy", "createdAt",
                 "modifiedBy", "modifiedAt", "changeTag"].contains(key)
+    }
+    
+    private func findObject(with ref: CKReference, _ key: String, _ object: NSManagedObject) -> NSManagedObject? {
+        guard let entityName = object.entity.relationshipsByName[key]?.destinationEntity?.name else {return nil}
+        guard let context = object.managedObjectContext else {return nil}
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        request.predicate = NSPredicate(format: "\(KEY_RECORD_NAME) == %@", ref.recordID.recordName)
+        request.includesPropertyValues = false
+        request.fetchLimit = 1
+        do {
+            return try context.fetch(request).first as? NSManagedObject
+        } catch {
+            return nil
+        }
     }
     
 }
