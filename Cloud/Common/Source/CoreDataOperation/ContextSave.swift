@@ -39,8 +39,8 @@ private extension ContextSave {
     @objc private func didSave(_ notification: Notification) {
         didSaveBlock?()
         guard let context = notification.object as? NSManagedObjectContext, context.name != FETCH_CONTEXT else {return}
-        upload()
         errorBlock = {self.errorHandle(observer: $0)}
+        upload()
     }
     
 }

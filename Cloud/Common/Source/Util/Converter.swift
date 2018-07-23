@@ -10,14 +10,24 @@ import CoreData
 
 internal class Converter {
     
-    internal func cloud(conflict record: ConflictRecord) {
-        print("diff result :", diff(with: record))
+    internal func cloud(conflict record: ConflictRecord, using container: Container) {
+        guard let server = record.server else {return}
+        container.coreData.performBackgroundTask { context in
+            context.name = LOCAL_CONTEXT
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: server.recordType)
+            request.fetchLimit = 1
+            request.predicate = NSPredicate(format: "\(KEY_RECORD_NAME) == %@", server.recordID.recordName)
+            if let object = try? context.fetch(request).first as? NSManagedObject, let strongObject = object {
+                strongObject.setValue(self.diff(with: record), forKey: KEY_RECORD_TEXT)
+            }
+            if context.hasChanges {try? context.save()}
+        }
     }
     
-    private func diff(with record: ConflictRecord) -> String {
-        guard let a = record.ancestor?.value(forKey: "text") as? String else {return ""}
-        guard let s = record.server?.value(forKey: "text") as? String else {return ""}
-        guard let c = record.client?.value(forKey: "text") as? String else {return ""}
+    private func diff(with record: ConflictRecord) -> String? {
+        let a = record.ancestor?.value(forKey: KEY_RECORD_TEXT) as? String ?? ""
+        let s = record.server?.value(forKey: KEY_RECORD_TEXT) as? String ?? ""
+        let c = record.client?.value(forKey: KEY_RECORD_TEXT) as? String ?? ""
         
         var result = c
         let diff3Maker = Diff3Maker(ancestor: a, a: c, b: s)
