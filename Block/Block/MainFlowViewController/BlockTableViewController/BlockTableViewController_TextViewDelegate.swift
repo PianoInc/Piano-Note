@@ -21,6 +21,10 @@ extension BlockTableViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         textView.isEditable = false
+        
+        guard let cell = textView.superview?.superview as? TextBlockTableViewCell,
+            let block = cell.data as? Block else { return }
+        block.text = textView.text
     }
     
     
@@ -50,7 +54,9 @@ extension BlockTableViewController: UITextViewDelegate {
         switch typingSituation(textView, block: block, replacementText: text) {
         case .resetForm:
             block.revertToPlain()
-            return true
+            let selectedRange = NSMakeRange(0, 0)
+            cursorCache = (indexPath, selectedRange)
+            return false
         case .movePrevious:
             guard let resultsController = resultsController,
                 indexPath.row > 0 else { return false }
@@ -68,7 +74,7 @@ extension BlockTableViewController: UITextViewDelegate {
             let selectedRange = NSMakeRange(previousBlock.text?.count ?? 0, 0)
             cursorCache = (indexPath, selectedRange)
             
-            let text = block.text ?? ""
+            let text = textView.text ?? ""
             previousBlock.append(text: text)
             previousBlock.modifiedDate = Date()
             block.deleteWithRelationship()
@@ -78,8 +84,11 @@ extension BlockTableViewController: UITextViewDelegate {
             return true
         case .moveNext:
 
-            var behindText: String = ""
-            block.splitTextByCursor(textView, remainText: &behindText)
+            let (frontText, behindText) = textView.splitTextByCursor()
+            //TODO: 이렇게 되면 형광펜이 깨짐, attributed로 만들어야함
+            textView.text = frontText
+            block.modifiedDate = Date()
+            
             block.insertNextBlock(with: behindText, on: resultsController)
             
             var indexPath = indexPath
@@ -119,10 +128,14 @@ extension BlockTableViewController: UITextViewDelegate {
         //PlainTextBlock이 아니라면 이 작업을 할 필요가 없음.
         guard let block = (textView.superview?.superview as? TextBlockTableViewCell)?.data as? Block,
             let bullet = PianoBullet(text: textView.text, selectedRange: textView.selectedRange),
-            block.plainTextBlock != nil else { return }
+            block.plainTextBlock != nil,
+            let indexPath = resultsController?.indexPath(forObject: block) else { return }
+//        block.text = textView.text
         var selectedRange = textView.selectedRange
+        textView.textStorage.replaceCharacters(in: NSMakeRange(0, bullet.baselineIndex), with: "")
+        
         block.replacePlainWith(bullet, on: resultsController, selectedRange: &selectedRange)
-        textView.selectedRange = selectedRange
+        cursorCache = (indexPath, selectedRange)
     }
     
 }

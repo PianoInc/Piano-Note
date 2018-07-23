@@ -29,7 +29,12 @@ extension BlockTableViewController: NSFetchedResultsControllerDelegate {
             case .update:
                 guard let indexPath = indexPath else { return }
                 tableView.reloadRows(at: [indexPath], with: .none)
-                
+//                tableView.beginUpdates()
+//                guard var cell = tableView.cellForRow(at: indexPath) as? TableDataAcceptable,
+//                    let data = controller.object(at: indexPath) as? Block else { return }
+//                cell.data = data
+//                tableView.endUpdates()
+
             case .move:
                 guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
                 self.tableView.moveRow(at: indexPath, to: newIndexPath)

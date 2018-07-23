@@ -163,7 +163,11 @@ extension Block {
      */
     internal func replacePlainWith(_ bullet: PianoBullet, on resultsController: NSFetchedResultsController<Block>?, selectedRange: inout NSRange) {
         guard let plain = plainTextBlock,
-            let context = managedObjectContext else { return  }
+            let context = managedObjectContext
+            else { return }
+        
+        type = bullet.blockType
+        modifiedDate = Date()
         
         var bulletTextBlock: BulletTextBlockType
         switch bullet.type {
@@ -174,9 +178,9 @@ extension Block {
         case .checkist:
             bulletTextBlock = ChecklistTextBlock(context: context)
         }
+
         bulletTextBlock.frontWhitespaces = bullet.whitespaces.string
         bulletTextBlock.key = bullet.string
-        bulletTextBlock.text = plain.text
         
         
         if let num = Int64(bullet.string),
@@ -197,14 +201,15 @@ extension Block {
         }
         
         plainTextBlock = nil
-        type = bullet.blockType
         
         selectedRange.location -= bullet.baselineIndex
-        modifiedDate = Date()
     }
     
     internal func revertToPlain() {
         guard let context = managedObjectContext else { return }
+        
+        type = .plainText
+        modifiedDate = Date()
         
         //1. plainText를 생성하고
         var plainTextBlock = PlainTextBlock(context: context)
@@ -236,7 +241,6 @@ extension Block {
         checklistTextBlock = nil
         unOrderedTextBlock = nil
         orderedTextBlock = nil
-        modifiedDate = Date()
         
     }
     
@@ -254,16 +258,6 @@ extension Block {
             self.deleteWithRelationship()
             return
         }
-    }
-    
-    internal func splitTextByCursor(_ textView: TextView, remainText: inout String) {
-        let location = textView.selectedRange.location
-        let nextText = (textView.text as NSString).substring(from: location)
-        let currentText = (textView.text as NSString).substring(to: location)
-        text = currentText
-        remainText = nextText
-        //TODO: 아래코드를 지우면 update가 안될까?
-        modifiedDate = Date()
     }
     
     internal func insertNextBlock(with text: String, on resultsController: NSFetchedResultsController<Block>?) {
