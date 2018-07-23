@@ -7,39 +7,46 @@
 //
 
 import CoreData
+import UIKit
 
 extension BlockTableViewController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        print("hello")
+//        tableView.beginUpdates()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        tableView.performBatchUpdates({ [weak self] in
-            guard let `self` = self else { return }
+        UIView.performWithoutAnimation {
             switch type {
             case .delete:
                 guard let indexPath = indexPath else { return }
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.tableView.deleteRows(at: [indexPath], with: .none)
                 
             case .insert:
                 guard let newIndexPath = newIndexPath else { return }
-                self.tableView.insertRows(at: [newIndexPath], with: .automatic)
+                self.tableView.insertRows(at: [newIndexPath], with: .none)
                 
             case .update:
-                ()
-//                이 부분에선 save를 하지음않음
-//                guard let indexPath = indexPath else { return }
-//                guard var cell = tableView.cellForRow(at: indexPath) as? TableDataAcceptable,
-//                    let data = controller.object(at: indexPath) as? Block else { return }
-//                cell.data = data
-                
+                guard let indexPath = indexPath else { return }
+                tableView.reloadRows(at: [indexPath], with: .none)
                 
             case .move:
                 guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
                 self.tableView.moveRow(at: indexPath, to: newIndexPath)
                 
             }
-            }, completion: nil)
+        }
+        
     }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        tableView.endUpdates()
+        guard let cursorCache = cursorCache,
+            let cell = tableView.cellForRow(at: cursorCache.indexPath) as? TextBlockTableViewCell else { return }
+        cell.ibTextView.isEditable = true
+        cell.ibTextView.selectedRange = cursorCache.selectedRange
+        cell.ibTextView.becomeFirstResponder()
+        self.cursorCache = nil
+    }
+    
 }
