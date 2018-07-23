@@ -51,7 +51,7 @@ extension Block: TableDatable {
             return false
         }
     }
-    
+
     var text: String? {
         get {
             switch self.type {

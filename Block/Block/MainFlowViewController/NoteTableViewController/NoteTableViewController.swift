@@ -56,7 +56,7 @@ class NoteTableViewController: UITableViewController {
             let context = persistentContainer.viewContext
             let resultsController = context.blockResultsController(note: note)
             vc.resultsController = resultsController
-            context.perform(resultsController: resultsController, tableVC: vc)
+            resultsController.delegate = vc
 
             
         } else if let nav = segue.destination as? UINavigationController,
