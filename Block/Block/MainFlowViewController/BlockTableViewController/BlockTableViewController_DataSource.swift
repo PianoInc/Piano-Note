@@ -20,7 +20,7 @@ extension BlockTableViewController: TableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(tableView.visibleCells.count)
+        
         guard let data = resultsController?.object(at: indexPath) else { return UITableViewCell() }
         var cell = tableView.dequeueReusableCell(withIdentifier: data.identifier) as! TableDataAcceptable & UITableViewCell
         cell.data = data
