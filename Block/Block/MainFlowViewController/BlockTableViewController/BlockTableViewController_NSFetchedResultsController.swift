@@ -11,10 +11,6 @@ import UIKit
 
 extension BlockTableViewController: NSFetchedResultsControllerDelegate {
     
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        tableView.beginUpdates()
-    }
-    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         UIView.performWithoutAnimation {
             switch type {
@@ -35,7 +31,6 @@ extension BlockTableViewController: NSFetchedResultsControllerDelegate {
             case .insert:
                 guard var newIndexPath = newIndexPath else { return }
                 self.tableView.insertRows(at: [newIndexPath], with: .none)
-                print("insert : \(newIndexPath.row)")
                 
                 //issue: 타이밍 이슈 때문에 여기서 숫자를 갱신해줘야함
                 guard let block = controller.object(at: newIndexPath) as? Block,
@@ -55,7 +50,6 @@ extension BlockTableViewController: NSFetchedResultsControllerDelegate {
             case .update:
                 guard let indexPath = indexPath else { return }
                 tableView.reloadRows(at: [indexPath], with: .none)
-                print("update : \(indexPath.row)")
 
             case .move:
                 guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
@@ -67,7 +61,6 @@ extension BlockTableViewController: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        tableView.endUpdates()
         guard let cursorCache = cursorCache,
             let cell = tableView.cellForRow(at: cursorCache.indexPath) as? TextBlockTableViewCell else { return }
         cell.ibTextView.isEditable = true
