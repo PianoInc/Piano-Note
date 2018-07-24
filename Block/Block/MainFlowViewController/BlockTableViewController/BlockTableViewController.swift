@@ -9,10 +9,11 @@
 import UIKit
 import CoreData
 
-class BlockTableViewController: UITableViewController {
+class BlockTableViewController: UIViewController {
     
     //MARK: Data
     
+    @IBOutlet weak var tableView: UITableView!
     internal var persistentContainer: NSPersistentContainer!
     
     internal var state: ViewControllerState!
@@ -31,6 +32,16 @@ class BlockTableViewController: UITableViewController {
         tableView.dragDelegate = self
         tableView.dropDelegate = self
         tableView.dragInteractionEnabled = true
+        
+        DispatchQueue.main.async { [weak self] in
+            do {
+                try self?.resultsController?.performFetch()
+            } catch {
+                print("NoteResultsController를 fetch하는 데 에러 발생: \(error.localizedDescription)")
+            }
+            
+            self?.tableView.reloadData()
+        }
         
 
         //TODO: persistentContainer 가 nil이라는 건 preserve로 왔거나 splitView라는 말임, 따라서 할당해주고, prepare에서 하는 짓을 다시 해줘야함

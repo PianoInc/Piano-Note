@@ -51,7 +51,7 @@ extension Block: TableDatable {
             return false
         }
     }
-    
+
     var text: String? {
         get {
             switch self.type {
@@ -277,16 +277,16 @@ extension Block {
             createdOrder = order + 1
         }
         
-        //생성하기 기존 블럭의 타입에 맞게 생성해야함.
         
         //1. block 생성
-        let block = Block(context: context)
-        block.order = createdOrder
-        block.note = note
-        
+        let newblock = Block(context: context)
+        newblock.order = createdOrder
+        newblock.note = note
+        newblock.type = type
         
         switch type {
         case .plainText:
+            
             guard let plainTextBlock = plainTextBlock else { return }
             
             //2. plainBlock 생성
@@ -298,7 +298,7 @@ extension Block {
             //        newPlainBlock.attributes
             
             //2. 이를 block에 연결시킨다.
-            newPlainBlock.addToBlockCollection(block)
+            newPlainBlock.addToBlockCollection(newblock)
             
         case .checklistText:
             guard let checklistTextBlock = checklistTextBlock else { return }
@@ -312,12 +312,12 @@ extension Block {
             //        newChecklistTextBlock.attributes
             
             //2. 이를 block에 연결시킨다.
-            newChecklistTextBlock.addToBlockCollection(block)
+            newChecklistTextBlock.addToBlockCollection(newblock)
             
         case .unOrderedText:
             guard let unOrderedTextBlock = unOrderedTextBlock else { return }
             
-            //2. checklistText 생성
+            //2. unOrderedText 생성
             let newUnOrderedTextBlock = UnOrderedTextBlock(context: context)
             newUnOrderedTextBlock.text = text
             newUnOrderedTextBlock.textStyleInteger = unOrderedTextBlock.textStyleInteger
@@ -326,31 +326,26 @@ extension Block {
             //        newUnOrderedTextBlock.attributes
             
             //2. 이를 block에 연결시킨다.
-            block.unOrderedTextBlock = newUnOrderedTextBlock
-//            newUnOrderedTextBlock.addToBlockCollection(block)
+            newUnOrderedTextBlock.addToBlockCollection(newblock)
             
         case .orderedText:
             guard let orderedTextBlock = orderedTextBlock else { return }
             
-            //2. checklistText 생성
+            //2. orderedText 생성
             let newOrderedTextBlock = OrderedTextBlock(context: context)
             newOrderedTextBlock.text = text
+            newOrderedTextBlock.num = orderedTextBlock.num + 1
             newOrderedTextBlock.textStyleInteger = orderedTextBlock.textStyleInteger
             
             //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
             //        newOrderedTextBlock.attributes
             
             //2. 이를 block에 연결시킨다.
-            newOrderedTextBlock.addToBlockCollection(block)
-            
-            //TODO: 다음 숫자들도 갱신해줘야함
-            
-            
+            newOrderedTextBlock.addToBlockCollection(newblock)
             
         default:
             return
         }
-        
         
     }
     
