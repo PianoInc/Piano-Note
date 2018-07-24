@@ -6,8 +6,6 @@
 //  Copyright © 2018년 piano. All rights reserved.
 //
 
-import Foundation
-
 /// Facebook의 data type protocol.
 public protocol FacebookData {
     

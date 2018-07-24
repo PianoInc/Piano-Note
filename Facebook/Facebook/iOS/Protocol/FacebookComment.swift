@@ -6,8 +6,6 @@
 //  Copyright © 2018년 piano. All rights reserved.
 //
 
-import UIKit
-
 public protocol FacebookCommentDelegate {}
 
 public extension FacebookCommentDelegate where Self: UIViewController {

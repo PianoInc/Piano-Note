@@ -6,8 +6,6 @@
 //  Copyright © 2018년 piano. All rights reserved.
 //
 
-import UIKit
-
 /// Facebook post 내용을 표기할 listView의 DataSource.
 public class PostDataSource<Section: FacebookSectionCell, Row: FacebookRowCell>:
 NSObject, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
@@ -38,10 +36,10 @@ NSObject, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefe
         self.listView = listView
         self.pageId = pageId
         
-        facebookRequest.postBinder = { [weak self] in self?.initData($0 as! [PostData])}
-        viewCtrl.facebookLogin { [weak self] isReady in
+        facebookRequest.postBinder = {self.initData($0 as! [PostData])}
+        viewCtrl.facebookLogin { isReady in
             if isReady {
-                self?.facebookRequest.post(from: pageId)
+                self.facebookRequest.post(from: pageId)
             } else {
                 notReady()
             }

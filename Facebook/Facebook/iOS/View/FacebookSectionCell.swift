@@ -6,14 +6,12 @@
 //  Copyright © 2018년 piano. All rights reserved.
 //
 
-import UIKit
-
 public class FacebookSectionCell: UITableViewCell, FacebookCell {
     
     @IBOutlet public weak var title: UILabel!
     
     public func configure(_ item: FacebookData, shape: PostRowShape?, at indexPath: IndexPath) {
-        
+        title.text = item.time.group
     }
     
 }
