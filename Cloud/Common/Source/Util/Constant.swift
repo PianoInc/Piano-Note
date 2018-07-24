@@ -6,7 +6,7 @@
 //
 
 /// "BlockZone"
-public let ZONE_ID = CKRecordZoneID(zoneName: "BlockZone", ownerName: CKCurrentUserDefaultName)
+public let ZONE_ID = CKRecordZone.ID(zoneName: "BlockZone", ownerName: CKCurrentUserDefaultName)
 
 /// "UserKey"
 internal let USER_KEY = "UserKey"

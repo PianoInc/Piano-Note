@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5f5-VZ-2YJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5f5-VZ-2YJ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14278.2"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1070,7 +1069,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="작성자" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMb-b9-JyP">
-                                                    <rect key="frame" x="47" y="13" width="44.5" height="20.5"/>
+                                                    <rect key="frame" x="47" y="12.5" width="44.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" red="0.24313725489999999" green="0.34509803919999998" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1524,7 +1523,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="지금부터 나는 메모를 할 것이다. 너도 동참하거라 zpffoffofoffoff" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fF-z1-bIf" customClass="BlockTextView" customModule="Block" customModuleProvider="target">
-                                                    <rect key="frame" x="29" y="5" width="327" height="84"/>
+                                                    <rect key="frame" x="29" y="4" width="327" height="86"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -1549,13 +1548,13 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="4fF-z1-bIf" firstAttribute="top" secondItem="XND-hK-E6t" secondAttribute="top" constant="5" id="545-k8-dCt"/>
+                                                <constraint firstItem="4fF-z1-bIf" firstAttribute="top" secondItem="XND-hK-E6t" secondAttribute="top" constant="4" id="545-k8-dCt"/>
                                                 <constraint firstItem="4fF-z1-bIf" firstAttribute="leading" secondItem="qvW-5k-UKr" secondAttribute="trailing" id="B0A-CE-eHj"/>
                                                 <constraint firstItem="Tl2-rH-q2i" firstAttribute="top" secondItem="XND-hK-E6t" secondAttribute="top" constant="5" id="Hj2-wg-zi3"/>
                                                 <constraint firstItem="Tl2-rH-q2i" firstAttribute="leading" secondItem="XND-hK-E6t" secondAttribute="leadingMargin" constant="-16" id="Ntd-QY-Kiz"/>
                                                 <constraint firstItem="qvW-5k-UKr" firstAttribute="top" secondItem="XND-hK-E6t" secondAttribute="top" constant="5" id="fCY-xb-8wp"/>
                                                 <constraint firstItem="4fF-z1-bIf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XND-hK-E6t" secondAttribute="leadingMargin" constant="14" id="gCT-W0-pGe"/>
-                                                <constraint firstAttribute="bottom" secondItem="4fF-z1-bIf" secondAttribute="bottom" constant="5" id="n8T-QJ-BKU"/>
+                                                <constraint firstAttribute="bottom" secondItem="4fF-z1-bIf" secondAttribute="bottom" constant="4" id="n8T-QJ-BKU"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="4fF-z1-bIf" secondAttribute="trailing" constant="4" id="ndN-zL-0CA"/>
                                                 <constraint firstItem="4fF-z1-bIf" firstAttribute="leading" secondItem="Tl2-rH-q2i" secondAttribute="trailing" id="zVt-Xc-Upi"/>
                                             </constraints>

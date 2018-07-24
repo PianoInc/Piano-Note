@@ -15,7 +15,7 @@ internal class Delete {
         self.container = container
     }
     
-    internal func operate(_ recordID: CKRecordID) {
+    internal func operate(_ recordID: CKRecord.ID) {
         container.coreData.performBackgroundTask { context in
             context.name = FETCH_CONTEXT
             for entity in self.container.coreData.managedObjectModel.entities where entity.isCloudable {
@@ -29,7 +29,7 @@ internal class Delete {
 
 internal extension Delete {
     
-    private func delete(_ entityName: String, with recordID: CKRecordID, using context: NSManagedObjectContext) {
+    private func delete(_ entityName: String, with recordID: CKRecord.ID, using context: NSManagedObjectContext) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         request.fetchLimit = 1
         request.includesPropertyValues = false

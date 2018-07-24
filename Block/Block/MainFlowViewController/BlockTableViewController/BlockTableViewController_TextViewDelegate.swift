@@ -12,7 +12,7 @@ import CoreData
 extension BlockTableViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        switchKeyboardIfNeeded(textView)
+//        switchKeyboardIfNeeded(textView)
         
         if state != .typing {
             updateViews(for: .typing)
@@ -35,7 +35,7 @@ extension BlockTableViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         reactCellHeight(textView)
-        switchKeyboardIfNeeded(textView)
+//        switchKeyboardIfNeeded(textView)
         formatTextIfNeeded(textView)
         //        setTableViewOffSetIfNeeded(textView: textView)
     }

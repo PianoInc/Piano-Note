@@ -32,14 +32,15 @@ extension BlockTableViewController: TableViewDataSource {
         return true
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle(rawValue: 3) ?? UITableViewCellEditingStyle.none
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return UITableViewCell.EditingStyle(rawValue: 3) ?? UITableViewCell.EditingStyle.none
     }
     
     
     
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         let title1Action = UIContextualAction(style: .normal, title:  "대제목", handler: {[weak self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             print("OK, marked as Closed")
             guard let `self` = self,
@@ -50,6 +51,7 @@ extension BlockTableViewController: TableViewDataSource {
             block.textStyle = .title1
 
         })
+        
         //        title1Action.image
         title1Action.backgroundColor = UIColor(red: 255/255, green: 158/255, blue: 78/255, alpha: 1)
         
@@ -77,9 +79,11 @@ extension BlockTableViewController: TableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let copyAction = UIContextualAction(style: .normal, title:  "복사", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            
+        let copyAction = UIContextualAction(style: .normal, title:  "복사", handler: { [weak self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             success(true)
+            guard let block = self?.resultsController?.object(at: indexPath) else { return }
+            self?.copy(blocks: [block])
+            
         })
         //        closeAction.image = UIImage(named: "tick")
         let blueColor = UIColor(red: 59/255, green: 141/255, blue: 251/255, alpha: 1)
@@ -89,7 +93,9 @@ extension BlockTableViewController: TableViewDataSource {
             guard let `self` = self,
                 let block = self.resultsController?.object(at: indexPath) else { return }
             
-            self.delete(block)
+            block.deleteWithRelationship()
+            
+            
             
             success(true)
         })
@@ -99,6 +105,12 @@ extension BlockTableViewController: TableViewDataSource {
         
         
         return UISwipeActionsConfiguration(actions: [deleteAction, copyAction])
+    }
+    
+    func copy(blocks: [Block]) {
+        //TODO: 이거 paste로직 만들어서 block 돌아가면서 제대로 타입 붙여야함
+        UIPasteboard.general.string = blocks.first?.text
+        navigationController?.appearCopyNotificationView()
     }
     
     

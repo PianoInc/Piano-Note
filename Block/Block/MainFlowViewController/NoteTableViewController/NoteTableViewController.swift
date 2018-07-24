@@ -21,6 +21,8 @@ class NoteTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0(self) }
         
+        try? persistentContainer.viewContext.saveIfNeeded()
+        
     }
 
     override func viewDidLoad() {
@@ -88,13 +90,13 @@ extension NoteTableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle(rawValue: 3) ?? UITableViewCellEditingStyle.none
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return UITableViewCell.EditingStyle(rawValue: 3) ?? UITableViewCell.EditingStyle.none
     }
     
     
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
     }
     
