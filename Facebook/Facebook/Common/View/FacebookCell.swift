@@ -6,8 +6,6 @@
 //  Copyright © 2018년 piano. All rights reserved.
 //
 
-import Foundation
-
 /// 해당 post cell이 group내에서 어떤 위치에 속하는가에 대한 type.
 public enum PostRowShape {
     case single, top, middle, bottom

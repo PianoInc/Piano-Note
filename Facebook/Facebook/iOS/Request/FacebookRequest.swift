@@ -6,9 +6,6 @@
 //  Copyright © 2018년 piano. All rights reserved.
 //
 
-import FBSDKCoreKit
-import FBSDKLoginKit
-
 typealias FacebookBinder = ([FacebookData]) -> ()
 
 /// Facebook Page에서 Post, Comment, Reply등의 정보를 요청할 수 있다.
@@ -52,7 +49,7 @@ class FacebookRequest: NSObject {
                 if let paging = json?["paging"] as? [String: Any], let next = paging["next"] as? String {
                     self.postCursor = String(next[next.index(lastOf: "=")...])
                 }
-                
+
                 let loadData = data.filter({
                     return $0["name"] as? String != nil && $0["message"] as? String != nil &&
                         $0["comments"] as? [String: Any] != nil

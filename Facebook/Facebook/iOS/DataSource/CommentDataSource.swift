@@ -6,8 +6,6 @@
 //  Copyright © 2018년 piano. All rights reserved.
 //
 
-import UIKit
-
 /// Facebook comment / reply 내용을 표기할 listView의 DataSource.
 public class CommentDataSource<Post: FacebookPostCell, Comment: FacebookCommentCell, Reply: FacebookReplyCell>:
 NSObject, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
@@ -32,11 +30,11 @@ NSObject, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefe
         self.listView = listView
         self.postData = postData
         
-        facebookRequest.commentBinder = { [weak self] in self?.initData($0)}
-        facebookRequest.replyBinder = { [weak self] in self?.initData($0)}
-        viewCtrl.facebookLogin { [weak self] isReady in
+        facebookRequest.commentBinder = {self.initData($0)}
+        facebookRequest.replyBinder = {self.initData($0)}
+        viewCtrl.facebookLogin { isReady in
             if isReady {
-                self?.facebookRequest.comment(from: postData.id)
+                self.facebookRequest.comment(from: postData.id)
             } else {
                 notReady()
             }

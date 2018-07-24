@@ -6,8 +6,6 @@
 //  Copyright © 2018년 piano. All rights reserved.
 //
 
-import Foundation
-
 internal extension String {
     
     /// 해당 string과 동일한 id의 LocalizedString을 반환한다.

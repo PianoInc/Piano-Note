@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef TARGET_OS_IPHONE
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#elif TARGET_OS_MAC
+
+#endif
+
 //! Project version number for Facebook.
 FOUNDATION_EXPORT double FacebookVersionNumber;
 
