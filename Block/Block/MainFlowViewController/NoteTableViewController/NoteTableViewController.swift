@@ -53,12 +53,11 @@ class NoteTableViewController: UITableViewController {
             vc.state = state
             
             vc.persistentContainer = persistentContainer
-            
-            persistentContainer.performBackgroundTask { (context) in
-                let resultsController = context.blockResultsController(note: note)
-                vc.resultsController = resultsController
-                context.perform(resultsController: resultsController, tableVC: vc)
-            }
+            let context = persistentContainer.viewContext
+            let resultsController = context.blockResultsController(note: note)
+            vc.resultsController = resultsController
+            context.perform(resultsController: resultsController, tableVC: vc)
+
             
         } else if let nav = segue.destination as? UINavigationController,
             let vc = nav.topViewController as? SortTableViewController  {

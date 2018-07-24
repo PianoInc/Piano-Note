@@ -2,112 +2,221 @@
 //  Block_extension.swift
 //  Block
 //
-//  Created by Kevin Kim on 2018. 7. 19..
+//  Created by Kevin Kim on 2018. 7. 21..
 //  Copyright © 2018년 Piano. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-//CoreData 값 변경
+extension Block: TableDatable {
+    var type: BlockType {
+        get {
+            return BlockType(rawValue: typeInteger) ?? .plainText
+        } set {
+            typeInteger = newValue.rawValue
+        }
+    }
+    
+    var identifier: String {
+        switch self.type {
+        case .plainText,
+             .orderedText,
+             .unOrderedText,
+             .checklistText:
+            return "TextBlockTableViewCell"
+        case .drawing:
+            return "DrawingBlockTableViewCell"
+        case .file:
+            return "FileBlockTableViewCell"
+        case .imageCollection:
+            return "ImageCollectionBlockTableViewCell"
+        case .imagePicker:
+            return "ImagePickerBlockTableViewCell"
+        case .separator:
+            return "SeparatorBlockTableViewCell"
+        case .comment:
+            return "CommentBlockTableViewCell"
+        }
+    }
+    
+    var isTextType: Bool {
+        switch self.type {
+        case .checklistText,
+             .orderedText,
+             .plainText,
+             .unOrderedText:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var text: String? {
+        get {
+            switch self.type {
+            case .plainText:
+                return plainTextBlock?.text
+            case .checklistText:
+                return checklistTextBlock?.text
+            case .unOrderedText:
+                return unOrderedTextBlock?.text
+            case .orderedText:
+                return orderedTextBlock?.text
+            default:
+                return nil
+            }
+        } set {
+            switch self.type {
+            case .plainText:
+                plainTextBlock?.text = newValue
+            case .checklistText:
+                checklistTextBlock?.text = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.text = newValue
+            case .orderedText:
+                orderedTextBlock?.text = newValue
+            default:
+                ()
+            }
+        }
+        
+    }
+    
+    var hasFormat: Bool {
+        switch self.type {
+        case .checklistText,
+             .orderedText,
+             .unOrderedText:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var textStyle: FontTextStyle {
+        get {
+            switch type {
+            case .plainText:
+                return plainTextBlock?.textStyle ?? .body
+            case .checklistText:
+                return checklistTextBlock?.textStyle ?? .body
+            case .unOrderedText:
+                return unOrderedTextBlock?.textStyle ?? .body
+            case .orderedText:
+                return orderedTextBlock?.textStyle ?? .body
+            default:
+                return .body
+            }
+        } set {
+            switch type {
+            case .plainText:
+                plainTextBlock?.textStyle = newValue
+            case .checklistText:
+                checklistTextBlock?.textStyle = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.textStyle = newValue
+            case .orderedText:
+                orderedTextBlock?.textStyle = newValue
+            default:
+                ()
+            }
+        }
+        
+    }
+    
+    internal func append(text: String) {
+        switch self.type {
+        case .plainText:
+            guard let originText = plainTextBlock?.text else { return }
+            plainTextBlock?.text = originText + text
+        case .checklistText:
+            guard let originText = checklistTextBlock?.text else { return }
+            checklistTextBlock?.text = originText + text
+        case .unOrderedText:
+            guard let originText = unOrderedTextBlock?.text else { return }
+            unOrderedTextBlock?.text = originText + text
+        case .orderedText:
+            guard let originText = orderedTextBlock?.text else { return }
+            orderedTextBlock?.text = originText + text
+        default:
+            return
+        }
+    }
+    
+    
+    func didSelectItem(fromVC viewController: ViewController) {
+        
+    }
+    
+}
+
 extension Block {
-    internal func replacePlainWithOrdered(bullet: PianoBullet) {
-        guard let plainTextBlock = plainTextBlock,
-            let num = Int64(bullet.string),
-            let context = managedObjectContext else { return }
-        
-        //1. orderedText를 생성하고
-        let orderedTextBlock = OrderedTextBlock(context: context)
-        orderedTextBlock.num = num
-        orderedTextBlock.frontWhitespaces = bullet.whitespaces.string
-        orderedTextBlock.text = (bullet.text as NSString).substring(from: bullet.baselineIndex)
-        orderedTextBlock.textStyle = plainTextBlock.textStyle
-        //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
-//        orderedTextBlock.attributes
-        
-        //2. 이를 block에 연결시킨다.
-        orderedTextBlock.addToBlockCollection(self)
-        
-        //3. plainText의 count가 1개이면 자신을 코어데이터에서 삭제
-        if let plainTextBlockCollection = plainTextBlock.blockCollection,
-            plainTextBlockCollection.count < 2 {
-            context.delete(plainTextBlock)
-        }
-        
-        //4. plainTextBlock 연결 끊기
-        self.plainTextBlock = nil
-        
-        //5. 타입을 지정하고
-        type = .orderedText
-    }
     
-    internal func replacePlainWithUnOrdered(bullet: PianoBullet) {
-        guard let plainTextBlock = plainTextBlock,
-            let context = managedObjectContext else { return }
+    /**
+     1. bullet 생성
+     2. 이를 block에 연결
+     3. plainText의 count가 1개이면 자신을 코어데이터에서 삭제
+     4. plainTextBlock 연결 끊기
+     5. 타입 지정
+     6. UI 정보 전달
+     */
+    internal func replacePlainWith(_ bullet: PianoBullet, on resultsController: NSFetchedResultsController<Block>?, selectedRange: inout NSRange) {
+        guard let plain = plainTextBlock,
+            let context = managedObjectContext
+            else { return }
         
-        //1. unOrderedText를 생성하고
-        let unOrderedTextBlock = UnOrderedTextBlock(context: context)
-        unOrderedTextBlock.key = bullet.string
-        unOrderedTextBlock.frontWhitespaces = bullet.whitespaces.string
-        unOrderedTextBlock.text = (bullet.text as NSString).substring(from: bullet.baselineIndex)
-        unOrderedTextBlock.textStyle = plainTextBlock.textStyle
-        //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
-//        orderedTextBlock.attributes
+        type = bullet.blockType
+        modifiedDate = Date()
         
-        //2. 이를 block에 연결시킨다.
-        unOrderedTextBlock.addToBlockCollection(self)
+        var bulletTextBlock: BulletTextBlockType
+        switch bullet.type {
+        case .orderedlist:
+            bulletTextBlock = OrderedTextBlock(context: context)
+        case .unOrderedlist:
+            bulletTextBlock = UnOrderedTextBlock(context: context)
+        case .checkist:
+            bulletTextBlock = ChecklistTextBlock(context: context)
+        }
+
+        bulletTextBlock.frontWhitespaces = bullet.whitespaces.string
+        bulletTextBlock.key = bullet.string
         
-        //3. plainText의 count가 1개이면 자신을 코어데이터에서 삭제
-        if let plainTextBlockCollection = plainTextBlock.blockCollection,
-            plainTextBlockCollection.count < 2 {
-            context.delete(plainTextBlock)
+        
+        if let num = Int64(bullet.string),
+            let resultsController = resultsController {
+            let correctNum = modifyNumIfNeeded(resultsController: resultsController) ?? num
+            var bullet = bullet
+            bullet.string = "\(correctNum)"
+            bulletTextBlock.num = num
+            adjustAfterOrder(currentNum: correctNum, resultsController: resultsController)
+        }
+        //TODO: attributes에 대한 처리도 해야함(피아노 효과 할 때)
+//        bulletTextBlock.attributes
+        
+        bulletTextBlock.addToBlockCollection(self)
+        
+        if let plainBlockCollection = plain.blockCollection, plainBlockCollection.count < 2 {
+            context.delete(plain)
         }
         
-        //4. plainTextBlock 연결 끊기
-        self.plainTextBlock = nil
+        plainTextBlock = nil
         
-        //5. 타입을 지정해준다
-        type = .unOrderedText
-    }
-    
-    internal func replacePlainWithCheck(bullet: PianoBullet) {
-        guard let plainTextBlock = plainTextBlock,
-            let context = managedObjectContext else { return }
-        
-        //1. checklistText를 생성하고
-        let checklistTextBlock = ChecklistTextBlock(context: context)
-        checklistTextBlock.frontWhitespaces = bullet.whitespaces.string
-        checklistTextBlock.text = (bullet.text as NSString).substring(from: bullet.baselineIndex)
-        checklistTextBlock.textStyle = plainTextBlock.textStyle
-        //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
-//        orderedTextBlock.attributes
-        
-        //2. 이를 block에 연결시킨다.
-        checklistTextBlock.addToBlockCollection(self)
-        
-        //3. plainText의 count가 1개이면 자신을 코어데이터에서 삭제
-        if let plainTextBlockCollection = plainTextBlock.blockCollection,
-            plainTextBlockCollection.count < 2 {
-            context.delete(plainTextBlock)
-        }
-        
-        //4. plainTextBlock 연결 끊기
-        self.plainTextBlock = nil
-        
-        //5. 타입을 지정해준다
-        type = .checklistText
+        selectedRange.location -= bullet.baselineIndex
     }
     
     internal func revertToPlain() {
         guard let context = managedObjectContext else { return }
         
+        type = .plainText
+        modifiedDate = Date()
         
         //1. plainText를 생성하고
-        let plainTextBlock = PlainTextBlock(context: context)
-        plainTextBlock.text = self.text
-        plainTextBlock.textStyle = self.textStyle ?? .body
+        var plainTextBlock = PlainTextBlock(context: context)
+        plainTextBlock.text = text
+        plainTextBlock.textStyle = textStyle
         //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
-//        orderedTextBlock.attributes
+        //        orderedTextBlock.attributes
         
         //2. 이를 block에 연결시킨다.
         plainTextBlock.addToBlockCollection(self)
@@ -125,18 +234,156 @@ extension Block {
             let collection = orderedTextBlock.blockCollection,
             collection.count < 2 {
             context.delete(orderedTextBlock)
+            //TODO: 아래에 ordered이면 현재 order로 치환하고 그다음부터 숫자 크기 세팅
         }
         
         //4. 나머지 것들 연결 끊기
-        self.checklistTextBlock = nil
-        self.unOrderedTextBlock = nil
-        self.orderedTextBlock = nil
+        checklistTextBlock = nil
+        unOrderedTextBlock = nil
+        orderedTextBlock = nil
         
-        //5. 타입을 지정한다
-        type = .plainText
     }
     
-    internal func deleteSelf() {
+    internal func combinePreviousBlock(on resultsController: NSFetchedResultsController<Block>?) {
+        guard let resultsController = resultsController,
+            var indexPath = resultsController.indexPath(forObject: self),
+            let text = text else { return }
+        
+        while indexPath.row > 0 {
+            indexPath.row -= 1
+            let previousBlock = resultsController.object(at: indexPath)
+            guard resultsController.object(at: indexPath).isTextType else { continue }
+            previousBlock.append(text: text)
+            previousBlock.modifiedDate = Date()
+            self.deleteWithRelationship()
+            return
+        }
+    }
+    
+    internal func insertNextBlock(with text: String, on resultsController: NSFetchedResultsController<Block>?) {
+        guard let resultsController = resultsController,
+            let count = resultsController.sections?.first?.numberOfObjects,
+            var indexPath = resultsController.indexPath(forObject: self),
+            let context = managedObjectContext else { return }
+        
+        indexPath.row += 1
+        
+        //다음 block이 있다면, order는 둘의 평균으로 잡고, 없다면 + 1하기
+        let createdOrder: Double
+        if indexPath.row < count {
+            let nextOrder = resultsController.object(at: indexPath).order
+            createdOrder = (order + nextOrder) / 2
+        } else {
+            createdOrder = order + 1
+        }
+        
+        //생성하기 기존 블럭의 타입에 맞게 생성해야함.
+        
+        //1. block 생성
+        let block = Block(context: context)
+        block.order = createdOrder
+        block.note = note
+        
+        
+        switch type {
+        case .plainText:
+            guard let plainTextBlock = plainTextBlock else { return }
+            
+            //2. plainBlock 생성
+            let newPlainBlock = PlainTextBlock(context: context)
+            newPlainBlock.text = text
+            newPlainBlock.textStyleInteger = plainTextBlock.textStyleInteger
+            
+            //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
+            //        newPlainBlock.attributes
+            
+            //2. 이를 block에 연결시킨다.
+            newPlainBlock.addToBlockCollection(block)
+            
+        case .checklistText:
+            guard let checklistTextBlock = checklistTextBlock else { return }
+            
+            //2. checklistText 생성
+            let newChecklistTextBlock = ChecklistTextBlock(context: context)
+            newChecklistTextBlock.text = text
+            newChecklistTextBlock.textStyleInteger = checklistTextBlock.textStyleInteger
+            
+            //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
+            //        newChecklistTextBlock.attributes
+            
+            //2. 이를 block에 연결시킨다.
+            newChecklistTextBlock.addToBlockCollection(block)
+            
+        case .unOrderedText:
+            guard let unOrderedTextBlock = unOrderedTextBlock else { return }
+            
+            //2. checklistText 생성
+            let newUnOrderedTextBlock = UnOrderedTextBlock(context: context)
+            newUnOrderedTextBlock.text = text
+            newUnOrderedTextBlock.textStyleInteger = unOrderedTextBlock.textStyleInteger
+            
+            //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
+            //        newUnOrderedTextBlock.attributes
+            
+            //2. 이를 block에 연결시킨다.
+            block.unOrderedTextBlock = newUnOrderedTextBlock
+//            newUnOrderedTextBlock.addToBlockCollection(block)
+            
+        case .orderedText:
+            guard let orderedTextBlock = orderedTextBlock else { return }
+            
+            //2. checklistText 생성
+            let newOrderedTextBlock = OrderedTextBlock(context: context)
+            newOrderedTextBlock.text = text
+            newOrderedTextBlock.textStyleInteger = orderedTextBlock.textStyleInteger
+            
+            //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
+            //        newOrderedTextBlock.attributes
+            
+            //2. 이를 block에 연결시킨다.
+            newOrderedTextBlock.addToBlockCollection(block)
+            
+            //TODO: 다음 숫자들도 갱신해줘야함
+            
+            
+            
+        default:
+            return
+        }
+        
+        
+    }
+    
+    private func modifyNumIfNeeded(resultsController: NSFetchedResultsController<Block>) -> Int64? {
+        guard var indexPath = resultsController.indexPath(forObject: self),
+            indexPath.row > 0,
+            let orderedTextBlock = resultsController
+                .object(at: IndexPath(row: indexPath.row - 1,
+                                      section: indexPath.section)).orderedTextBlock
+            else { return nil }
+        
+        return orderedTextBlock.num + 1
+        
+    }
+    
+    private func adjustAfterOrder(currentNum: Int64, resultsController: NSFetchedResultsController<Block>) {
+        guard var indexPath = resultsController.indexPath(forObject: self) else { return }
+        var num = currentNum
+        while true {
+            indexPath.row += 1
+            num += 1
+            let nextBlock = resultsController.object(at: indexPath)
+            guard indexPath.row != resultsController.sections?.first?.numberOfObjects,
+                let orderedTextBlock = nextBlock.orderedTextBlock,
+                num != orderedTextBlock.num else { return }
+            
+            orderedTextBlock.num = num
+            nextBlock.modifiedDate = Date()
+            
+        }
+    }
+    
+    internal func deleteWithRelationship() {
         guard let context = managedObjectContext else { return }
         
         //1. 자신과 연결된 블록을 체크하여 삭제한다.
@@ -180,10 +427,7 @@ extension Block {
                     context.delete(imageID)
                 }
             }
-
-            
             context.delete(imageCollectionBlock)
-            
         } else {
             //나머지 추가로 추가될 것들
         }
@@ -196,6 +440,4 @@ extension Block {
         context.delete(self)
         
     }
-    
-    
 }
