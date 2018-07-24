@@ -34,7 +34,7 @@ internal class Sync: Uploadable, ErrorHandleable {
     
 }
 
-internal extension Sync {
+private extension Sync {
     
     private func fetchedObjects() -> Set<NSManagedObject> {
         var insertedObjects = Set<NSManagedObject>()

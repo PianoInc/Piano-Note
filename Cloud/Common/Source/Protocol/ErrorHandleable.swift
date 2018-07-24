@@ -86,7 +86,7 @@ internal extension ErrorHandleable where Self: ContextSave {
         serverRecord.syncMetaData(using: self.container.coreData)
         let record = ConflictRecord(ancestor: ancestorRecord, server: serverRecord, client: clientRecord)
         let converter = Converter()
-        converter.cloud(conflict: record)
+        converter.cloud(conflict: record, using: container)
     }
     
 }
