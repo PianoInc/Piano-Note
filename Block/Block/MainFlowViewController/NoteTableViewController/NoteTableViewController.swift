@@ -12,7 +12,7 @@ import CoreData
 class NoteTableViewController: UITableViewController {
     
     var persistentContainer: NSPersistentContainer!
-    
+    var folder: Folder!
 
     var resultsController: NSFetchedResultsController<Note>?
     internal var delayBlockQueue: [(NoteTableViewController) -> Void] = []
@@ -39,6 +39,8 @@ class NoteTableViewController: UITableViewController {
     }
     
     @IBAction func tapNewNote(_ sender: UIBarButtonItem) {
+        let note = Note()
+
         performSegue(withIdentifier: "DetailNavigationController", sender: nil)
     }
     
@@ -90,13 +92,13 @@ extension NoteTableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return UITableViewCell.EditingStyle(rawValue: 3) ?? UITableViewCell.EditingStyle.none
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle(rawValue: 3) ?? UITableViewCellEditingStyle.none
     }
     
     
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
     }
     

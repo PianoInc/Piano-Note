@@ -12,32 +12,22 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
     @IBOutlet weak var ibButton: UIButton!
     @IBOutlet weak var ibLabel: UILabel!
     @IBOutlet weak var ibTextView: BlockTextView!
-    
-    //default value = 16
-    @IBOutlet weak var whitespaceConstraint: NSLayoutConstraint!
-    
-    
+    @IBOutlet weak var ibTextViewLeadingAnchor: NSLayoutConstraint!
+    @IBOutlet weak var ibButtonLeadingAnchor: NSLayoutConstraint!
+    @IBOutlet weak var ibLabelLeadingAnchor: NSLayoutConstraint!
     
     var data: TableDatable? {
         didSet {
             guard let block = data as? Block else { return }
-            whitespaceConstraint.constant = -16
-            ibLabel.text = ""
             
             switch block.type {
             case .plainText:
                 guard let plainTextBlock = block.plainTextBlock else { return }
-                ibButton.isHidden = true
-                ibLabel.isHidden = false
-                
                 
                 let font = UIFont.preferredFont(forTextStyle: plainTextBlock.textStyle)
                 ibTextView.font = font
-                ibLabel.font = font
                 ibTextView.text = plainTextBlock.text ?? ""
-//                ibTextView.textStorage.replaceCharacters(in: NSMakeRange(0, ibTextView.textStorage.length),
-//                                                              with: plainTextBlock.text ?? "")
-                
+                ibTextViewLeadingAnchor.constant = 0
                 /*
                 //이미지, json, detector은 전부 비동기
                 DispatchQueue.global().async {
@@ -46,23 +36,25 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 */
             case .checklistText:
                 guard let checklistTextBlock = block.checklistTextBlock else { return }
-                ibButton.isHidden = false
                 ibLabel.isHidden = true
-                
+                ibButton.isHidden = false
                 
                 let font = UIFont.preferredFont(forTextStyle: checklistTextBlock.textStyle)
                 ibTextView.font = font
-                ibLabel.font = font
+                ibLabel.font = ibLabel.font.withSize(font.pointSize)
                 ibTextView.text = checklistTextBlock.text ?? ""
-//                ibTextView.textStorage.replaceCharacters(in: NSMakeRange(0, ibTextView.textStorage.length),
-//                                                              with: checklistTextBlock.text ?? "")
+                ibTextViewLeadingAnchor.constant = ibButton.frame.width + 8
+                ibButtonLeadingAnchor.constant = 0
+                ibLabelLeadingAnchor.constant = 0
+
                 self.ibButton.isSelected = checklistTextBlock.isSelected
                 
                 if let whitespaceStr = checklistTextBlock.frontWhitespaces as NSString? {
                     let width = whitespaceStr.size(withAttributes: [.font : font]).width
                     if width > 0 {
-                        //TODO: 이거 제대로 실행되는 지 체크
-                        self.whitespaceConstraint.constant = width
+                        ibTextViewLeadingAnchor.constant += width
+                        ibButtonLeadingAnchor.constant += width
+                        ibLabelLeadingAnchor.constant += width
                     }
                 }
                 
@@ -75,23 +67,25 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 
             case .orderedText:
                 guard let orderedTextBlock = block.orderedTextBlock else { return }
-                
-                ibButton.isHidden = true
                 ibLabel.isHidden = false
-                
+                ibButton.isHidden = true
                 
                 let font = UIFont.preferredFont(forTextStyle: orderedTextBlock.textStyle)
                 ibTextView.font = font
-                ibLabel.font = font
+                ibLabel.font = ibLabel.font.withSize(font.pointSize)
                 ibTextView.text = orderedTextBlock.text ?? ""
-//                ibTextView.textStorage.replaceCharacters(in: NSMakeRange(0, ibTextView.textStorage.length),
-//                                                              with: orderedTextBlock.text ?? "")
                 ibLabel.text = "\(orderedTextBlock.num)."
+                ibTextViewLeadingAnchor.constant = ibButton.frame.width + 8
+                ibButtonLeadingAnchor.constant = 0
+                ibLabelLeadingAnchor.constant = 0
+                
                 
                 if let whitespaceStr = orderedTextBlock.frontWhitespaces as NSString? {
                     let width = whitespaceStr.size(withAttributes: [.font : font]).width
                     if width > 0 {
-                        self.whitespaceConstraint.constant = width
+                        ibTextViewLeadingAnchor.constant += width
+                        ibButtonLeadingAnchor.constant += width
+                        ibLabelLeadingAnchor.constant += width
                     }
                 }
                 
@@ -104,24 +98,24 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 
             case .unOrderedText:
                 guard let unOrderedTextBlock = block.unOrderedTextBlock else { return }
-                
-                ibButton.isHidden = true
                 ibLabel.isHidden = false
-                ibLabel.text = ""
+                ibButton.isHidden = true
                 
                 let font = UIFont.preferredFont(forTextStyle: unOrderedTextBlock.textStyle)
                 ibTextView.font = font
-                ibLabel.font = font
+                ibLabel.font = ibLabel.font.withSize(font.pointSize)
                 ibTextView.text = unOrderedTextBlock.text ?? ""
-//                ibTextView.textStorage.replaceCharacters(in: NSMakeRange(0, ibTextView.textStorage.length),
-//                                                         with: unOrderedTextBlock.text ?? "")
-                
                 ibLabel.text = "•"  //TODO: 이거 나중에 얼마든지 바뀔 수 있기 때문에 리펙토링 할 것
+                ibTextViewLeadingAnchor.constant = ibButton.frame.width + 8
+                ibButtonLeadingAnchor.constant = 0
+                ibLabelLeadingAnchor.constant = 0
                 
                 if let whitespaceStr = unOrderedTextBlock.frontWhitespaces as NSString? {
                     let width = whitespaceStr.size(withAttributes: [.font : font]).width
                     if width > 0 {
-                        self.whitespaceConstraint.constant = width
+                        ibTextViewLeadingAnchor.constant += width
+                        ibButtonLeadingAnchor.constant += width
+                        ibLabelLeadingAnchor.constant += width
                     }
                 }
                 

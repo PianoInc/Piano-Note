@@ -32,12 +32,9 @@ extension BlockTableViewController: TableViewDataSource {
         return true
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return UITableViewCell.EditingStyle(rawValue: 3) ?? UITableViewCell.EditingStyle.none
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle(rawValue: 3) ?? UITableViewCellEditingStyle.none
     }
-    
-    
-    
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
@@ -113,13 +110,6 @@ extension BlockTableViewController: TableViewDataSource {
         navigationController?.appearCopyNotificationView()
     }
     
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        resultsController?.object(at: indexPath).didSelectItem(fromVC: self)
-        
-    }
-    
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         guard let state = self.state else { return false }
         return state != .normal ? false : true
@@ -132,5 +122,8 @@ extension BlockTableViewController: TableViewDataSource {
 }
 
 extension BlockTableViewController: TableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        resultsController?.object(at: indexPath).didSelectItem(fromVC: self)
+        
+    }
 }
