@@ -76,7 +76,7 @@ internal extension Uploadable where Self: ErrorHandleable {
         let operation = CKModifyRecordsOperation(recordsToSave: datasource.recordsToSave, recordIDsToDelete: datasource.recordIDsToDelete)
         operation.qualityOfService = .utility
         operation.perRecordCompletionBlock = { record, error in
-            record.syncMetaData(using: self.container.coreData)
+            record.syncMetaData(using: self.container)
             if let error = error {
                 self.errorBlock?(error)
             } else {
