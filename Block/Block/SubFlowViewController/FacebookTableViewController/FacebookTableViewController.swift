@@ -10,12 +10,13 @@ import UIKit
 import Facebook
 
 class FacebookTableViewController: UITableViewController, FacebookPostDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        delegate { [weak self] in self?.dismiss(animated: true)}.didSelectRowAt = { [weak self] in
-            print("didSelectRowAt")
-            self?.performSegue(withIdentifier: "FacebookDetailTableViewController", sender: $0)
+        delegate { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+            }.didSelectRowAt = { [weak self] in
+                self?.performSegue(withIdentifier: "FacebookDetailTableViewController", sender: $0)
         }
     }
     
@@ -25,9 +26,9 @@ class FacebookTableViewController: UITableViewController, FacebookPostDelegate {
             vc.postData = postData
         }
     }
-
+    
     @IBAction func tapCancel(_ sender: Any) {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
 }
