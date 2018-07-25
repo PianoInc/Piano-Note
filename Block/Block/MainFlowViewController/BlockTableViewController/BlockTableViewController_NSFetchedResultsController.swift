@@ -11,27 +11,31 @@ import UIKit
 
 extension BlockTableViewController: NSFetchedResultsControllerDelegate {
     
+    private func refreshOrderedTextIfNeeded(controller: NSFetchedResultsController<NSFetchRequestResult>, currentIndexPath indexPath: IndexPath) {
+        guard let count = controller.sections?.first?.numberOfObjects else { return }
+        guard indexPath.row > 0 else { return }
+        var indexPath = indexPath
+        indexPath.row -= 1
+        guard let prevBlock = controller.object(at: indexPath) as? Block,
+            let prevOrderedTextBlock = prevBlock.orderedTextBlock else  { return }
+        var num = prevOrderedTextBlock.num
+        while true {
+            num += 1
+            indexPath.row += 1
+            guard indexPath.row < count,
+                let nextBlock = controller.object(at: indexPath) as? Block,
+                let nextOrderedBlock = nextBlock.orderedTextBlock else { return }
+            nextOrderedBlock.num = num
+            nextBlock.modifiedDate = Date()
+        }
+    }
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
             switch type {
             case .delete:
-                guard var indexPath = indexPath else { return }
+                guard let indexPath = indexPath else { return }
                 self.tableView.deleteRows(at: [indexPath], with: .none)
-                
-                guard let count = controller.sections?.first?.numberOfObjects else { return }
-                guard indexPath.row > 0 else { return }
-                var prevIndexPath = indexPath
-                prevIndexPath.row -= 1
-                guard let prevBlock = controller.object(at: prevIndexPath) as? Block, let prevOrderedTextBlock = prevBlock.orderedTextBlock else  { return }
-                var num = prevOrderedTextBlock.num
-                while true {
-                    num += 1
-                    guard indexPath.row < count,
-                        let nextBlock = controller.object(at: indexPath) as? Block,
-                        let nextOrderedBlock = nextBlock.orderedTextBlock else { return }
-                    nextOrderedBlock.num = num
-                    nextBlock.modifiedDate = Date()
-                    indexPath.row += 1
-                }
+                refreshOrderedTextIfNeeded(controller: controller, currentIndexPath: indexPath)
                 
             case .insert:
                 UIView.performWithoutAnimation {

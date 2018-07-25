@@ -336,6 +336,7 @@
 		77E843F33F4BA30297508451072421CC /* Block */ = {
 			isa = PBXGroup;
 			children = (
+				7CDA577F2108399B00517A0C /* Common */,
 				72B1AD043929504F1A24D277C8EB5288 /* Extension */,
 				6944E1A674B664BAB6DEB92204150418 /* MainFlowViewController */,
 				0A14859DDDB3ABB86377328B30388A42 /* PlatformConvertible */,
@@ -349,9 +350,16 @@
 				AB03E11856499D5BBE8C4BB46CA88A5E /* Info.plist */,
 				324AEFF89DC61A7224C39A438E70247B /* LaunchScreen.storyboard */,
 				BB94C1FE17D982EC63A541C7349E6045 /* Main.storyboard */,
-				DDFF0712AC5BD3AEC798DAB16E962EC6 /* PasteboardManager.swift */,
 			);
 			path = Block;
+			sourceTree = "<group>";
+		};
+		7CDA577F2108399B00517A0C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DDFF0712AC5BD3AEC798DAB16E962EC6 /* PasteboardManager.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		849A28FF124594ADCAF89ACE77B7D427 /* BlockCell */ = {

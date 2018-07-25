@@ -33,7 +33,6 @@ extension NSPersistentContainer {
                 note1.title = "선택받은 메모"
                 note1.modifiedDate = Date()
                 
-                
                 for i in 0...1000 {
                     let Block1 = Block(context: viewContext)
                     Block1.order = Double(i)

@@ -9,6 +9,7 @@ import UIKit
 
 //MARK: Action
 extension BlockTableViewController {
+    
     @IBAction func tapTableViewBackground(_ sender: UITapGestureRecognizer) {
         setCursor(position: sender.location(in: tableView))
     }

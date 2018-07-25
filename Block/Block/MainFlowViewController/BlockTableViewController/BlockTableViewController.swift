@@ -29,8 +29,8 @@ class BlockTableViewController: UIViewController {
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
+//        tableView.dragDelegate = self
+//        tableView.dropDelegate = self
         tableView.dragInteractionEnabled = true
         
         DispatchQueue.main.async { [weak self] in

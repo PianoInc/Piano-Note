@@ -20,7 +20,6 @@ class FolderTableViewController: UITableViewController {
         
         clearsSelectionOnViewWillAppear = true
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
     }
 
     

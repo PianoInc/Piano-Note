@@ -21,6 +21,9 @@ extension BlockTableViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         textView.isEditable = false
+        guard let cell = textView.superview?.superview as? TextBlockTableViewCell,
+            let block = cell.data as? Block else { return }
+        block.text = textView.text
     }
     
     
@@ -50,12 +53,10 @@ extension BlockTableViewController: UITextViewDelegate {
         switch typingSituation(textView, block: block, replacementText: text) {
         case .resetForm:
             block.revertToPlain()
-            let selectedRange = NSMakeRange(0, 0)
-            cursorCache = (indexPath, selectedRange)
+            moveCursorForResetForm(in: indexPath)
             return false
         case .movePrevious:
-            guard let resultsController = resultsController,
-                indexPath.row > 0 else { return false }
+            guard let resultsController = resultsController, indexPath.row > 0 else { return false }
             
             var indexPath = indexPath
             indexPath.row -= 1
@@ -67,8 +68,7 @@ extension BlockTableViewController: UITextViewDelegate {
                 return false
             }
 
-            let selectedRange = NSMakeRange(previousBlock.text?.count ?? 0, 0)
-            cursorCache = (indexPath, selectedRange)
+            moveCursorTo(previousBlock, prevIndexPath: indexPath)
             
             let text = textView.text ?? ""
             previousBlock.append(text: text)
@@ -120,18 +120,31 @@ extension BlockTableViewController: UITextViewDelegate {
         }
     }
     
+}
+
+extension BlockTableViewController {
+    /**
+     PlainTextBlock이 아니라면 이 작업을 할 필요가 없음.
+     */
     private func formatTextIfNeeded(_ textView: UITextView) {
-        //PlainTextBlock이 아니라면 이 작업을 할 필요가 없음.
         guard let block = (textView.superview?.superview as? TextBlockTableViewCell)?.data as? Block,
             let bullet = PianoBullet(text: textView.text, selectedRange: textView.selectedRange),
             block.plainTextBlock != nil,
             let indexPath = resultsController?.indexPath(forObject: block) else { return }
-//        block.text = textView.text
+        
         var selectedRange = textView.selectedRange
         textView.textStorage.replaceCharacters(in: NSMakeRange(0, bullet.baselineIndex), with: "")
-        
         block.replacePlainWith(bullet, on: resultsController, selectedRange: &selectedRange)
         cursorCache = (indexPath, selectedRange)
     }
     
+    private func moveCursorForResetForm(in indexPath: IndexPath) {
+        let selectedRange = NSMakeRange(0, 0)
+        cursorCache = (indexPath, selectedRange)
+    }
+    
+    private func moveCursorTo(_ previousBlock: Block, prevIndexPath indexPath: IndexPath) {
+        let selectedRange = NSMakeRange(previousBlock.text?.count ?? 0, 0)
+        cursorCache = (indexPath, selectedRange)
+    }
 }
