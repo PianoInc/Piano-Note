@@ -30,7 +30,7 @@ class BlockTextView: UITextView {
         if attributedText.length != 0 && attributedText.attribute(.link, at: index, effectiveRange: nil) != nil {
             return
         } else {
-            selectedRange.location = index
+            selectedRange.location = index + 1
             isEditable = true
             becomeFirstResponder()
         }

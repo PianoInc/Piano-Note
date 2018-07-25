@@ -6,9 +6,11 @@
 //  Copyright © 2018년 Piano. All rights reserved.
 
 import UIKit
+import CoreData
 
 //MARK: Action
 extension BlockTableViewController {
+    
     @IBAction func tapTableViewBackground(_ sender: UITapGestureRecognizer) {
         setCursor(position: sender.location(in: tableView))
     }
@@ -78,5 +80,58 @@ extension BlockTableViewController {
     
     @IBAction func tapPermanentlyDelete(sender: UIBarButtonItem) {
         
+    }
+    
+    /**
+     텍스트 맨 밑에 터치했을 때 마지막 셀이 텍스트 셀이 아니라면, 셀 생성하여 커서 띄우고, 텍스트 셀이라면 맨 마지막에 커서 띄우기
+     */
+    @IBAction func tapBackground(_ sender: Any) {
+        createBlockIfNeeded()
+    }
+}
+
+extension BlockTableViewController {
+    
+    private func createBlockIfNeeded(){
+        guard let resultsController = resultsController,
+            let count = resultsController.sections?.first?.numberOfObjects else { return }
+        let indexPath = IndexPath(row: count - 1, section: 0)
+        
+        guard count > 0,
+            resultsController.object(at: indexPath).isTextType else {
+                createBlockAtLast(controller: resultsController, lastIndexPath: indexPath)
+                return }
+        
+        let lastBlock = resultsController.object(at: indexPath)
+        let textCount = lastBlock.text?.count ?? 0
+        let selectedRange = NSMakeRange(textCount, 0)
+        lastBlock.modifiedDate = Date()
+        cursorCache = (indexPath, selectedRange)
+    }
+    
+    /**
+     셀이 하나도 없으면 첫 셀을 만들어주고, 셀이 존재하면 마지막 셀의 order + 1를 해주기
+     */
+    private func createBlockAtLast(controller: NSFetchedResultsController<Block>, lastIndexPath: IndexPath) {
+        let context = controller.managedObjectContext
+        let order: Double
+        
+        if lastIndexPath.row < 0 {
+            order = 0
+        } else {
+            let previousBlock = controller.object(at: lastIndexPath)
+            order = previousBlock.order + 1
+        }
+        
+        let block = Block(context: context)
+        block.order = order
+        block.note = note
+        block.type = .plainText
+        
+        let plainTextBlock = PlainTextBlock(context: context)
+        plainTextBlock.addToBlockCollection(block)
+        let indexPath = IndexPath(row: 0, section: 0)
+        let selectedRange = NSMakeRange(0, 0)
+        cursorCache = (indexPath, selectedRange)
     }
 }

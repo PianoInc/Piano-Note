@@ -33,8 +33,7 @@ extension NSPersistentContainer {
                 note1.title = "선택받은 메모"
                 note1.modifiedDate = Date()
                 
-                
-                for i in 0...1000 {
+                for i in 0...10 {
                     let Block1 = Block(context: viewContext)
                     Block1.order = Double(i)
                     Block1.type = .plainText
@@ -45,7 +44,7 @@ extension NSPersistentContainer {
                     plainTextBlock1.addToBlockCollection(Block1)
                 }
                 
-                for i in 1...1000 {
+                for i in 1...100 {
                     let note2 = Note(context: viewContext)
                     note2.folder = allFolder
                     note2.modifiedDate = Date(timeIntervalSinceNow: -60 * Double(i))
