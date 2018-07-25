@@ -15,6 +15,7 @@
 		33C2D8010185115D319DB835DD6ED63A /* FileBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE972EAD7524620DB26765DD8060D95 /* FileBlockTableViewCell.swift */; };
 		39DFC3AF903112F14F02A17897FAABDE /* NSManagedObjectContext_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50E6CB5CB0524DDCDD15CF9F9DF3A70 /* NSManagedObjectContext_extension.swift */; };
 		3D2C95CB0D7669C1077FDD1D7C51730A /* BlockTableViewController_DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF050B1BAC07472DA4BCE48073B299 /* BlockTableViewController_DataSource.swift */; };
+		3DF717FD8F715E15AD0D66790AB18A6A /* Cloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4231AE1C1105906CD56A813D9B7B8618 /* NSPersistentContainer_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEB35F3DD462F6D397C35C69B0D217F /* NSPersistentContainer_extension.swift */; };
 		4294093C8AC9EE4A2155BBB1D0D43774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AF3298A0D3C0394F569F658130DAA4A /* Assets.xcassets */; };
 		43F2859B17FCB12953C221A28BDDC8A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33720B9B9DBB4DEFE9A1C14AF314FF0F /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 		567802734F5A95ABF7B80DF69441F3E2 /* Block.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B52C1F77382585B87FAB91C0B7F86B0D /* Block.xcdatamodeld */; };
 		5821C1534B09FC85E093095D48DD9128 /* PianoBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F62133D64ADF2B4DC5652A60A33C26 /* PianoBullet.swift */; };
 		5C5E5D43A0561A3EDC34F784ADAEA45B /* OrderedTextBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7B30DCE84A61C98DBC9DCE4CD42D6D /* OrderedTextBlock_extension.swift */; };
+		5D2D5077097AFF0008754F34169D3104 /* Array_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DFA89A636F231954CAA4598972C85 /* Array_extension.swift */; };
 		5EC3900F2EE33D0B4E97B761C61581E9 /* TextBlockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD49890669222562AA90074970895C9 /* TextBlockType.swift */; };
 		5FDE2876216C2268948CD22257F8A4B3 /* DrawingBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC95E25D47826AEE0E2951B56EF127ED /* DrawingBlock_extension.swift */; };
 		62EC65B42E68FFCA4935D05BE1868B06 /* Font_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DAA29DC735CABAB107CA113D60E199 /* Font_extension.swift */; };
@@ -30,8 +32,6 @@
 		6BE618DA046E0170A006B11B44F893E9 /* SortTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB059842C8C290E032AE5E44EE5EC9C /* SortTableViewController.swift */; };
 		708AEC48F21F12C0682938F5022D1157 /* BlockTableViewController_dragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79878F7252E5C39CD3FD335B19A4A6 /* BlockTableViewController_dragDelegate.swift */; };
 		7B03E7473B9086CAF32C0FB0B433E595 /* BlockTableViewController_Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189224B2C44B7A10D6D1A5319146F823 /* BlockTableViewController_Action.swift */; };
-		7CDA57732107F50700517A0C /* Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */; };
-		7CDA57742107F50700517A0C /* Cloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		819B02D5B1704A356B6EBC240014C901 /* BlockTableViewController_DropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142856B2F1CD8026DC11330C1086577C /* BlockTableViewController_DropDelegate.swift */; };
 		8508F8D27DD758AFCD668721408EFE33 /* ImageBlockCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F410F0C09B96D64CEFABF5824E369DF /* ImageBlockCollectionViewCell.swift */; };
 		8654A349F536C5232D017F04E4ED36F4 /* NotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 677226EE12C944122ABC49EA8783C4E2 /* NotificationView.xib */; };
@@ -74,13 +74,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7CDA57752107F50700517A0C /* Embed Frameworks */ = {
+		EB80A3FDBA193E3066744B7700816230 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7CDA57742107F50700517A0C /* Cloud.framework in Embed Frameworks */,
+				3DF717FD8F715E15AD0D66790AB18A6A /* Cloud.framework in Embed Frameworks */,
 				AC1E17FC1AC23D5DC144F6A2009BF118 /* Facebook.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -90,6 +90,7 @@
 
 /* Begin PBXFileReference section */
 		08A7918D3F3A8E3018AC5C35D414949C /* iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOS.swift; sourceTree = "<group>"; };
+		0A1DFA89A636F231954CAA4598972C85 /* Array_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array_extension.swift; sourceTree = "<group>"; };
 		0AEB9F04C0487381311168453FF70E19 /* Pianote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pianote.xcdatamodel; sourceTree = "<group>"; };
 		1365B1788320989665703066AE899293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		142856B2F1CD8026DC11330C1086577C /* BlockTableViewController_DropDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableViewController_DropDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		23BB4A0854718BD99247A748525886A6 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		2CD616AB0D46ABC81FA5836A34245103 /* ChecklistTextBlock_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistTextBlock_extension.swift; sourceTree = "<group>"; };
 		2F410F0C09B96D64CEFABF5824E369DF /* ImageBlockCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBlockCollectionViewCell.swift; sourceTree = "<group>"; };
+		309B4CBC25EC963C51390BBDB80D30F7 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../Facebook/Facebook/Framework/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		33720B9B9DBB4DEFE9A1C14AF314FF0F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3535607CDDE71A26C39A438C7E473031 /* TableViewAutoSystemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewAutoSystemProtocol.swift; sourceTree = "<group>"; };
 		3EC2017EEB55EDA604B73943706EA227 /* Facebook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Facebook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +115,7 @@
 		677226EE12C944122ABC49EA8783C4E2 /* NotificationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationView.xib; sourceTree = "<group>"; };
 		6AF3298A0D3C0394F569F658130DAA4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E1A8C35F614897BDD66A1F68DEEDD45 /* Folder_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder_extension.swift; sourceTree = "<group>"; };
+		6FF1129625CDB644DDE3C4626BCF72B4 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../Facebook/Facebook/Framework/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		73C3F33572668CCD6C1A96D9421D7158 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		7428876D175DBA2A4BC03CEA11974EAA /* FolderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
 		796E985D4DFA2739B8F9CF20A5680EB9 /* UnOrderedTextBlock_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnOrderedTextBlock_extension.swift; sourceTree = "<group>"; };
@@ -150,6 +153,7 @@
 		DDFF0712AC5BD3AEC798DAB16E962EC6 /* PasteboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasteboardManager.swift; sourceTree = "<group>"; };
 		E1FCF8E8AF7DDBC58833538DAFFB8509 /* BulletTextBlockType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletTextBlockType.swift; sourceTree = "<group>"; };
 		E9C0225E81079A46AB72FEB46C9B5DDD /* UITextView_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView_extension.swift; sourceTree = "<group>"; };
+		ED06E3799EEEE09BA54107BEE92F1E7B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../Facebook/Facebook/Framework/Bolts.framework; sourceTree = "<group>"; };
 		F50E6CB5CB0524DDCDD15CF9F9DF3A70 /* NSManagedObjectContext_extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContext_extension.swift; sourceTree = "<group>"; };
 		F62B761A0A93AF578F8E14CAC392F88A /* BlockTableViewController_state.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableViewController_state.swift; sourceTree = "<group>"; };
 		F9E2468E3775C4FE51083F488B6CDC3C /* BlockTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTextView.swift; sourceTree = "<group>"; };
@@ -162,7 +166,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CDA57732107F50700517A0C /* Cloud.framework in Frameworks */,
 				6B0A989EABD5E11423CEC6BE5719DD6D /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,7 +212,10 @@
 		1E00F1598E7CFF8759DA1247055CA88C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED06E3799EEEE09BA54107BEE92F1E7B /* Bolts.framework */,
 				99F740AC6F1CD900544EA0E007D600A3 /* CloudKit.framework */,
+				6FF1129625CDB644DDE3C4626BCF72B4 /* FBSDKCoreKit.framework */,
+				309B4CBC25EC963C51390BBDB80D30F7 /* FBSDKLoginKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -312,6 +318,7 @@
 		72B1AD043929504F1A24D277C8EB5288 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0A1DFA89A636F231954CAA4598972C85 /* Array_extension.swift */,
 				BD278F32DBF6B4BE70808EAE6449EBA5 /* Block_extension.swift */,
 				2CD616AB0D46ABC81FA5836A34245103 /* ChecklistTextBlock_extension.swift */,
 				AC1836D0A2BFDE8DD6AF375F658868F9 /* DateFormatter_extension.swift */,
@@ -420,7 +427,7 @@
 				9871D7CDD8FCF056267961EB9F92F517 /* Sources */,
 				DA3F95E9C0906C93F5E857D46F1692A8 /* Frameworks */,
 				016403D8A1239D901906E06B0757D00C /* Resources */,
-				7CDA57752107F50700517A0C /* Embed Frameworks */,
+				EB80A3FDBA193E3066744B7700816230 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -494,6 +501,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43F2859B17FCB12953C221A28BDDC8A4 /* AppDelegate.swift in Sources */,
+				5D2D5077097AFF0008754F34169D3104 /* Array_extension.swift in Sources */,
 				567802734F5A95ABF7B80DF69441F3E2 /* Block.xcdatamodeld in Sources */,
 				F5B81D52BFBF75D9CDB8FE65A92A4F33 /* BlockTableViewController.swift in Sources */,
 				7B03E7473B9086CAF32C0FB0B433E595 /* BlockTableViewController_Action.swift in Sources */,
@@ -581,12 +589,14 @@
 				CODE_SIGN_ENTITLEMENTS = Block/Block.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9KHV9D7LV;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Facebook/Facebook/Framework\"";
 				INFOPLIST_FILE = Block/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = Piano.Block;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -601,12 +611,14 @@
 				CODE_SIGN_ENTITLEMENTS = Block/Block.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9KHV9D7LV;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Facebook/Facebook/Framework\"";
 				INFOPLIST_FILE = Block/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = Piano.Block;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

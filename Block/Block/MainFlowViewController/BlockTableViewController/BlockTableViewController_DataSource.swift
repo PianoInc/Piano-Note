@@ -116,9 +116,24 @@ extension BlockTableViewController: TableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard let sourceBlock = resultsController?.object(at: sourceIndexPath) else {return}
-        guard let destBlock = resultsController?.object(at: destinationIndexPath) else {return}
-        (sourceBlock.text, destBlock.text) = (destBlock.text, sourceBlock.text)
+        guard sourceIndexPath.row != destinationIndexPath.row else {return}
+        guard let low = [sourceIndexPath.row, destinationIndexPath.row].min() else {return}
+        guard let high = [sourceIndexPath.row, destinationIndexPath.row].max() else {return}
+        
+        var orders = [Double]()
+        for row in low...high {
+            let indexPath = IndexPath(row: row, section: 0)
+            guard let block = resultsController?.object(at: indexPath) else {continue}
+            orders.append(block.order)
+        }
+        
+        orders = orders.shifted(by: sourceIndexPath.row < destinationIndexPath.row ? 1 : -1)
+        
+        for (idx, row) in (low...high).enumerated() {
+            let indexPath = IndexPath(row: row, section: 0)
+            guard let block = resultsController?.object(at: indexPath) else {continue}
+            block.order = orders[idx]
+        }
     }
     
 }
