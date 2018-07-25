@@ -6,7 +6,7 @@
 //  Copyright © 2018년 piano. All rights reserved.
 //
 
-/// Facebook post 내용을 표기할 listView의 DataSource.
+/// Facebook post 내용을 표기할 tableView의 DataSource.
 public class PostDataSource<Section: FacebookSectionCell, Row: FacebookRowCell>:
 NSObject, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
@@ -21,12 +21,6 @@ NSObject, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefe
     /// PostDataSource RowCell selection closure
     public var didSelectRowAt: ((PostData) -> ())?
     
-    /**
-     - parameter viewCtrl : ViewController context.
-     - parameter listView : 결과를 attach하려는 tableView.
-     - parameter pageId : 불러오려는 Facebook PageId.
-     - parameter notReady : 로그인 실패시 호출.
-     */
     public init(_ viewCtrl: UIViewController, listView: UITableView,
                 pageId: String = "602234013303895", notReady: @escaping (() -> ())) {
         super.init()

@@ -1040,36 +1040,73 @@
         <scene sceneID="i24-iy-5KD">
             <objects>
                 <tableViewController id="Qem-7D-7kH" customClass="FacebookDetailTableViewController" customModule="Block" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fdu-FO-xzS">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fdu-FO-xzS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="208" id="gwU-ZU-e7L">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FacebookPostCell" rowHeight="208" id="gwU-ZU-e7L" customClass="FacebookPostCell" customModule="Facebook">
                                 <rect key="frame" x="0.0" y="28" width="375" height="208"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gwU-ZU-e7L" id="Ew6-Tb-2Yv">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="207.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AAb-bf-mTt">
-                                            <rect key="frame" x="8" y="0.0" width="359" height="157.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfs-fz-GgS">
+                                            <rect key="frame" x="16" y="16" width="343" height="176"/>
+                                            <string key="text">와.. 전 아이폰 기본 메모앱을 쓰는데 주로 회의 필기할 때 ms워드처럼 간편하게 서식을 쓸 수 있어서 애용해요. 그리고 아이폰 메모 앱은 제가 작곡을 좋아하는데 메모장으로 녹음한 걸 재저장할 수 있어서 제 노래를 분류할 때 참 좋더라구요!  영상 보고 왔는데 형광칠이나 제목화 하는 거 진짜 너무너무너무너무너무 탐나는 기능입니다..!!</string>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6SW-P1-ji1">
+                                            <rect key="frame" x="0.0" y="207" width="375" height="1"/>
+                                            <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="0.5" id="eyA-0R-8Dk"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="vfs-fz-GgS" firstAttribute="top" secondItem="Ew6-Tb-2Yv" secondAttribute="top" constant="16" id="0q9-OC-Xti"/>
+                                        <constraint firstAttribute="trailing" secondItem="vfs-fz-GgS" secondAttribute="trailing" constant="16" id="MpQ-5x-qKu"/>
+                                        <constraint firstAttribute="bottom" secondItem="vfs-fz-GgS" secondAttribute="bottom" constant="16" id="T8n-05-uVo"/>
+                                        <constraint firstAttribute="bottom" secondItem="6SW-P1-ji1" secondAttribute="bottom" id="Ycx-ic-uxZ"/>
+                                        <constraint firstItem="6SW-P1-ji1" firstAttribute="leading" secondItem="Ew6-Tb-2Yv" secondAttribute="leading" id="izZ-gl-psh"/>
+                                        <constraint firstAttribute="trailing" secondItem="6SW-P1-ji1" secondAttribute="trailing" id="mrM-ec-Gbu"/>
+                                        <constraint firstItem="vfs-fz-GgS" firstAttribute="leading" secondItem="Ew6-Tb-2Yv" secondAttribute="leading" constant="16" id="pY4-L5-A23"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="title" destination="vfs-fz-GgS" id="wSH-VS-s44"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FacebookCommentCell" rowHeight="208" id="II4-KO-kAx" customClass="FacebookCommentCell" customModule="Facebook">
+                                <rect key="frame" x="0.0" y="236" width="375" height="208"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="II4-KO-kAx" id="KbL-r6-I7N">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hHj-Eq-lRF">
+                                            <rect key="frame" x="8" y="10" width="359" height="158"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T2m-HJ-X6q">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JrC-N8-oaG">
                                                     <rect key="frame" x="10" y="10" width="25" height="25"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="25" id="GLJ-j0-92B"/>
-                                                        <constraint firstAttribute="height" constant="25" id="dsJ-4f-mrp"/>
+                                                        <constraint firstAttribute="height" constant="25" id="Prl-5H-0oX"/>
+                                                        <constraint firstAttribute="width" constant="25" id="Tgd-wY-eeu"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfs-fz-GgS">
-                                                    <rect key="frame" x="10" y="47" width="339" height="100.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="021-mu-AHG">
+                                                    <rect key="frame" x="10" y="47" width="339" height="101"/>
                                                     <string key="text">와.. 전 아이폰 기본 메모앱을 쓰는데 주로 회의 필기할 때 ms워드처럼 간편하게 서식을 쓸 수 있어서 애용해요. 그리고 아이폰 메모 앱은 제가 작곡을 좋아하는데 메모장으로 녹음한 걸 재저장할 수 있어서 제 노래를 분류할 때 참 좋더라구요!  영상 보고 왔는데 형광칠이나 제목화 하는 거 진짜 너무너무너무너무너무 탐나는 기능입니다..!!</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="작성자" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMb-b9-JyP">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="작성자" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGu-5g-s4c">
                                                     <rect key="frame" x="47" y="13" width="44.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" red="0.24313725489999999" green="0.34509803919999998" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1078,27 +1115,38 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="vfs-fz-GgS" firstAttribute="leading" secondItem="AAb-bf-mTt" secondAttribute="leading" constant="10" id="05z-Yc-Ilw"/>
-                                                <constraint firstItem="wMb-b9-JyP" firstAttribute="centerY" secondItem="T2m-HJ-X6q" secondAttribute="centerY" id="FXU-aT-1jk"/>
-                                                <constraint firstAttribute="trailing" secondItem="vfs-fz-GgS" secondAttribute="trailing" constant="10" id="Vur-Yo-x0M"/>
-                                                <constraint firstItem="T2m-HJ-X6q" firstAttribute="leading" secondItem="AAb-bf-mTt" secondAttribute="leading" constant="10" id="jhx-YU-PcU"/>
-                                                <constraint firstItem="wMb-b9-JyP" firstAttribute="leading" secondItem="T2m-HJ-X6q" secondAttribute="trailing" constant="12" id="lFw-zU-aOu"/>
-                                                <constraint firstItem="vfs-fz-GgS" firstAttribute="top" secondItem="T2m-HJ-X6q" secondAttribute="bottom" constant="12" id="qW5-HE-hEO"/>
-                                                <constraint firstItem="T2m-HJ-X6q" firstAttribute="top" secondItem="AAb-bf-mTt" secondAttribute="top" constant="10" id="xRI-IW-a7h"/>
-                                                <constraint firstAttribute="bottom" secondItem="vfs-fz-GgS" secondAttribute="bottom" constant="10" id="zOt-qh-kiH"/>
+                                                <constraint firstItem="IGu-5g-s4c" firstAttribute="leading" secondItem="JrC-N8-oaG" secondAttribute="trailing" constant="12" id="0ET-Ux-NM5"/>
+                                                <constraint firstItem="021-mu-AHG" firstAttribute="top" secondItem="JrC-N8-oaG" secondAttribute="bottom" constant="12" id="4dS-M6-ANV"/>
+                                                <constraint firstItem="IGu-5g-s4c" firstAttribute="centerY" secondItem="JrC-N8-oaG" secondAttribute="centerY" id="Gmg-kU-elA"/>
+                                                <constraint firstAttribute="trailing" secondItem="021-mu-AHG" secondAttribute="trailing" constant="10" id="KP6-bs-XIb"/>
+                                                <constraint firstItem="JrC-N8-oaG" firstAttribute="top" secondItem="hHj-Eq-lRF" secondAttribute="top" constant="10" id="PLK-cZ-feQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="021-mu-AHG" secondAttribute="bottom" constant="10" id="Ytv-TJ-fx6"/>
+                                                <constraint firstItem="JrC-N8-oaG" firstAttribute="leading" secondItem="hHj-Eq-lRF" secondAttribute="leading" constant="10" id="fXt-lz-U8a"/>
+                                                <constraint firstItem="021-mu-AHG" firstAttribute="leading" secondItem="hHj-Eq-lRF" secondAttribute="leading" constant="10" id="hTC-nY-IFq"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" red="0.78823529411764703" green="0.78823529411764703" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="0.5"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
-                                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="L2l-CG-pQw">
-                                            <rect key="frame" x="20" y="167.5" width="164" height="30"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gls-c1-5cZ">
+                                            <rect key="frame" x="20" y="178" width="164" height="30"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reply" translatesAutoresizingMaskIntoConstraints="NO" id="NSu-c7-KTc">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reply" translatesAutoresizingMaskIntoConstraints="NO" id="8Go-td-w8J">
                                                     <rect key="frame" x="0.0" y="9" width="13" height="12"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYz-Bf-B9q">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kdp-bZ-Oug">
                                                     <rect key="frame" x="23" y="0.0" width="83" height="30"/>
                                                     <state key="normal" title="답글 3개 보기"/>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7개월 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azI-9H-eGD">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7개월 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXU-rM-Nii">
                                                     <rect key="frame" x="116" y="6.5" width="48" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -1106,20 +1154,113 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="fHT-nF-8Df"/>
+                                                <constraint firstAttribute="height" constant="30" id="6f9-3W-vda"/>
                                             </constraints>
                                         </stackView>
                                     </subviews>
                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="L2l-CG-pQw" secondAttribute="bottom" constant="10" id="5pc-py-2XC"/>
-                                        <constraint firstItem="AAb-bf-mTt" firstAttribute="top" secondItem="Ew6-Tb-2Yv" secondAttribute="top" id="Afj-DN-eJh"/>
-                                        <constraint firstAttribute="trailing" secondItem="AAb-bf-mTt" secondAttribute="trailing" constant="8" id="EGj-pn-zGv"/>
-                                        <constraint firstItem="L2l-CG-pQw" firstAttribute="leading" secondItem="Ew6-Tb-2Yv" secondAttribute="leading" constant="20" id="HUB-Ld-9tF"/>
-                                        <constraint firstItem="AAb-bf-mTt" firstAttribute="leading" secondItem="Ew6-Tb-2Yv" secondAttribute="leading" constant="8" id="fV2-X9-Sdu"/>
-                                        <constraint firstItem="L2l-CG-pQw" firstAttribute="top" secondItem="AAb-bf-mTt" secondAttribute="bottom" constant="10" id="lrv-qo-rqO"/>
+                                        <constraint firstAttribute="trailing" secondItem="hHj-Eq-lRF" secondAttribute="trailing" constant="8" id="2It-ob-YNb"/>
+                                        <constraint firstItem="hHj-Eq-lRF" firstAttribute="leading" secondItem="KbL-r6-I7N" secondAttribute="leading" constant="8" id="4d1-bW-MC5"/>
+                                        <constraint firstItem="hHj-Eq-lRF" firstAttribute="top" secondItem="KbL-r6-I7N" secondAttribute="top" constant="10" id="QD5-a5-Lg6"/>
+                                        <constraint firstItem="gls-c1-5cZ" firstAttribute="leading" secondItem="KbL-r6-I7N" secondAttribute="leading" constant="20" id="rzJ-sf-xQ9"/>
+                                        <constraint firstItem="gls-c1-5cZ" firstAttribute="top" secondItem="hHj-Eq-lRF" secondAttribute="bottom" constant="10" id="tCh-Lo-UfN"/>
+                                        <constraint firstAttribute="bottom" secondItem="gls-c1-5cZ" secondAttribute="bottom" id="zEl-Iq-f7e"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="date" destination="lXU-rM-Nii" id="wcV-8y-2zM"/>
+                                    <outlet property="message" destination="021-mu-AHG" id="4bX-OE-bh2"/>
+                                    <outlet property="name" destination="IGu-5g-s4c" id="gKD-YX-XFp"/>
+                                    <outlet property="portrait" destination="JrC-N8-oaG" id="aSz-zN-VQL"/>
+                                    <outlet property="reply" destination="Kdp-bZ-Oug" id="FtG-L2-YS6"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FacebookReplyCell" rowHeight="208" id="4Ck-6B-PUw" customClass="FacebookReplyCell" customModule="Facebook">
+                                <rect key="frame" x="0.0" y="444" width="375" height="208"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Ck-6B-PUw" id="uwd-7t-ueh">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hh8-n2-yTX">
+                                            <rect key="frame" x="40" y="10" width="327" height="158"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GOd-hh-diB">
+                                                    <rect key="frame" x="10" y="10" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="If8-o7-Zq8"/>
+                                                        <constraint firstAttribute="width" constant="25" id="bQI-Db-9bf"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Koi-9K-Dte">
+                                                    <rect key="frame" x="10" y="47" width="307" height="101"/>
+                                                    <string key="text">와.. 전 아이폰 기본 메모앱을 쓰는데 주로 회의 필기할 때 ms워드처럼 간편하게 서식을 쓸 수 있어서 애용해요. 그리고 아이폰 메모 앱은 제가 작곡을 좋아하는데 메모장으로 녹음한 걸 재저장할 수 있어서 제 노래를 분류할 때 참 좋더라구요!  영상 보고 왔는데 형광칠이나 제목화 하는 거 진짜 너무너무너무너무너무 탐나는 기능입니다..!!</string>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="작성자" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DB2-z4-hix">
+                                                    <rect key="frame" x="47" y="13" width="44.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <color key="textColor" red="0.24313725489999999" green="0.34509803919999998" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="DB2-z4-hix" firstAttribute="centerY" secondItem="GOd-hh-diB" secondAttribute="centerY" id="304-fY-y01"/>
+                                                <constraint firstAttribute="bottom" secondItem="Koi-9K-Dte" secondAttribute="bottom" constant="10" id="TgJ-J6-FiK"/>
+                                                <constraint firstItem="GOd-hh-diB" firstAttribute="top" secondItem="hh8-n2-yTX" secondAttribute="top" constant="10" id="XzX-cw-hCA"/>
+                                                <constraint firstItem="DB2-z4-hix" firstAttribute="leading" secondItem="GOd-hh-diB" secondAttribute="trailing" constant="12" id="dIC-kt-mep"/>
+                                                <constraint firstAttribute="trailing" secondItem="Koi-9K-Dte" secondAttribute="trailing" constant="10" id="fbx-8f-Ujc"/>
+                                                <constraint firstItem="Koi-9K-Dte" firstAttribute="top" secondItem="GOd-hh-diB" secondAttribute="bottom" constant="12" id="hQb-3R-gTa"/>
+                                                <constraint firstItem="GOd-hh-diB" firstAttribute="leading" secondItem="hh8-n2-yTX" secondAttribute="leading" constant="10" id="lMi-mc-zgr"/>
+                                                <constraint firstItem="Koi-9K-Dte" firstAttribute="leading" secondItem="hh8-n2-yTX" secondAttribute="leading" constant="10" id="vAL-tV-rhh"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" red="0.78823529411764703" green="0.78823529411764703" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="0.5"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1at-mb-Dvv">
+                                            <rect key="frame" x="52" y="178" width="48" height="30"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7개월 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1jj-xi-0Ra">
+                                                    <rect key="frame" x="0.0" y="6.5" width="48" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="dr1-sz-7RC"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="1at-mb-Dvv" firstAttribute="top" secondItem="hh8-n2-yTX" secondAttribute="bottom" constant="10" id="2GD-KP-EwH"/>
+                                        <constraint firstAttribute="bottom" secondItem="1at-mb-Dvv" secondAttribute="bottom" id="Oyu-GM-9l9"/>
+                                        <constraint firstItem="hh8-n2-yTX" firstAttribute="leading" secondItem="uwd-7t-ueh" secondAttribute="leading" constant="40" id="aLB-cs-nE1"/>
+                                        <constraint firstAttribute="trailing" secondItem="hh8-n2-yTX" secondAttribute="trailing" constant="8" id="kZG-hU-OG8"/>
+                                        <constraint firstItem="1at-mb-Dvv" firstAttribute="leading" secondItem="uwd-7t-ueh" secondAttribute="leading" constant="52" id="mJS-z8-cYe"/>
+                                        <constraint firstItem="hh8-n2-yTX" firstAttribute="top" secondItem="uwd-7t-ueh" secondAttribute="top" constant="10" id="ovM-C2-xo9"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="date" destination="1jj-xi-0Ra" id="lxh-H6-ZFd"/>
+                                    <outlet property="message" destination="Koi-9K-Dte" id="ja2-2H-aU8"/>
+                                    <outlet property="name" destination="DB2-z4-hix" id="Pfj-g4-TgF"/>
+                                    <outlet property="portrait" destination="GOd-hh-diB" id="maU-OP-NHg"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1133,33 +1274,80 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G5y-zI-XyV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-463" y="-568"/>
+            <point key="canvasLocation" x="-994" y="-1318"/>
         </scene>
         <!--페이스북 페이지-->
         <scene sceneID="kX4-0k-Qw3">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="gd1-Rv-47K" customClass="FacebookTableViewController" customModule="Block" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tZh-2D-jnQ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tZh-2D-jnQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="5d5-8T-68x" style="IBUITableViewCellStyleDefault" id="oZd-SS-fL4">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FacebookSectionCell" id="oZd-SS-fL4" customClass="FacebookSectionCell" customModule="Facebook">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oZd-SS-fL4" id="6wa-qh-5qS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="메모를 하면서 불편한 점이 무엇인가요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5d5-8T-68x">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghd-zz-SyC">
+                                            <rect key="frame" x="16" y="8" width="343" height="27.5"/>
+                                            <string key="text">와.. 전 아이폰 기본 메모앱을 쓰는데 주로 회의 필기할 때 ms워드처럼 간편하게 서식을 쓸 수 있어서 애용해요. 그리고 아이폰 메모 앱은 제가 작곡을 좋아하는데 메모장으로 녹음한 걸 재저장할 수 있어서 제 노래를 분류할 때 참 좋더라구요!  영상 보고 왔는데 형광칠이나 제목화 하는 거 진짜 너무너무너무너무너무 탐나는 기능입니다..!!</string>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Ghd-zz-SyC" secondAttribute="bottom" constant="8" id="1V2-Ma-Rbq"/>
+                                        <constraint firstItem="Ghd-zz-SyC" firstAttribute="top" secondItem="6wa-qh-5qS" secondAttribute="top" constant="8" id="ONq-re-hVP"/>
+                                        <constraint firstAttribute="trailing" secondItem="Ghd-zz-SyC" secondAttribute="trailing" constant="16" id="cPv-8x-Mn2"/>
+                                        <constraint firstItem="Ghd-zz-SyC" firstAttribute="leading" secondItem="6wa-qh-5qS" secondAttribute="leading" constant="16" id="uRq-XM-yJk"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="title" destination="Ghd-zz-SyC" id="1yZ-qc-RHU"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FacebookRowCell" id="45Y-Yy-qBE" customClass="FacebookRowCell" customModule="Facebook">
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="45Y-Yy-qBE" id="3JW-m9-9GH">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcw-aT-FXO">
+                                            <rect key="frame" x="16" y="16" width="343" height="11.5"/>
+                                            <string key="text">와.. 전 아이폰 기본 메모앱을 쓰는데 주로 회의 필기할 때 ms워드처럼 간편하게 서식을 쓸 수 있어서 애용해요. 그리고 아이폰 메모 앱은 제가 작곡을 좋아하는데 메모장으로 녹음한 걸 재저장할 수 있어서 제 노래를 분류할 때 참 좋더라구요!  영상 보고 왔는데 형광칠이나 제목화 하는 거 진짜 너무너무너무너무너무 탐나는 기능입니다..!!</string>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I26-nS-odV">
+                                            <rect key="frame" x="16" y="43" width="359" height="1"/>
+                                            <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="0.5" id="dPN-7O-fME"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="hcw-aT-FXO" secondAttribute="trailing" constant="16" id="4HJ-9F-WAr"/>
+                                        <constraint firstItem="hcw-aT-FXO" firstAttribute="leading" secondItem="3JW-m9-9GH" secondAttribute="leading" constant="16" id="6lf-mE-0uW"/>
+                                        <constraint firstItem="hcw-aT-FXO" firstAttribute="top" secondItem="3JW-m9-9GH" secondAttribute="top" constant="16" id="9fo-ID-YmZ"/>
+                                        <constraint firstItem="I26-nS-odV" firstAttribute="leading" secondItem="3JW-m9-9GH" secondAttribute="leading" constant="16" id="iP1-LX-TXA"/>
+                                        <constraint firstAttribute="bottom" secondItem="I26-nS-odV" secondAttribute="bottom" id="iyo-cg-VdW"/>
+                                        <constraint firstAttribute="bottom" secondItem="hcw-aT-FXO" secondAttribute="bottom" constant="16" id="jwb-IW-B2q"/>
+                                        <constraint firstAttribute="trailing" secondItem="I26-nS-odV" secondAttribute="trailing" id="tzG-nY-iFt"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="title" destination="hcw-aT-FXO" id="GTB-ei-V3M"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1174,39 +1362,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Qem-7D-7kH" kind="showDetail" identifier="FacebookDetailTableViewController" id="2Er-Eh-HsQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TT2-ch-jWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="326" y="-1297"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="5aH-Bj-RoZ">
-            <objects>
-                <navigationController id="cTX-Th-yqU" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ppR-wV-7Mg">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="gd1-Rv-47K" kind="relationship" relationship="rootViewController" id="ObC-sd-9Dc"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Quk-Pl-rcj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-463" y="-1297"/>
-        </scene>
-        <!--Split View Controller-->
-        <scene sceneID="FM9-d2-Ocp">
-            <objects>
-                <splitViewController id="gMx-ky-Z5N" sceneMemberID="viewController">
-                    <connections>
-                        <segue destination="cTX-Th-yqU" kind="relationship" relationship="masterViewController" id="HFY-1c-gg8"/>
-                        <segue destination="Qem-7D-7kH" kind="relationship" relationship="detailViewController" id="5Ll-MH-4io"/>
-                    </connections>
-                </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7ai-Fe-O9g" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1298" y="-1033"/>
+            <point key="canvasLocation" x="-2066" y="-1318"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="M0a-pF-Br7">
@@ -1405,6 +1567,11 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Ja1-ci-pk8"/>
+                        <barButtonItem title="Facebook" id="7xg-sD-qPP">
+                            <connections>
+                                <segue destination="gd1-Rv-47K" kind="show" id="tav-qQ-gWT"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem systemItem="compose" id="ORc-Yc-s8s">
                             <connections>
                                 <action selector="tapNewNote:" destination="Z4M-VK-h0l" id="V33-md-cME"/>
@@ -1414,7 +1581,6 @@
                     <navigationItem key="navigationItem" title="All Notes" id="1aq-Fi-Zeg"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="gMx-ky-Z5N" kind="presentation" id="opS-Ze-ASW"/>
                         <segue destination="bEp-xx-jIT" kind="showDetail" identifier="BlockTableViewController" id="aYA-gJ-wLg"/>
                     </connections>
                 </tableViewController>

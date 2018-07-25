@@ -6,7 +6,7 @@
 //  Copyright © 2018년 piano. All rights reserved.
 //
 
-/// Facebook comment / reply 내용을 표기할 listView의 DataSource.
+/// Facebook comment / reply 내용을 표기할 tableView의 DataSource.
 public class CommentDataSource<Post: FacebookPostCell, Comment: FacebookCommentCell, Reply: FacebookReplyCell>:
 NSObject, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
@@ -17,9 +17,6 @@ NSObject, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefe
     private var data = [FacebookData]()
     
     private var postData: PostData!
-    
-    /// CommentDataSource RowCell selection closure
-    public var didSelectRowAt: ((FacebookData) -> ())?
     
     public init(_ viewCtrl: UIViewController, listView: UITableView,
                 postData: PostData, notReady: @escaping (() -> ())) {
@@ -98,7 +95,6 @@ NSObject, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefe
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        didSelectRowAt?(data[indexPath.row])
         if let cData = data[indexPath.row] as? CommentData {
             guard cData.hasReply else {return}
             var mcData = cData
