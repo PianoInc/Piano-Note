@@ -10,10 +10,8 @@ import UIKit
 
 extension BlockTableViewController {
     internal func registerKeyboardNotification() {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: Notification.Name.UIKeyboardDidHide, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: .UIKeyboardDidHide, object: nil)
     }
     
     internal func unRegisterKeyboardNotification(){
@@ -27,7 +25,6 @@ extension BlockTableViewController {
         guard let userInfo = notification.userInfo,
             let kbHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
             else { return }
-        
         tableView.contentInset.bottom = kbHeight
         tableView.scrollIndicatorInsets.bottom = kbHeight
     }

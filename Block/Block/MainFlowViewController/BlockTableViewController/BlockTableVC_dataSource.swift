@@ -46,7 +46,7 @@ extension BlockTableViewController: TableViewDataSource {
             success(true)
             block.modifiedDate = Date()
             block.textStyle = .title1
-
+            
         })
         
         //        title1Action.image
@@ -116,7 +116,9 @@ extension BlockTableViewController: TableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        ()
+        guard let sourceBlock = resultsController?.object(at: sourceIndexPath) else {return}
+        guard let destBlock = resultsController?.object(at: destinationIndexPath) else {return}
+        (sourceBlock.text, destBlock.text) = (destBlock.text, sourceBlock.text)
     }
     
 }

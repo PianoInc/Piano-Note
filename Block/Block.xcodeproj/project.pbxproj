@@ -13,6 +13,7 @@
 		32096179A1C53C11BE23F6D4DCBD0AA6 /* BlockTableVC_action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634AEFCD50328D51CCE23B0A379F67E2 /* BlockTableVC_action.swift */; };
 		33C2D8010185115D319DB835DD6ED63A /* FileBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE972EAD7524620DB26765DD8060D95 /* FileBlockTableViewCell.swift */; };
 		39DFC3AF903112F14F02A17897FAABDE /* NSManagedObjectContext_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50E6CB5CB0524DDCDD15CF9F9DF3A70 /* NSManagedObjectContext_extension.swift */; };
+		3DF717FD8F715E15AD0D66790AB18A6A /* Cloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4231AE1C1105906CD56A813D9B7B8618 /* NSPersistentContainer_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEB35F3DD462F6D397C35C69B0D217F /* NSPersistentContainer_extension.swift */; };
 		4294093C8AC9EE4A2155BBB1D0D43774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AF3298A0D3C0394F569F658130DAA4A /* Assets.xcassets */; };
 		43F2859B17FCB12953C221A28BDDC8A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33720B9B9DBB4DEFE9A1C14AF314FF0F /* AppDelegate.swift */; };
@@ -70,6 +71,7 @@
 		EA26F51B4C259C92607779B8E341CE94 /* ImagePickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F4B6EE9252B27973283E18C84C9A0D /* ImagePickerCollectionViewCell.swift */; };
 		F0499248DB57A13B346DD84E4D95EA62 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C3F33572668CCD6C1A96D9421D7158 /* NotificationView.swift */; };
 		F42F50779FA3AA6A2A464CE1CDBC7BCE /* BlockTableVC_state.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9394CC42E06C01FB38B81C12E475853 /* BlockTableVC_state.swift */; };
+		F454862FBB69F9F126650BC6BAC376BB /* Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */; };
 		F86253D43D87AB87BE1B598115C67BBF /* ChecklistTextBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD616AB0D46ABC81FA5836A34245103 /* ChecklistTextBlock_extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +82,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3DF717FD8F715E15AD0D66790AB18A6A /* Cloud.framework in Embed Frameworks */,
 				AC1E17FC1AC23D5DC144F6A2009BF118 /* Facebook.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -163,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F454862FBB69F9F126650BC6BAC376BB /* Cloud.framework in Frameworks */,
 				6B0A989EABD5E11423CEC6BE5719DD6D /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,3 +12,5 @@
 "recentMonth" = "최근 한달";
 "inYear" = "%d개월 전";
 "yearPast" = "%d년 %d월";
+"replyCount" = "답글 %d개 보기";
+"replyNoCount" = "답글 없음";
