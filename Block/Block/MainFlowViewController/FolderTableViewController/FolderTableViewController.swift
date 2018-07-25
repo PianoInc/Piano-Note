@@ -20,6 +20,17 @@ class FolderTableViewController: UITableViewController {
         
         clearsSelectionOnViewWillAppear = true
         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        
+        DispatchQueue.main.async { [weak self] in
+            do {
+                try self?.resultsController?.performFetch()
+            } catch {
+                print("NoteResultsController를 fetch하는 데 에러 발생: \(error.localizedDescription)")
+            }
+            
+            self?.tableView.reloadData()
+        }
     }
 
     
@@ -28,13 +39,12 @@ class FolderTableViewController: UITableViewController {
         if let vc = segue.destination as? NoteTableViewController,
             let folder = sender as? Folder {
             
+            vc.folder = folder
             vc.persistentContainer = persistentContainer
-            
-            persistentContainer.performBackgroundTask { (context) in
-                let resultsController = context.noteResultsController(folder: folder)
-                vc.resultsController = resultsController
-                context.perform(resultsController: resultsController, tableVC: vc)
-            }
+            let context = persistentContainer.viewContext
+            let resultsController = context.noteResultsController(folder: folder)
+            vc.resultsController = resultsController
+            resultsController.delegate = vc
         }
     }
 
@@ -74,7 +84,7 @@ extension FolderTableViewController {
     
     
      // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 
      }
     

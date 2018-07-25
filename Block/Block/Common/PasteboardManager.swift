@@ -10,7 +10,6 @@ import Foundation
 
 struct PasteboardManager {
     
-    
     /**
      # what
      지정된 문단들을 복사한다.

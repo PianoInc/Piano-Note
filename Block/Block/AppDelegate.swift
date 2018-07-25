@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let context = persistentContainer.viewContext
                 let resultsController = context.folderResultsController()
                 vc.resultsController = resultsController
-                context.perform(resultsController: resultsController, tableVC: vc)
+                resultsController.delegate = vc
                 
             } else {
                 print("에러발생!! 스플릿뷰의 첫번째 컨트롤러가 폴더가 아니다!")
@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

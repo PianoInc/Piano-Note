@@ -383,9 +383,10 @@ extension Block {
         while true {
             indexPath.row += 1
             num += 1
+            guard let numberOfObjects = resultsController.sections?.first?.numberOfObjects,
+                indexPath.row < numberOfObjects else { return }
             let nextBlock = resultsController.object(at: indexPath)
-            guard indexPath.row != resultsController.sections?.first?.numberOfObjects,
-                let nextOrderedTextBlock = nextBlock.orderedTextBlock,
+            guard let nextOrderedTextBlock = nextBlock.orderedTextBlock,
                 num != nextOrderedTextBlock.num,
                 (self.frontWhitespaces ?? "") == (nextBlock.frontWhitespaces ?? "") else { return }
             
