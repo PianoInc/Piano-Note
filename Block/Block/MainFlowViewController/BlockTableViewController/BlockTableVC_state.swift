@@ -9,8 +9,6 @@
 import Foundation
 
 extension BlockTableViewController {
-    //MARK: State
-    
     enum ViewControllerState {
         case normal
         case edit
@@ -40,7 +38,7 @@ extension BlockTableViewController {
             setToolbarForHighlighting()
             
         case .deleted:
-            setToolbarForTrash()
+            setToolbarForDeleted()
             
         case .typing:
             setNavbarForTyping()
@@ -53,6 +51,9 @@ extension BlockTableViewController {
         self.navigationItem.setRightBarButton(editBtn, animated: true)
         self.navigationItem.setLeftBarButton(nil, animated: true)
         self.navigationItem.setHidesBackButton(false, animated: true)
+        
+        navigationItem.leftItemsSupplementBackButton = true
+        navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
     }
     
     private func setToolbarForNormal() {
@@ -71,7 +72,7 @@ extension BlockTableViewController {
     
     private func setNavbarForEdit() {
         navigationItem.title = ""
-        let doneBtn = BarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapFinishEditing(sender:)))
+        let doneBtn = BarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapFinishEdit(sender:)))
         let selectAllBtn = BarButtonItem(title: "전체 복사", style: .plain, target: self, action: #selector(tapCopyAll(sender:)))
         self.navigationItem.setHidesBackButton(true, animated: true)
         self.navigationItem.setLeftBarButton(selectAllBtn, animated: true)
@@ -98,7 +99,7 @@ extension BlockTableViewController {
         self.setToolbarItems([flexibleWidthBtn, finishBtn, flexibleWidthBtn], animated: true)
     }
     
-    private func setToolbarForTrash() {
+    private func setToolbarForDeleted() {
         let deleteBtn = BarButtonItem(title: "영구삭제", style: .plain, target: self, action: #selector(tapPermanentlyDelete(sender:)))
         let restoreBtn = BarButtonItem(title: "복구하기", style: .plain, target: self, action: #selector(tapRestore(sender:)))
         let flexibleWidthBtn = BarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -106,13 +107,12 @@ extension BlockTableViewController {
     }
     
     private func setNavbarForTyping() {
-        let completeBtn = BarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapFinishTyping(sender:)))
+        let completeBtn = BarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapFinishType(sender:)))
         self.navigationItem.setRightBarButton(completeBtn, animated: true)
     }
     
     private func setViews(state: ViewControllerState) {
         self.state = state
-        
     }
     
     enum RecommandBarState {

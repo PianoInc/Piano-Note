@@ -104,12 +104,6 @@ extension BlockTableViewController: TableViewDataSource {
         return UISwipeActionsConfiguration(actions: [deleteAction, copyAction])
     }
     
-    func copy(blocks: [Block]) {
-        //TODO: 이거 paste로직 만들어서 block 돌아가면서 제대로 타입 붙여야함
-        UIPasteboard.general.string = blocks.first?.text
-        navigationController?.appearCopyNotificationView()
-    }
-    
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         guard let state = self.state else { return false }
         return state != .normal ? false : true
@@ -142,5 +136,13 @@ extension BlockTableViewController: TableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         resultsController?.object(at: indexPath).didSelectItem(fromVC: self)
         
+    }
+}
+
+extension BlockTableViewController {
+    func copy(blocks: [Block]) {
+        //TODO: 이거 paste로직 만들어서 block 돌아가면서 제대로 타입 붙여야함
+        UIPasteboard.general.string = blocks.first?.text
+        navigationController?.appearCopyNotificationView()
     }
 }

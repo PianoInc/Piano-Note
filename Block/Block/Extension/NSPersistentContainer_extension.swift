@@ -28,28 +28,6 @@ extension NSPersistentContainer {
                 let deletedFolder = Folder(context: viewContext)
                 deletedFolder.name = "Recently Deleted"
                 deletedFolder.typeInteger = 3
-                let note1 = Note(context: viewContext)
-                note1.folder = allFolder
-                note1.title = "선택받은 메모"
-                note1.modifiedDate = Date()
-                
-                for i in 0...10 {
-                    let Block1 = Block(context: viewContext)
-                    Block1.order = Double(i)
-                    Block1.type = .plainText
-                    Block1.note = note1
-                    
-                    let plainTextBlock1 = PlainTextBlock(context: viewContext)
-                    plainTextBlock1.text = "\(i)번째 state는 단순히 뷰의 상태를 바꾸기 위한 값으로만 쓰여야 한다. 즉 didSet을 무조건 써야 하고, 이게 불가능한 상황(viewLoad같은 곳에서 state를 참조해서 뷰를 변화시키는 행위)이 있다하면 state를 쓰지 않는다."
-                    plainTextBlock1.addToBlockCollection(Block1)
-                }
-                
-                for i in 1...100 {
-                    let note2 = Note(context: viewContext)
-                    note2.folder = allFolder
-                    note2.modifiedDate = Date(timeIntervalSinceNow: -60 * Double(i))
-                    note2.title = "\(i)번째 메모"
-                }
                 
                 guard viewContext.hasChanges else { return }
                 try viewContext.save()
@@ -74,6 +52,23 @@ extension NSPersistentContainer {
         allFolder.name = "All Note"
         allFolder.typeInteger = 0
         return allFolder
+    }
+    
+    internal func fetchFolders(type: Folder.FolderType) -> [Folder] {
+        let request: NSFetchRequest<Folder> = Folder.fetchRequest()
+        request.predicate = NSPredicate(format: "typeInteger == %lld", type.rawValue)
+        let sort = NSSortDescriptor(key: #keyPath(Folder.typeInteger), ascending: true)
+        request.sortDescriptors = [sort]
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print("fetchFolder(type: Folder.FolderType)에서 오류: \(error.localizedDescription)")
+        }
+        
+        let allFolder = Folder(context: viewContext)
+        allFolder.name = "All Note"
+        allFolder.typeInteger = 0
+        return [allFolder]
     }
     
 }

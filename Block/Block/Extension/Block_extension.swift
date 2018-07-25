@@ -470,9 +470,12 @@ extension Block {
         
     }
     
-    internal func adjustAfterOrder(currentNum: Int64, resultsController: NSFetchedResultsController<Block>) {
-        guard var indexPath = resultsController.indexPath(forObject: self) else { return }
-        var num = currentNum
+    internal func updateNumbersAfter(controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        guard let orderedTextBlock = orderedTextBlock,
+            let resultsController = controller as? NSFetchedResultsController<Block>,
+            var indexPath = resultsController.indexPath(forObject: self) else { return }
+    
+        var num = orderedTextBlock.num
         while true {
             indexPath.row += 1
             num += 1

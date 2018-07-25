@@ -24,8 +24,7 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
             case .plainText:
                 guard let plainTextBlock = block.plainTextBlock else { return }
                 
-                let font = UIFont.preferredFont(forTextStyle: plainTextBlock.textStyle)
-                ibTextView.font = font
+                ibTextView.font = plainTextBlock.font
                 ibTextView.text = plainTextBlock.text ?? ""
                 ibTextViewLeadingAnchor.constant = 0
                 /*
@@ -39,7 +38,7 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibLabel.isHidden = true
                 ibButton.isHidden = false
                 
-                let font = UIFont.preferredFont(forTextStyle: checklistTextBlock.textStyle)
+                let font = checklistTextBlock.font
                 ibTextView.font = font
                 ibLabel.font = ibLabel.font.withSize(font.pointSize)
                 ibTextView.text = checklistTextBlock.text ?? ""
@@ -70,7 +69,7 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibLabel.isHidden = false
                 ibButton.isHidden = true
                 
-                let font = UIFont.preferredFont(forTextStyle: orderedTextBlock.textStyle)
+                let font = orderedTextBlock.font
                 ibTextView.font = font
                 ibLabel.font = ibLabel.font.withSize(font.pointSize)
                 ibTextView.text = orderedTextBlock.text ?? ""
@@ -101,7 +100,7 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibLabel.isHidden = false
                 ibButton.isHidden = true
                 
-                let font = UIFont.preferredFont(forTextStyle: unOrderedTextBlock.textStyle)
+                let font = unOrderedTextBlock.font
                 ibTextView.font = font
                 ibLabel.font = ibLabel.font.withSize(font.pointSize)
                 ibTextView.text = unOrderedTextBlock.text ?? ""

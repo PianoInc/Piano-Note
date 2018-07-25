@@ -27,23 +27,8 @@ class BlockTableViewController: UIViewController {
         super.viewDidLoad()
         
         updateViews(for: state)
-        navigationItem.leftItemsSupplementBackButton = true
-        navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        fetchData()
 
-        tableView.contentInset = tableViewInset
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
-        tableView.dragInteractionEnabled = true
-        
-        DispatchQueue.main.async { [weak self] in
-            do {
-                try self?.resultsController?.performFetch()
-            } catch {
-                print("NoteResultsController를 fetch하는 데 에러 발생: \(error.localizedDescription)")
-            }
-            
-            self?.tableView.reloadData()
-        }
 
         //TODO: persistentContainer 가 nil이라는 건 preserve로 왔거나 splitView라는 말임, 따라서 할당해주고, prepare에서 하는 짓을 다시 해줘야함
         if persistentContainer == nil {
@@ -59,10 +44,21 @@ class BlockTableViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         unRegisterKeyboardNotification()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        //TODO: 여기에 있어도 되는지 체크하기
+        save()
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0() }
+        
+        let count = resultsController?.sections?.first?.numberOfObjects ?? 0
+        if count == 0 {
+            tapBackground("firstWriting")
+        }
         
     }
     
@@ -76,7 +72,44 @@ class BlockTableViewController: UIViewController {
 }
 
 
-
+extension BlockTableViewController {
+    private func fetchData() {
+        DispatchQueue.main.async { [weak self] in
+            do {
+                try self?.resultsController?.performFetch()
+            } catch {
+                print("BlockTableViewController를 fetch하는 데 에러 발생: \(error.localizedDescription)")
+            }
+            
+            self?.tableView.reloadData()
+        }
+    }
+    
+    private func save() {
+        
+        if let resultsController = resultsController,
+            let count = resultsController.sections?.first?.numberOfObjects,
+            count > 0 {
+            
+            for i in 0 ..< count {
+                let indexPath = IndexPath(row: i, section: 0)
+                let block = resultsController.object(at: indexPath)
+                if block.isTextType {
+                    note.title = block.text
+                    break
+                }
+            }
+        }
+        persistentContainer.viewContext.saveIfNeeded()
+    }
+    
+    private func setupTableView(){
+        tableView.contentInset = tableViewInset
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
+        tableView.dragInteractionEnabled = true
+    }
+}
 
 
 

@@ -34,7 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let resultsController = context.folderResultsController()
                 vc.resultsController = resultsController
                 resultsController.delegate = vc
-                
             } else {
                 print("에러발생!! 스플릿뷰의 첫번째 컨트롤러가 폴더가 아니다!")
             }
@@ -45,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
     }
-    
+
     func applicationWillResignActive(_ application: UIApplication) {
         
     }

@@ -15,7 +15,7 @@ extension BlockTableViewController {
         setCursor(position: sender.location(in: tableView))
     }
     
-    @IBAction func tapFinishTyping(sender: UIBarButtonItem) {
+    @IBAction func tapFinishType(sender: UIBarButtonItem) {
         updateViews(for: .normal)
         self.view.endEditing(true)
     }
@@ -25,7 +25,7 @@ extension BlockTableViewController {
         tableView.setEditing(true, animated: true)
     }
     
-    @IBAction func tapFinishEditing(sender: UIBarButtonItem) {
+    @IBAction func tapFinishEdit(sender: UIBarButtonItem) {
         updateViews(for: .normal)
         tableView.setEditing(false, animated: true)
     }
@@ -93,16 +93,14 @@ extension BlockTableViewController {
 extension BlockTableViewController {
     
     private func createBlockIfNeeded(){
-        guard let resultsController = resultsController,
-            let count = resultsController.sections?.first?.numberOfObjects else { return }
+        guard let count = resultsController?.sections?.first?.numberOfObjects,
+            count > 0,
+            let lastBlock = resultsController?.object(at: IndexPath(row: count - 1, section: 0)),
+            lastBlock.isTextType else {
+                createBlockAtLast(controller: resultsController)
+                return
+        }
         let indexPath = IndexPath(row: count - 1, section: 0)
-        
-        guard count > 0,
-            resultsController.object(at: indexPath).isTextType else {
-                createBlockAtLast(controller: resultsController, lastIndexPath: indexPath)
-                return }
-        
-        let lastBlock = resultsController.object(at: indexPath)
         let textCount = lastBlock.text?.count ?? 0
         let selectedRange = NSMakeRange(textCount, 0)
         lastBlock.modifiedDate = Date()
@@ -112,15 +110,20 @@ extension BlockTableViewController {
     /**
      셀이 하나도 없으면 첫 셀을 만들어주고, 셀이 존재하면 마지막 셀의 order + 1를 해주기
      */
-    private func createBlockAtLast(controller: NSFetchedResultsController<Block>, lastIndexPath: IndexPath) {
+    private func createBlockAtLast(controller: NSFetchedResultsController<Block>?) {
+        guard let controller = controller else { return }
+        let count = controller.sections?.first?.numberOfObjects ?? 0
+        
+        
         let context = controller.managedObjectContext
         let order: Double
         
-        if lastIndexPath.row < 0 {
-            order = 0
-        } else {
+        if count != 0 {
+            let lastIndexPath = IndexPath(row: count, section: 0)
             let previousBlock = controller.object(at: lastIndexPath)
             order = previousBlock.order + 1
+        } else {
+            order = 0
         }
         
         let block = Block(context: context)
