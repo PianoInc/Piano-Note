@@ -12,9 +12,9 @@ import Facebook
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         if !UserDefaults.standard.bool(forKey: "previouslyLaunched") {
@@ -45,23 +45,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
     }
 
-
     func applicationWillResignActive(_ application: UIApplication) {
         
     }
-
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         saveContext()
     }
-
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         
     }
-
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         FBSDKAppEvents.activateApp()
     }
-
+    
     func applicationWillTerminate(_ application: UIApplication) {
         saveContext()
     }
@@ -89,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
 }
 
 extension AppDelegate : UISplitViewControllerDelegate {

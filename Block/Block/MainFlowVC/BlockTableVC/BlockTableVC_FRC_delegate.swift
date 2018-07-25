@@ -15,38 +15,41 @@ extension BlockTableViewController: NSFetchedResultsControllerDelegate {
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-            switch type {
-            case .delete:
-                guard let indexPath = indexPath else { return }
-                self.tableView.deleteRows(at: [indexPath], with: .none)
-                refreshOrderedTextIfNeeded(controller: controller, currentIndexPath: indexPath)
+        switch type {
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            self.tableView.deleteRows(at: [indexPath], with: .none)
+            refreshOrderedTextIfNeeded(controller: controller, currentIndexPath: indexPath)
+            
+
+        case .insert:
+            UIView.performWithoutAnimation {
+                guard let newIndexPath = newIndexPath else { return }
+                self.tableView.insertRows(at: [newIndexPath], with: .none)
                 
-            case .insert:
-                UIView.performWithoutAnimation {
-                    guard let newIndexPath = newIndexPath else { return }
-                    self.tableView.insertRows(at: [newIndexPath], with: .none)
-                    
-                    //issue: 타이밍 이슈 때문에 여기서 숫자를 갱신해줘야함
-                    guard let block = controller.object(at: newIndexPath) as? Block else { return }
-                    block.updateNumbersAfter(controller: controller)
-                }
+                //issue: 타이밍 이슈 때문에 여기서 숫자를 갱신해줘야함
+                guard let block = controller.object(at: newIndexPath) as? Block else { return }
+                block.updateNumbersAfter(controller: controller)
+            }
+
+            
+        case .update:
+            UIView.performWithoutAnimation {
+                guard let indexPath = indexPath,
+                    let block = controller.object(at: indexPath) as? Block,
+                    let cell = tableView.cellForRow(at: indexPath) as? TextBlockTableViewCell else { return }
+                cell.data = block
                 
-            case .update:
-                UIView.performWithoutAnimation {
-                    guard let indexPath = indexPath,
-                        let block = controller.object(at: indexPath) as? Block,
-                        let cell = tableView.cellForRow(at: indexPath) as? TextBlockTableViewCell else { return }
-                    cell.data = block
-                    
                     //issue: 타이밍 이슈 때문에 여기서 숫자를 갱신해줘야함
-                    block.updateNumbersAfter(controller: controller)
+                block.updateNumbersAfter(controller: controller)
                 }
 
-            case .move:
-                guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
-                self.tableView.moveRow(at: indexPath, to: newIndexPath)
+        case .move:
+            UIView.performWithoutAnimation {
+                guard let indexPaths = tableView.indexPathsForVisibleRows else {return}
+                tableView.reloadRows(at: indexPaths, with: .none)
+            }
         }
-        
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
@@ -71,8 +74,6 @@ extension BlockTableViewController: NSFetchedResultsControllerDelegate {
         cell.ibTextView.selectedRange = cursorCache.selectedRange
         cell.ibTextView.becomeFirstResponder()
         self.cursorCache = nil
-        
-        
     }
     
 }

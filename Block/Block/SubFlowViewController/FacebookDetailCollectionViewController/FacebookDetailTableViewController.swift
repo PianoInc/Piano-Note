@@ -10,7 +10,7 @@ import UIKit
 import Facebook
 
 class FacebookDetailTableViewController: UITableViewController, FacebookCommentDelegate {
-
+    
     var postData: PostData?
     
     override func viewDidLoad() {

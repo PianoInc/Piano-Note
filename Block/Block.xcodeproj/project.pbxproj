@@ -27,6 +27,7 @@
 		52F586F3E901E51476BF86A99AD00302 /* FileBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D377912E61367F717BF7606D547577E7 /* FileBlockTableViewCell.swift */; };
 		567802734F5A95ABF7B80DF69441F3E2 /* Block.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B52C1F77382585B87FAB91C0B7F86B0D /* Block.xcdatamodeld */; };
 		5C5E5D43A0561A3EDC34F784ADAEA45B /* OrderedTextBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7B30DCE84A61C98DBC9DCE4CD42D6D /* OrderedTextBlock_extension.swift */; };
+		5D2D5077097AFF0008754F34169D3104 /* Array_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DFA89A636F231954CAA4598972C85 /* Array_extension.swift */; };
 		5EC3900F2EE33D0B4E97B761C61581E9 /* TextBlockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD49890669222562AA90074970895C9 /* TextBlockType.swift */; };
 		5FDE2876216C2268948CD22257F8A4B3 /* DrawingBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC95E25D47826AEE0E2951B56EF127ED /* DrawingBlock_extension.swift */; };
 		6176A980C315F81497526368E3E5344C /* FolderTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98BD7AC780F8B9FAA128843ECAC4F54 /* FolderTableVC.swift */; };
@@ -99,6 +100,7 @@
 
 /* Begin PBXFileReference section */
 		08A7918D3F3A8E3018AC5C35D414949C /* iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOS.swift; sourceTree = "<group>"; };
+		0A1DFA89A636F231954CAA4598972C85 /* Array_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array_extension.swift; sourceTree = "<group>"; };
 		0AEB9F04C0487381311168453FF70E19 /* Pianote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pianote.xcdatamodel; sourceTree = "<group>"; };
 		10B2D31FF88C242870F23B33C4628881 /* NoteTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTableVC.swift; sourceTree = "<group>"; };
 		12948BFA2D53FDA553511F4CF00CDBF6 /* PasteboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasteboardManager.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 		72B1AD043929504F1A24D277C8EB5288 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0A1DFA89A636F231954CAA4598972C85 /* Array_extension.swift */,
 				BD278F32DBF6B4BE70808EAE6449EBA5 /* Block_extension.swift */,
 				2CD616AB0D46ABC81FA5836A34245103 /* ChecklistTextBlock_extension.swift */,
 				AC1836D0A2BFDE8DD6AF375F658868F9 /* DateFormatter_extension.swift */,
@@ -513,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43F2859B17FCB12953C221A28BDDC8A4 /* AppDelegate.swift in Sources */,
+				5D2D5077097AFF0008754F34169D3104 /* Array_extension.swift in Sources */,
 				567802734F5A95ABF7B80DF69441F3E2 /* Block.xcdatamodeld in Sources */,
 				E0F8C27238D633627430C8A1799D93A6 /* BlockTableVC.swift in Sources */,
 				BEDD6771BF2915BF79DE2930515F0D18 /* BlockTableVC_FRC_delegate.swift in Sources */,
