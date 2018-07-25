@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 extension NSManagedObjectContext {
-    internal func saveIfNeeded() throws {
+    internal func saveIfNeeded() {
         guard hasChanges else { return }
         do {
             print("변경사항 있으니 저장한다잉")

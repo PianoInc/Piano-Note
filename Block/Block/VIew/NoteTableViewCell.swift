@@ -14,7 +14,6 @@ class NoteTableViewCell: UITableViewCell, TableDataAcceptable {
     @IBOutlet weak var ibDateLabel: UILabel!
     @IBOutlet weak var ibFolderLabel: UILabel!
     
-    
     var data: TableDatable? {
         didSet {
             guard let data = self.data as? Note else { return }

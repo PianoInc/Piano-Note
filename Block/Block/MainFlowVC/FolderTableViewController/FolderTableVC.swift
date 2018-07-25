@@ -13,26 +13,20 @@ class FolderTableViewController: UITableViewController {
     
     var persistentContainer: NSPersistentContainer!
     var resultsController: NSFetchedResultsController<Folder>?
-    
+    var state: ViewControllerState = .normal
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateViews(for: state)
         clearsSelectionOnViewWillAppear = true
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        
-        DispatchQueue.main.async { [weak self] in
-            do {
-                try self?.resultsController?.performFetch()
-            } catch {
-                print("NoteResultsController를 fetch하는 데 에러 발생: \(error.localizedDescription)")
-            }
-            
-            self?.tableView.reloadData()
-        }
+        fetchData()
     }
-
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        save()
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -41,6 +35,20 @@ class FolderTableViewController: UITableViewController {
             
             vc.folder = folder
             vc.persistentContainer = persistentContainer
+            let state: NoteTableViewController.ViewControllerState
+            switch folder.folderType {
+            case .all, .custom:
+                state = .normal
+                
+            case .deleted:
+                state = .deleted
+                
+            case .locked:
+                state = .locked
+                
+            }
+            vc.state = state
+            
             let context = persistentContainer.viewContext
             let resultsController = context.noteResultsController(folder: folder)
             vc.resultsController = resultsController
@@ -104,6 +112,20 @@ extension FolderTableViewController {
      */
 }
 
-extension FolderTableViewController: NSFetchedResultsControllerDelegate {
+extension FolderTableViewController {
+    private func fetchData() {
+        DispatchQueue.main.async { [weak self] in
+            do {
+                try self?.resultsController?.performFetch()
+            } catch {
+                print("FolderTableViewController를 fetch하는 데 에러 발생: \(error.localizedDescription)")
+            }
+            
+            self?.tableView.reloadData()
+        }
+    }
     
+    private func save() {
+        persistentContainer.viewContext.saveIfNeeded()
+    }
 }

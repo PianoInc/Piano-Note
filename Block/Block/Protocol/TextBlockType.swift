@@ -43,4 +43,14 @@ extension TextBlockType {
             }
         }
     }
+    
+    var font: Font {
+        get {
+            if textStyle == .body {
+                return Font.preferredFont(forTextStyle: .body)
+            } else {
+                return Font.preferredFont(forTextStyle: textStyle).bold()
+            }
+        }
+    }
 }

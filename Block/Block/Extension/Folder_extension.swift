@@ -21,7 +21,7 @@ extension Folder: TableDatable {
         get {
             return FolderType(rawValue: typeInteger) ?? FolderType.all
         } set {
-            typeInteger = folderType.rawValue
+            typeInteger = newValue.rawValue
         }
     }
     
