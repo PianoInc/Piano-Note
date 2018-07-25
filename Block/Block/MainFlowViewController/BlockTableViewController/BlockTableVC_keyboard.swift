@@ -25,11 +25,12 @@ extension BlockTableViewController {
         guard let userInfo = notification.userInfo,
             let kbHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
             else { return }
-        tableView.contentInset.bottom = kbHeight
-        tableView.scrollIndicatorInsets.bottom = kbHeight
+        let bottomInset = kbHeight - tableView.safeAreaInsets.bottom
+        tableView.contentInset.bottom = bottomInset
+        tableView.scrollIndicatorInsets.bottom = bottomInset
     }
     
     @objc func keyboardDidHide(_ notification: Notification) {
-        tableView.contentInset.bottom = tableViewInset.bottom
+        tableView.contentInset = tableViewInset
     }
 }
