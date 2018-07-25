@@ -25,6 +25,7 @@
 		54B217F3572F4100FC57E69966833C30 /* BlockTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BD395BD4B80A2457BC73C8D84EC6EB /* BlockTableVC.swift */; };
 		567802734F5A95ABF7B80DF69441F3E2 /* Block.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B52C1F77382585B87FAB91C0B7F86B0D /* Block.xcdatamodeld */; };
 		5C5E5D43A0561A3EDC34F784ADAEA45B /* OrderedTextBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7B30DCE84A61C98DBC9DCE4CD42D6D /* OrderedTextBlock_extension.swift */; };
+		5D2D5077097AFF0008754F34169D3104 /* Array_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DFA89A636F231954CAA4598972C85 /* Array_extension.swift */; };
 		5EC3900F2EE33D0B4E97B761C61581E9 /* TextBlockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD49890669222562AA90074970895C9 /* TextBlockType.swift */; };
 		5FDE2876216C2268948CD22257F8A4B3 /* DrawingBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC95E25D47826AEE0E2951B56EF127ED /* DrawingBlock_extension.swift */; };
 		62EC65B42E68FFCA4935D05BE1868B06 /* Font_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DAA29DC735CABAB107CA113D60E199 /* Font_extension.swift */; };
@@ -93,6 +94,7 @@
 /* Begin PBXFileReference section */
 		06BD395BD4B80A2457BC73C8D84EC6EB /* BlockTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableVC.swift; sourceTree = "<group>"; };
 		08A7918D3F3A8E3018AC5C35D414949C /* iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOS.swift; sourceTree = "<group>"; };
+		0A1DFA89A636F231954CAA4598972C85 /* Array_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array_extension.swift; sourceTree = "<group>"; };
 		0AEB9F04C0487381311168453FF70E19 /* Pianote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pianote.xcdatamodel; sourceTree = "<group>"; };
 		12948BFA2D53FDA553511F4CF00CDBF6 /* PasteboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasteboardManager.swift; sourceTree = "<group>"; };
 		1365B1788320989665703066AE899293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -201,6 +203,15 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		15B5D4E7EAA244AF6508E9E3B052CB49 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				12948BFA2D53FDA553511F4CF00CDBF6 /* PasteboardManager.swift */,
+				84A728C7450F1817C4C1A5CE976C54B4 /* PianoBullet.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		1B3E93BF92F2FB3F0886FAC55C9F420D /* FolderTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +318,7 @@
 		72B1AD043929504F1A24D277C8EB5288 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0A1DFA89A636F231954CAA4598972C85 /* Array_extension.swift */,
 				BD278F32DBF6B4BE70808EAE6449EBA5 /* Block_extension.swift */,
 				2CD616AB0D46ABC81FA5836A34245103 /* ChecklistTextBlock_extension.swift */,
 				AC1836D0A2BFDE8DD6AF375F658868F9 /* DateFormatter_extension.swift */,
@@ -347,15 +359,6 @@
 				BB94C1FE17D982EC63A541C7349E6045 /* Main.storyboard */,
 			);
 			path = Block;
-			sourceTree = "<group>";
-		};
-		15B5D4E7EAA244AF6508E9E3B052CB49 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				12948BFA2D53FDA553511F4CF00CDBF6 /* PasteboardManager.swift */,
-				84A728C7450F1817C4C1A5CE976C54B4 /* PianoBullet.swift */,
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		849A28FF124594ADCAF89ACE77B7D427 /* BlockCell */ = {
@@ -500,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43F2859B17FCB12953C221A28BDDC8A4 /* AppDelegate.swift in Sources */,
+				5D2D5077097AFF0008754F34169D3104 /* Array_extension.swift in Sources */,
 				567802734F5A95ABF7B80DF69441F3E2 /* Block.xcdatamodeld in Sources */,
 				54B217F3572F4100FC57E69966833C30 /* BlockTableVC.swift in Sources */,
 				32096179A1C53C11BE23F6D4DCBD0AA6 /* BlockTableVC_action.swift in Sources */,
@@ -589,6 +593,7 @@
 				CODE_SIGN_ENTITLEMENTS = Block/Block.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9KHV9D7LV;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Facebook/Facebook/Framework\"";
 				INFOPLIST_FILE = Block/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -609,6 +614,7 @@
 				CODE_SIGN_ENTITLEMENTS = Block/Block.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9KHV9D7LV;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Facebook/Facebook/Framework\"";
 				INFOPLIST_FILE = Block/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
