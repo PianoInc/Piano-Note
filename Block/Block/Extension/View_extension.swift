@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreGraphics
+import UIKit
 
 extension View {
     
@@ -49,13 +50,34 @@ extension View {
     
 }
 
-/**
- View 생성 helper.
- - parameter view : 생성하고자 하는 view.
- - parameter attr : View에 대한 attribute 선언부.
- - returns : Attribute가 설정된 view.
- */
-func view<T>(_ view: T, _ attr: ((T) -> ())) -> T {
-    attr(view)
-    return view
+extension UIView {
+    
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
+    }
+    
+    @IBInspectable var borderColor: UIColor? {
+        get {
+            return UIColor(cgColor: layer.borderColor!)
+        }
+        set {
+            layer.borderColor = newValue?.cgColor
+        }
+    }
+    
 }
