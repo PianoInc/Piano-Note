@@ -16,17 +16,18 @@ internal class Modify {
         self.container = container
     }
     
-    internal func operate(_ record: CKRecord) {
-        container.coreData.performBackgroundTask { context in
-            context.name = FETCH_CONTEXT
-            self.fetch(with: record, using: context)
-            if context.hasChanges {try? context.save()}
-        }
+    internal func operate(_ record: CKRecord, _ context: NSManagedObjectContext) {
+        fetch(with: record, using: context)
+    }
+    
+    internal func operate(forReference record: [CKRecord], _ context: NSManagedObjectContext) {
+        record.forEach {fetch(with: $0, using: context)}
+        if context.hasChanges {try? context.save()}
     }
     
 }
 
-internal extension Modify {
+private extension Modify {
     
     private func fetch(with record: CKRecord, using context: NSManagedObjectContext) {
         guard record.recordType != SHARE_RECORD_TYPE else {return}

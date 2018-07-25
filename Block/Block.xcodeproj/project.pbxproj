@@ -49,6 +49,7 @@
 		A7947047B4A5D97C56F98EF07C7352C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB94C1FE17D982EC63A541C7349E6045 /* Main.storyboard */; };
 		A9303277F05F7EB64D014DB75B14B9A5 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB4A0854718BD99247A748525886A6 /* SettingTableViewController.swift */; };
 		AB79BCDFD06094BB1CAC8161C89EFBF6 /* Folder_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A8C35F614897BDD66A1F68DEEDD45 /* Folder_extension.swift */; };
+		AC1E17FC1AC23D5DC144F6A2009BF118 /* Facebook.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC2017EEB55EDA604B73943706EA227 /* Facebook.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AE3B94BE78C3402794EE5E37A1779050 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7428876D175DBA2A4BC03CEA11974EAA /* FolderTableViewCell.swift */; };
 		AED2A134B81BB3A7DB7741882B9F5C33 /* PasteboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFF0712AC5BD3AEC798DAB16E962EC6 /* PasteboardManager.swift */; };
 		B5A9CE93285A39B2A9E0B95E8840B1C2 /* BlockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8A8EF3A8B4F67B573FD6AE77E28824 /* BlockType.swift */; };
@@ -80,6 +81,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				7CDA57742107F50700517A0C /* Cloud.framework in Embed Frameworks */,
+				AC1E17FC1AC23D5DC144F6A2009BF118 /* Facebook.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +102,7 @@
 		2F410F0C09B96D64CEFABF5824E369DF /* ImageBlockCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBlockCollectionViewCell.swift; sourceTree = "<group>"; };
 		33720B9B9DBB4DEFE9A1C14AF314FF0F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3535607CDDE71A26C39A438C7E473031 /* TableViewAutoSystemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewAutoSystemProtocol.swift; sourceTree = "<group>"; };
+		3EC2017EEB55EDA604B73943706EA227 /* Facebook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Facebook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48FF050B1BAC07472DA4BCE48073B299 /* BlockTableViewController_DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableViewController_DataSource.swift; sourceTree = "<group>"; };
 		4A8A8EF3A8B4F67B573FD6AE77E28824 /* BlockType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockType.swift; sourceTree = "<group>"; };
 		4BD49890669222562AA90074970895C9 /* TextBlockType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBlockType.swift; sourceTree = "<group>"; };
@@ -283,6 +286,7 @@
 				1E00F1598E7CFF8759DA1247055CA88C /* Frameworks */,
 				0BC09F83C4BE7821BE0A1A0089E40F42 /* Products */,
 				CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */,
+				3EC2017EEB55EDA604B73943706EA227 /* Facebook.framework */,
 			);
 			sourceTree = "<group>";
 		};

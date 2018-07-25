@@ -20,13 +20,17 @@ internal let DATABASE_DB_ID = "DatabaseBlockDatabase"
 
 /// "BlockFetchContext"
 internal let FETCH_CONTEXT = "BlockFetchContext"
+/// "BlockFetchContext"
+internal let LOCAL_CONTEXT = "BlockLocalContext"
 
 /// "recordData"
 public let KEY_RECORD_DATA = "ckMetaData"
 /// "recordName"
 public let KEY_RECORD_NAME = "recordName"
+/// "text"
+public let KEY_RECORD_TEXT = "text"
+
 /// "cloudkit.share"
 internal let SHARE_RECORD_TYPE = "cloudkit.share"
-
 /// "BlockCloudToken"
 internal let KEY_TOKEN = "BlockCloudToken"
