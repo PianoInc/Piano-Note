@@ -8,10 +8,17 @@
 
 public class FacebookReplyCell: UITableViewCell, FacebookCell {
     
-    @IBOutlet public weak var title: UILabel!
+    @IBOutlet public weak var portrait: UIImageView!
+    @IBOutlet public weak var name: UILabel!
+    @IBOutlet public weak var message: UILabel!
+    @IBOutlet public weak var date: UILabel!
     
     public func configure(_ item: FacebookData, shape: PostRowShape?, at indexPath: IndexPath) {
-        title.text = item.message
+        guard let data = item as? ReplyData else {return}
+        portrait.image = nil
+        name.text = "댓댓글 작성자"
+        message.text = data.message
+        date.text = data.time.group
     }
     
 }

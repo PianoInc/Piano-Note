@@ -12,16 +12,15 @@ internal class Converter {
     
     internal func cloud(conflict record: ConflictRecord, using container: Container) {
         guard let server = record.server else {return}
-        container.coreData.performBackgroundTask { context in
-            context.name = LOCAL_CONTEXT
-            let request = NSFetchRequest<NSFetchRequestResult>(entityName: server.recordType)
-            request.fetchLimit = 1
-            request.predicate = NSPredicate(format: "\(KEY_RECORD_NAME) == %@", server.recordID.recordName)
-            if let object = try? context.fetch(request).first as? NSManagedObject, let strongObject = object {
-                strongObject.setValue(self.diff(with: record), forKey: KEY_RECORD_TEXT)
-            }
-            if context.hasChanges {try? context.save()}
+        let context = container.coreData.viewContext
+        context.name = LOCAL_CONTEXT
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: server.recordType)
+        request.fetchLimit = 1
+        request.predicate = NSPredicate(format: "\(KEY_RECORD_NAME) == %@", server.recordID.recordName)
+        if let object = try? context.fetch(request).first as? NSManagedObject, let strongObject = object {
+            strongObject.setValue(self.diff(with: record), forKey: KEY_RECORD_TEXT)
         }
+        if context.hasChanges {try? context.save()}
     }
     
     private func diff(with record: ConflictRecord) -> String? {

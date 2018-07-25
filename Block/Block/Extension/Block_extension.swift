@@ -77,7 +77,7 @@ extension Block: TableDatable {
             return false
         }
     }
-
+    
     var text: String? {
         get {
             switch self.type {
@@ -204,7 +204,7 @@ extension Block {
         case .checkist:
             bulletTextBlock = ChecklistTextBlock(context: context)
         }
-
+        
         bulletTextBlock.frontWhitespaces = bullet.whitespaces.string
         bulletTextBlock.key = bullet.string
         
@@ -214,10 +214,10 @@ extension Block {
             let correctNum = modifyNumIfNeeded(resultsController: resultsController) ?? num
             var bullet = bullet
             bullet.string = "\(correctNum)"
-             bulletTextBlock.num = num
+            bulletTextBlock.num = num
         }
         //TODO: attributes에 대한 처리도 해야함(피아노 효과 할 때)
-//        bulletTextBlock.attributes
+        //        bulletTextBlock.attributes
         
         bulletTextBlock.addToBlockCollection(self)
         
@@ -283,6 +283,99 @@ extension Block {
             self.deleteWithRelationship()
             return
         }
+    }
+    
+    internal func insertBlock(with text: String, on resultsController: NSFetchedResultsController<Block>?) {
+        guard let resultsController = resultsController,
+            let count = resultsController.sections?.first?.numberOfObjects,
+            var indexPath = resultsController.indexPath(forObject: self),
+            let context = managedObjectContext else { return }
+        
+        indexPath.row += 1
+        
+        //다음 block이 있다면, order는 둘의 평균으로 잡고, 없다면 + 1하기
+        let createdOrder: Double
+        if indexPath.row < count {
+            let nextOrder = resultsController.object(at: indexPath).order
+            createdOrder = (order + nextOrder) / 2
+        } else {
+            createdOrder = order + 1
+        }
+        
+        //1. block 생성
+        let newblock = Block(context: context)
+        newblock.order = order
+        newblock.note = note
+        newblock.type = type
+        
+        order = createdOrder
+        
+        switch type {
+        case .plainText:
+            
+            guard let plainTextBlock = plainTextBlock else { return }
+            
+            //2. plainBlock 생성
+            let newPlainBlock = PlainTextBlock(context: context)
+            newPlainBlock.text = text
+            newPlainBlock.textStyleInteger = plainTextBlock.textStyleInteger
+            
+            //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
+            //        newPlainBlock.attributes
+            
+            //2. 이를 block에 연결시킨다.
+            newPlainBlock.addToBlockCollection(newblock)
+            
+        case .checklistText:
+            guard let checklistTextBlock = checklistTextBlock else { return }
+            
+            //2. checklistText 생성
+            let newChecklistTextBlock = ChecklistTextBlock(context: context)
+            newChecklistTextBlock.text = text
+            newChecklistTextBlock.textStyleInteger = checklistTextBlock.textStyleInteger
+            newChecklistTextBlock.frontWhitespaces = checklistTextBlock.frontWhitespaces
+            
+            //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
+            //        newChecklistTextBlock.attributes
+            
+            //2. 이를 block에 연결시킨다.
+            newChecklistTextBlock.addToBlockCollection(newblock)
+            
+        case .unOrderedText:
+            guard let unOrderedTextBlock = unOrderedTextBlock else { return }
+            
+            //2. unOrderedText 생성
+            let newUnOrderedTextBlock = UnOrderedTextBlock(context: context)
+            newUnOrderedTextBlock.text = text
+            newUnOrderedTextBlock.textStyleInteger = unOrderedTextBlock.textStyleInteger
+            newUnOrderedTextBlock.frontWhitespaces = unOrderedTextBlock.frontWhitespaces
+            
+            //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
+            //        newUnOrderedTextBlock.attributes
+            
+            //2. 이를 block에 연결시킨다.
+            newUnOrderedTextBlock.addToBlockCollection(newblock)
+            
+        case .orderedText:
+            guard let orderedTextBlock = orderedTextBlock else { return }
+            
+            //2. orderedText 생성
+            let newOrderedTextBlock = OrderedTextBlock(context: context)
+            newOrderedTextBlock.text = text
+            newOrderedTextBlock.num = orderedTextBlock.num + 1
+            newOrderedTextBlock.textStyleInteger = orderedTextBlock.textStyleInteger
+            newOrderedTextBlock.frontWhitespaces = orderedTextBlock.frontWhitespaces
+            
+            //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
+            //        newOrderedTextBlock.attributes
+            
+            //2. 이를 block에 연결시킨다.
+            newOrderedTextBlock.addToBlockCollection(newblock)
+            
+        default:
+            return
+        }
+        
     }
     
     internal func insertNextBlock(with text: String, on resultsController: NSFetchedResultsController<Block>?) {
