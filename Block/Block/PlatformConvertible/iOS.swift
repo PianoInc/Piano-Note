@@ -16,7 +16,6 @@ public typealias MutableParagraphStyle = NSMutableParagraphStyle
 public typealias ParagraphStyle = NSParagraphStyle
 public typealias TextAlignment = NSTextAlignment
 public typealias TextView = UITextView
-public typealias FontStyle = UIFontTextStyle
 public typealias Image = UIImage
 public typealias Label = UILabel
 public typealias Touch = UITouch

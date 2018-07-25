@@ -13,10 +13,8 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         if !UserDefaults.standard.bool(forKey: "previouslyLaunched") {
             UserDefaults.standard.set(true, forKey: "previouslyLaunched")
             persistentContainer.createFolderIfNeeded()
@@ -34,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let resultsController = context.folderResultsController()
                 vc.resultsController = resultsController
                 context.perform(resultsController: resultsController, tableVC: vc)
-
+                
             } else {
                 print("에러발생!! 스플릿뷰의 첫번째 컨트롤러가 폴더가 아니다!")
             }
@@ -49,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
+        self.saveContext()
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }

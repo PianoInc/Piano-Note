@@ -12,7 +12,7 @@ import CoreData
 extension BlockTableViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        switchKeyboardIfNeeded(textView)
+//        switchKeyboardIfNeeded(textView)
         
         if state != .typing {
             updateViews(for: .typing)
@@ -21,10 +21,6 @@ extension BlockTableViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         textView.isEditable = false
-        
-        guard let cell = textView.superview?.superview as? TextBlockTableViewCell,
-            let block = cell.data as? Block else { return }
-        block.text = textView.text
     }
     
     
@@ -35,7 +31,7 @@ extension BlockTableViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         reactCellHeight(textView)
-        switchKeyboardIfNeeded(textView)
+//        switchKeyboardIfNeeded(textView)
         formatTextIfNeeded(textView)
         //        setTableViewOffSetIfNeeded(textView: textView)
     }
@@ -86,7 +82,7 @@ extension BlockTableViewController: UITextViewDelegate {
 
             let (frontText, behindText) = textView.splitTextByCursor()
             //TODO: 이렇게 되면 형광펜이 깨짐, attributed로 만들어야함
-            textView.text = frontText
+            block.text = frontText
             block.modifiedDate = Date()
             
             block.insertNextBlock(with: behindText, on: resultsController)
