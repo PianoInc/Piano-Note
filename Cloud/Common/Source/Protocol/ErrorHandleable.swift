@@ -83,7 +83,7 @@ internal extension ErrorHandleable where Self: ContextSave {
     
     private func conflict(_ error: CKError) {
         guard let ancestorRecord = error.ancestorRecord, let serverRecord = error.serverRecord, let clientRecord = error.clientRecord else {return}
-        serverRecord.syncMetaData(using: self.container.coreData)
+        serverRecord.syncMetaData(using: container)
         let record = ConflictRecord(ancestor: ancestorRecord, server: serverRecord, client: clientRecord)
         let converter = Converter()
         converter.cloud(conflict: record, using: container)
