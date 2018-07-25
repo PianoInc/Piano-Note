@@ -36,6 +36,18 @@ class NoteTableViewController: UITableViewController {
         if persistentContainer == nil {
             
         }
+        
+        
+        
+        DispatchQueue.main.async { [weak self] in
+            do {
+                try self?.resultsController?.performFetch()
+            } catch {
+                print("NoteResultsController를 fetch하는 데 에러 발생: \(error.localizedDescription)")
+            }
+            
+            self?.tableView.reloadData()
+        }
     }
     
     @IBAction func tapNewNote(_ sender: UIBarButtonItem) {
@@ -55,7 +67,7 @@ class NoteTableViewController: UITableViewController {
                 .deleted
             
             vc.state = state
-            
+            vc.note = note
             vc.persistentContainer = persistentContainer
             let context = persistentContainer.viewContext
             let resultsController = context.blockResultsController(note: note)
