@@ -13,6 +13,7 @@ extension NSManagedObjectContext {
     internal func saveIfNeeded() throws {
         guard hasChanges else { return }
         do {
+            print("변경사항 있으니 저장한다잉")
             try save()
         } catch {
             print("saveIfNeeded에러: \(error.localizedDescription)")

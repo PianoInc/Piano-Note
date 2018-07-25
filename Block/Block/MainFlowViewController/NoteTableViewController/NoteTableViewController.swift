@@ -12,7 +12,7 @@ import CoreData
 class NoteTableViewController: UITableViewController {
     
     var persistentContainer: NSPersistentContainer!
-    
+    var folder: Folder!
 
     var resultsController: NSFetchedResultsController<Note>?
     internal var delayBlockQueue: [(NoteTableViewController) -> Void] = []
@@ -20,6 +20,8 @@ class NoteTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0(self) }
+        
+        try? persistentContainer.viewContext.saveIfNeeded()
         
     }
 
@@ -37,6 +39,8 @@ class NoteTableViewController: UITableViewController {
     }
     
     @IBAction func tapNewNote(_ sender: UIBarButtonItem) {
+        let note = Note()
+
         performSegue(withIdentifier: "DetailNavigationController", sender: nil)
     }
     

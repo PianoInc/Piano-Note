@@ -18,6 +18,32 @@ extension Block: TableDatable {
         }
     }
     
+    var frontWhitespaces: String? {
+        get {
+            switch type {
+            case .checklistText:
+                return checklistTextBlock?.frontWhitespaces
+            case .orderedText:
+                return orderedTextBlock?.frontWhitespaces
+            case .unOrderedText:
+                return unOrderedTextBlock?.frontWhitespaces
+            default:
+                return nil
+            }
+        } set {
+            switch type {
+            case .checklistText:
+                self.checklistTextBlock?.frontWhitespaces = newValue
+            case .unOrderedText:
+                self.unOrderedTextBlock?.frontWhitespaces = newValue
+            case .orderedText:
+                self.orderedTextBlock?.frontWhitespaces = newValue
+            default:
+                ()
+            }
+        }
+    }
+    
     var identifier: String {
         switch self.type {
         case .plainText,
@@ -188,8 +214,7 @@ extension Block {
             let correctNum = modifyNumIfNeeded(resultsController: resultsController) ?? num
             var bullet = bullet
             bullet.string = "\(correctNum)"
-            bulletTextBlock.num = num
-            adjustAfterOrder(currentNum: correctNum, resultsController: resultsController)
+             bulletTextBlock.num = num
         }
         //TODO: attributes에 대한 처리도 해야함(피아노 효과 할 때)
 //        bulletTextBlock.attributes
@@ -307,6 +332,7 @@ extension Block {
             let newChecklistTextBlock = ChecklistTextBlock(context: context)
             newChecklistTextBlock.text = text
             newChecklistTextBlock.textStyleInteger = checklistTextBlock.textStyleInteger
+            newChecklistTextBlock.frontWhitespaces = checklistTextBlock.frontWhitespaces
             
             //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
             //        newChecklistTextBlock.attributes
@@ -321,6 +347,7 @@ extension Block {
             let newUnOrderedTextBlock = UnOrderedTextBlock(context: context)
             newUnOrderedTextBlock.text = text
             newUnOrderedTextBlock.textStyleInteger = unOrderedTextBlock.textStyleInteger
+            newUnOrderedTextBlock.frontWhitespaces = unOrderedTextBlock.frontWhitespaces
             
             //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
             //        newUnOrderedTextBlock.attributes
@@ -336,6 +363,7 @@ extension Block {
             newOrderedTextBlock.text = text
             newOrderedTextBlock.num = orderedTextBlock.num + 1
             newOrderedTextBlock.textStyleInteger = orderedTextBlock.textStyleInteger
+            newOrderedTextBlock.frontWhitespaces = orderedTextBlock.frontWhitespaces
             
             //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
             //        newOrderedTextBlock.attributes
@@ -349,19 +377,7 @@ extension Block {
         
     }
     
-    private func modifyNumIfNeeded(resultsController: NSFetchedResultsController<Block>) -> Int64? {
-        guard var indexPath = resultsController.indexPath(forObject: self),
-            indexPath.row > 0,
-            let orderedTextBlock = resultsController
-                .object(at: IndexPath(row: indexPath.row - 1,
-                                      section: indexPath.section)).orderedTextBlock
-            else { return nil }
-        
-        return orderedTextBlock.num + 1
-        
-    }
-    
-    private func adjustAfterOrder(currentNum: Int64, resultsController: NSFetchedResultsController<Block>) {
+    internal func adjustAfterOrder(currentNum: Int64, resultsController: NSFetchedResultsController<Block>) {
         guard var indexPath = resultsController.indexPath(forObject: self) else { return }
         var num = currentNum
         while true {
@@ -369,10 +385,11 @@ extension Block {
             num += 1
             let nextBlock = resultsController.object(at: indexPath)
             guard indexPath.row != resultsController.sections?.first?.numberOfObjects,
-                let orderedTextBlock = nextBlock.orderedTextBlock,
-                num != orderedTextBlock.num else { return }
+                let nextOrderedTextBlock = nextBlock.orderedTextBlock,
+                num != nextOrderedTextBlock.num,
+                (self.frontWhitespaces ?? "") == (nextBlock.frontWhitespaces ?? "") else { return }
             
-            orderedTextBlock.num = num
+            nextOrderedTextBlock.num = num
             nextBlock.modifiedDate = Date()
             
         }
@@ -433,6 +450,19 @@ extension Block {
         
         //3. 나 자신을 지워야함
         context.delete(self)
+        
+    }
+    
+    private func modifyNumIfNeeded(resultsController: NSFetchedResultsController<Block>) -> Int64? {
+        guard var indexPath = resultsController.indexPath(forObject: self),
+            indexPath.row > 0,
+            let previousOrderedTextBlock = resultsController
+                .object(at: IndexPath(row: indexPath.row - 1,
+                                      section: indexPath.section)).orderedTextBlock,
+            (self.orderedTextBlock?.frontWhitespaces ?? "") == (previousOrderedTextBlock.frontWhitespaces ?? "")
+            else { return nil }
+        
+        return previousOrderedTextBlock.num + 1
         
     }
 }

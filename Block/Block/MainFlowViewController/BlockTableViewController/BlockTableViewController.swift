@@ -65,6 +65,9 @@ class BlockTableViewController: UIViewController {
         }
     }
 
+    @IBAction func tapBackground(_ sender: Any) {
+        //Todo: 텍스트 맨 밑에 터치했을 때 마지막 셀이 텍스트 셀이 아니라면, 셀 생성하여 커서 띄우고, 텍스트 셀이라면 맨 마지막에 커서 띄우기
+    }
 }
 
 
