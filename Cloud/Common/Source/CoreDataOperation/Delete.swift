@@ -25,7 +25,7 @@ internal class Delete {
 
 private extension Delete {
     
-    private func delete(_ entityName: String, with recordID: CKRecord.ID, using context: NSManagedObjectContext) {
+    private func delete(_ entityName: String, with recordID: CKRecordID, using context: NSManagedObjectContext) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         request.fetchLimit = 1
         request.includesPropertyValues = false

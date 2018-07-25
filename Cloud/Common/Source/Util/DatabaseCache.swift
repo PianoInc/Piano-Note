@@ -10,7 +10,7 @@ internal class DatabaseCache {
     internal let database: CKDatabase
     
     internal var recordsToSave = [CKRecord]()
-    internal var recordIDsToDelete = [CKRecord.ID]()
+    internal var recordIDsToDelete = [CKRecordID]()
     
     internal init(database: CKDatabase) {
         self.database = database

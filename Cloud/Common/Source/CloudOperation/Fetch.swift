@@ -45,9 +45,10 @@ public class Fetch: ErrorHandleable {
 
 internal extension Fetch {
     
-    internal func zoneOperation(zoneID: CKRecordZone.ID = ZONE_ID, token key: String = PRIVATE_DB_ID, _ database: CKDatabase) {
-        var optionDic = [CKRecordZone.ID: CKFetchRecordZoneChangesOperation.ZoneOptions]()
-        let option = CKFetchRecordZoneChangesOperation.ZoneOptions()
+    internal func zoneOperation(zoneID: CKRecordZoneID = ZONE_ID, token key: String = PRIVATE_DB_ID, _ database: CKDatabase) {
+        
+        var optionDic = [CKRecordZoneID: CKFetchRecordZoneChangesOptions]()
+        let option = CKFetchRecordZoneChangesOptions()
         option.previousServerChangeToken = token.byZoneID[key]
         optionDic[zoneID] = option
         
