@@ -30,6 +30,8 @@
 		6BE618DA046E0170A006B11B44F893E9 /* SortTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB059842C8C290E032AE5E44EE5EC9C /* SortTableViewController.swift */; };
 		708AEC48F21F12C0682938F5022D1157 /* BlockTableViewController_dragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79878F7252E5C39CD3FD335B19A4A6 /* BlockTableViewController_dragDelegate.swift */; };
 		7B03E7473B9086CAF32C0FB0B433E595 /* BlockTableViewController_Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189224B2C44B7A10D6D1A5319146F823 /* BlockTableViewController_Action.swift */; };
+		7CDA57732107F50700517A0C /* Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */; };
+		7CDA57742107F50700517A0C /* Cloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		819B02D5B1704A356B6EBC240014C901 /* BlockTableViewController_DropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142856B2F1CD8026DC11330C1086577C /* BlockTableViewController_DropDelegate.swift */; };
 		8508F8D27DD758AFCD668721408EFE33 /* ImageBlockCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F410F0C09B96D64CEFABF5824E369DF /* ImageBlockCollectionViewCell.swift */; };
 		8654A349F536C5232D017F04E4ED36F4 /* NotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 677226EE12C944122ABC49EA8783C4E2 /* NotificationView.xib */; };
@@ -69,6 +71,20 @@
 		F5B81D52BFBF75D9CDB8FE65A92A4F33 /* BlockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB833A61E9F64446F0F20EB245D80745 /* BlockTableViewController.swift */; };
 		F86253D43D87AB87BE1B598115C67BBF /* ChecklistTextBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD616AB0D46ABC81FA5836A34245103 /* ChecklistTextBlock_extension.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7CDA57752107F50700517A0C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7CDA57742107F50700517A0C /* Cloud.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		08A7918D3F3A8E3018AC5C35D414949C /* iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOS.swift; sourceTree = "<group>"; };
@@ -143,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CDA57732107F50700517A0C /* Cloud.framework in Frameworks */,
 				6B0A989EABD5E11423CEC6BE5719DD6D /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +258,15 @@
 			path = FolderPickerTableViewController;
 			sourceTree = "<group>";
 		};
+		4951628857F6FF8603919501B7589D9E /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				73C3F33572668CCD6C1A96D9421D7158 /* NotificationView.swift */,
+				677226EE12C944122ABC49EA8783C4E2 /* NotificationView.xib */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
 		50EB84BCC5388A3424CC8039B9244454 /* ImagePickerCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,15 +350,6 @@
 			path = Block;
 			sourceTree = "<group>";
 		};
-		4951628857F6FF8603919501B7589D9E /* VIew */ = {
-			isa = PBXGroup;
-			children = (
-				73C3F33572668CCD6C1A96D9421D7158 /* NotificationView.swift */,
-				677226EE12C944122ABC49EA8783C4E2 /* NotificationView.xib */,
-			);
-			path = VIew;
-			sourceTree = "<group>";
-		};
 		849A28FF124594ADCAF89ACE77B7D427 /* BlockCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,6 +416,7 @@
 				9871D7CDD8FCF056267961EB9F92F517 /* Sources */,
 				DA3F95E9C0906C93F5E857D46F1692A8 /* Frameworks */,
 				016403D8A1239D901906E06B0757D00C /* Resources */,
+				7CDA57752107F50700517A0C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
