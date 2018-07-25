@@ -593,7 +593,6 @@
 				CODE_SIGN_ENTITLEMENTS = Block/Block.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9KHV9D7LV;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Facebook/Facebook/Framework\"";
 				INFOPLIST_FILE = Block/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -614,7 +613,6 @@
 				CODE_SIGN_ENTITLEMENTS = Block/Block.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9KHV9D7LV;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Facebook/Facebook/Framework\"";
 				INFOPLIST_FILE = Block/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
