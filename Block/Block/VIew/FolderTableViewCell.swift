@@ -32,6 +32,19 @@ class FolderTableViewCell: UITableViewCell, TableDataAcceptable {
             
             textLabel?.text = folder.name
             detailTextLabel?.text = "\(folder.noteCollection?.count ?? 0)"
+            
+            if folder.folderType == .all {
+                    let request: NSFetchRequest<Note> = Note.fetchRequest()
+                    request.predicate = NSPredicate(format: "folder.typeInteger < 2")
+                    request.resultType = .countResultType
+                    do {
+                        let count = try folder.managedObjectContext?.count(for: request)
+                        detailTextLabel?.text = "\(count ?? 0)"
+                    } catch {
+                        print(print("모든 폴더 갯수 만들다 에러: \(error.localizedDescription)"))
+                }
+            }
+            
         }
     }
 }
