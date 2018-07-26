@@ -125,7 +125,13 @@ extension Block: TableDatable {
         }
     }
     
-    //TODO: 형광펜 기능 추가되면 attributes까지 입혀야함
+    //TODO: 형광펜 data + 일정 data + 연락처 data 추가되면 attributes까지 입혀야함
+    
+    /**
+     attributedText에 데이터를 넣으면 알아서 디테일 블럭을 만들어준다.
+     split을 잘 해야한다.
+     
+     */
     var attributedText: NSAttributedString? {
         get {
             switch type {
@@ -154,14 +160,22 @@ extension Block: TableDatable {
                 return nil
             }
         } set {
+            //이미지 추가될 때 로직 바꾸어야함
+            guard let string = newValue?.string else { return }
+            
+            //맨 앞이 - 로 되어있다면 체크리스트 타입
+            
+            //맨 앞이 * 로 되어있다면 순서없는 서식 타입
+            
+            //맨 앞이 숫자. 로 되어 있다면 순서있는 서식 타입
+            let bullet = PianoBullet(text: , selectedRange: <#T##NSRange#>)
+            
             
             //TODO: 다음을 처리해야함: 이미지 attachment 배열 -> 이미지 컬렉션
             
             //TODO: 다음을 처리해야함: attachment data 타입: file -> 파일
             
             //TODO: 다음을 처리해야함: attachment data 타입: drawing -> 그리기
-            
-            //문단 맨 앞이 - 로 되어있다면 체크리스트 타입
             
         }
     }

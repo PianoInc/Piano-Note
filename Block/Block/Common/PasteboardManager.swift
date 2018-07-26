@@ -30,6 +30,34 @@ struct PasteboardManager {
         //3. 이걸 데이터로 변환하기
         //4. 테스트해보기
         
+        //우선은 텍스트밖에 없으므로 String으로 만든다.
+        var string = ""
+        blocks.forEach { (block) in
+            switch block.type {
+            case .plainText:
+                let plainStr = (block.text ?? "") + "\n"
+                string.append(plainStr)
+            case .checklistText:
+                let checkStr = "- " + (block.text ?? "") + "\n"
+                string.append(checkStr)
+                
+            case .orderedText:
+                let orderStr = "\((block.orderedTextBlock?.num ?? 0)). "  + "\n"
+                string.append(orderStr)
+                
+            case .unOrderedText:
+                let unOrderStr = "* " + (block.text ?? "") + "\n"
+                string.append(unOrderStr)
+                
+            case .separator:
+                let separatorStr = "---" + "\n"
+                string.append(separatorStr)
+            default:
+                print("TODO: 데이터 추가되면 이곳 작업해줘야함")
+            }
+        }
+        
+        PasteBoard.general.string = string
         
         
     }
