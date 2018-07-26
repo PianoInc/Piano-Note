@@ -12,7 +12,7 @@ import CoreData
 extension BlockTableViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-//        switchKeyboardIfNeeded(textView)
+        //        switchKeyboardIfNeeded(textView)
         
         if state != .typing {
             updateViews(for: .typing)
@@ -34,7 +34,7 @@ extension BlockTableViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         reactCellHeight(textView)
-//        switchKeyboardIfNeeded(textView)
+        //        switchKeyboardIfNeeded(textView)
         formatTextIfNeeded(textView)
         //        setTableViewOffSetIfNeeded(textView: textView)
     }
@@ -67,7 +67,7 @@ extension BlockTableViewController: UITextViewDelegate {
                 print("TODO: 이미지, 파일, 등등의 타입이므로 해당 block을 지울 것인지 물어보는 얼럿 창을 띄워줘야함")
                 return false
             }
-
+            
             moveCursorTo(previousBlock, prevIndexPath: indexPath)
             
             let text = textView.text ?? ""
@@ -79,12 +79,10 @@ extension BlockTableViewController: UITextViewDelegate {
         case .stayCurrent:
             return true
         case .moveNext:
-
-            let (frontText, behindText) = textView.splitTextByCursor()
             //TODO: 이렇게 되면 형광펜이 깨짐, attributed로 만들어야함
-            block.text = frontText
+            let (frontText, behindText) = textView.splitTextByCursor()
+            block.text = data(detector: frontText)
             block.modifiedDate = Date()
-            
             block.insertNextBlock(with: behindText, on: resultsController)
             
             var indexPath = indexPath
@@ -101,6 +99,10 @@ extension BlockTableViewController: UITextViewDelegate {
         case movePrevious
         case stayCurrent
         case moveNext
+    }
+    
+    private func data(detector text: String) -> String {
+        return text
     }
     
     private func typingSituation(_ textView: UITextView, block: Block, replacementText text: String) -> TypingSituation {

@@ -5,9 +5,9 @@
       location = "group:Cloud/Cloud.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Block/Block.xcodeproj">
+      location = "group:Block/../Facebook/Facebook.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Block/../Facebook/Facebook.xcodeproj">
+      location = "group:Block/Block.xcodeproj">
    </FileRef>
 </Workspace>

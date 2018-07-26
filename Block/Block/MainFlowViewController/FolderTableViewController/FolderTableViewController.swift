@@ -29,7 +29,6 @@ class FolderTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let vc = segue.destination as? NoteTableViewController,
             let folder = sender as? Folder {
             
@@ -54,11 +53,27 @@ class FolderTableViewController: UITableViewController {
             vc.resultsController = resultsController
             resultsController.delegate = vc
         }
+        
+        // Facebook splitView
+        if let vc = segue.destination as? UISplitViewController {
+            vc.delegate = self
+            vc.preferredDisplayMode = .allVisible
+            vc.maximumPrimaryColumnWidth = 414
+            vc.minimumPrimaryColumnWidth = 320
+        }
     }
-
+    
     @IBAction func tapAddFolder(_ sender: Any) {
-
+        
     }
+}
+
+extension FolderTableViewController : UISplitViewControllerDelegate {
+    
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        return true
+    }
+    
 }
 
 extension FolderTableViewController {
@@ -76,11 +91,11 @@ extension FolderTableViewController {
         var cell = tableView.dequeueReusableCell(withIdentifier: data.identifier) as! TableDataAcceptable & UITableViewCell
         cell.data = data
         return cell
-     }
- 
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return resultsController?.object(at: indexPath).folderType != .custom ? false : true
-     }
+    }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return UITableViewCellEditingStyle(rawValue: 3) ?? UITableViewCellEditingStyle.none
@@ -91,10 +106,10 @@ extension FolderTableViewController {
     }
     
     
-     // Override to support editing the table view.
+    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-
-     }
+        
+    }
     
     /*
      // Override to support rearranging the table view.
