@@ -46,19 +46,24 @@ extension NSManagedObjectContext {
     
     internal func noteResultsController(folder: Folder) -> NSFetchedResultsController<Note> {
         let request: NSFetchRequest<Note> = Note.fetchRequest()
-        let predicate = NSPredicate(format: "folder = %@", folder)
-        let sort1 = NSSortDescriptor(key: #keyPath(Note.typeInteger), ascending: false)
-        let sort2: NSSortDescriptor
+        
+        if folder.folderType != .all {
+            //all이면 predicate을 하지 말아야 함
+            let predicate = NSPredicate(format: "folder = %@", folder)
+            request.predicate = predicate
+        }
+        
+        let sort: NSSortDescriptor
         switch folder.sortType {
         case .modified:
-            sort2 = NSSortDescriptor(key: #keyPath(Note.modifiedDate), ascending: false)
+            sort = NSSortDescriptor(key: #keyPath(Note.modifiedDate), ascending: false)
         case .created:
-            sort2 = NSSortDescriptor(key: #keyPath(Note.createdDate), ascending: false)
+            sort = NSSortDescriptor(key: #keyPath(Note.createdDate), ascending: false)
         case .name:
-            sort2 = NSSortDescriptor(key: #keyPath(Note.title), ascending: true)
+            sort = NSSortDescriptor(key: #keyPath(Note.title), ascending: true)
         }
-        request.predicate = predicate
-        request.sortDescriptors = [sort1, sort2]
+        
+        request.sortDescriptors = [sort]
         request.fetchBatchSize = 20
         return NSFetchedResultsController(fetchRequest: request, managedObjectContext: self, sectionNameKeyPath: #keyPath(Note.typeInteger), cacheName: cacheName(folder: folder))
     }

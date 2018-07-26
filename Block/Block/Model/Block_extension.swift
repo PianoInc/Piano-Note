@@ -168,7 +168,6 @@ extension Block: TableDatable {
             //맨 앞이 * 로 되어있다면 순서없는 서식 타입
             
             //맨 앞이 숫자. 로 되어 있다면 순서있는 서식 타입
-            let bullet = PianoBullet(text: , selectedRange: <#T##NSRange#>)
             
             
             //TODO: 다음을 처리해야함: 이미지 attachment 배열 -> 이미지 컬렉션
@@ -245,7 +244,6 @@ extension Block {
             else { return }
         
         type = bullet.blockType
-        modifiedDate = Date()
         
         var bulletTextBlock: BulletTextBlockType
         switch bullet.type {
@@ -258,6 +256,7 @@ extension Block {
         }
         
         bulletTextBlock.frontWhitespaces = bullet.whitespaces.string
+        bulletTextBlock.text = plain.text
         bulletTextBlock.key = bullet.string
         
         
@@ -278,7 +277,7 @@ extension Block {
         }
         
         plainTextBlock = nil
-        
+        modifiedDate = Date()
         selectedRange.location -= bullet.baselineIndex
     }
     

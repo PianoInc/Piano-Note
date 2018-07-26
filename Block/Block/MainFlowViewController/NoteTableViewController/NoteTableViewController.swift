@@ -81,7 +81,8 @@ extension NoteTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let data = resultsController?.object(at: indexPath) else { return UITableViewCell() }
-        var cell = tableView.dequeueReusableCell(withIdentifier: data.identifier) as! TableDataAcceptable & UITableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: data.identifier) as! NoteTableDataAcceptable & UITableViewCell
+        cell.folder = folder
         cell.data = data
         return cell
     }

@@ -33,3 +33,7 @@ protocol TableDatable: Uniquable {
 protocol TableDataAcceptable {
     var data: TableDatable? { get set }
 }
+
+protocol NoteTableDataAcceptable: TableDataAcceptable {
+    var folder: Folder? { get set }
+}
