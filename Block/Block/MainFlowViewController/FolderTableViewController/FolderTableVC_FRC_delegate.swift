@@ -26,9 +26,9 @@ extension FolderTableViewController: NSFetchedResultsControllerDelegate {
             
         case .update:
             guard let indexPath = indexPath,
-                let block = controller.object(at: indexPath) as? Block,
-                let cell = tableView.cellForRow(at: indexPath) as? TextBlockTableViewCell else { return }
-            cell.data = block
+                let folder = controller.object(at: indexPath) as? Folder,
+                let cell = tableView.cellForRow(at: indexPath) as? FolderTableViewCell else { return }
+            cell.data = folder
             
         case .move:
             guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }

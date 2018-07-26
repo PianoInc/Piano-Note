@@ -28,7 +28,7 @@ class BlockTableViewController: UIViewController {
         
         updateViews(for: state)
         fetchData()
-
+        setupTableView()
 
         //TODO: persistentContainer 가 nil이라는 건 preserve로 왔거나 splitView라는 말임, 따라서 할당해주고, prepare에서 하는 짓을 다시 해줘야함
         if persistentContainer == nil {
@@ -47,7 +47,7 @@ class BlockTableViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        //TODO: 여기에 있어도 되는지 체크하기
+        setNoteTitle()
         save()
     }
 
@@ -85,7 +85,7 @@ extension BlockTableViewController {
         }
     }
     
-    private func save() {
+    private func setNoteTitle() {
         
         if let resultsController = resultsController,
             let count = resultsController.sections?.first?.numberOfObjects,
@@ -100,7 +100,6 @@ extension BlockTableViewController {
                 }
             }
         }
-        persistentContainer.viewContext.saveIfNeeded()
     }
     
     private func setupTableView(){
@@ -108,6 +107,10 @@ extension BlockTableViewController {
         tableView.dragDelegate = self
         tableView.dropDelegate = self
         tableView.dragInteractionEnabled = true
+    }
+    
+    private func save() {
+        persistentContainer.viewContext.saveIfNeeded()
     }
 }
 

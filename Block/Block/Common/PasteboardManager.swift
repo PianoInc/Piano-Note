@@ -24,8 +24,13 @@ struct PasteboardManager {
      # why
      빠른 편집의 한 기능으로 제공하기 위해
      */
-    static func copyParagraphs(Blocks: [Block]) {
-        //
+    static func copyParagraphs(blocks: [Block]) {
+        //1. 우선 blocks를 NSAttributedString으로 만들기 -> block.nsAttributedText
+        //2. 그 다음 붙일 때 개행을 삽입해주기
+        //3. 이걸 데이터로 변환하기
+        //4. 테스트해보기
+        
+        
         
     }
     

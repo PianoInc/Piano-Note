@@ -10,10 +10,6 @@ import UIKit
 
 extension BlockTableViewController {
     
-    internal func setCursor(position: CGPoint) {
-        let indexPath = tableView.indexPathForRow(at: position)
-    }
-    
     internal func switchKeyboardIfNeeded(_ textView: UITextView) {
         
         if textView.text.count == 0 && textView.keyboardType == .default {

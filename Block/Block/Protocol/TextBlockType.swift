@@ -51,6 +51,25 @@ extension TextBlockType {
             } else {
                 return Font.preferredFont(forTextStyle: textStyle).bold()
             }
+        } set {
+            switch newValue {
+            case Font.preferredFont(forTextStyle: .body):
+                textStyle = .body
+                
+            case Font.preferredFont(forTextStyle: .title1).bold():
+                textStyle = .title1
+                
+            case Font.preferredFont(forTextStyle: .title2).bold():
+                textStyle = .title2
+                
+            case Font.preferredFont(forTextStyle: .title3).bold():
+                textStyle = .title3
+            
+            default:
+                textStyle = .body
+                
+            }
+
         }
     }
 }

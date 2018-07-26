@@ -74,7 +74,8 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibLabel.font = ibLabel.font.withSize(font.pointSize)
                 ibTextView.text = orderedTextBlock.text ?? ""
                 ibLabel.text = "\(orderedTextBlock.num)."
-                ibTextViewLeadingAnchor.constant = ibButton.frame.width + 8
+                ibLabel.sizeToFit()
+                ibTextViewLeadingAnchor.constant = ibLabel.frame.width + 8
                 ibButtonLeadingAnchor.constant = 0
                 ibLabelLeadingAnchor.constant = 0
                 
@@ -105,9 +106,10 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibLabel.font = ibLabel.font.withSize(font.pointSize)
                 ibTextView.text = unOrderedTextBlock.text ?? ""
                 ibLabel.text = "•"  //TODO: 이거 나중에 얼마든지 바뀔 수 있기 때문에 리펙토링 할 것
-                ibTextViewLeadingAnchor.constant = ibButton.frame.width + 8
+                ibTextViewLeadingAnchor.constant = ibLabel.frame.width + 8
                 ibButtonLeadingAnchor.constant = 0
                 ibLabelLeadingAnchor.constant = 0
+                
                 
                 if let whitespaceStr = unOrderedTextBlock.frontWhitespaces as NSString? {
                     let width = whitespaceStr.size(withAttributes: [.font : font]).width

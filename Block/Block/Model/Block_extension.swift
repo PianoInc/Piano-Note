@@ -18,6 +18,25 @@ extension Block: TableDatable {
         }
     }
     
+    var font: Font {
+        get {
+            return plainTextBlock?.font ?? orderedTextBlock?.font ?? unOrderedTextBlock?.font ?? checklistTextBlock?.font ?? Font.preferredFont(forTextStyle: .body)
+        } set {
+            switch type {
+            case .plainText:
+                plainTextBlock?.font = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.font = newValue
+            case .orderedText:
+                orderedTextBlock?.font = newValue
+            case .checklistText:
+                checklistTextBlock?.font = newValue
+            default:
+                ()
+            }
+        }
+    }
+    
     var frontWhitespaces: String? {
         get {
             switch type {
@@ -57,8 +76,6 @@ extension Block: TableDatable {
             return "FileBlockTableViewCell"
         case .imageCollection:
             return "ImageCollectionBlockTableViewCell"
-        case .imagePicker:
-            return "ImagePickerBlockTableViewCell"
         case .separator:
             return "SeparatorBlockTableViewCell"
         case .comment:
@@ -80,7 +97,7 @@ extension Block: TableDatable {
     
     var text: String? {
         get {
-            switch self.type {
+            switch type {
             case .plainText:
                 return plainTextBlock?.text
             case .checklistText:
@@ -93,7 +110,7 @@ extension Block: TableDatable {
                 return nil
             }
         } set {
-            switch self.type {
+            switch type {
             case .plainText:
                 plainTextBlock?.text = newValue
             case .checklistText:
@@ -106,7 +123,47 @@ extension Block: TableDatable {
                 ()
             }
         }
-        
+    }
+    
+    //TODO: 형광펜 기능 추가되면 attributes까지 입혀야함
+    var attributedText: NSAttributedString? {
+        get {
+            switch type {
+            case .plainText:
+                return NSAttributedString(string: text ?? "", attributes: [.font : font])
+            case .checklistText:
+                return NSAttributedString(string: "- " + (text ?? ""), attributes: [.font : font])
+            case .unOrderedText:
+                return NSAttributedString(string: "* " + (text ?? ""), attributes: [.font : font])
+            case .orderedText:
+                let num = orderedTextBlock?.num ?? 0
+                return NSAttributedString(string: "\(num). ", attributes: [.font : font])
+            case .imageCollection:
+                //TODO: 이미지를 NSTextAttachment로 바꿔서 연달아 합쳐서 리턴해야함
+                return nil
+            case .separator:
+                return NSAttributedString(string: "---", attributes: [.font : font])
+            case .file:
+                //TODO: 파일을 NSTextAttachment로 바꿔서 리턴해야함
+                return nil
+            case .drawing:
+                //TODO: 이미지를 NSTextAttachment로 바꿔서 리턴해야함
+                return nil
+            case .comment:
+                //TODO: 댓글을 복사/붙여넣기 허용할 건지?? 고민해보고 결정하기
+                return nil
+            }
+        } set {
+            
+            //TODO: 다음을 처리해야함: 이미지 attachment 배열 -> 이미지 컬렉션
+            
+            //TODO: 다음을 처리해야함: attachment data 타입: file -> 파일
+            
+            //TODO: 다음을 처리해야함: attachment data 타입: drawing -> 그리기
+            
+            //문단 맨 앞이 - 로 되어있다면 체크리스트 타입
+            
+        }
     }
     
     var hasFormat: Bool {
@@ -149,25 +206,6 @@ extension Block: TableDatable {
             }
         }
         
-    }
-    
-    internal func append(text: String) {
-        switch self.type {
-        case .plainText:
-            guard let originText = plainTextBlock?.text else { return }
-            plainTextBlock?.text = originText + text
-        case .checklistText:
-            guard let originText = checklistTextBlock?.text else { return }
-            checklistTextBlock?.text = originText + text
-        case .unOrderedText:
-            guard let originText = unOrderedTextBlock?.text else { return }
-            unOrderedTextBlock?.text = originText + text
-        case .orderedText:
-            guard let originText = orderedTextBlock?.text else { return }
-            orderedTextBlock?.text = originText + text
-        default:
-            return
-        }
     }
     
     
@@ -269,21 +307,21 @@ extension Block {
         
     }
     
-    internal func combinePreviousBlock(on resultsController: NSFetchedResultsController<Block>?) {
-        guard let resultsController = resultsController,
-            var indexPath = resultsController.indexPath(forObject: self),
-            let text = text else { return }
-        
-        while indexPath.row > 0 {
-            indexPath.row -= 1
-            let previousBlock = resultsController.object(at: indexPath)
-            guard resultsController.object(at: indexPath).isTextType else { continue }
-            previousBlock.append(text: text)
-            previousBlock.modifiedDate = Date()
-            self.deleteWithRelationship()
-            return
-        }
-    }
+//    internal func combinePreviousBlock(on resultsController: NSFetchedResultsController<Block>?) {
+//        guard let resultsController = resultsController,
+//            var indexPath = resultsController.indexPath(forObject: self),
+//            let text = text else { return }
+//        
+//        while indexPath.row > 0 {
+//            indexPath.row -= 1
+//            let previousBlock = resultsController.object(at: indexPath)
+//            guard resultsController.object(at: indexPath).isTextType else { continue }
+//            previousBlock.append(text: text)
+//            previousBlock.modifiedDate = Date()
+//            self.deleteWithRelationship()
+//            return
+//        }
+//    }
     
     internal func insertBlock(with text: String, on resultsController: NSFetchedResultsController<Block>?) {
         guard let resultsController = resultsController,
@@ -561,5 +599,24 @@ extension Block {
         
         return previousOrderedTextBlock.num + 1
         
+    }
+    
+    internal func append(text: String) {
+        switch self.type {
+        case .plainText:
+            guard let originText = plainTextBlock?.text else { return }
+            plainTextBlock?.text = originText + text
+        case .checklistText:
+            guard let originText = checklistTextBlock?.text else { return }
+            checklistTextBlock?.text = originText + text
+        case .unOrderedText:
+            guard let originText = unOrderedTextBlock?.text else { return }
+            unOrderedTextBlock?.text = originText + text
+        case .orderedText:
+            guard let originText = orderedTextBlock?.text else { return }
+            orderedTextBlock?.text = originText + text
+        default:
+            return
+        }
     }
 }

@@ -11,10 +11,6 @@ import CoreData
 //MARK: Action
 extension BlockTableViewController {
     
-    @IBAction func tapTableViewBackground(_ sender: UITapGestureRecognizer) {
-        setCursor(position: sender.location(in: tableView))
-    }
-    
     @IBAction func tapFinishType(sender: UIBarButtonItem) {
         updateViews(for: .normal)
         self.view.endEditing(true)
@@ -39,7 +35,7 @@ extension BlockTableViewController {
     }
     
     @IBAction func tapCopyParagraphs(sender: UIBarButtonItem) {
-        PasteboardManager.copyParagraphs(Blocks: selectedBlocks)
+        PasteboardManager.copyParagraphs(blocks: selectedBlocks)
     }
     
     @IBAction func tapCopyAll(sender: UIBarButtonItem) {

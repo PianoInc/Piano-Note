@@ -21,7 +21,6 @@ class NoteTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0(self) }
-        
     }
 
     override func viewDidLoad() {

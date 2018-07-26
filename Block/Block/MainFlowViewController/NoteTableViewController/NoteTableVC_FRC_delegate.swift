@@ -27,9 +27,9 @@ extension NoteTableViewController: NSFetchedResultsControllerDelegate {
             
         case .update:
             guard let indexPath = indexPath,
-                let block = controller.object(at: indexPath) as? Block,
-                let cell = tableView.cellForRow(at: indexPath) as? TextBlockTableViewCell else { return }
-            cell.data = block
+                let note = controller.object(at: indexPath) as? Note,
+                let cell = tableView.cellForRow(at: indexPath) as? NoteTableViewCell else { return }
+            cell.data = note
             
         case .move:
             guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }

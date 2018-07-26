@@ -17,6 +17,5 @@ enum BlockType: Int64 {
     case drawing
     case file
     case separator
-    case imagePicker
     case comment
 }

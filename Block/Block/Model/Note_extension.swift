@@ -20,7 +20,7 @@ extension Note: TableDatable {
         get {
             return NoteType(rawValue: typeInteger) ?? NoteType.normal
         } set {
-            typeInteger = type.rawValue
+            typeInteger = newValue.rawValue
         }
     }
     

@@ -10,6 +10,6 @@ import UIKit
 
 extension BlockTableViewController {
     internal var tableViewInset: UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 8, left: 0, bottom: 20, right: 0)
     }
 }

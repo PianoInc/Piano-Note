@@ -40,6 +40,6 @@ class BlockTextView: UITextView {
 
 extension BlockTextView: NSLayoutManagerDelegate {
     func layoutManager(_ layoutManager: NSLayoutManager, lineSpacingAfterGlyphAt glyphIndex: Int, withProposedLineFragmentRect rect: CGRect) -> CGFloat {
-        return 4
+        return 6
     }
 }
