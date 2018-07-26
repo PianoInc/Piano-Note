@@ -111,22 +111,30 @@ extension BlockTableViewController: TableViewDataSource {
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         guard sourceIndexPath.row != destinationIndexPath.row else {return}
-        guard let low = [sourceIndexPath.row, destinationIndexPath.row].min() else {return}
-        guard let high = [sourceIndexPath.row, destinationIndexPath.row].max() else {return}
+        guard let sourceBlock = resultsController?.object(at: sourceIndexPath) else {return}
+        guard let destBlock = resultsController?.object(at: destinationIndexPath) else {return}
+        guard let count = resultsController?.sections?.first?.numberOfObjects else {return}
         
-        var orders = [Double]()
-        for row in low...high {
-            let indexPath = IndexPath(row: row, section: 0)
-            guard let block = resultsController?.object(at: indexPath) else {continue}
-            orders.append(block.order)
+        if destinationIndexPath.row == 0 {
+            sourceBlock.order = destBlock.order - 1
+        } else if destinationIndexPath.row == count - 1 {
+            sourceBlock.order = destBlock.order + 1
+        } else {
+            if sourceIndexPath.row < destinationIndexPath.row {
+                var nextIndexPath = destinationIndexPath
+                nextIndexPath.row += 1
+                guard let prevBlock = resultsController?.object(at: nextIndexPath) else {return}
+                sourceBlock.order = (prevBlock.order + destBlock.order) / 2
+            } else {
+                var prevIndexPath = destinationIndexPath
+                prevIndexPath.row -= 1
+                guard let prevBlock = resultsController?.object(at: prevIndexPath) else {return}
+                sourceBlock.order = (prevBlock.order + destBlock.order) / 2
+            }
         }
         
-        orders = orders.shifted(by: sourceIndexPath.row < destinationIndexPath.row ? 1 : -1)
-        
-        for (idx, row) in (low...high).enumerated() {
-            let indexPath = IndexPath(row: row, section: 0)
-            guard let block = resultsController?.object(at: indexPath) else {continue}
-            block.order = orders[idx]
+        tableView.indexPathsForVisibleRows!.forEach {
+            print($0, resultsController?.object(at: $0).order ?? 0)
         }
     }
     

@@ -29,7 +29,6 @@
 		5796AC45FF1B897995445E7B6E14B234 /* FolderTableVC_state.swift in Sources */ = {isa = PBXBuildFile; fileRef = F120D872A3D185105F15F77E6F8CF065 /* FolderTableVC_state.swift */; };
 		5C4B907F62EB01F50C6AACB2A7D5F7DA /* NoteTableVC_action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489A08FCF7871F2232B9EF98CA494DB0 /* NoteTableVC_action.swift */; };
 		5C5E5D43A0561A3EDC34F784ADAEA45B /* OrderedTextBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7B30DCE84A61C98DBC9DCE4CD42D6D /* OrderedTextBlock_extension.swift */; };
-		5D2D5077097AFF0008754F34169D3104 /* Array_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DFA89A636F231954CAA4598972C85 /* Array_extension.swift */; };
 		5EC3900F2EE33D0B4E97B761C61581E9 /* TextBlockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD49890669222562AA90074970895C9 /* TextBlockType.swift */; };
 		5FDE2876216C2268948CD22257F8A4B3 /* DrawingBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC95E25D47826AEE0E2951B56EF127ED /* DrawingBlock_extension.swift */; };
 		62EC65B42E68FFCA4935D05BE1868B06 /* Font_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DAA29DC735CABAB107CA113D60E199 /* Font_extension.swift */; };
@@ -100,7 +99,6 @@
 
 /* Begin PBXFileReference section */
 		08A7918D3F3A8E3018AC5C35D414949C /* iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOS.swift; sourceTree = "<group>"; };
-		0A1DFA89A636F231954CAA4598972C85 /* Array_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array_extension.swift; sourceTree = "<group>"; };
 		0AEB9F04C0487381311168453FF70E19 /* Pianote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pianote.xcdatamodel; sourceTree = "<group>"; };
 		12948BFA2D53FDA553511F4CF00CDBF6 /* PasteboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasteboardManager.swift; sourceTree = "<group>"; };
 		1365B1788320989665703066AE899293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -226,6 +224,17 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		1B3E93BF92F2FB3F0886FAC55C9F420D /* FolderTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D3300D23731A1C60AAB7359D15942A9D /* FolderTableVC_FRC_delegate.swift */,
+				F3A71CC96CC921C516CCD9B4A9672323 /* FolderTableVC_action.swift */,
+				F120D872A3D185105F15F77E6F8CF065 /* FolderTableVC_state.swift */,
+				CE84097EC525FA2FF1E2D667E27DB047 /* FolderTableViewController.swift */,
+			);
+			path = FolderTableViewController;
+			sourceTree = "<group>";
+		};
 		1E00F1598E7CFF8759DA1247055CA88C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +249,17 @@
 				815389907A9E81E80CA7A11F77A407E8 /* FacebookTableViewController.swift */,
 			);
 			path = FacebookTableViewController;
+			sourceTree = "<group>";
+		};
+		2CF561E103426F79EE55665C02E9EC16 /* NoteTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CA62AA8D1647D359962E9FB1FD6B7A06 /* NoteTableVC_FRC_delegate.swift */,
+				489A08FCF7871F2232B9EF98CA494DB0 /* NoteTableVC_action.swift */,
+				D8A1602D1313FCB7748A3CDB2CC444E3 /* NoteTableVC_state.swift */,
+				C684236D2E54A820730BFC463F47DA0E /* NoteTableViewController.swift */,
+			);
+			path = NoteTableViewController;
 			sourceTree = "<group>";
 		};
 		2DB5B67C4D5988FF123D09EF064A94B3 /* SubFlowViewController */ = {
@@ -296,21 +316,19 @@
 			);
 			sourceTree = "<group>";
 		};
-		2CF561E103426F79EE55665C02E9EC16 /* NoteTableViewController */ = {
+		6944E1A674B664BAB6DEB92204150418 /* MainFlowViewController */ = {
 			isa = PBXGroup;
 			children = (
-				CA62AA8D1647D359962E9FB1FD6B7A06 /* NoteTableVC_FRC_delegate.swift */,
-				489A08FCF7871F2232B9EF98CA494DB0 /* NoteTableVC_action.swift */,
-				D8A1602D1313FCB7748A3CDB2CC444E3 /* NoteTableVC_state.swift */,
-				C684236D2E54A820730BFC463F47DA0E /* NoteTableViewController.swift */,
+				BF7FC98E7A4A574C94A7980874E0C967 /* BlockTableViewController */,
+				1B3E93BF92F2FB3F0886FAC55C9F420D /* FolderTableViewController */,
+				2CF561E103426F79EE55665C02E9EC16 /* NoteTableViewController */,
 			);
-			path = NoteTableViewController;
+			path = MainFlowViewController;
 			sourceTree = "<group>";
 		};
 		72B1AD043929504F1A24D277C8EB5288 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				0A1DFA89A636F231954CAA4598972C85 /* Array_extension.swift */,
 				BD278F32DBF6B4BE70808EAE6449EBA5 /* Block_extension.swift */,
 				2CD616AB0D46ABC81FA5836A34245103 /* ChecklistTextBlock_extension.swift */,
 				AC1836D0A2BFDE8DD6AF375F658868F9 /* DateFormatter_extension.swift */,
@@ -368,15 +386,12 @@
 			path = BlockCell;
 			sourceTree = "<group>";
 		};
-		1B3E93BF92F2FB3F0886FAC55C9F420D /* FolderTableViewController */ = {
+		AABEB4A36F886CCF7332F6E25D570C30 /* FacebookDetailTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D3300D23731A1C60AAB7359D15942A9D /* FolderTableVC_FRC_delegate.swift */,
-				F3A71CC96CC921C516CCD9B4A9672323 /* FolderTableVC_action.swift */,
-				F120D872A3D185105F15F77E6F8CF065 /* FolderTableVC_state.swift */,
-				CE84097EC525FA2FF1E2D667E27DB047 /* FolderTableViewController.swift */,
+				814168EA51BD4B5E39B7A30C544A337E /* FacebookDetailTableViewController.swift */,
 			);
-			path = FolderTableViewController;
+			path = FacebookDetailTableViewController;
 			sourceTree = "<group>";
 		};
 		AE1A6AB3E5D71281005FBFFA0F2E181F /* SettingTableViewController */ = {
@@ -386,14 +401,6 @@
 				23BB4A0854718BD99247A748525886A6 /* SettingTableViewController.swift */,
 			);
 			path = SettingTableViewController;
-			sourceTree = "<group>";
-		};
-		CA07FC51466F88440B8C4C0432BED192 /* SortTableViewController */ = {
-			isa = PBXGroup;
-			children = (
-				5CB059842C8C290E032AE5E44EE5EC9C /* SortTableViewController.swift */,
-			);
-			path = SortTableViewController;
 			sourceTree = "<group>";
 		};
 		BF7FC98E7A4A574C94A7980874E0C967 /* BlockTableViewController */ = {
@@ -414,22 +421,12 @@
 			path = BlockTableViewController;
 			sourceTree = "<group>";
 		};
-		AABEB4A36F886CCF7332F6E25D570C30 /* FacebookDetailTableViewController */ = {
+		CA07FC51466F88440B8C4C0432BED192 /* SortTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				814168EA51BD4B5E39B7A30C544A337E /* FacebookDetailTableViewController.swift */,
+				5CB059842C8C290E032AE5E44EE5EC9C /* SortTableViewController.swift */,
 			);
-			path = FacebookDetailTableViewController;
-			sourceTree = "<group>";
-		};
-		6944E1A674B664BAB6DEB92204150418 /* MainFlowViewController */ = {
-			isa = PBXGroup;
-			children = (
-				BF7FC98E7A4A574C94A7980874E0C967 /* BlockTableViewController */,
-				1B3E93BF92F2FB3F0886FAC55C9F420D /* FolderTableViewController */,
-				2CF561E103426F79EE55665C02E9EC16 /* NoteTableViewController */,
-			);
-			path = MainFlowViewController;
+			path = SortTableViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -516,7 +513,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				43F2859B17FCB12953C221A28BDDC8A4 /* AppDelegate.swift in Sources */,
-				5D2D5077097AFF0008754F34169D3104 /* Array_extension.swift in Sources */,
 				567802734F5A95ABF7B80DF69441F3E2 /* Block.xcdatamodeld in Sources */,
 				19FC6A7A79E1C67A895DCBE11983C220 /* BlockTableVC_FRC_delegate.swift in Sources */,
 				32096179A1C53C11BE23F6D4DCBD0AA6 /* BlockTableVC_action.swift in Sources */,
