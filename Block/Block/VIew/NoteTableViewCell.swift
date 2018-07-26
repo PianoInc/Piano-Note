@@ -8,19 +8,33 @@
 
 import UIKit
 
-class NoteTableViewCell: UITableViewCell, TableDataAcceptable {
+class NoteTableViewCell: UITableViewCell, NoteTableDataAcceptable {
 
     @IBOutlet weak var ibTitleLabel: UILabel!
+    @IBOutlet weak var ibSubTitleLabel: UILabel!
     @IBOutlet weak var ibDateLabel: UILabel!
     @IBOutlet weak var ibFolderLabel: UILabel!
     
+    var folder: Folder?
+    
     var data: TableDatable? {
         didSet {
-            guard let data = self.data as? Note else { return }
+            guard let note = self.data as? Note else { return }
             
-            ibTitleLabel.text = data.title
-            ibDateLabel.text = DateFormatter.sharedInstance.string(from: data.modifiedDate ?? Date())
-            ibFolderLabel.text = data.folder?.folderType != .all ? data.folder?.name : ""
+            ibTitleLabel.text = note.title
+            ibSubTitleLabel.text = note.subTitle
+            ibDateLabel.text = DateFormatter.sharedInstance.string(from: note.modifiedDate ?? Date())
+            
+            if let screenFolderType = folder?.folderType,
+                screenFolderType == .all,
+                let noteFolderType = note.folder?.folderType,
+                noteFolderType == .custom {
+                ibFolderLabel.isHidden = false
+                ibFolderLabel.text = note.folder?.name ?? ""
+            } else {
+                ibFolderLabel.isHidden = true
+            }
+            
         }
     }
 

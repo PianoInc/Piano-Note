@@ -136,6 +136,7 @@ extension BlockTableViewController {
         
         var selectedRange = textView.selectedRange
         textView.textStorage.replaceCharacters(in: NSMakeRange(0, bullet.baselineIndex), with: "")
+        block.text = textView.text
         block.replacePlainWith(bullet, on: resultsController, selectedRange: &selectedRange)
         cursorCache = (indexPath, selectedRange)
     }

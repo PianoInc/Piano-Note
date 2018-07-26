@@ -48,6 +48,7 @@ class BlockTableViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         setNoteTitle()
+        deleteNoteIfNeeded()
         save()
     }
 
@@ -69,6 +70,15 @@ class BlockTableViewController: UIViewController {
             
         }
     }
+    
+    private func deleteNoteIfNeeded() {
+//        guard let controller = resultsController,
+//            let count = resultsController?.fetchedObjects?.count,
+//            count != 0 else {
+//
+//        }
+
+    }
 }
 
 
@@ -85,21 +95,32 @@ extension BlockTableViewController {
         }
     }
     
+    //50글자를 채워야함. //50글자가 안된다면,
     private func setNoteTitle() {
+        guard let controller = resultsController,
+            let count = controller.sections?.first?.numberOfObjects,
+            count > 0 else { return }
         
-        if let resultsController = resultsController,
-            let count = resultsController.sections?.first?.numberOfObjects,
-            count > 0 {
+        var title = ""
+        var subtitle = ""
+        for i in 0 ..< count {
+            guard subtitle.count < 30 else { break }
             
-            for i in 0 ..< count {
-                let indexPath = IndexPath(row: i, section: 0)
-                let block = resultsController.object(at: indexPath)
-                if block.isTextType {
-                    note.title = block.text
-                    break
+            let indexPath = IndexPath(row: i, section: 0)
+            let block = controller.object(at: indexPath)
+            if let text = block.text, text.count != 0 {
+                if title.count != 0 {
+                    //그 다음 줄 부터는 최대한 많이 보이게 하기 위함
+                    subtitle.append(text + "  ")
+                } else {
+                    //제목같아 보이게 하기 위해 개행
+                    title.append(text)
                 }
+                
             }
         }
+        note.title = title
+        note.subTitle = subtitle.count != 0 ? subtitle : "추가 텍스트 없음"
     }
     
     private func setupTableView(){

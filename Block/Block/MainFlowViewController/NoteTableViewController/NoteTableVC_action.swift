@@ -23,7 +23,8 @@ extension NoteTableViewController {
     }
     
     @IBAction func tapFinishEdit(_ sender: Any) {
-        
+        updateViews(for: .normal)
+        tableView.setEditing(false, animated: true)
     }
     
     @IBAction func tapCompose(_ sender: Any) {
