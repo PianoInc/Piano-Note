@@ -1,23 +1,19 @@
 //
-//  String_extension.swift
+//  Date_extention.swift
 //  Block
 //
-//  Created by Kevin Kim on 2018. 7. 25..
+//  Created by JangDoRi on 2018. 7. 26..
 //  Copyright © 2018년 Piano. All rights reserved.
 //
 
 import Foundation
 
-extension String {
+extension Date {
     
-    var localized: String {
-        return NSLocalizedString(self, comment: "")
-    }
-    
-    var isoDate: Date {
+    var isoString: String {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withFullDate, .withDashSeparatorInDate, .withTime, .withColonSeparatorInTime]
-        return formatter.date(from: self) ?? Date()
+        return formatter.string(from: self)
     }
     
 }

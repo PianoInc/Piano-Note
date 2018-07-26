@@ -151,6 +151,37 @@ extension Block: TableDatable {
         
     }
     
+    var detect: Detect? {
+        get {
+            switch type {
+            case .plainText:
+                return plainTextBlock?.detect
+            case .checklistText:
+                return checklistTextBlock?.detect
+            case .unOrderedText:
+                return unOrderedTextBlock?.detect
+            case .orderedText:
+                return orderedTextBlock?.detect
+            default:
+                return nil
+            }
+        } set {
+            switch type {
+            case .plainText:
+                plainTextBlock?.detect = newValue
+            case .checklistText:
+                checklistTextBlock?.detect = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.detect = newValue
+            case .orderedText:
+                orderedTextBlock?.detect = newValue
+            default:
+                ()
+            }
+        }
+        
+    }
+    
     internal func append(text: String) {
         switch self.type {
         case .plainText:
