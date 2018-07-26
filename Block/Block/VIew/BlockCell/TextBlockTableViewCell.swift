@@ -19,7 +19,6 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
     var data: TableDatable? {
         didSet {
             guard let block = data as? Block else { return }
-            
             switch block.type {
             case .plainText:
                 guard let plainTextBlock = block.plainTextBlock else { return }
@@ -28,11 +27,11 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibTextView.text = plainTextBlock.text ?? ""
                 ibTextViewLeadingAnchor.constant = 0
                 /*
-                //이미지, json, detector은 전부 비동기
-                DispatchQueue.global().async {
-                    //
-                }
-                */
+                 //이미지, json, detector은 전부 비동기
+                 DispatchQueue.global().async {
+                 //
+                 }
+                 */
             case .checklistText:
                 guard let checklistTextBlock = block.checklistTextBlock else { return }
                 ibLabel.isHidden = true
@@ -45,7 +44,7 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibTextViewLeadingAnchor.constant = ibButton.frame.width + 8
                 ibButtonLeadingAnchor.constant = 0
                 ibLabelLeadingAnchor.constant = 0
-
+                
                 self.ibButton.isSelected = checklistTextBlock.isSelected
                 
                 if let whitespaceStr = checklistTextBlock.frontWhitespaces as NSString? {
@@ -58,11 +57,11 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 }
                 
                 /*
-                //이미지, json은 전부 비동기
-                DispatchQueue.main.async { [weak self] in
-                    //TODO: JSON 로직
-                }
-                */
+                 //이미지, json은 전부 비동기
+                 DispatchQueue.main.async { [weak self] in
+                 //TODO: JSON 로직
+                 }
+                 */
                 
             case .orderedText:
                 guard let orderedTextBlock = block.orderedTextBlock else { return }
@@ -90,11 +89,11 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 }
                 
                 /*
-                //이미지, json은 전부 비동기
-                DispatchQueue.main.async { [weak self] in
-                    //TODO: JSON 로직
-                }
-                */
+                 //이미지, json은 전부 비동기
+                 DispatchQueue.main.async { [weak self] in
+                 //TODO: JSON 로직
+                 }
+                 */
                 
             case .unOrderedText:
                 guard let unOrderedTextBlock = block.unOrderedTextBlock else { return }
@@ -131,9 +130,33 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
             default:
                 print("cannot invoked")
             }
+            attributedLink(using: block)
         }
     }
-        
+    
+    private func attributedLink(using block: Block) {
+        guard let detect = block.detect else {return}
+        let mAttr = NSMutableAttributedString(string: ibTextView.text, attributes: [.font : ibTextView.font!])
+        var url = URL(string: DETECT_LINK)!
+        url.appendPathComponent(detect.type.rawValue)
+        switch detect.state {
+        case .calendar(let title, let startDate):
+            url.appendPathComponent(title)
+            url.appendPathComponent(startDate.isoString)
+        case .reminder(let title, let date):
+            url.appendPathComponent(title)
+            url.appendPathComponent(date.isoString)
+        case .contact(let name, let number):
+            url.appendPathComponent(name)
+            url.appendPathComponent(number)
+        case .pasteboard(_): break
+        case .restore(_): break
+        }
+        mAttr.addAttributes([.link : url], range: detect.range)
+        ibTextView.attributedText = mAttr
+        block.detect = nil
+    }
+    
     @IBAction func tapButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         

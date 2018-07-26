@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14278.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,16 +24,27 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oTb-gb-Sn8">
+                    <rect key="frame" x="0.0" y="0.0" width="406" height="64"/>
+                    <connections>
+                        <action selector="actionWithButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="Vsx-UC-vSP"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="oTb-gb-Sn8" firstAttribute="leading" secondItem="bKe-Nl-gQJ" secondAttribute="leading" id="6a2-YB-N37"/>
                 <constraint firstAttribute="trailing" secondItem="WoC-xQ-Y02" secondAttribute="trailing" id="E7U-MK-gk4"/>
+                <constraint firstItem="oTb-gb-Sn8" firstAttribute="top" secondItem="bKe-Nl-gQJ" secondAttribute="top" id="Qrh-Va-Ebj"/>
                 <constraint firstAttribute="bottom" secondItem="WoC-xQ-Y02" secondAttribute="bottom" id="Qy1-iY-hZB"/>
+                <constraint firstItem="bKe-Nl-gQJ" firstAttribute="bottom" secondItem="oTb-gb-Sn8" secondAttribute="bottom" id="RZs-PU-uP4"/>
+                <constraint firstItem="bKe-Nl-gQJ" firstAttribute="trailing" secondItem="oTb-gb-Sn8" secondAttribute="trailing" id="d3G-Xu-95Z"/>
                 <constraint firstItem="WoC-xQ-Y02" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="x8B-gz-TZO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="bKe-Nl-gQJ"/>
             <connections>
+                <outlet property="button" destination="oTb-gb-Sn8" id="V8Q-UW-8WT"/>
                 <outlet property="ibLabel" destination="WoC-xQ-Y02" id="9QD-aN-mM5"/>
                 <outlet property="labelHeightAnchor" destination="diC-Er-OQv" id="ADG-Xq-AX1"/>
             </connections>
