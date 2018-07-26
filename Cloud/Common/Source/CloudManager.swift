@@ -13,9 +13,11 @@ public class CloudManager {
     private var container: Container
     
     /// Cloud에서 보내온 changed notification에 대한 처리기능.
-    public var fetch: Fetch?
+    public lazy var fetch = Fetch(with: container)
+    /// CoreData의 persistent적으로 save되었을때를 감지하여 Cloud에 sync해주는 기능.
+    public lazy var contextSave = ContextSave(with: container)
     /// Cloud share invitation에 대한 처리기능.
-    public var acceptShared: AcceptShared?
+    public lazy var acceptShared = AcceptShared()
     /// Cloud에 구성원을 invite하여 share하는 작업에 대한 처리기능.
     public lazy var share = Share(with: container)
     
@@ -23,8 +25,6 @@ public class CloudManager {
     private var longLived: LongLived?
     /// Cloud에서 사용 될 custom Database & Zone 구독정보를 관리하는 기능.
     private var subscription: Subscription?
-    /// CoreData의 persistent적으로 save되었을때를 감지하여 Cloud에 sync해주는 기능.
-    private var contextSave: ContextSave?
     /// Cloud account가 바뀌었을때에 대한 처리기능.
     private var accountChanged: AccountChanged?
     
@@ -38,20 +38,17 @@ public class CloudManager {
     }
     
     private func initialize() {
-        acceptShared = AcceptShared()
         accountChanged = AccountChanged(with: container)
-        fetch = Fetch(with: container)
         longLived = LongLived(with: container)
         subscription = Subscription(with: container)
-        contextSave = ContextSave(with: container)
     }
     
     private func setup() {
-        func fetchAll() {accountChanged?.requestUserInfo {self.fetch?.operate()}}
+        func fetchAll() {accountChanged?.requestUserInfo {self.fetch.operate()}}
         fetchAll()
         subscription?.operate {self.longLived?.operate()}
         accountChanged?.addObserver {fetchAll()}
-        contextSave?.addObserver()
+        contextSave.addObserver()
     }
     
 }

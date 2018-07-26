@@ -46,32 +46,42 @@ public class Fetch: ErrorHandleable {
 internal extension Fetch {
     
     internal func zoneOperation(zoneID: CKRecordZoneID = ZONE_ID, token key: String = PRIVATE_DB_ID, _ database: CKDatabase) {
+        
         var optionDic = [CKRecordZoneID: CKFetchRecordZoneChangesOptions]()
         let option = CKFetchRecordZoneChangesOptions()
         option.previousServerChangeToken = token.byZoneID[key]
         optionDic[zoneID] = option
         
+        let context = container.coreData.viewContext
+        context.name = FETCH_CONTEXT
+        var changedRecords = [CKRecord]()
+        
         let operation = CKFetchRecordZoneChangesOperation(recordZoneIDs: [zoneID], optionsByRecordZoneID: optionDic)
-        operation.fetchAllChanges = false
         operation.qualityOfService = .utility
-        operation.recordChangedBlock = {self.modify.operate($0)}
+        operation.recordChangedBlock = { record in
+            self.modify.operate(record, context)
+            changedRecords.append(record)
+        }
         operation.recordWithIDWasDeletedBlock = { recordID, _ in
-            self.delete.operate(recordID)
+            self.delete.operate(recordID, context)
         }
         operation.recordZoneChangeTokensUpdatedBlock = { _, token, _ in
             self.token.byZoneID[key] = token
         }
-        operation.recordZoneFetchCompletionBlock = { _, token, _, isMore, error in
+        operation.recordZoneFetchCompletionBlock = { _, token, _, _, error in
             self.token.byZoneID[key] = token
-            if isMore {self.zoneOperation(database)}
             if let error = error {self.errorHandle(fetch: error, database)}
+            if changedRecords.isEmpty {
+                if context.hasChanges {try? context.save()}
+            } else {
+                self.modify.operate(forReference: changedRecords, context)
+            }
         }
         database.add(operation)
     }
     
     internal func dbOperation(_ database: CKDatabase) {
         let operation = CKFetchDatabaseChangesOperation(previousServerChangeToken: token.byZoneID[DATABASE_DB_ID])
-        operation.fetchAllChanges = false
         operation.qualityOfService = .utility
         operation.changeTokenUpdatedBlock = {self.token.byZoneID[DATABASE_DB_ID] = $0}
         operation.fetchDatabaseChangesCompletionBlock = { token, isMore, error in

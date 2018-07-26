@@ -13,35 +13,67 @@ class FolderTableViewController: UITableViewController {
     
     var persistentContainer: NSPersistentContainer!
     var resultsController: NSFetchedResultsController<Folder>?
-    
+    var state: ViewControllerState = .normal
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateViews(for: state)
         clearsSelectionOnViewWillAppear = true
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
+        fetchData()
     }
-
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        save()
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let vc = segue.destination as? NoteTableViewController,
             let folder = sender as? Folder {
             
+            vc.folder = folder
             vc.persistentContainer = persistentContainer
-            
-            persistentContainer.performBackgroundTask { (context) in
-                let resultsController = context.noteResultsController(folder: folder)
-                vc.resultsController = resultsController
-                context.perform(resultsController: resultsController, tableVC: vc)
+            let state: NoteTableViewController.ViewControllerState
+            switch folder.folderType {
+            case .all, .custom:
+                state = .normal
+                
+            case .deleted:
+                state = .deleted
+                
+            case .locked:
+                state = .locked
+                
             }
+            vc.state = state
+            
+            let context = persistentContainer.viewContext
+            let resultsController = context.noteResultsController(folder: folder)
+            vc.resultsController = resultsController
+            resultsController.delegate = vc
+        }
+        
+        // Facebook splitView
+        if let vc = segue.destination as? UISplitViewController {
+            vc.delegate = self
+            vc.preferredDisplayMode = .allVisible
+            vc.maximumPrimaryColumnWidth = 414
+            vc.minimumPrimaryColumnWidth = 320
         }
     }
-
+    
     @IBAction func tapAddFolder(_ sender: Any) {
-
+        
     }
+}
+
+extension FolderTableViewController : UISplitViewControllerDelegate {
+    
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        return true
+    }
+    
 }
 
 extension FolderTableViewController {
@@ -59,11 +91,11 @@ extension FolderTableViewController {
         var cell = tableView.dequeueReusableCell(withIdentifier: data.identifier) as! TableDataAcceptable & UITableViewCell
         cell.data = data
         return cell
-     }
- 
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return resultsController?.object(at: indexPath).folderType != .custom ? false : true
-     }
+    }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return UITableViewCellEditingStyle(rawValue: 3) ?? UITableViewCellEditingStyle.none
@@ -74,10 +106,10 @@ extension FolderTableViewController {
     }
     
     
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-
-     }
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+    }
     
     /*
      // Override to support rearranging the table view.
@@ -95,6 +127,20 @@ extension FolderTableViewController {
      */
 }
 
-extension FolderTableViewController: NSFetchedResultsControllerDelegate {
+extension FolderTableViewController {
+    private func fetchData() {
+        DispatchQueue.main.async { [weak self] in
+            do {
+                try self?.resultsController?.performFetch()
+            } catch {
+                print("FolderTableViewController를 fetch하는 데 에러 발생: \(error.localizedDescription)")
+            }
+            
+            self?.tableView.reloadData()
+        }
+    }
     
+    private func save() {
+        persistentContainer.viewContext.saveIfNeeded()
+    }
 }

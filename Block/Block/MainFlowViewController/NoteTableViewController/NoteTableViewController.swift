@@ -12,7 +12,8 @@ import CoreData
 class NoteTableViewController: UITableViewController {
     
     var persistentContainer: NSPersistentContainer!
-    
+    var folder: Folder!
+    var state: ViewControllerState!
 
     var resultsController: NSFetchedResultsController<Note>?
     internal var delayBlockQueue: [(NoteTableViewController) -> Void] = []
@@ -20,24 +21,25 @@ class NoteTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0(self) }
-        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         clearsSelectionOnViewWillAppear = true
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
+        updateViews(for: state)
+        fetchData()
         
         //TODO: persistentContainer 가 nil이라는 건 preserve로 왔거나 splitView라는 말임, 따라서 할당해주고, prepare에서 하는 짓을 다시 해줘야함
         if persistentContainer == nil {
             
         }
+        
     }
     
-    @IBAction func tapNewNote(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "DetailNavigationController", sender: nil)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        save()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,12 +53,12 @@ class NoteTableViewController: UITableViewController {
                 .deleted
             
             vc.state = state
-            
+            vc.note = note
             vc.persistentContainer = persistentContainer
             let context = persistentContainer.viewContext
             let resultsController = context.blockResultsController(note: note)
             vc.resultsController = resultsController
-            context.perform(resultsController: resultsController, tableVC: vc)
+            resultsController.delegate = vc
 
             
         } else if let nav = segue.destination as? UINavigationController,
@@ -99,6 +101,7 @@ extension NoteTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard !tableView.isEditing else { return }
         resultsController?.object(at: indexPath).didSelectItem(fromVC: self)
     }
     
@@ -119,6 +122,20 @@ extension NoteTableViewController {
 
 }
 
-extension NoteTableViewController: NSFetchedResultsControllerDelegate {
+extension NoteTableViewController {
+    private func fetchData() {
+        DispatchQueue.main.async { [weak self] in
+            do {
+                try self?.resultsController?.performFetch()
+            } catch {
+                print("NoteTableViewController를 fetch하는 데 에러 발생: \(error.localizedDescription)")
+            }
+            
+            self?.tableView.reloadData()
+        }
+    }
     
+    private func save() {
+        persistentContainer.viewContext.saveIfNeeded()
+    }
 }

@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  Facebook
+
+  Created by JangDoRi on 2018. 7. 23..
+  Copyright © 2018년 piano. All rights reserved.
+*/
+
+"today" = "오늘";
+"yesterday" = "어제";
+"recentWeek" = "최근 일주일";
+"recentMonth" = "최근 한달";
+"inYear" = "%d개월 전";
+"yearPast" = "%d년 %d월";
+"replyCount" = "답글 %d개 보기";
+"replyNoCount" = "답글 없음";
