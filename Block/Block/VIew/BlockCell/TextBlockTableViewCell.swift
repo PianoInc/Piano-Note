@@ -23,6 +23,8 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
             switch block.type {
             case .plainText:
                 guard let plainTextBlock = block.plainTextBlock else { return }
+                ibLabel.isHidden = true
+                ibButton.isHidden = true
                 
                 ibTextView.font = plainTextBlock.font
                 ibTextView.text = plainTextBlock.text ?? ""
