@@ -99,8 +99,11 @@ extension BlockTableViewController {
         let indexPath = IndexPath(row: count - 1, section: 0)
         let textCount = lastBlock.text?.count ?? 0
         let selectedRange = NSMakeRange(textCount, 0)
-        lastBlock.modifiedDate = Date()
-        cursorCache = (indexPath, selectedRange)
+        
+        guard let cell = tableView.cellForRow(at: indexPath) as? TextBlockTableViewCell else { return }
+        cell.ibTextView.isEditable = true
+        cell.ibTextView.selectedRange = selectedRange
+        cell.ibTextView.becomeFirstResponder()
     }
     
     /**

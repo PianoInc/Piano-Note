@@ -46,6 +46,7 @@ extension NSManagedObjectContext {
     
     internal func noteResultsController(folder: Folder) -> NSFetchedResultsController<Note> {
         let request: NSFetchRequest<Note> = Note.fetchRequest()
+        let predicate = NSPredicate(format: "folder = %@", folder)
         let sort1 = NSSortDescriptor(key: #keyPath(Note.typeInteger), ascending: false)
         let sort2: NSSortDescriptor
         switch folder.sortType {
@@ -56,6 +57,7 @@ extension NSManagedObjectContext {
         case .name:
             sort2 = NSSortDescriptor(key: #keyPath(Note.title), ascending: true)
         }
+        request.predicate = predicate
         request.sortDescriptors = [sort1, sort2]
         request.fetchBatchSize = 20
         return NSFetchedResultsController(fetchRequest: request, managedObjectContext: self, sectionNameKeyPath: #keyPath(Note.typeInteger), cacheName: cacheName(folder: folder))
