@@ -45,13 +45,8 @@ extension NSPersistentContainer {
         do {
             return try viewContext.fetch(request).first!
         } catch {
-            print("fetchFolder(type: Folder.FolderType)에서 오류: \(error.localizedDescription)")
+            fatalError("fetchFolder(type: Folder.FolderType)에서 오류: \(error.localizedDescription)")
         }
-        
-        let allFolder = Folder(context: viewContext)
-        allFolder.name = "All Note"
-        allFolder.typeInteger = 0
-        return allFolder
     }
     
     internal func fetchFolders(type: Folder.FolderType) -> [Folder] {
@@ -62,13 +57,8 @@ extension NSPersistentContainer {
         do {
             return try viewContext.fetch(request)
         } catch {
-            print("fetchFolder(type: Folder.FolderType)에서 오류: \(error.localizedDescription)")
+            fatalError("fetchFolder(type: Folder.FolderType)에서 오류: \(error.localizedDescription)")
         }
-        
-        let allFolder = Folder(context: viewContext)
-        allFolder.name = "All Note"
-        allFolder.typeInteger = 0
-        return [allFolder]
     }
     
 }

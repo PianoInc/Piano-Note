@@ -48,8 +48,11 @@ extension NSManagedObjectContext {
         let request: NSFetchRequest<Note> = Note.fetchRequest()
         
         if folder.folderType != .all {
-            //all이면 predicate을 하지 말아야 함
             let predicate = NSPredicate(format: "folder = %@", folder)
+            request.predicate = predicate
+        } else {
+            //all이면 locked와 deleted빼고 predicate
+            let predicate = NSPredicate(format: "folder.typeInteger < 2")
             request.predicate = predicate
         }
         

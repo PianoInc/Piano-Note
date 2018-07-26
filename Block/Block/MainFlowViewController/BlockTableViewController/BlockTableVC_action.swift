@@ -11,70 +11,70 @@ import CoreData
 //MARK: Action
 extension BlockTableViewController {
     
-    @IBAction func tapFinishType(sender: UIBarButtonItem) {
+    @IBAction func tapFinishType(_ sender: Any) {
         updateViews(for: .normal)
         self.view.endEditing(true)
     }
     
-    @IBAction func tapEdit(sender: UIBarButtonItem) {
+    @IBAction func tapEdit(_ sender: Any) {
         updateViews(for: .edit)
         tableView.setEditing(true, animated: true)
     }
     
-    @IBAction func tapFinishEdit(sender: UIBarButtonItem) {
+    @IBAction func tapFinishEdit(_ sender: Any) {
         updateViews(for: .normal)
         tableView.setEditing(false, animated: true)
     }
     
-    @IBAction func tapRestore(sender: UIBarButtonItem) {
+    @IBAction func tapRestore(_ sender: Any) {
         
     }
     
-    @IBAction func tapSearch(sender: UIBarButtonItem) {
+    @IBAction func tapSearch(_ sender: Any) {
         
     }
     
-    @IBAction func tapCopyParagraphs(sender: UIBarButtonItem) {
+    @IBAction func tapCopyParagraphs(_ sender: Any) {
         PasteboardManager.copyParagraphs(blocks: selectedBlocks)
     }
     
-    @IBAction func tapCopyAll(sender: UIBarButtonItem) {
+    @IBAction func tapCopyAll(_ sender: Any) {
         
     }
     
     
     
-    @IBAction func tapTrash(sender: UIBarButtonItem) {
+    @IBAction func tapTrash(_ sender: Any) {
         
     }
     
-    @IBAction func tapFolder(sender: UIBarButtonItem) {
+    @IBAction func tapFolder(_ sender: Any) {
         performSegue(withIdentifier: "FolderPickerTableViewController", sender: sender)
     }
     
-    @IBAction func tapHighlight(sender: UIBarButtonItem) {
+    @IBAction func tapHighlight(_ sender: Any) {
         updateViews(for: .highlighting)
     }
     
-    @IBAction func tapFinishHighlight(sender: UIBarButtonItem) {
+    @IBAction func tapFinishHighlight(_ sender: Any) {
         updateViews(for: .normal)
         
     }
     
-    @IBAction func tapSend(sender: UIBarButtonItem) {
+    @IBAction func tapTheme(_ sender: Any) {
         
     }
     
-    @IBAction func tapCompose(sender: UIBarButtonItem) {
+    @IBAction func tapCompose(_ sender: Any) {
         
     }
     
-    @IBAction func tapDeleteParagraphs(sender: UIBarButtonItem) {
+    @IBAction func tapDeleteParagraphs(_ sender: Any) {
         //        TODO: 이부분은 어떻게 할 지 고민해봐야함
         //        undoManager.deleteParagraphs(selectedIndexPaths: [IndexPath])
     }
     
-    @IBAction func tapPermanentlyDelete(sender: UIBarButtonItem) {
+    @IBAction func tapPermanentlyDelete(_ sender: Any) {
         
     }
     

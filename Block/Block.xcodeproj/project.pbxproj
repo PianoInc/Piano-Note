@@ -69,6 +69,7 @@
 		E2B09F60E96E7D272C86FA0953BCAB65 /* UITextView_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C0225E81079A46AB72FEB46C9B5DDD /* UITextView_extension.swift */; };
 		E741F5F9EEFA56C2D802674531AE75F1 /* UnOrderedTextBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796E985D4DFA2739B8F9CF20A5680EB9 /* UnOrderedTextBlock_extension.swift */; };
 		EA26F51B4C259C92607779B8E341CE94 /* ImagePickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F4B6EE9252B27973283E18C84C9A0D /* ImagePickerCollectionViewCell.swift */; };
+		EC5F8D7BCC6FDFC99BF8FC3B81E5A424 /* NoteTableVC_dataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2913F6CB34415CFE75E5C6C573EBD08A /* NoteTableVC_dataSource.swift */; };
 		ECC468870DAA8A50E1ED0544A28D8BE6 /* SeparatorBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E444454B19F70043604C1DC1FD84B7 /* SeparatorBlockTableViewCell.swift */; };
 		F0499248DB57A13B346DD84E4D95EA62 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C3F33572668CCD6C1A96D9421D7158 /* NotificationView.swift */; };
 		F0F54C91C241BF34E4FF80D0247FCF3E /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3B019313EDFF8F59DFF8232EAF0907 /* NoteTableViewCell.swift */; };
@@ -105,6 +106,7 @@
 		19E7EC3E3E6514D7A67FDE1C793F42A3 /* OrderedTextBlock_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedTextBlock_extension.swift; sourceTree = "<group>"; };
 		23BB4A0854718BD99247A748525886A6 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		27E444454B19F70043604C1DC1FD84B7 /* SeparatorBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeparatorBlockTableViewCell.swift; sourceTree = "<group>"; };
+		2913F6CB34415CFE75E5C6C573EBD08A /* NoteTableVC_dataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableVC_dataSource.swift; sourceTree = "<group>"; };
 		2ABB42F092ADF3BE61D2A645B8B3B377 /* BlockTableVC_dataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableVC_dataSource.swift; sourceTree = "<group>"; };
 		2FEA4218D2C90C98FCC73A6710CE5E76 /* ImageBlockCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBlockCollectionViewCell.swift; sourceTree = "<group>"; };
 		3151EEDBED39974E6EA9B4D06AE77F77 /* BlockTableVC_property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableVC_property.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			children = (
 				CA62AA8D1647D359962E9FB1FD6B7A06 /* NoteTableVC_FRC_delegate.swift */,
 				489A08FCF7871F2232B9EF98CA494DB0 /* NoteTableVC_action.swift */,
+				2913F6CB34415CFE75E5C6C573EBD08A /* NoteTableVC_dataSource.swift */,
 				D8A1602D1313FCB7748A3CDB2CC444E3 /* NoteTableVC_state.swift */,
 				C684236D2E54A820730BFC463F47DA0E /* NoteTableViewController.swift */,
 			);
@@ -567,6 +570,7 @@
 				4C7C3BAC369BD0858340F828A26E4F3C /* NSPersistentContainer_extension.swift in Sources */,
 				FFE106B5B595DF8AE8D72E356A3EF103 /* NoteTableVC_FRC_delegate.swift in Sources */,
 				5C4B907F62EB01F50C6AACB2A7D5F7DA /* NoteTableVC_action.swift in Sources */,
+				EC5F8D7BCC6FDFC99BF8FC3B81E5A424 /* NoteTableVC_dataSource.swift in Sources */,
 				6CBB85AE237904CD8472CDFC2B94C9E0 /* NoteTableVC_state.swift in Sources */,
 				F0F54C91C241BF34E4FF80D0247FCF3E /* NoteTableViewCell.swift in Sources */,
 				B7AF6635B487D16DE74D398025A9BBBB /* NoteTableViewController.swift in Sources */,

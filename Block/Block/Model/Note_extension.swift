@@ -11,7 +11,7 @@ import Foundation
 extension Note: TableDatable {
     
     enum NoteType: Int64 {
-        case pin = 0
+        case pinned = 0
         case shared = 1
         case normal = 2
     }
@@ -31,5 +31,16 @@ extension Note: TableDatable {
     func didSelectItem(fromVC viewController: ViewController) {
         viewController.performSegue(withIdentifier: "BlockTableViewController", sender: self)
         
+    }
+}
+
+extension Note {
+    internal func deleteWithRelationship() {
+        blockCollection?.forEach({ (item) in
+            guard let block = item as? Block else { return }
+            block.deleteWithRelationship()
+        })
+        
+        self.managedObjectContext?.delete(self)
     }
 }
