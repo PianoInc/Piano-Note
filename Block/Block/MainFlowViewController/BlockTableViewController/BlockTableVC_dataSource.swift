@@ -115,26 +115,22 @@ extension BlockTableViewController: TableViewDataSource {
         guard let destBlock = resultsController?.object(at: destinationIndexPath) else {return}
         guard let count = resultsController?.sections?.first?.numberOfObjects else {return}
         
-        if destinationIndexPath.row == 0 {
+        if destinationIndexPath.row <= 0 {
             sourceBlock.order = destBlock.order - 1
-        } else if destinationIndexPath.row == count - 1 {
+        } else if destinationIndexPath.row >= count - 1 {
             sourceBlock.order = destBlock.order + 1
         } else {
             if sourceIndexPath.row < destinationIndexPath.row {
                 var nextIndexPath = destinationIndexPath
                 nextIndexPath.row += 1
-                guard let prevBlock = resultsController?.object(at: nextIndexPath) else {return}
-                sourceBlock.order = (prevBlock.order + destBlock.order) / 2
+                guard let nextBlock = resultsController?.object(at: nextIndexPath) else {return}
+                sourceBlock.order = (nextBlock.order + destBlock.order) / 2
             } else {
                 var prevIndexPath = destinationIndexPath
                 prevIndexPath.row -= 1
                 guard let prevBlock = resultsController?.object(at: prevIndexPath) else {return}
                 sourceBlock.order = (prevBlock.order + destBlock.order) / 2
             }
-        }
-        
-        tableView.indexPathsForVisibleRows!.forEach {
-            print($0, resultsController?.object(at: $0).order ?? 0)
         }
     }
     

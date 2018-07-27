@@ -166,11 +166,11 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
         if let link = block.link?.data {
             link.forEach {
                 var url = URL(string: DETECT_LINK)!
-                url.appendPathComponent((ibTextView.text as NSString).substring(with: $0))
+                let link = (ibTextView.text as NSString).substring(with: $0).lowercased()
+                url.appendPathComponent(link.replacingOccurrences(of: "http://", with: ""))
                 mAttr.addAttributes([.link : url], range: $0)
             }
         }
-        guard mAttr.attributes(at: 0, effectiveRange: nil).contains(where: {$0.key == .link}) else {return}
         ibTextView.attributedText = mAttr
     }
     
