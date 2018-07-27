@@ -25,7 +25,7 @@ extension BlockTableViewController: UITextViewDelegate {
         textView.isEditable = false
         guard let cell = textView.superview?.superview as? TextBlockTableViewCell,
             let block = cell.data as? Block else { return }
-        detect(data: textView.text, with: textView, using: block)
+        detect(data: textView.text, with: textView, using: block, noShow: true)
         block.text = textView.text
         cell.data = block
     }
@@ -85,7 +85,7 @@ extension BlockTableViewController: UITextViewDelegate {
             block.text = frontText
             block.modifiedDate = Date()
             block.insertNextBlock(with: behindText, on: resultsController)
-            detect(data: frontText, with: textView, using: block)
+            detect(data: frontText, with: textView, using: block, noShow: true)
             
             var indexPath = indexPath
             indexPath.row += 1
@@ -157,14 +157,14 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
     
     private typealias DetectData = (event: Event?, contact: Contact?, address: Address?, link: Link?)
     
-    private func detect(data text: String, with textView: UITextView, using block: Block) {
+    private func detect(data text: String, with textView: UITextView, using block: Block, noShow: Bool = false) {
         let types: NSTextCheckingResult.CheckingType = [.date, .phoneNumber, .address, .link]
         let detector = try? NSDataDetector(types:types.rawValue)
         
-        var event = Event(data: nil)
-        var contact = Contact(data: nil)
-        var address = Address(data: nil)
-        var link = Link(data: nil)
+        var event = Event(data: [])
+        var contact = Contact(data: [])
+        var address = Address(data: [])
+        var link = Link(data: [])
         
         if let matches = detector?.matches(in: text, options: .reportCompletion, range: NSMakeRange(0, text.count)) {
             for (index, match) in matches.enumerated() {
@@ -173,29 +173,25 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
                 if title.isEmpty {title = " "}
                 if match.resultType == .date {
                     guard let date = match.date else {return}
-                    if event.data == nil {event.data = []}
                     event.data?.append(Event.Data(title: title, date: date, range: match.range))
                 } else if match.resultType == .phoneNumber {
                     guard let number = match.phoneNumber else {return}
-                    if contact.data == nil {contact.data = []}
                     contact.data?.append(Contact.Data(name: title, number: number, range: match.range))
                 } else if match.resultType == .address {
-                    if address.data == nil {address.data = []}
                     address.data?.append(match.range)
                 } else if match.resultType == .link {
-                    if link.data == nil {link.data = []}
                     link.data?.append(match.range)
                 }
-                guard index == 0 else {continue}
+                guard !noShow, index == 0 else {continue}
                 let detectData = DetectData(event: event, contact: contact, address: address, link: link)
                 showRecommandView(detectData, isReminder: block.type == .checklistText, with: textView)
             }
         }
         
-        block.event = event
-        block.contact = contact
-        block.address = address
-        block.link = link
+        block.event = event.data!.isEmpty ? nil : event
+        block.contact = contact.data!.isEmpty ? nil : contact
+        block.address = address.data!.isEmpty ? nil : address
+        block.link = link.data!.isEmpty ? nil : link
     }
     
     private func showRecommandView(_ detectData: DetectData, isReminder: Bool, with textView: UITextView) {
@@ -273,7 +269,7 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
             }
         } else if let contactData = detectData.contact?.data?.first {
             let contact = CNMutableContact()
-            contact.givenName = contactData.name ?? ""
+            contact.familyName = contactData.name ?? ""
             contact.phoneNumbers.append(CNLabeledValue(label: "", value: CNPhoneNumber(stringValue: contactData.number)))
             let request = CNSaveRequest()
             request.add(contact, toContainerWithIdentifier: nil)
@@ -354,7 +350,7 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
             }
             let contactAction = UIAlertAction(title: "연락처 등록", style: .default) { _ in
                 let contact = CNMutableContact()
-                contact.givenName = urlData[1].removingPercentEncoding ?? ""
+                contact.familyName = urlData[1].removingPercentEncoding ?? ""
                 contact.phoneNumbers.append(CNLabeledValue(label: "", value: CNPhoneNumber(stringValue: urlData[2])))
                 let contactVC = CNContactViewController(forNewContact: contact)
                 contactVC.contactStore = CNContactStore()
