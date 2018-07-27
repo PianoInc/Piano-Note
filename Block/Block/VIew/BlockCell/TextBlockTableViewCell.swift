@@ -8,13 +8,30 @@
 
 import UIKit
 
-class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
+class TextBlockTableViewCell: UITableViewCell, BlockTableDataAcceptable {
     @IBOutlet weak var ibButton: UIButton!
     @IBOutlet weak var ibLabel: UILabel!
     @IBOutlet weak var ibTextView: BlockTextView!
     @IBOutlet weak var ibTextViewLeadingAnchor: NSLayoutConstraint!
     @IBOutlet weak var ibButtonLeadingAnchor: NSLayoutConstraint!
     @IBOutlet weak var ibLabelLeadingAnchor: NSLayoutConstraint!
+    
+    var state: BlockTableViewController.ViewControllerState? {
+        didSet {
+            guard let state = state else { return }
+            switch state {
+            case .deleted, .edit, .highlighting:
+                ibTextView.isUserInteractionEnabled = false
+                ibLabel.isUserInteractionEnabled = false
+                ibButton.isUserInteractionEnabled = false
+                
+            case .normal, .typing:
+                ibTextView.isUserInteractionEnabled = true
+                ibLabel.isUserInteractionEnabled = true
+                ibButton.isUserInteractionEnabled = true
+            }
+        }
+    }
     
     var data: TableDatable? {
         didSet {
@@ -43,7 +60,7 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibTextView.font = font
                 ibLabel.font = ibLabel.font.withSize(font.pointSize)
                 ibTextView.text = checklistTextBlock.text ?? ""
-                ibTextViewLeadingAnchor.constant = ibButton.frame.width + 8
+                ibTextViewLeadingAnchor.constant = ibButton.frame.width + 16
                 ibButtonLeadingAnchor.constant = 0
                 ibLabelLeadingAnchor.constant = 0
                 
@@ -76,7 +93,7 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibTextView.text = orderedTextBlock.text ?? ""
                 ibLabel.text = "\(orderedTextBlock.num)."
                 ibLabel.sizeToFit()
-                ibTextViewLeadingAnchor.constant = ibLabel.frame.width + 8
+                ibTextViewLeadingAnchor.constant = ibLabel.frame.width + 16
                 ibButtonLeadingAnchor.constant = 0
                 ibLabelLeadingAnchor.constant = 0
                 
@@ -108,7 +125,7 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibTextView.text = unOrderedTextBlock.text ?? ""
                 ibLabel.text = "• "  //TODO: 이거 나중에 얼마든지 바뀔 수 있기 때문에 리펙토링 할 것
                 ibLabel.sizeToFit()
-                ibTextViewLeadingAnchor.constant = ibLabel.frame.width + 8
+                ibTextViewLeadingAnchor.constant = ibLabel.frame.width + 16
                 ibButtonLeadingAnchor.constant = 0
                 ibLabelLeadingAnchor.constant = 0
                 

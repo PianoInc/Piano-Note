@@ -107,6 +107,7 @@ extension FolderTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard !tableView.isEditing else { return }
         resultsController?.object(at: indexPath).didSelectItem(fromVC: self)
     }
     

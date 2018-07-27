@@ -1721,7 +1721,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6yE-WC-Umq">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6yE-WC-Umq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                                 <color key="backgroundColor" red="0.039215686274509803" green="0.035294117647058823" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -2041,6 +2041,7 @@
                     <size key="freeformSize" width="375" height="1300"/>
                     <connections>
                         <outlet property="tableView" destination="6yE-WC-Umq" id="cnx-1F-0eb"/>
+                        <outlet property="tapGestureRecognizer" destination="AQo-dj-kB8" id="Wmw-m3-SSa"/>
                         <segue destination="QGn-Fu-X3u" kind="popoverPresentation" popoverAnchorView="6yE-WC-Umq" id="GoG-GS-Ite">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
