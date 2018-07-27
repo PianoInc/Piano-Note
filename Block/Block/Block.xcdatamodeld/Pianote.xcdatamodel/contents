@@ -19,12 +19,12 @@
     </entity>
     <entity name="ChecklistTextBlock" representedClassName="ChecklistTextBlock" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="attributes" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="contact" optional="YES" attributeType="Binary" customClassName="Detect" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553159020" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="event" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="frontWhitespaces" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="highlight" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553872120" usesScalarValueType="NO" syncable="YES"/>
@@ -107,12 +107,12 @@
     </entity>
     <entity name="OrderedTextBlock" representedClassName="OrderedTextBlock" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="attributes" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="contact" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158540" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="event" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="frontWhitespaces" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="highlight" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158540" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="num" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -124,11 +124,11 @@
     </entity>
     <entity name="PlainTextBlock" representedClassName="PlainTextBlock" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="attributes" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="contact" optional="YES" attributeType="Binary" customClassName="Detect" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158420" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="event" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="highlight" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158420" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
@@ -146,12 +146,12 @@
     </entity>
     <entity name="UnOrderedTextBlock" representedClassName="UnOrderedTextBlock" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="attributes" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="contact" optional="YES" attributeType="Binary" customClassName="Detect" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158600" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="event" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="frontWhitespaces" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="highlight" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158600" usesScalarValueType="NO" syncable="YES"/>

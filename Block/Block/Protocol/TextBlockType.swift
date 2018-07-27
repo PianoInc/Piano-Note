@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TextBlockType {
-    var attributes: Data? { get set }
+    var highlight: Data? { get set }
     var ckMetaData: Data? { get set }
     var createdDate: Date? { get set }
     var modifiedDate: Date? { get set }
