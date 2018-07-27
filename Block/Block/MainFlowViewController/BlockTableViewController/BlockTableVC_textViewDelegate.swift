@@ -25,9 +25,10 @@ extension BlockTableViewController: UITextViewDelegate {
         textView.isEditable = false
         guard let cell = textView.superview?.superview as? TextBlockTableViewCell,
             let block = cell.data as? Block else { return }
+        detect(data: textView.text, with: textView, using: block)
         block.text = textView.text
+        cell.data = block
     }
-    
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         guard !isCharacter(over: 10000) else { return false }
@@ -84,14 +85,12 @@ extension BlockTableViewController: UITextViewDelegate {
             block.text = frontText
             block.modifiedDate = Date()
             block.insertNextBlock(with: behindText, on: resultsController)
+            detect(data: frontText, with: textView, using: block)
             
             var indexPath = indexPath
             indexPath.row += 1
             let selectedRange = NSMakeRange(0, 0)
             cursorCache = (indexPath, selectedRange)
-            
-            detect(data: frontText, with: textView, using: block)
-            
             return false
         }
     }
@@ -161,35 +160,36 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
     private func detect(data text: String, with textView: UITextView, using block: Block) {
         let types: NSTextCheckingResult.CheckingType = [.date, .phoneNumber, .address, .link]
         let detector = try? NSDataDetector(types:types.rawValue)
-        guard let matches = detector?.matches(in: text, options: .reportProgress, range: NSMakeRange(0, text.count)) else {return}
         
         var event = Event(data: nil)
         var contact = Contact(data: nil)
         var address = Address(data: nil)
         var link = Link(data: nil)
         
-        for (index, match) in matches.enumerated() {
-            var title = (text as NSString).substring(from: match.range.location + match.range.length)
-            if title.isEmpty {title = (text as NSString).substring(to: match.range.location)}
-            if title.isEmpty {title = " "}
-            if match.resultType == .date {
-                guard let date = match.date else {return}
-                if event.data == nil {event.data = []}
-                event.data?.append(Event.Data(title: title, date: date, range: match.range))
-            } else if match.resultType == .phoneNumber {
-                guard let number = match.phoneNumber else {return}
-                if contact.data == nil {contact.data = []}
-                contact.data?.append(Contact.Data(name: title, number: number, range: match.range))
-            } else if match.resultType == .address {
-                if address.data == nil {address.data = []}
-                address.data?.append(match.range)
-            } else if match.resultType == .link {
-                if link.data == nil {link.data = []}
-                link.data?.append(match.range)
+        if let matches = detector?.matches(in: text, options: .reportCompletion, range: NSMakeRange(0, text.count)) {
+            for (index, match) in matches.enumerated() {
+                var title = (text as NSString).substring(from: match.range.location + match.range.length)
+                if title.isEmpty {title = (text as NSString).substring(to: match.range.location)}
+                if title.isEmpty {title = " "}
+                if match.resultType == .date {
+                    guard let date = match.date else {return}
+                    if event.data == nil {event.data = []}
+                    event.data?.append(Event.Data(title: title, date: date, range: match.range))
+                } else if match.resultType == .phoneNumber {
+                    guard let number = match.phoneNumber else {return}
+                    if contact.data == nil {contact.data = []}
+                    contact.data?.append(Contact.Data(name: title, number: number, range: match.range))
+                } else if match.resultType == .address {
+                    if address.data == nil {address.data = []}
+                    address.data?.append(match.range)
+                } else if match.resultType == .link {
+                    if link.data == nil {link.data = []}
+                    link.data?.append(match.range)
+                }
+                guard index == 0 else {continue}
+                let detectData = DetectData(event: event, contact: contact, address: address, link: link)
+                showRecommandView(detectData, isReminder: block.type == .checklistText, with: textView)
             }
-            guard index == 0 else {continue}
-            let detectData = DetectData(event: event, contact: contact, address: address, link: link)
-            showRecommandView(detectData, isReminder: block.type == .checklistText, with: textView)
         }
         
         block.event = event
@@ -210,7 +210,7 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
         var isSelected = false
         recoView.didSelect = {
             isSelected = true
-            self.interact(view: recoView, detectData: detectData, isReminder)
+            self.interact(view: recoView, detectData: detectData, isReminder, with: textView)
         }
         
         if let event = detectData.event?.data?.first {
@@ -239,7 +239,7 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
         naviView.subviews.first(where: {$0 is NotificationView})?.removeFromSuperview()
     }
     
-    private func interact(view: NotificationView, detectData: DetectData, _ isReminder: Bool) {
+    private func interact(view: NotificationView, detectData: DetectData, _ isReminder: Bool, with textView: UITextView) {
         if let eventData = detectData.event?.data?.first {
             if !isReminder {
                 eventAuth(check: .event) {
@@ -284,9 +284,16 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
                 view.ibLabel.text = "연락처 등록 실패"
             }
         } else if let addressData = detectData.address?.data?.first {
-            print("address", addressData)
+            let address = (textView.text as NSString).substring(with: addressData)
+            var url = URL(string: "http://www.google.com/maps/place")!
+            url.appendPathComponent(address)
+            guard UIApplication.shared.canOpenURL(url) else {return}
+            UIApplication.shared.open(url, options: [:])
         } else if let linkData = detectData.link?.data?.first {
-            print("link", linkData)
+            let linkStr = (textView.text as NSString).substring(with: linkData).lowercased()
+            let url = URL(string: "http://" + linkStr.replacingOccurrences(of: "http://", with: ""))!
+            guard UIApplication.shared.canOpenURL(url) else {return}
+            UIApplication.shared.open(url, options: [:])
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -300,13 +307,13 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
     
     private func interect(link url: URL) -> Bool {
         let urlData = url.absoluteString.components(separatedBy: "/")
-        print("urlData :", urlData)
         
         if urlData[0] == DETECT_EVENT {
             eventAuth(check: .event) {
                 let eventStore = EKEventStore()
                 let event = EKEvent(eventStore: eventStore)
-                event.title = urlData[1].removingPercentEncoding
+                event.title = urlData[1].removingPercentEncoding?.trimmingCharacters(in: .whitespacesAndNewlines)
+                if event.title.isEmpty {event.title = nil}
                 event.startDate = urlData[3].isoDate
                 event.calendar = eventStore.defaultCalendarForNewEvents
                 let eventEditVC = EKEventEditViewController()
@@ -322,7 +329,8 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
                 let reminderAction = UIAlertAction(title: "미리알림 등록", style: .default) { _ in
                     let eventStore = EKEventStore()
                     let reminder = EKReminder(eventStore: eventStore)
-                    reminder.title = urlData[2].removingPercentEncoding
+                    reminder.title = urlData[2].removingPercentEncoding?.trimmingCharacters(in: .whitespacesAndNewlines)
+                    if reminder.title.isEmpty {reminder.title = nil}
                     reminder.completionDate = urlData[3].isoDate
                     reminder.calendar = eventStore.defaultCalendarForNewReminders()
                     do {
@@ -361,9 +369,13 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
             alert.addAction(dismissAction)
             present(alert, animated: true)
         } else if urlData[0] == DETECT_ADDRESS {
-            print("address")
+            let url = URL(string: "http://www.google.com/maps/place/" + urlData[1])!
+            guard UIApplication.shared.canOpenURL(url) else {return true}
+            UIApplication.shared.open(url, options: [:])
         } else if urlData[0] == DETECT_LINK {
-            print("link")
+            let url = URL(string: "http://" + urlData[1])!
+            guard UIApplication.shared.canOpenURL(url) else {return true}
+            UIApplication.shared.open(url, options: [:])
         }
         
         return !(urlData[0] == DETECT_EVENT || urlData[0] == DETECT_REMINDER ||
