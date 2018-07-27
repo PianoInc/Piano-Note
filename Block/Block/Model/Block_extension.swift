@@ -586,13 +586,8 @@ extension Block {
         
         switch type {
         case .plainText:
-            
-            guard let plainTextBlock = plainTextBlock else { return }
-            
-            //2. plainBlock 생성
             let newPlainBlock = PlainTextBlock(context: context)
             newPlainBlock.text = text
-            newPlainBlock.textStyleInteger = plainTextBlock.textStyleInteger
             
             //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
             //        newPlainBlock.attributes
@@ -601,13 +596,9 @@ extension Block {
             newPlainBlock.addToBlockCollection(newblock)
             
         case .checklistText:
-            guard let checklistTextBlock = checklistTextBlock else { return }
-            
-            //2. checklistText 생성
             let newChecklistTextBlock = ChecklistTextBlock(context: context)
             newChecklistTextBlock.text = text
-            newChecklistTextBlock.textStyleInteger = checklistTextBlock.textStyleInteger
-            newChecklistTextBlock.frontWhitespaces = checklistTextBlock.frontWhitespaces
+            newChecklistTextBlock.frontWhitespaces = frontWhitespaces
             
             //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
             //        newChecklistTextBlock.attributes
@@ -616,13 +607,9 @@ extension Block {
             newChecklistTextBlock.addToBlockCollection(newblock)
             
         case .unOrderedText:
-            guard let unOrderedTextBlock = unOrderedTextBlock else { return }
-            
-            //2. unOrderedText 생성
             let newUnOrderedTextBlock = UnOrderedTextBlock(context: context)
             newUnOrderedTextBlock.text = text
-            newUnOrderedTextBlock.textStyleInteger = unOrderedTextBlock.textStyleInteger
-            newUnOrderedTextBlock.frontWhitespaces = unOrderedTextBlock.frontWhitespaces
+            newUnOrderedTextBlock.frontWhitespaces = frontWhitespaces
             
             //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
             //        newUnOrderedTextBlock.attributes
@@ -631,14 +618,12 @@ extension Block {
             newUnOrderedTextBlock.addToBlockCollection(newblock)
             
         case .orderedText:
-            guard let orderedTextBlock = orderedTextBlock else { return }
-            
-            //2. orderedText 생성
+            guard let num = orderedTextBlock?.num else { return }
+ 
             let newOrderedTextBlock = OrderedTextBlock(context: context)
             newOrderedTextBlock.text = text
-            newOrderedTextBlock.num = orderedTextBlock.num + 1
-            newOrderedTextBlock.textStyleInteger = orderedTextBlock.textStyleInteger
-            newOrderedTextBlock.frontWhitespaces = orderedTextBlock.frontWhitespaces
+            newOrderedTextBlock.num = num + 1
+            newOrderedTextBlock.frontWhitespaces = frontWhitespaces
             
             //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
             //        newOrderedTextBlock.attributes
@@ -649,6 +634,9 @@ extension Block {
         default:
             return
         }
+        
+        //개행시 새 문단을 작성하는 경우라면 textStyle은 다시 바디를 유지해야한다.
+        newblock.textStyle = text.count != 0 ? self.textStyle : .body
         
     }
     
