@@ -8,10 +8,14 @@
 
 import Foundation
 
-let DETECT_LINK = UUID().uuidString
+let DETECT_EVENT = "EVENT_" + UUID().uuidString
+let DETECT_REMINDER = "REMINDER_" + UUID().uuidString
+let DETECT_CONTACT = "CONTACT_" + UUID().uuidString
+let DETECT_ADDRESS = "ADDRESS_" + UUID().uuidString
+let DETECT_LINK = "LINK_" + UUID().uuidString
 
 struct Event: Codable {
-    let data: [Data]?
+    var data: [Data]?
     struct Data: Codable {
         let title: String?
         let date: Date
@@ -20,7 +24,7 @@ struct Event: Codable {
 }
 
 struct Contact: Codable {
-    let data: [Data]?
+    var data: [Data]?
     struct Data: Codable {
         let name: String?
         let number: String
@@ -29,9 +33,9 @@ struct Contact: Codable {
 }
 
 struct Address: Codable {
-    let data: [NSRange]?
+    var data: [NSRange]?
 }
 
 struct Link: Codable {
-    let data: [NSRange]?
+    var data: [NSRange]?
 }
