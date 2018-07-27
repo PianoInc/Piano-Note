@@ -108,4 +108,54 @@ extension NSManagedObjectContext {
         return nil
     }
     
+    internal func fetchFolder(type: Folder.FolderType) -> Folder {
+        let request: NSFetchRequest<Folder> = Folder.fetchRequest()
+        request.predicate = NSPredicate(format: "typeInteger == %d", type.rawValue)
+        request.fetchLimit = 1
+        do {
+            return try fetch(request).first!
+        } catch {
+            fatalError("fetchFolder(type: Folder.FolderType)에서 오류: \(error.localizedDescription)")
+        }
+    }
+    
+    internal func fetchFolders(type: Folder.FolderType) -> [Folder] {
+        let request: NSFetchRequest<Folder> = Folder.fetchRequest()
+        request.predicate = NSPredicate(format: "typeInteger == %lld", type.rawValue)
+        let sort = NSSortDescriptor(key: #keyPath(Folder.typeInteger), ascending: true)
+        request.sortDescriptors = [sort]
+        do {
+            return try fetch(request)
+        } catch {
+            fatalError("fetchFolder(type: Folder.FolderType)에서 오류: \(error.localizedDescription)")
+        }
+    }
+    
+    internal func createFolderIfNeeded() {
+        do {
+            let request: NSFetchRequest<Folder> = Folder.fetchRequest()
+            let count = try self.count(for: request)
+            
+            if count == 0 {
+                let allFolder = Folder(context: self)
+                allFolder.name = "All Note"
+                allFolder.typeInteger = 0
+                
+                let lockedFolder = Folder(context: self)
+                lockedFolder.name = "Locked"
+                lockedFolder.typeInteger = 2
+                
+                let deletedFolder = Folder(context: self)
+                deletedFolder.name = "Recently Deleted"
+                deletedFolder.typeInteger = 3
+                
+                guard hasChanges else { return }
+                try save()
+                
+            }
+        } catch {
+            print("createFolderIfNeeded")
+        }
+    }
+    
 }

@@ -109,16 +109,7 @@ extension NoteTableViewController {
         
         let delete = UIContextualAction(style: .normal, title:  "삭제", handler: {[weak self](ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
-            //note의 폴더 타입이 휴지통이라면 영구삭제, 아니라면 휴지통 폴더로 이동
-            guard let folderType = note.folder?.folderType,
-                let persistentContainer = self?.persistentContainer else { return }
-            
-            switch folderType {
-            case .deleted:
-                note.deleteWithRelationship()
-            case .all, .custom, .locked:
-                note.folder = persistentContainer.fetchFolder(type: .deleted)
-            }
+            note.deleteWithRelationshipIfNeeded()
             
             
             

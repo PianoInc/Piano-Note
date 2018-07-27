@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         if !UserDefaults.standard.bool(forKey: "previouslyLaunched") {
             UserDefaults.standard.set(true, forKey: "previouslyLaunched")
-            persistentContainer.createFolderIfNeeded()
+            persistentContainer.viewContext.createFolderIfNeeded()
         }
         
         if let splitViewController = window?.rootViewController as? UISplitViewController {
