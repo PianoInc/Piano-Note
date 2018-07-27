@@ -130,31 +130,7 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
             default:
                 print("cannot invoked")
             }
-            attributedLink(using: block)
         }
-    }
-    
-    private func attributedLink(using block: Block) {
-        guard let detect = block.detect else {return}
-        let mAttr = NSMutableAttributedString(string: ibTextView.text, attributes: [.font : ibTextView.font!])
-        var url = URL(string: DETECT_LINK)!
-        url.appendPathComponent(detect.type.rawValue)
-        switch detect.state {
-        case .calendar(let title, let startDate):
-            url.appendPathComponent(title)
-            url.appendPathComponent(startDate.isoString)
-        case .reminder(let title, let date):
-            url.appendPathComponent(title)
-            url.appendPathComponent(date.isoString)
-        case .contact(let name, let number):
-            url.appendPathComponent(name)
-            url.appendPathComponent(number)
-        case .pasteboard(_): break
-        case .restore(_): break
-        }
-        mAttr.addAttributes([.link : url], range: detect.range)
-        ibTextView.attributedText = mAttr
-        block.detect = nil
     }
     
     @IBAction func tapButton(_ sender: UIButton) {

@@ -48,7 +48,6 @@
 		991D445A419CB30EFD728E3D423D3888 /* DateFormatter_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1836D0A2BFDE8DD6AF375F658868F9 /* DateFormatter_extension.swift */; };
 		995EF9071138C6DB7AF60731BAF15389 /* FolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84097EC525FA2FF1E2D667E27DB047 /* FolderTableViewController.swift */; };
 		9D3A450B58AD97F9EC0F2154E17C02FA /* Folder_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9D1E62AD2A2947D489CBD4CF8D6705 /* Folder_extension.swift */; };
-		A16595C550BE48CA3A148366418360B6 /* Detect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A4857AB8638DC9AB8F1B626A55DB91 /* Detect.swift */; };
 		A74F3A6B8FBAAB23131BE1F3CA9413BF /* FacebookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815389907A9E81E80CA7A11F77A407E8 /* FacebookTableViewController.swift */; };
 		A7947047B4A5D97C56F98EF07C7352C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB94C1FE17D982EC63A541C7349E6045 /* Main.storyboard */; };
 		A886C6148A7CC0371A1DA63F6ABA36A9 /* BlockTableVC_dragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FF18EF7CA44CD7EF072BE139EC53EB /* BlockTableVC_dragDelegate.swift */; };
@@ -60,6 +59,7 @@
 		B7AF6635B487D16DE74D398025A9BBBB /* NoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C684236D2E54A820730BFC463F47DA0E /* NoteTableViewController.swift */; };
 		B8D6A2767DA9A8A413BC1E7F92319BED /* FolderPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B2C61D4789A041B2E70B8BC2FCFEA6 /* FolderPickerTableViewController.swift */; };
 		BA0DF86E07D5E62853789594063E92CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 324AEFF89DC61A7224C39A438E70247B /* LaunchScreen.storyboard */; };
+		BC600D311B50985B10CDBCF34363BD55 /* DetectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F89CB911721BFAD3EF4741937F55AB4 /* DetectData.swift */; };
 		BFA7E9950EE98D4535513617D64F46E3 /* iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A7918D3F3A8E3018AC5C35D414949C /* iOS.swift */; };
 		CE32085CFA421A3611A69A632621ABE0 /* BlockTableVC_dropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3B1F02DD63A073B482E5D3B3AC62DF /* BlockTableVC_dropDelegate.swift */; };
 		D2B4DF7836A84FCD3C7142BE0ED80615 /* BlockTableVC_textViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69069131F35B448510933C74EE522A85 /* BlockTableVC_textViewDelegate.swift */; };
@@ -127,6 +127,7 @@
 		677226EE12C944122ABC49EA8783C4E2 /* NotificationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationView.xib; sourceTree = "<group>"; };
 		69069131F35B448510933C74EE522A85 /* BlockTableVC_textViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableVC_textViewDelegate.swift; sourceTree = "<group>"; };
 		6AF3298A0D3C0394F569F658130DAA4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6F89CB911721BFAD3EF4741937F55AB4 /* DetectData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectData.swift; sourceTree = "<group>"; };
 		73C3F33572668CCD6C1A96D9421D7158 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		786C0FA1F69AE5E79C4B9CE88F877F07 /* ImageCollectionBlock_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionBlock_extension.swift; sourceTree = "<group>"; };
 		796E985D4DFA2739B8F9CF20A5680EB9 /* UnOrderedTextBlock_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnOrderedTextBlock_extension.swift; sourceTree = "<group>"; };
@@ -152,7 +153,6 @@
 		B7FF70D4124EC5257B182C46D710E35C /* String_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_extension.swift; sourceTree = "<group>"; };
 		BAD6106924C9368C67B0FE06297E61BF /* NSPersistentContainer_extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSPersistentContainer_extension.swift; sourceTree = "<group>"; };
 		BB833A61E9F64446F0F20EB245D80745 /* BlockTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableViewController.swift; sourceTree = "<group>"; };
-		C1A4857AB8638DC9AB8F1B626A55DB91 /* Detect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detect.swift; sourceTree = "<group>"; };
 		C684236D2E54A820730BFC463F47DA0E /* NoteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTableViewController.swift; sourceTree = "<group>"; };
 		CA62AA8D1647D359962E9FB1FD6B7A06 /* NoteTableVC_FRC_delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableVC_FRC_delegate.swift; sourceTree = "<group>"; };
 		CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Cloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,7 +220,6 @@
 		15B5D4E7EAA244AF6508E9E3B052CB49 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				C1A4857AB8638DC9AB8F1B626A55DB91 /* Detect.swift */,
 				12948BFA2D53FDA553511F4CF00CDBF6 /* PasteboardManager.swift */,
 				84A728C7450F1817C4C1A5CE976C54B4 /* PianoBullet.swift */,
 			);
@@ -411,6 +410,7 @@
 				3061A3D1C5E4AFA682FEB48FDF0F09A2 /* Core */,
 				D6899DD088C87EB4E74FF9AB4BA6E3F2 /* Block_extension.swift */,
 				DC3A603D87E9A2AA61817EEF4CBF5181 /* ChecklistTextBlock_extension.swift */,
+				6F89CB911721BFAD3EF4741937F55AB4 /* DetectData.swift */,
 				7B35CBF79353E41BA569687A3631B0D8 /* DrawingBlock_extension.swift */,
 				88DF69EDADBAAABA2D845EEE95454EC4 /* FileBlock_extension.swift */,
 				DA9D1E62AD2A2947D489CBD4CF8D6705 /* Folder_extension.swift */,
@@ -551,7 +551,7 @@
 				F9B8A72A9CA9F53FC0D48F9EFA0F85FC /* ChecklistTextBlock_extension.swift in Sources */,
 				991D445A419CB30EFD728E3D423D3888 /* DateFormatter_extension.swift in Sources */,
 				32403F16B50C27E3AD94095AF26761B0 /* Date_extention.swift in Sources */,
-				A16595C550BE48CA3A148366418360B6 /* Detect.swift in Sources */,
+				BC600D311B50985B10CDBCF34363BD55 /* DetectData.swift in Sources */,
 				74D729F9C374EEC4F576837A039F6CE3 /* DrawingBlockTableViewCell.swift in Sources */,
 				DBC3E497FFCFEE0E4EAADF64BEB2D741 /* DrawingBlock_extension.swift in Sources */,
 				5307A7763A8AF55AEC5FEA227CB5B87C /* FacebookDetailTableViewController.swift in Sources */,

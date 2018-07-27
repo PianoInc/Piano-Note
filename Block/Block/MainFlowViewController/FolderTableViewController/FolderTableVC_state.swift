@@ -67,4 +67,13 @@ extension FolderTableViewController {
         self.state = state
         
     }
+    
+    enum RecommandBarState {
+        case calendar(title: String, startDate: Date)
+        case reminder(title: String, date: Date)
+        case contact(name: String, number: String)
+        case pasteboard(NSAttributedString)
+        case restore([(order: Int, Block: Block)])
+    }
+    
 }

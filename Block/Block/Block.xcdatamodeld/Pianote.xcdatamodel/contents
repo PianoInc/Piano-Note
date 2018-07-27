@@ -18,12 +18,15 @@
         <relationship name="unOrderedTextBlock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UnOrderedTextBlock" inverseName="blockCollection" inverseEntity="UnOrderedTextBlock" syncable="YES"/>
     </entity>
     <entity name="ChecklistTextBlock" representedClassName="ChecklistTextBlock" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="attributes" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="contact" optional="YES" attributeType="Binary" customClassName="Detect" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553159020" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="detect" optional="YES" attributeType="Transformable" customClassName="Detect" syncable="YES"/>
+        <attribute name="event" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="frontWhitespaces" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553872120" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tagStr" optional="YES" attributeType="String" syncable="YES"/>
@@ -103,11 +106,14 @@
         <relationship name="tagCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="noteCollection" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <entity name="OrderedTextBlock" representedClassName="OrderedTextBlock" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="attributes" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="contact" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158540" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="detect" optional="YES" attributeType="Transformable" customClassName="Detect" syncable="YES"/>
+        <attribute name="event" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="frontWhitespaces" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158540" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="num" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
@@ -117,10 +123,13 @@
         <relationship name="blockCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Block" inverseName="orderedTextBlock" inverseEntity="Block" syncable="YES"/>
     </entity>
     <entity name="PlainTextBlock" representedClassName="PlainTextBlock" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="attributes" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="contact" optional="YES" attributeType="Binary" customClassName="Detect" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158420" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="detect" optional="YES" attributeType="Transformable" customClassName="Detect" syncable="YES"/>
+        <attribute name="event" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158420" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tagStr" optional="YES" attributeType="String" syncable="YES"/>
@@ -136,12 +145,15 @@
         <relationship name="noteCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="tagCollection" inverseEntity="Note" syncable="YES"/>
     </entity>
     <entity name="UnOrderedTextBlock" representedClassName="UnOrderedTextBlock" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="attributes" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="contact" optional="YES" attributeType="Binary" customClassName="Detect" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158600" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="detect" optional="YES" attributeType="Transformable" customClassName="Detect" syncable="YES"/>
+        <attribute name="event" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="frontWhitespaces" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158600" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tagStr" optional="YES" attributeType="String" syncable="YES"/>
@@ -151,7 +163,7 @@
     </entity>
     <elements>
         <element name="Block" positionX="-45" positionY="72" width="128" height="270"/>
-        <element name="ChecklistTextBlock" positionX="763" positionY="-102" width="128" height="225"/>
+        <element name="ChecklistTextBlock" positionX="763" positionY="-102" width="128" height="270"/>
         <element name="Comment" positionX="178" positionY="60" width="128" height="150"/>
         <element name="DrawingBlock" positionX="405" positionY="6" width="128" height="150"/>
         <element name="FileBlock" positionX="387" positionY="-102" width="128" height="150"/>
@@ -160,9 +172,9 @@
         <element name="ImageCollectionBlock" positionX="369" positionY="288" width="128" height="165"/>
         <element name="ImageID" positionX="556" positionY="288" width="128" height="105"/>
         <element name="Note" positionX="-263" positionY="282" width="128" height="180"/>
-        <element name="OrderedTextBlock" positionX="576" positionY="99" width="128" height="225"/>
-        <element name="PlainTextBlock" positionX="565" positionY="-270" width="128" height="195"/>
+        <element name="OrderedTextBlock" positionX="576" positionY="99" width="128" height="270"/>
+        <element name="PlainTextBlock" positionX="565" positionY="-270" width="128" height="240"/>
         <element name="Tag" positionX="-108" positionY="495" width="128" height="120"/>
-        <element name="UnOrderedTextBlock" positionX="556" positionY="-432" width="128" height="225"/>
+        <element name="UnOrderedTextBlock" positionX="556" positionY="-432" width="128" height="270"/>
     </elements>
 </model>
