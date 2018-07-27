@@ -71,15 +71,7 @@ class BlockTableViewController: UIViewController {
             
         }
     }
-    
-    private func deleteNoteIfNeeded() {
-//        guard let controller = resultsController,
-//            let count = resultsController?.fetchedObjects?.count,
-//            count != 0 else {
-//
-//        }
 
-    }
 }
 
 
@@ -120,8 +112,19 @@ extension BlockTableViewController {
                 
             }
         }
-        note.title = title
+        note.title = title.count != 0 ? title : "새로운 메모를 작성해주세요"
         note.subTitle = subtitle.count != 0 ? subtitle : "추가 텍스트 없음"
+    }
+    
+    private func deleteNoteIfNeeded() {
+        //블럭이 없거나, 블럭이 1개인데 그게 하필 plain 텍스트 타입이고, 텍스트 카운트가 0인 경우 노트 지우고, 거기에 해당하는 블럭, 연관된 디테일 블럭 지우기
+        guard let controller = resultsController,
+            let count = controller.fetchedObjects?.count,
+            count > 0, (count != 1 || controller.object(at: IndexPath(row: 0, section: 0)).text?.count != 0) else {
+                note.deleteWithRelationship()
+                return
+        }
+        
     }
     
     private func setupTableView(){
