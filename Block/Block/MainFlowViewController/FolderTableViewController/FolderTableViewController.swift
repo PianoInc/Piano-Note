@@ -20,6 +20,11 @@ class FolderTableViewController: UITableViewController {
         
         updateViews(for: state)
         clearsSelectionOnViewWillAppear = true
+    }
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchData()
     }
     

@@ -47,7 +47,7 @@ extension BlockTableViewController {
     
     private func setNavbarForNormal() {
         navigationItem.title = ""
-        let editBtn = BarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tapEdit(sender:)))
+        let editBtn = BarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tapEdit(_:)))
         self.navigationItem.setRightBarButton(editBtn, animated: true)
         self.navigationItem.setLeftBarButton(nil, animated: true)
         self.navigationItem.setHidesBackButton(false, animated: true)
@@ -57,31 +57,31 @@ extension BlockTableViewController {
     }
     
     private func setToolbarForNormal() {
-        let trashBtn = BarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(tapTrash(sender:)))
-        let folderBtn = BarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(tapFolder(sender:)))
-        let highlightBtn = BarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(tapHighlight(sender:)))
-        let sendBtn = BarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(tapSend(sender:)))
-        let composeBtn = BarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(tapCompose(sender:)))
+        let trashBtn = BarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(tapTrash(_:)))
+        let folderBtn = BarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(tapFolder(_:)))
+        let highlightBtn = BarButtonItem(title: "형광펜", style: .plain, target: self, action: #selector(tapHighlight(_:)))
+        let themeBtn = BarButtonItem(title: "테마", style: .plain, target: self, action: #selector(tapTheme(_:)))
+        let composeBtn = BarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(tapCompose(_:)))
         let flexibleWidthBtn = BarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
         self.setToolbarItems(
             [trashBtn, flexibleWidthBtn, folderBtn, flexibleWidthBtn, highlightBtn,
-             flexibleWidthBtn, sendBtn, flexibleWidthBtn, composeBtn],
+             flexibleWidthBtn, themeBtn, flexibleWidthBtn, composeBtn],
             animated: true)
     }
     
     private func setNavbarForEdit() {
         navigationItem.title = ""
-        let doneBtn = BarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapFinishEdit(sender:)))
-        let selectAllBtn = BarButtonItem(title: "전체 복사", style: .plain, target: self, action: #selector(tapCopyAll(sender:)))
+        let doneBtn = BarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapFinishEdit(_:)))
+        let selectAllBtn = BarButtonItem(title: "전체 복사", style: .plain, target: self, action: #selector(tapCopyAll(_:)))
         self.navigationItem.setHidesBackButton(true, animated: true)
         self.navigationItem.setLeftBarButton(selectAllBtn, animated: true)
         self.navigationItem.setRightBarButton(doneBtn, animated: true)
     }
     
     private func setToolbarForEdit() {
-        let copyBtn = BarButtonItem(title: "복사하기", style: .plain, target: self, action: #selector(tapCopyParagraphs(sender:)))
-        let deleteBtn = BarButtonItem(title: "삭제하기", style: .plain, target: self, action: #selector(tapDeleteParagraphs(sender:)))
+        let copyBtn = BarButtonItem(title: "복사하기", style: .plain, target: self, action: #selector(tapCopyParagraphs(_:)))
+        let deleteBtn = BarButtonItem(title: "삭제하기", style: .plain, target: self, action: #selector(tapDeleteParagraphs(_:)))
         let flexibleWidthBtn = BarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         self.setToolbarItems([deleteBtn, flexibleWidthBtn, copyBtn], animated: true)
     }
@@ -94,20 +94,20 @@ extension BlockTableViewController {
     }
     
     private func setToolbarForHighlighting() {
-        let finishBtn = BarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapFinishHighlight(sender:)))
+        let finishBtn = BarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapFinishHighlight(_:)))
         let flexibleWidthBtn = BarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         self.setToolbarItems([flexibleWidthBtn, finishBtn, flexibleWidthBtn], animated: true)
     }
     
     private func setToolbarForDeleted() {
-        let deleteBtn = BarButtonItem(title: "영구삭제", style: .plain, target: self, action: #selector(tapPermanentlyDelete(sender:)))
-        let restoreBtn = BarButtonItem(title: "복구하기", style: .plain, target: self, action: #selector(tapRestore(sender:)))
+        let deleteBtn = BarButtonItem(title: "영구삭제", style: .plain, target: self, action: #selector(tapPermanentlyDelete(_:)))
+        let restoreBtn = BarButtonItem(title: "복구하기", style: .plain, target: self, action: #selector(tapRestore(_:)))
         let flexibleWidthBtn = BarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         self.setToolbarItems([deleteBtn, flexibleWidthBtn, restoreBtn], animated: true)
     }
     
     private func setNavbarForTyping() {
-        let completeBtn = BarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapFinishType(sender:)))
+        let completeBtn = BarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapFinishType(_:)))
         self.navigationItem.setRightBarButton(completeBtn, animated: true)
     }
     

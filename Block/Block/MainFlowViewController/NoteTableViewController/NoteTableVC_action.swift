@@ -32,6 +32,8 @@ extension NoteTableViewController {
         let note = Note(context: context)
         note.folder = folder
         note.type = .normal
+        note.createdDate = Date()
+        note.modifiedDate = Date()
         note.title = "새로운 메모를 작성해주세요"
         
         performSegue(withIdentifier: "BlockTableViewController", sender: note)
