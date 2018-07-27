@@ -19,7 +19,6 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
     var data: TableDatable? {
         didSet {
             guard let block = data as? Block else { return }
-            
             switch block.type {
             case .plainText:
                 guard let plainTextBlock = block.plainTextBlock else { return }
@@ -30,11 +29,11 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibTextView.text = plainTextBlock.text ?? ""
                 ibTextViewLeadingAnchor.constant = 0
                 /*
-                //이미지, json, detector은 전부 비동기
-                DispatchQueue.global().async {
-                    //
-                }
-                */
+                 //이미지, json, detector은 전부 비동기
+                 DispatchQueue.global().async {
+                 //
+                 }
+                 */
             case .checklistText:
                 guard let checklistTextBlock = block.checklistTextBlock else { return }
                 ibLabel.isHidden = true
@@ -47,7 +46,7 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 ibTextViewLeadingAnchor.constant = ibButton.frame.width + 8
                 ibButtonLeadingAnchor.constant = 0
                 ibLabelLeadingAnchor.constant = 0
-
+                
                 self.ibButton.isSelected = checklistTextBlock.isSelected
                 
                 if let whitespaceStr = checklistTextBlock.frontWhitespaces as NSString? {
@@ -60,11 +59,11 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 }
                 
                 /*
-                //이미지, json은 전부 비동기
-                DispatchQueue.main.async { [weak self] in
-                    //TODO: JSON 로직
-                }
-                */
+                 //이미지, json은 전부 비동기
+                 DispatchQueue.main.async { [weak self] in
+                 //TODO: JSON 로직
+                 }
+                 */
                 
             case .orderedText:
                 guard let orderedTextBlock = block.orderedTextBlock else { return }
@@ -92,11 +91,11 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
                 }
                 
                 /*
-                //이미지, json은 전부 비동기
-                DispatchQueue.main.async { [weak self] in
-                    //TODO: JSON 로직
-                }
-                */
+                 //이미지, json은 전부 비동기
+                 DispatchQueue.main.async { [weak self] in
+                 //TODO: JSON 로직
+                 }
+                 */
                 
             case .unOrderedText:
                 guard let unOrderedTextBlock = block.unOrderedTextBlock else { return }
@@ -135,7 +134,7 @@ class TextBlockTableViewCell: UITableViewCell, TableDataAcceptable {
             }
         }
     }
-        
+    
     @IBAction func tapButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         

@@ -32,7 +32,7 @@ class FolderTableViewCell: UITableViewCell, TableDataAcceptable {
             
             textLabel?.text = folder.name
             detailTextLabel?.text = "\(folder.noteCollection?.count ?? 0)"
-            
+
             guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
             delegate.persistentContainer.performBackgroundTask { (context) in
                 if folder.folderType == .all {
@@ -50,10 +50,6 @@ class FolderTableViewCell: UITableViewCell, TableDataAcceptable {
                     }
                 }
             }
-            
-            
-            
-            
         }
     }
 }

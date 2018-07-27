@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import EventKitUI
+import ContactsUI
 
 extension BlockTableViewController: UITextViewDelegate {
     
@@ -40,8 +42,7 @@ extension BlockTableViewController: UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        
-        //        presentAlertController(Block, with: URL)
+        //presentAlertController(Block, with: URL)
         return true
     }
     
@@ -81,7 +82,7 @@ extension BlockTableViewController: UITextViewDelegate {
         case .moveNext:
             //TODO: 이렇게 되면 형광펜이 깨짐, attributed로 만들어야함
             let (frontText, behindText) = textView.splitTextByCursor()
-            block.text = data(detector: frontText)
+            block.text = frontText
             block.modifiedDate = Date()
             block.insertNextBlock(with: behindText, on: resultsController)
             

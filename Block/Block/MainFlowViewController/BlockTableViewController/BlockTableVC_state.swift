@@ -116,10 +116,11 @@ extension BlockTableViewController {
     }
     
     enum RecommandBarState {
-        case calendar(title: String, startDate: Date, endDate: Date)
+        case calendar(title: String, startDate: Date)
         case reminder(title: String, date: Date)
-        case contact(name: String, number: Int)
+        case contact(name: String, number: String)
         case pasteboard(NSAttributedString)
         case restore([(order: Int, Block: Block)])
     }
+    
 }
