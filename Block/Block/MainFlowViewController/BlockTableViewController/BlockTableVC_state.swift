@@ -111,8 +111,23 @@ extension BlockTableViewController {
         self.navigationItem.setRightBarButton(completeBtn, animated: true)
     }
     
+    
+    //TODO: 여기서 visibleCell 처리해주기
     private func setViews(state: ViewControllerState) {
         self.state = state
+        
+        switch state {
+        case .normal, .typing:
+            tapGestureRecognizer.isEnabled = true
+        case .deleted, .edit, .highlighting:
+            tapGestureRecognizer.isEnabled = false
+        }
+        
+        tableView.visibleCells.forEach { (cell) in
+            //TODO: 나중에 이미지, 파일 등등일 때에도 처리해줘야함
+            guard let cell = cell as? TextBlockTableViewCell else { return }
+            cell.state = state
+        }
     }
     
     enum RecommandBarState {

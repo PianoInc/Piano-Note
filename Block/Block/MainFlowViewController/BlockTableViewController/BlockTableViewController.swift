@@ -13,6 +13,7 @@ class BlockTableViewController: UIViewController {
     
     //MARK: Data
     
+    @IBOutlet weak var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet weak var tableView: UITableView!
     internal var persistentContainer: NSPersistentContainer!
     

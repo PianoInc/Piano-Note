@@ -37,3 +37,7 @@ protocol TableDataAcceptable {
 protocol NoteTableDataAcceptable: TableDataAcceptable {
     var folder: Folder? { get set }
 }
+
+protocol BlockTableDataAcceptable: TableDataAcceptable {
+    var state: BlockTableViewController.ViewControllerState? { get set }
+}

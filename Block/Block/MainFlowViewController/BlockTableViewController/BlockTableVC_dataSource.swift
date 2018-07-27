@@ -10,7 +10,6 @@ import UIKit
 
 extension BlockTableViewController: TableViewDataSource {
     // MARK: - Table view data source
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return resultsController?.sections?.count ?? 0
     }
@@ -22,8 +21,9 @@ extension BlockTableViewController: TableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let data = resultsController?.object(at: indexPath) else { return UITableViewCell() }
-        var cell = tableView.dequeueReusableCell(withIdentifier: data.identifier) as! TableDataAcceptable & UITableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: data.identifier) as! BlockTableDataAcceptable & UITableViewCell
         cell.data = data
+        cell.state = state
         
         return cell
     }
