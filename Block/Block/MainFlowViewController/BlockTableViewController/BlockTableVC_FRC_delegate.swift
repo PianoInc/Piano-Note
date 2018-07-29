@@ -45,10 +45,8 @@ extension BlockTableViewController: NSFetchedResultsControllerDelegate {
                 }
 
         case .move:
-            UIView.performWithoutAnimation {
-                guard let indexPaths = tableView.indexPathsForVisibleRows else {return}
-                tableView.reloadRows(at: indexPaths, with: .none)
-            }
+            // TODO...
+            break
         }
     }
     
