@@ -9,7 +9,7 @@
 import UIKit
 
 class BlockTextView: UITextView {
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         layoutManager.delegate = self

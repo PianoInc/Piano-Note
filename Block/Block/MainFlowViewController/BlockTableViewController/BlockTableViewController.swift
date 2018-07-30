@@ -16,7 +16,6 @@ class BlockTableViewController: UIViewController {
     @IBOutlet weak var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet weak var tableView: UITableView!
     internal var persistentContainer: NSPersistentContainer!
-    
     internal var state: ViewControllerState!
     internal var note: Note!
     internal var resultsController: NSFetchedResultsController<Block>?

@@ -35,7 +35,8 @@ extension BlockTableViewController {
     }
     
     @IBAction func tapCopyParagraphs(_ sender: Any) {
-        PasteboardManager.copyParagraphs(blocks: selectedBlocks)
+        let manager = PasteboardManager()
+        manager.copyParagraphs(blocks: selectedBlocks)
     }
     
     @IBAction func tapCopyAll(_ sender: Any) {

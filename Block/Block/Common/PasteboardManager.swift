@@ -10,6 +10,8 @@ import Foundation
 
 struct PasteboardManager {
     
+    
+    
     /**
      # what
      지정된 문단들을 복사한다.
@@ -24,43 +26,99 @@ struct PasteboardManager {
      # why
      빠른 편집의 한 기능으로 제공하기 위해
      */
-    static func copyParagraphs(blocks: [Block]) {
+    func copyParagraphs(blocks: [Block]) {
         //1. 우선 blocks를 NSAttributedString으로 만들기 -> block.nsAttributedText
         //2. 그 다음 붙일 때 개행을 삽입해주기
         //3. 이걸 데이터로 변환하기
         //4. 테스트해보기
         
-        //우선은 텍스트밖에 없으므로 String으로 만든다.
-        var string = ""
+        //TODO: string만 넣어도 되는 것인지, 아니면 데이터에도 다 넣어야 하는 건지 문서 보고 만들기!
+        
         blocks.forEach { (block) in
-            switch block.type {
-            case .plainText:
-                let plainStr = (block.text ?? "") + "\n"
-                string.append(plainStr)
-            case .checklistText:
-                let checkStr = "- " + (block.text ?? "") + "\n"
-                string.append(checkStr)
-                
-            case .orderedText:
-                let orderStr = "\((block.orderedTextBlock?.num ?? 0)). "  + "\n"
-                string.append(orderStr)
-                
-            case .unOrderedText:
-                let unOrderStr = "* " + (block.text ?? "") + "\n"
-                string.append(unOrderStr)
-                
-            case .separator:
-                let separatorStr = "---" + "\n"
-                string.append(separatorStr)
-            default:
-                print("TODO: 데이터 추가되면 이곳 작업해줘야함")
-            }
+            ()
         }
         
         PasteBoard.general.string = string
         
+    }
+    
+    private func nsAttributedStringFrom(block: Block) -> NSAttributedString {
+
+        switch block.type {
+        case .plainText:
+            return attributedStringFrom(textBlock: block)
+            
+        case .unOrderedText:
+            let prefix = NSAttributedString(string: "* ", attributes: [.font: block.font])
+            let unorderedAttrString = attributedStringFrom(textBlock: block)
+            unorderedAttrString.insert(prefix, at: 0)
+            return unorderedAttrString
+            
+        case .orderedText:
+            let prefix = NSAttributedString(string: "\(block.orderedTextBlock?.num ?? 0). ", attributes: [.font: block.font])
+            let unorderedAttrString = attributedStringFrom(textBlock: block)
+            unorderedAttrString.insert(prefix, at: 0)
+            return unorderedAttrString
+            
+        case .checklistText:
+            let prefix = NSAttributedString(string: "- ", attributes: [.font: block.font])
+            let unorderedAttrString = attributedStringFrom(textBlock: block)
+            unorderedAttrString.insert(prefix, at: 0)
+            return unorderedAttrString
+            
+        case .separator:
+            return NSAttributedString(string: "---\n", attributes: [.font: block.font])
+            
+        case .imageCollection, .comment, .drawing, .file:
+            //TODO: 여기 작업해야함
+            fatalError("여기가 왜 호출되냐;; nsAttributedStringFrom(block: Block)")
+
+        }
         
     }
+    
+    private func attributedStringFrom(textBlock: Block) -> NSMutableAttributedString {
+        let themeType = ThemeManager.ThemeType(rawValue: textBlock.note?.themeTypeInteger ?? 0)!
+        let themeManager = ThemeManager(type: themeType)
+        let attrString = NSMutableAttributedString(string: textBlock.text ?? "", attributes: [.font : textBlock.font])
+        
+        //1. 먼저 text에 attributes를 입힌다.
+        if let highlight = textBlock.highlight {
+            highlight.ranges.forEach { (range) in
+                attrString.addAttributes([.backgroundColor: themeManager.backgroundColor], range: range)
+            }
+        }
+        
+        if let event = textBlock.event {
+            event.ranges.forEach { (range) in
+                attrString.addAttributes([.link: event], range: range)
+            }
+        }
+        
+        if let contact = textBlock.contact {
+            contact.ranges.forEach { (range) in
+                attrString.addAttributes([.link: contact], range: range)
+            }
+        }
+        
+        if let address = textBlock.address {
+            address.ranges.forEach { (range) in
+                attrString.addAttributes([.link: address], range: range)
+            }
+        }
+        
+        if let link = textBlock.link {
+            link.ranges.forEach { (range) in
+                attrString.addAttributes([.link: link], range: range)
+            }
+        }
+        let newLineAttrString = NSAttributedString(string: "\n")
+        attrString.append(newLineAttrString)
+        return attrString
+    }
+    
+    
+ 
     
     /**
      

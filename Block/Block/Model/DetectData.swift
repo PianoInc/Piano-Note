@@ -15,27 +15,17 @@ let DETECT_ADDRESS = "ADDRESS_" + UUID().uuidString
 let DETECT_LINK = "LINK_" + UUID().uuidString
 
 struct Event: Codable {
-    var data: [Data]?
-    struct Data: Codable {
-        let title: String?
-        let date: Date
-        let range: NSRange
-    }
+    var ranges: [NSRange]
 }
 
 struct Contact: Codable {
-    var data: [Data]?
-    struct Data: Codable {
-        let name: String?
-        let number: String
-        let range: NSRange
-    }
+    var ranges: [NSRange]
 }
 
 struct Address: Codable {
-    var data: [NSRange]?
+    var ranges: [NSRange]
 }
 
 struct Link: Codable {
-    var data: [NSRange]?
+    var ranges: [NSRange]
 }
