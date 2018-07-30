@@ -9,7 +9,16 @@
 import Foundation
 
 protocol TextBlockType {
-    var highlight: Data? { get set }
+    var highlightData: Data? { get set }
+    var linkData: Data? { get set }
+    var addressData: Data? { get set }
+    var contactData: Data? { get set }
+    var eventData: Data? { get set }
+    var highlight: Highlight? { get set }
+    var event: Event? { get set }
+    var contact: Contact? { get set }
+    var address: Address? { get set }
+    var link: Link? { get set }
     var ckMetaData: Data? { get set }
     var createdDate: Date? { get set }
     var modifiedDate: Date? { get set }
@@ -24,6 +33,57 @@ protocol TextBlockType {
 }
 
 extension TextBlockType {
+    
+    var highlight: Highlight? {
+        get {
+            guard let highlightData = highlightData else { return nil }
+            return try? JSONDecoder().decode(Highlight.self, from: highlightData)
+        } set {
+            let data = try? JSONEncoder().encode(newValue)
+            highlightData = data
+        }
+    }
+    
+    var event: Event? {
+        get {
+            guard let eventData = eventData else { return nil }
+            return try? JSONDecoder().decode(Event.self, from: eventData)
+        } set {
+            let data = try? JSONEncoder().encode(newValue)
+            eventData = data
+        }
+    }
+    
+    var contact: Contact? {
+        get {
+            guard let contactData = contactData else { return nil }
+            return try? JSONDecoder().decode(Contact.self, from: contactData)
+        } set {
+            let data = try? JSONEncoder().encode(newValue)
+            contactData = data
+        }
+    }
+    
+    var address: Address? {
+        get {
+            guard let addressData = addressData else { return nil }
+            return try? JSONDecoder().decode(Address.self, from: addressData)
+        } set {
+            let data = try? JSONEncoder().encode(newValue)
+            addressData = data
+        }
+    }
+    
+    var link: Link? {
+        get {
+            guard let linkData = linkData else { return nil }
+            return try? JSONDecoder().decode(Link.self, from: linkData)
+        } set {
+            let data = try? JSONEncoder().encode(newValue)
+            linkData = data
+        }
+    }
+    
     var textStyle: FontTextStyle {
         get {
             switch textStyleInteger {

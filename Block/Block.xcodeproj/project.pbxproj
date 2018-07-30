@@ -79,6 +79,7 @@
 		F454862FBB69F9F126650BC6BAC376BB /* Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */; };
 		F461F6787BD8F29D20AFCB60C8836A9B /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CCF28B8D349C51045BEBD9273159F1 /* FolderTableViewCell.swift */; };
 		F5B81D52BFBF75D9CDB8FE65A92A4F33 /* BlockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB833A61E9F64446F0F20EB245D80745 /* BlockTableViewController.swift */; };
+		F5CA4E31EE15F9925C8F47F1464A8D6F /* HighlightData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E7B282E85FBE25CFB5D595B8238E6 /* HighlightData.swift */; };
 		F9B8A72A9CA9F53FC0D48F9EFA0F85FC /* ChecklistTextBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3A603D87E9A2AA61817EEF4CBF5181 /* ChecklistTextBlock_extension.swift */; };
 		FBF1F7293F18F5483947AB51A25793D1 /* Note_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C95CB238C76AD1C208BE6334EB288D /* Note_extension.swift */; };
 		FFE106B5B595DF8AE8D72E356A3EF103 /* NoteTableVC_FRC_delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA62AA8D1647D359962E9FB1FD6B7A06 /* NoteTableVC_FRC_delegate.swift */; };
@@ -159,6 +160,7 @@
 		CA62AA8D1647D359962E9FB1FD6B7A06 /* NoteTableVC_FRC_delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableVC_FRC_delegate.swift; sourceTree = "<group>"; };
 		CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Cloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE84097EC525FA2FF1E2D667E27DB047 /* FolderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderTableViewController.swift; sourceTree = "<group>"; };
+		CE8E7B282E85FBE25CFB5D595B8238E6 /* HighlightData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightData.swift; sourceTree = "<group>"; };
 		CFCEF150F52E137528C93BC9507A1D14 /* SettingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDetailTableViewController.swift; sourceTree = "<group>"; };
 		D2B2C61D4789A041B2E70B8BC2FCFEA6 /* FolderPickerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderPickerTableViewController.swift; sourceTree = "<group>"; };
 		D3300D23731A1C60AAB7359D15942A9D /* FolderTableVC_FRC_delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableVC_FRC_delegate.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 				7B35CBF79353E41BA569687A3631B0D8 /* DrawingBlock_extension.swift */,
 				88DF69EDADBAAABA2D845EEE95454EC4 /* FileBlock_extension.swift */,
 				DA9D1E62AD2A2947D489CBD4CF8D6705 /* Folder_extension.swift */,
+				CE8E7B282E85FBE25CFB5D595B8238E6 /* HighlightData.swift */,
 				786C0FA1F69AE5E79C4B9CE88F877F07 /* ImageCollectionBlock_extension.swift */,
 				B2C95CB238C76AD1C208BE6334EB288D /* Note_extension.swift */,
 				19E7EC3E3E6514D7A67FDE1C793F42A3 /* OrderedTextBlock_extension.swift */,
@@ -569,6 +572,7 @@
 				995EF9071138C6DB7AF60731BAF15389 /* FolderTableViewController.swift in Sources */,
 				9D3A450B58AD97F9EC0F2154E17C02FA /* Folder_extension.swift in Sources */,
 				62EC65B42E68FFCA4935D05BE1868B06 /* Font_extension.swift in Sources */,
+				F5CA4E31EE15F9925C8F47F1464A8D6F /* HighlightData.swift in Sources */,
 				D84423160116D04AF3B0394D47ADDC47 /* ImageBlockCollectionViewCell.swift in Sources */,
 				027A796899DCB1764FB2605ECEE18E84 /* ImageCollectionBlockTableViewCell.swift in Sources */,
 				1C9D2E4F73410EDFB9CD78E60FB4618B /* ImageCollectionBlock_extension.swift in Sources */,

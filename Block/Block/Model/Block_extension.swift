@@ -134,6 +134,17 @@ extension Block: TableDatable {
      */
     var attributedText: NSAttributedString? {
         get {
+            //먼저 text에 attributes를 입힌다.
+            let attrString = NSAttributedString(string: text ?? "", attributes: [.font : font])
+            
+            
+            
+            
+            //다 입혔으면 타입에 따라 앞에 prefix를 붙여준다.
+            
+            //완성도를 위해 NSParagraphStyle까지 적절하게 세팅해준다.
+            
+            
             switch type {
             case .plainText:
                 return NSAttributedString(string: text ?? "", attributes: [.font : font])
@@ -220,135 +231,153 @@ extension Block: TableDatable {
         }
         
     }
-
-    var event: Event? {
+    
+    var highlight: Highlight? {
         get {
-            var data: Data?
             switch type {
             case .plainText:
-                data = plainTextBlock?.event
-            case .checklistText:
-                data = checklistTextBlock?.event
-            case .unOrderedText:
-                data = unOrderedTextBlock?.event
+                return plainTextBlock?.highlight
             case .orderedText:
-                data = orderedTextBlock?.event
+                return orderedTextBlock?.highlight
+            case .unOrderedText:
+                return unOrderedTextBlock?.highlight
+            case .checklistText:
+                return checklistTextBlock?.highlight
             default:
                 return nil
             }
-            guard let sData = data else {return nil}
-            return try? JSONDecoder().decode(Event.self, from: sData)
         } set {
-            let data = try? JSONEncoder().encode(newValue)
             switch type {
             case .plainText:
-                plainTextBlock?.event = data
-            case .checklistText:
-                checklistTextBlock?.event = data
-            case .unOrderedText:
-                unOrderedTextBlock?.event = data
+                plainTextBlock?.highlight = newValue
             case .orderedText:
-                orderedTextBlock?.event = data
-            default: break
+                orderedTextBlock?.highlight = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.highlight = newValue
+            case .checklistText:
+                checklistTextBlock?.highlight = newValue
+            default:
+                ()
+            }
+        }
+    }
+
+    var event: Event? {
+        get {
+            switch type {
+            case .plainText:
+                return plainTextBlock?.event
+            case .orderedText:
+                return orderedTextBlock?.event
+            case .unOrderedText:
+                return unOrderedTextBlock?.event
+            case .checklistText:
+                return checklistTextBlock?.event
+            default:
+                return nil
+            }
+        } set {
+            switch type {
+            case .plainText:
+                plainTextBlock?.event = newValue
+            case .orderedText:
+                orderedTextBlock?.event = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.event = newValue
+            case .checklistText:
+                checklistTextBlock?.event = newValue
+            default:
+                ()
             }
         }
     }
     
     var contact: Contact? {
         get {
-            var data: Data?
             switch type {
             case .plainText:
-                data = plainTextBlock?.contact
-            case .checklistText:
-                data = checklistTextBlock?.contact
-            case .unOrderedText:
-                data = unOrderedTextBlock?.contact
+                return plainTextBlock?.contact
             case .orderedText:
-                data = orderedTextBlock?.contact
+                return orderedTextBlock?.contact
+            case .unOrderedText:
+                return unOrderedTextBlock?.contact
+            case .checklistText:
+                return checklistTextBlock?.contact
             default:
                 return nil
             }
-            guard let sData = data else {return nil}
-            return try? JSONDecoder().decode(Contact.self, from: sData)
         } set {
-            let data = try? JSONEncoder().encode(newValue)
             switch type {
             case .plainText:
-                plainTextBlock?.contact = data
-            case .checklistText:
-                checklistTextBlock?.contact = data
-            case .unOrderedText:
-                unOrderedTextBlock?.contact = data
+                plainTextBlock?.contact = newValue
             case .orderedText:
-                orderedTextBlock?.contact = data
-            default: break
+                orderedTextBlock?.contact = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.contact = newValue
+            case .checklistText:
+                checklistTextBlock?.contact = newValue
+            default:
+                ()
             }
         }
     }
     
     var address: Address? {
         get {
-            var data: Data?
             switch type {
             case .plainText:
-                data = plainTextBlock?.address
-            case .checklistText:
-                data = checklistTextBlock?.address
-            case .unOrderedText:
-                data = unOrderedTextBlock?.address
+                return plainTextBlock?.address
             case .orderedText:
-                data = orderedTextBlock?.address
+                return orderedTextBlock?.address
+            case .unOrderedText:
+                return unOrderedTextBlock?.address
+            case .checklistText:
+                return checklistTextBlock?.address
             default:
                 return nil
             }
-            guard let sData = data else {return nil}
-            return try? JSONDecoder().decode(Address.self, from: sData)
         } set {
-            let data = try? JSONEncoder().encode(newValue)
             switch type {
             case .plainText:
-                plainTextBlock?.address = data
-            case .checklistText:
-                checklistTextBlock?.address = data
-            case .unOrderedText:
-                unOrderedTextBlock?.address = data
+                plainTextBlock?.address = newValue
             case .orderedText:
-                orderedTextBlock?.address = data
-            default: break
+                orderedTextBlock?.address = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.address = newValue
+            case .checklistText:
+                checklistTextBlock?.address = newValue
+            default:
+                ()
             }
         }
     }
     
     var link: Link? {
         get {
-            var data: Data?
             switch type {
             case .plainText:
-                data = plainTextBlock?.link
-            case .checklistText:
-                data = checklistTextBlock?.link
-            case .unOrderedText:
-                data = unOrderedTextBlock?.link
+                return plainTextBlock?.link
             case .orderedText:
-                data = orderedTextBlock?.link
+                return orderedTextBlock?.link
+            case .unOrderedText:
+                return unOrderedTextBlock?.link
+            case .checklistText:
+                return checklistTextBlock?.link
             default:
                 return nil
             }
-            guard let sData = data else {return nil}
-            return try? JSONDecoder().decode(Link.self, from: sData)
         } set {
-            let data = try? JSONEncoder().encode(newValue)
             switch type {
             case .plainText:
-                plainTextBlock?.link = data
-            case .checklistText:
-                checklistTextBlock?.link = data
-            case .unOrderedText:
-                unOrderedTextBlock?.link = data
+                plainTextBlock?.link = newValue
             case .orderedText:
-                orderedTextBlock?.link = data
-            default: break
+                orderedTextBlock?.link = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.link = newValue
+            case .checklistText:
+                checklistTextBlock?.link = newValue
+            default:
+                ()
             }
         }
     }
