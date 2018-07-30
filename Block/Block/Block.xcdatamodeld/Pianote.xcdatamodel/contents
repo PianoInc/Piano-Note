@@ -18,15 +18,15 @@
         <relationship name="unOrderedTextBlock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UnOrderedTextBlock" inverseName="blockCollection" inverseEntity="UnOrderedTextBlock" syncable="YES"/>
     </entity>
     <entity name="ChecklistTextBlock" representedClassName="ChecklistTextBlock" syncable="YES" codeGenerationType="class">
-        <attribute name="address" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="addressData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="contact" optional="YES" attributeType="Binary" customClassName="Detect" syncable="YES"/>
+        <attribute name="contactData" optional="YES" attributeType="Binary" customClassName="Detect" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553159020" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="event" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="eventData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="frontWhitespaces" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="highlight" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="highlightData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="link" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="linkData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553872120" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tagStr" optional="YES" attributeType="String" syncable="YES"/>
@@ -106,14 +106,14 @@
         <relationship name="tagCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="noteCollection" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <entity name="OrderedTextBlock" representedClassName="OrderedTextBlock" syncable="YES" codeGenerationType="class">
-        <attribute name="address" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="addressData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="contact" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="contactData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158540" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="event" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="eventData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="frontWhitespaces" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="highlight" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="link" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="highlightData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="linkData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158540" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="num" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
@@ -123,13 +123,13 @@
         <relationship name="blockCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Block" inverseName="orderedTextBlock" inverseEntity="Block" syncable="YES"/>
     </entity>
     <entity name="PlainTextBlock" representedClassName="PlainTextBlock" syncable="YES" codeGenerationType="class">
-        <attribute name="address" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="addressData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="contact" optional="YES" attributeType="Binary" customClassName="Detect" syncable="YES"/>
+        <attribute name="contactData" optional="YES" attributeType="Binary" customClassName="Detect" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158420" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="event" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="highlight" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="link" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="eventData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="highlightData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="linkData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158420" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tagStr" optional="YES" attributeType="String" syncable="YES"/>
@@ -145,15 +145,15 @@
         <relationship name="noteCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="tagCollection" inverseEntity="Note" syncable="YES"/>
     </entity>
     <entity name="UnOrderedTextBlock" representedClassName="UnOrderedTextBlock" syncable="YES" codeGenerationType="class">
-        <attribute name="address" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="addressData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="contact" optional="YES" attributeType="Binary" customClassName="Detect" syncable="YES"/>
+        <attribute name="contactData" optional="YES" attributeType="Binary" customClassName="Detect" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158600" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="event" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="eventData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="frontWhitespaces" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="highlight" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="highlightData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="link" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="linkData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553158600" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tagStr" optional="YES" attributeType="String" syncable="YES"/>
