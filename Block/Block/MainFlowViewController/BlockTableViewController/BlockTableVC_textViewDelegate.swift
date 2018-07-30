@@ -257,7 +257,7 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
                     let eventStore = EKEventStore()
                     let reminder = EKReminder(eventStore: eventStore)
                     reminder.title = eventData.title
-                    reminder.completionDate = eventData.date
+                    reminder.addAlarm(EKAlarm(absoluteDate: eventData.date))
                     reminder.calendar = eventStore.defaultCalendarForNewReminders()
                     do {
                         try eventStore.save(reminder, commit: true)
@@ -321,13 +321,14 @@ extension BlockTableViewController: EKEventEditViewDelegate, CNContactViewContro
             }
         } else if urlData[0] == DETECT_REMINDER {
             eventAuth(check: .reminder) {
-                let alert = UIAlertController(title: nil, message: urlData[2].removingPercentEncoding, preferredStyle: .actionSheet)
+                let message = (urlData[2].removingPercentEncoding ?? "") + " " + (urlData[1].removingPercentEncoding ?? "")
+                let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
                 let reminderAction = UIAlertAction(title: "미리알림 등록", style: .default) { _ in
                     let eventStore = EKEventStore()
                     let reminder = EKReminder(eventStore: eventStore)
-                    reminder.title = urlData[2].removingPercentEncoding?.trimmingCharacters(in: .whitespacesAndNewlines)
+                    reminder.title = urlData[1].removingPercentEncoding?.trimmingCharacters(in: .whitespacesAndNewlines)
                     if reminder.title.isEmpty {reminder.title = nil}
-                    reminder.completionDate = urlData[3].isoDate
+                    reminder.addAlarm(EKAlarm(absoluteDate: urlData[3].isoDate))
                     reminder.calendar = eventStore.defaultCalendarForNewReminders()
                     do {
                         try eventStore.save(reminder, commit: true)

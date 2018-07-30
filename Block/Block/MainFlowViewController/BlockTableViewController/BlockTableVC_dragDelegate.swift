@@ -15,10 +15,9 @@ extension BlockTableViewController: UITableViewDragDelegate {
         guard let state = self.state, state == .normal else {return []}
         //TODO: 여기서 이미지일 수도 있으니 보완해야함
         guard let title = resultsController?.object(at: indexPath).text else {return []}
-        let data = title.data(using: .utf8)
         let itemProvider = NSItemProvider()
         itemProvider.registerDataRepresentation(forTypeIdentifier: kUTTypePlainText as String, visibility: .all) {
-            $0(data, nil)
+            $0(title.data(using: .utf8), nil)
             return nil
         }
         return [UIDragItem(itemProvider: itemProvider)]

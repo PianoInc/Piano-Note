@@ -45,10 +45,10 @@ extension BlockTableViewController: NSFetchedResultsControllerDelegate {
                 }
 
         case .move:
-            UIView.performWithoutAnimation {
-                guard let indexPaths = tableView.indexPathsForVisibleRows else {return}
-                tableView.reloadRows(at: indexPaths, with: .none)
-            }
+            guard let indexPath = newIndexPath,
+                let block = controller.object(at: indexPath) as? Block,
+                let cell = tableView.cellForRow(at: indexPath) as? TextBlockTableViewCell else { return }
+            cell.data = block
         }
     }
     
