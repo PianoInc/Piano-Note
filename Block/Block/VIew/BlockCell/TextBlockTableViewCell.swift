@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TextBlockTableViewCell: UITableViewCell, BlockTableDataAcceptable {
+class TextBlockTableViewCell: UITableViewCell, BlockTableDataAcceptable, Detection {
     @IBOutlet weak var ibButton: UIButton!
     @IBOutlet weak var ibLabel: UILabel!
     @IBOutlet weak var ibTextView: BlockTextView!
@@ -149,46 +149,8 @@ class TextBlockTableViewCell: UITableViewCell, BlockTableDataAcceptable {
             default:
                 print("cannot invoked")
             }
-            detect(link: block)
+            detectToAttribute(using: block)
         }
-    }
-    
-    private func detect(link block: Block) {
-        guard !ibTextView.text.isEmpty else {return}
-        let mAttr = NSMutableAttributedString(string: ibTextView.text, attributes: [.font : ibTextView.font!, .foregroundColor : ibTextView.textColor!])
-        if let event = block.event?.data {
-            event.forEach {
-                var url = URL(string: (block.type == .checklistText) ? DETECT_REMINDER : DETECT_EVENT)!
-                url.appendPathComponent($0.title ?? "")
-                url.appendPathComponent((ibTextView.text as NSString).substring(with: $0.range))
-                url.appendPathComponent($0.date.isoString)
-                mAttr.addAttributes([.link : url], range: $0.range)
-            }
-        }
-        if let contact = block.contact?.data {
-            contact.forEach {
-                var url = URL(string: DETECT_CONTACT)!
-                url.appendPathComponent($0.name ?? "")
-                url.appendPathComponent($0.number)
-                mAttr.addAttributes([.link : url], range: $0.range)
-            }
-        }
-        if let address = block.address?.data {
-            address.forEach {
-                var url = URL(string: DETECT_ADDRESS)!
-                url.appendPathComponent((ibTextView.text as NSString).substring(with: $0))
-                mAttr.addAttributes([.link : url], range: $0)
-            }
-        }
-        if let link = block.link?.data {
-            link.forEach {
-                var url = URL(string: DETECT_LINK)!
-                let link = (ibTextView.text as NSString).substring(with: $0).lowercased()
-                url.appendPathComponent(link.replacingOccurrences(of: "http://", with: ""))
-                mAttr.addAttributes([.link : url], range: $0)
-            }
-        }
-        ibTextView.attributedText = mAttr
     }
     
     @IBAction func tapButton(_ sender: UIButton) {
