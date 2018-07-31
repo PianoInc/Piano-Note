@@ -17,7 +17,8 @@ extension BlockTableViewController {
         case deleted
     }
     
-    internal func updateViews(for state: ViewControllerState) {
+    internal func updateViews(for state: ViewControllerState?) {
+        guard let state = state else { return }
         setBarButtonItems(state: state)
         setViews(state: state)
     }

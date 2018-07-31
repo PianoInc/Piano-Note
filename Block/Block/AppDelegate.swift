@@ -38,6 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             splitViewController.maximumPrimaryColumnWidth = 414
             splitViewController.minimumPrimaryColumnWidth = 320
             
+            if let vc = (splitViewController.viewControllers.last as? UINavigationController)?.topViewController as? BlockTableViewController {
+                vc.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
+                vc.navigationItem.leftItemsSupplementBackButton = true
+            }
             
             if let vc = (splitViewController.viewControllers.first as? UINavigationController)?.topViewController as? FolderTableViewController {
                 vc.persistentContainer = persistentContainer
@@ -108,6 +112,4 @@ extension AppDelegate : UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return true
     }
-    
-
 }
