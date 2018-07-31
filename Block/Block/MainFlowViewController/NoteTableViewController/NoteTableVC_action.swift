@@ -36,7 +36,7 @@ extension NoteTableViewController {
         note.modifiedDate = Date()
         note.title = "새로운 메모를 작성해주세요"
         
-        performSegue(withIdentifier: "BlockTableViewController", sender: note)
+        performSegue(withIdentifier: "BlockNavigationController", sender: note)
     }
     
     @IBAction func tapMoveAll(_ sender: Any) {

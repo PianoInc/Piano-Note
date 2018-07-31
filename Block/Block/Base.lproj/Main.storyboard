@@ -1611,7 +1611,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Ja1-ci-pk8"/>
                         <barButtonItem systemItem="compose" id="ORc-Yc-s8s">
                             <connections>
-                                <action selector="tapNewNote:" destination="Z4M-VK-h0l" id="V33-md-cME"/>
+                                <action selector="tapCompose:" destination="Z4M-VK-h0l" id="8us-hc-28U"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -2025,13 +2025,17 @@
         <!--Navigation Controller-->
         <scene sceneID="NeY-RN-8A6">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mmD-b1-HuX" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="mmD-b1-HuX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hjy-T7-b2I">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vjM-42-N3J">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="bEp-xx-jIT" kind="relationship" relationship="rootViewController" id="XaF-xj-sd1"/>
                     </connections>

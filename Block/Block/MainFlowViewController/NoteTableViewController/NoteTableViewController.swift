@@ -36,6 +36,22 @@ class NoteTableViewController: UITableViewController {
         }
         clearsSelectionOnViewWillAppear = true
     }
+//    lazy var detailViewController: DetailViewController = {
+//        let unwrapSplitViewController = self.splitViewController!
+//        let unwrapDetailNav = unwrapSplitViewController.viewControllers.last as! UINavigationController
+//        return unwrapDetailNav.topViewController as! DetailViewController
+//    }()
+    
+//    func setFirstCellIfIpad() {
+//        if detailViewController.isVisible {
+//
+//            if hasMemoInCurrentFolder() {
+//                selectTableViewCell(with: IndexPath(row: 0, section: 0))
+//            } else {
+//                detailViewController.memo = nil
+//            }
+//        }
+//    }
 
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)

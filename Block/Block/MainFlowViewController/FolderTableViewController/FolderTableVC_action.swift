@@ -32,7 +32,7 @@ extension FolderTableViewController {
     }
     
     @IBAction func tapFacebook(_ sender: Any) {
-        performSegue(withIdentifier: "FacebookMasterDetailVC", sender: nil)
+        performSegue(withIdentifier: "FacebookSplitViewController", sender: nil)
     }
     
     @IBAction func tapSetting(_ sender: Any) {
