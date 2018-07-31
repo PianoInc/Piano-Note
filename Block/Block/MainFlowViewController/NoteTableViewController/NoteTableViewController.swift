@@ -32,7 +32,7 @@ class NoteTableViewController: UITableViewController {
 
         case .some(_):
             updateViews(for: state)
-            fetchData()
+            asyncFetchData()
         }
         clearsSelectionOnViewWillAppear = true
     }
@@ -91,7 +91,7 @@ class NoteTableViewController: UITableViewController {
 }
 
 extension NoteTableViewController {
-    private func fetchData() {
+    private func asyncFetchData() {
         DispatchQueue.main.async { [weak self] in
             do {
                 try self?.resultsController?.performFetch()

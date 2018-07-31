@@ -33,7 +33,7 @@ class BlockTableViewController: UIViewController {
 
         case .some(_):
             updateViews(for: state)
-            fetchData()
+            asyncFetchData()
             setupTableView()
         }
     }
@@ -98,7 +98,7 @@ class BlockTableViewController: UIViewController {
 
 
 extension BlockTableViewController {
-    private func fetchData() {
+    private func asyncFetchData() {
         DispatchQueue.main.async { [weak self] in
             do {
                 try self?.resultsController?.performFetch()
