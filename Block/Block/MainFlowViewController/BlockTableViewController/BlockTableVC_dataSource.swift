@@ -146,8 +146,8 @@ extension BlockTableViewController: TableViewDelegate {
 
 extension BlockTableViewController {
     func copy(blocks: [Block]) {
-        //TODO: 이거 paste로직 만들어서 block 돌아가면서 제대로 타입 붙여야함
-        UIPasteboard.general.string = blocks.first?.text
+        let pasteboardManager = PasteboardManager()
+        pasteboardManager.copyParagraphs(blocks: blocks)
         navigationController?.appearCopyNotificationView()
     }
 }

@@ -30,6 +30,7 @@ struct PasteboardManager {
         let mutableAttrString = NSMutableAttributedString()
         blocks.forEach { (block) in
             let attrString = self.nsAttributedStringFrom(block: block)
+            print(attrString.string)
             mutableAttrString.append(attrString)
         }
         
@@ -84,7 +85,7 @@ struct PasteboardManager {
             
             //첫번째 문단은 일단 붙인다.
             let firstString = strArray.remove(at: 0)
-            currentBlock.text?.append(firstString)
+            currentBlock.text = (currentBlock.text ?? "") + firstString
             currentBlock.modifiedDate = Date()
             
             DispatchQueue.main.async {
