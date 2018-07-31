@@ -26,7 +26,7 @@ struct PasteboardManager {
      # why
      빠른 편집의 한 기능으로 제공하기 위해
      */
-    func copyParagraphs(blocks: [Block]) {
+    public func copyParagraphs(blocks: [Block]) {
         let mutableAttrString = NSMutableAttributedString()
         blocks.forEach { (block) in
             let attrString = self.nsAttributedStringFrom(block: block)
@@ -70,7 +70,7 @@ struct PasteboardManager {
      텍스트뷰가 아닌 테이블 뷰 엔진에 맞는 데이터 구조로 변환시키기 위해
      */
     
-    func pasteParagraphs(currentBlock: Block, in controller: NSFetchedResultsController<Block>) {
+    public func pasteParagraphs(currentBlock: Block, in controller: NSFetchedResultsController<Block>) {
         //TODO: Loading Indicator 여기서 킨 다음 메인 비동기 큐에서 해제해야함.
         
         guard let context = currentBlock.managedObjectContext,
@@ -156,7 +156,7 @@ struct PasteboardManager {
      # why
      보통 외부에서 붙여넣기를 할 때, 외부에서 복사한 뒤, 메모 앱으로 와서 메모화면을 띄우고 붙여넣기 버튼을 누르는데 이 걸 자동화시키기 위함. 단, 붙여넣기
     */
-    func suggestPasteIfNeeded() {
+    public func suggestPasteIfNeeded() {
         
     }
     
