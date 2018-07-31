@@ -24,18 +24,41 @@ class BlockTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        updateViews(for: state)
-        fetchData()
-        setupTableView()
+        switch resultsController {
+        case .none:
+            let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+            persistentContainer = container
 
-        //TODO: persistentContainer 가 nil이라는 건 preserve로 왔거나 splitView라는 말임, 따라서 할당해주고, prepare에서 하는 짓을 다시 해줘야함
-        if persistentContainer == nil {
-            
+        case .some(_):
+            updateViews(for: state)
+            asyncFetchData()
+            setupTableView()
         }
-        
     }
-    
+
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        coder.encode(note.objectID.uriRepresentation(), forKey: "noteURI")
+        coder.encode(state.rawValue, forKey: "BlockTableViewControllerState")
+    }
+
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        if let url = coder.decodeObject(forKey: "noteURI") as? URL,
+            let decodeState = coder.decodeObject(forKey: "BlockTableViewControllerState") as? String,
+            let id = persistentContainer.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url),
+            let note = persistentContainer.viewContext.object(with: id) as? Note {
+
+            self.note = note
+            state = ViewControllerState(rawValue: decodeState)
+            resultsController = persistentContainer.viewContext.blockResultsController(note: note)
+            resultsController?.delegate = self
+            updateViews(for: state)
+            syncFetchData()
+            setupTableView()
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         registerKeyboardNotification()
     }
@@ -54,12 +77,12 @@ class BlockTableViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0() }
-        
+
         let count = resultsController?.sections?.first?.numberOfObjects ?? 0
         if count == 0 {
             tapBackground("firstWriting")
         }
-        
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -69,12 +92,11 @@ class BlockTableViewController: UIViewController {
             
         }
     }
-
 }
 
 
 extension BlockTableViewController {
-    private func fetchData() {
+    private func asyncFetchData() {
         DispatchQueue.main.async { [weak self] in
             do {
                 try self?.resultsController?.performFetch()
@@ -84,6 +106,15 @@ extension BlockTableViewController {
             
             self?.tableView.reloadData()
         }
+    }
+
+    private func syncFetchData() {
+        do {
+            try self.resultsController?.performFetch()
+        } catch {
+            print("BlockTableViewController를 fetch하는 데 에러 발생: \(error.localizedDescription)")
+        }
+        self.tableView.reloadData()
     }
     
     //50글자를 채워야함. //50글자가 안된다면,
@@ -125,7 +156,7 @@ extension BlockTableViewController {
         
     }
     
-    private func setupTableView(){
+    private func setupTableView() {
         tableView.contentInset = tableViewInset
         tableView.dragDelegate = self
         tableView.dropDelegate = self
@@ -136,8 +167,4 @@ extension BlockTableViewController {
         persistentContainer.viewContext.saveIfNeeded()
     }
 }
-
-
-
-
 

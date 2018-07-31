@@ -1391,7 +1391,7 @@
         <!--Split View Controller-->
         <scene sceneID="RsT-Sq-EFB">
             <objects>
-                <splitViewController id="5f5-VZ-2YJ" sceneMemberID="viewController">
+                <splitViewController restorationIdentifier="RootSplitViewController" id="5f5-VZ-2YJ" sceneMemberID="viewController">
                     <connections>
                         <segue destination="ioo-Jc-95o" kind="relationship" relationship="detailViewController" id="tfu-C1-rl1"/>
                         <segue destination="OnT-0c-zuN" kind="relationship" relationship="masterViewController" id="Ppl-SD-QTe"/>
@@ -1441,8 +1441,8 @@
         <!--Folder-->
         <scene sceneID="xmf-Oh-EwE">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="7Ql-cp-YfK" customClass="FolderTableViewController" customModule="Block" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vLT-bo-4ae">
+                <tableViewController restorationIdentifier="FolderTableViewController" clearsSelectionOnViewWillAppear="NO" id="7Ql-cp-YfK" customClass="FolderTableViewController" customModule="Block" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FolderTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vLT-bo-4ae">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1507,6 +1507,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="Z4M-VK-h0l" kind="show" identifier="NoteTableViewController" id="moi-8E-hF0"/>
+                        <segue destination="Z4M-VK-h0l" kind="show" identifier="NoAnimationNoteViewController" customClass="NoAnimationPushSegue" customModule="Block" customModuleProvider="target" id="G5e-RA-gxg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uB4-0J-GnX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1516,8 +1517,8 @@
         <!--All Notes-->
         <scene sceneID="Vpe-yw-kkD">
             <objects>
-                <tableViewController storyboardIdentifier="NoteTableViewController" id="Z4M-VK-h0l" customClass="NoteTableViewController" customModule="Block" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XAg-if-Fwh">
+                <tableViewController storyboardIdentifier="NoteTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z4M-VK-h0l" customClass="NoteTableViewController" customModule="Block" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="NoteTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XAg-if-Fwh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1716,12 +1717,12 @@
         <!--Block Table View Controller-->
         <scene sceneID="YcT-6h-2Ah">
             <objects>
-                <viewController id="bEp-xx-jIT" customClass="BlockTableViewController" customModule="Block" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kyk-R6-WM7">
+                <viewController storyboardIdentifier="BlockTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bEp-xx-jIT" customClass="BlockTableViewController" customModule="Block" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="BlockTableViewControllerView" id="kyk-R6-WM7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6yE-WC-Umq">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="BlockTableView" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6yE-WC-Umq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -2060,7 +2061,7 @@
         <!--Navigation Controller-->
         <scene sceneID="VAu-sj-1kg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="OnT-0c-zuN" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="FolderNavigationController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="OnT-0c-zuN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="0c4-YU-Qt3">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
@@ -2133,4 +2134,7 @@
         <image name="test1" width="142" height="106"/>
         <image name="unCheck" width="20" height="21"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="G5e-RA-gxg"/>
+    </inferredMetricsTieBreakers>
 </document>
