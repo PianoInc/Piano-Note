@@ -25,18 +25,40 @@ class NoteTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        clearsSelectionOnViewWillAppear = true
-        updateViews(for: state)
-        fetchData()
-        
-        //TODO: persistentContainer 가 nil이라는 건 preserve로 왔거나 splitView라는 말임, 따라서 할당해주고, prepare에서 하는 짓을 다시 해줘야함
-        if persistentContainer == nil {
-            
+        switch resultsController {
+        case .none:
+            let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+            persistentContainer = container
+
+        case .some(_):
+            updateViews(for: state)
+            asyncFetchData()
         }
-        
+        clearsSelectionOnViewWillAppear = true
     }
-    
+
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        coder.encode(folder.objectID.uriRepresentation(), forKey: "folderURI")
+        coder.encode(state.rawValue, forKey: "NoteTableViewControllerState")
+    }
+
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        if let url = coder.decodeObject(forKey: "folderURI") as? URL,
+            let decodeState = coder.decodeObject(forKey: "NoteTableViewControllerState") as? String,
+            let id = persistentContainer.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url),
+            let folder = persistentContainer.viewContext.object(with: id) as? Folder {
+
+            self.folder = folder
+            state = ViewControllerState(rawValue: decodeState)
+            resultsController = persistentContainer.viewContext.noteResultsController(folder: folder)
+            resultsController?.delegate = self
+            updateViews(for: state)
+            syncFetchData()
+        }
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         save()
@@ -60,7 +82,6 @@ class NoteTableViewController: UITableViewController {
             vc.resultsController = resultsController
             resultsController.delegate = vc
 
-            
         } else if let nav = segue.destination as? UINavigationController,
             let vc = nav.topViewController as? SortTableViewController  {
             vc.noteTableVC = self
@@ -70,7 +91,7 @@ class NoteTableViewController: UITableViewController {
 }
 
 extension NoteTableViewController {
-    private func fetchData() {
+    private func asyncFetchData() {
         DispatchQueue.main.async { [weak self] in
             do {
                 try self?.resultsController?.performFetch()
@@ -81,8 +102,19 @@ extension NoteTableViewController {
             self?.tableView.reloadData()
         }
     }
+
+    private func syncFetchData() {
+        do {
+            try self.resultsController?.performFetch()
+        } catch {
+            print("NoteTableViewController를 fetch하는 데 에러 발생: \(error.localizedDescription)")
+        }
+        self.tableView.reloadData()
+    }
     
     private func save() {
         persistentContainer.viewContext.saveIfNeeded()
     }
 }
+
+

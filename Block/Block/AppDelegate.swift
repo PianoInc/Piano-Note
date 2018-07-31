@@ -14,12 +14,22 @@ import Facebook
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var isRestoreSession = false
+
+    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        return true
+    }
+
+    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+        isRestoreSession = true
+        return true
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         if !UserDefaults.standard.bool(forKey: "previouslyLaunched") {
             UserDefaults.standard.set(true, forKey: "previouslyLaunched")
-            persistentContainer.createFolderIfNeeded()
+            persistentContainer.viewContext.createFolderIfNeeded()
         }
         
         if let splitViewController = window?.rootViewController as? UISplitViewController {
@@ -64,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         saveContext()
     }
-    
+
     var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Block")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in

@@ -46,4 +46,4 @@ public typealias TableView = UITableView
 public typealias FontDescriptorSymbolicTraits = UIFontDescriptorSymbolicTraits
 public typealias TableViewController = UITableViewController
 public typealias FontTextStyle = UIFontTextStyle
-public typealias PasteBoard = UIPasteboard
+public typealias Pasteboard = UIPasteboard

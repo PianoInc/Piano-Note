@@ -10,11 +10,19 @@ import Foundation
 import CoreData
 
 extension Block: TableDatable {
+    
     var type: BlockType {
         get {
-            return BlockType(rawValue: typeInteger) ?? .plainText
-        } set {
-            typeInteger = newValue.rawValue
+            if plainTextBlock != nil { return .plainText }
+            else if checklistTextBlock != nil { return .checklistText }
+            else if unOrderedTextBlock != nil { return .unOrderedText }
+            else if orderedTextBlock != nil { return .orderedText }
+            else if separatorBlock != nil { return .separator }
+            else if imageCollectionBlock != nil { return .imageCollection }
+            else if fileBlock != nil { return .file }
+            else if drawingBlock != nil { return .drawing }
+            else { return .comment }
+            
         }
     }
     
@@ -125,60 +133,6 @@ extension Block: TableDatable {
         }
     }
     
-    //TODO: 형광펜 data + 일정 data + 연락처 data 추가되면 attributes까지 입혀야함
-    
-    /**
-     attributedText에 데이터를 넣으면 알아서 디테일 블럭을 만들어준다.
-     split을 잘 해야한다.
-     
-     */
-    var attributedText: NSAttributedString? {
-        get {
-            switch type {
-            case .plainText:
-                return NSAttributedString(string: text ?? "", attributes: [.font : font])
-            case .checklistText:
-                return NSAttributedString(string: "- " + (text ?? ""), attributes: [.font : font])
-            case .unOrderedText:
-                return NSAttributedString(string: "* " + (text ?? ""), attributes: [.font : font])
-            case .orderedText:
-                let num = orderedTextBlock?.num ?? 0
-                return NSAttributedString(string: "\(num). ", attributes: [.font : font])
-            case .imageCollection:
-                //TODO: 이미지를 NSTextAttachment로 바꿔서 연달아 합쳐서 리턴해야함
-                return nil
-            case .separator:
-                return NSAttributedString(string: "---", attributes: [.font : font])
-            case .file:
-                //TODO: 파일을 NSTextAttachment로 바꿔서 리턴해야함
-                return nil
-            case .drawing:
-                //TODO: 이미지를 NSTextAttachment로 바꿔서 리턴해야함
-                return nil
-            case .comment:
-                //TODO: 댓글을 복사/붙여넣기 허용할 건지?? 고민해보고 결정하기
-                return nil
-            }
-        } set {
-            //이미지 추가될 때 로직 바꾸어야함
-            guard let string = newValue?.string else { return }
-            
-            //맨 앞이 - 로 되어있다면 체크리스트 타입
-            
-            //맨 앞이 * 로 되어있다면 순서없는 서식 타입
-            
-            //맨 앞이 숫자. 로 되어 있다면 순서있는 서식 타입
-            
-            
-            //TODO: 다음을 처리해야함: 이미지 attachment 배열 -> 이미지 컬렉션
-            
-            //TODO: 다음을 처리해야함: attachment data 타입: file -> 파일
-            
-            //TODO: 다음을 처리해야함: attachment data 타입: drawing -> 그리기
-            
-        }
-    }
-    
     var hasFormat: Bool {
         switch self.type {
         case .checklistText,
@@ -220,135 +174,153 @@ extension Block: TableDatable {
         }
         
     }
-
-    var event: Event? {
+    
+    var highlight: Highlight? {
         get {
-            var data: Data?
             switch type {
             case .plainText:
-                data = plainTextBlock?.event
-            case .checklistText:
-                data = checklistTextBlock?.event
-            case .unOrderedText:
-                data = unOrderedTextBlock?.event
+                return plainTextBlock?.highlight
             case .orderedText:
-                data = orderedTextBlock?.event
+                return orderedTextBlock?.highlight
+            case .unOrderedText:
+                return unOrderedTextBlock?.highlight
+            case .checklistText:
+                return checklistTextBlock?.highlight
             default:
                 return nil
             }
-            guard let sData = data else {return nil}
-            return try? JSONDecoder().decode(Event.self, from: sData)
         } set {
-            let data = try? JSONEncoder().encode(newValue)
             switch type {
             case .plainText:
-                plainTextBlock?.event = data
-            case .checklistText:
-                checklistTextBlock?.event = data
-            case .unOrderedText:
-                unOrderedTextBlock?.event = data
+                plainTextBlock?.highlight = newValue
             case .orderedText:
-                orderedTextBlock?.event = data
-            default: break
+                orderedTextBlock?.highlight = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.highlight = newValue
+            case .checklistText:
+                checklistTextBlock?.highlight = newValue
+            default:
+                ()
+            }
+        }
+    }
+
+    var event: Event? {
+        get {
+            switch type {
+            case .plainText:
+                return plainTextBlock?.event
+            case .orderedText:
+                return orderedTextBlock?.event
+            case .unOrderedText:
+                return unOrderedTextBlock?.event
+            case .checklistText:
+                return checklistTextBlock?.event
+            default:
+                return nil
+            }
+        } set {
+            switch type {
+            case .plainText:
+                plainTextBlock?.event = newValue
+            case .orderedText:
+                orderedTextBlock?.event = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.event = newValue
+            case .checklistText:
+                checklistTextBlock?.event = newValue
+            default:
+                ()
             }
         }
     }
     
     var contact: Contact? {
         get {
-            var data: Data?
             switch type {
             case .plainText:
-                data = plainTextBlock?.contact
-            case .checklistText:
-                data = checklistTextBlock?.contact
-            case .unOrderedText:
-                data = unOrderedTextBlock?.contact
+                return plainTextBlock?.contact
             case .orderedText:
-                data = orderedTextBlock?.contact
+                return orderedTextBlock?.contact
+            case .unOrderedText:
+                return unOrderedTextBlock?.contact
+            case .checklistText:
+                return checklistTextBlock?.contact
             default:
                 return nil
             }
-            guard let sData = data else {return nil}
-            return try? JSONDecoder().decode(Contact.self, from: sData)
         } set {
-            let data = try? JSONEncoder().encode(newValue)
             switch type {
             case .plainText:
-                plainTextBlock?.contact = data
-            case .checklistText:
-                checklistTextBlock?.contact = data
-            case .unOrderedText:
-                unOrderedTextBlock?.contact = data
+                plainTextBlock?.contact = newValue
             case .orderedText:
-                orderedTextBlock?.contact = data
-            default: break
+                orderedTextBlock?.contact = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.contact = newValue
+            case .checklistText:
+                checklistTextBlock?.contact = newValue
+            default:
+                ()
             }
         }
     }
     
     var address: Address? {
         get {
-            var data: Data?
             switch type {
             case .plainText:
-                data = plainTextBlock?.address
-            case .checklistText:
-                data = checklistTextBlock?.address
-            case .unOrderedText:
-                data = unOrderedTextBlock?.address
+                return plainTextBlock?.address
             case .orderedText:
-                data = orderedTextBlock?.address
+                return orderedTextBlock?.address
+            case .unOrderedText:
+                return unOrderedTextBlock?.address
+            case .checklistText:
+                return checklistTextBlock?.address
             default:
                 return nil
             }
-            guard let sData = data else {return nil}
-            return try? JSONDecoder().decode(Address.self, from: sData)
         } set {
-            let data = try? JSONEncoder().encode(newValue)
             switch type {
             case .plainText:
-                plainTextBlock?.address = data
-            case .checklistText:
-                checklistTextBlock?.address = data
-            case .unOrderedText:
-                unOrderedTextBlock?.address = data
+                plainTextBlock?.address = newValue
             case .orderedText:
-                orderedTextBlock?.address = data
-            default: break
+                orderedTextBlock?.address = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.address = newValue
+            case .checklistText:
+                checklistTextBlock?.address = newValue
+            default:
+                ()
             }
         }
     }
     
     var link: Link? {
         get {
-            var data: Data?
             switch type {
             case .plainText:
-                data = plainTextBlock?.link
-            case .checklistText:
-                data = checklistTextBlock?.link
-            case .unOrderedText:
-                data = unOrderedTextBlock?.link
+                return plainTextBlock?.link
             case .orderedText:
-                data = orderedTextBlock?.link
+                return orderedTextBlock?.link
+            case .unOrderedText:
+                return unOrderedTextBlock?.link
+            case .checklistText:
+                return checklistTextBlock?.link
             default:
                 return nil
             }
-            guard let sData = data else {return nil}
-            return try? JSONDecoder().decode(Link.self, from: sData)
         } set {
-            let data = try? JSONEncoder().encode(newValue)
             switch type {
             case .plainText:
-                plainTextBlock?.link = data
-            case .checklistText:
-                checklistTextBlock?.link = data
-            case .unOrderedText:
-                unOrderedTextBlock?.link = data
+                plainTextBlock?.link = newValue
             case .orderedText:
-                orderedTextBlock?.link = data
-            default: break
+                orderedTextBlock?.link = newValue
+            case .unOrderedText:
+                unOrderedTextBlock?.link = newValue
+            case .checklistText:
+                checklistTextBlock?.link = newValue
+            default:
+                ()
             }
         }
     }
@@ -373,8 +345,6 @@ extension Block {
         guard let plain = plainTextBlock,
             let context = managedObjectContext
             else { return }
-        
-        type = bullet.blockType
         
         var bulletTextBlock: BulletTextBlockType
         switch bullet.type {
@@ -415,7 +385,6 @@ extension Block {
     internal func revertToPlain() {
         guard let context = managedObjectContext else { return }
         
-        type = .plainText
         modifiedDate = Date()
         
         //1. plainText를 생성하고
@@ -488,7 +457,6 @@ extension Block {
         let newblock = Block(context: context)
         newblock.order = order
         newblock.note = note
-        newblock.type = type
         
         order = createdOrder
         
@@ -582,17 +550,11 @@ extension Block {
         let newblock = Block(context: context)
         newblock.order = createdOrder
         newblock.note = note
-        newblock.type = type
         
         switch type {
         case .plainText:
-            
-            guard let plainTextBlock = plainTextBlock else { return }
-            
-            //2. plainBlock 생성
             let newPlainBlock = PlainTextBlock(context: context)
             newPlainBlock.text = text
-            newPlainBlock.textStyleInteger = plainTextBlock.textStyleInteger
             
             //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
             //        newPlainBlock.attributes
@@ -601,13 +563,9 @@ extension Block {
             newPlainBlock.addToBlockCollection(newblock)
             
         case .checklistText:
-            guard let checklistTextBlock = checklistTextBlock else { return }
-            
-            //2. checklistText 생성
             let newChecklistTextBlock = ChecklistTextBlock(context: context)
             newChecklistTextBlock.text = text
-            newChecklistTextBlock.textStyleInteger = checklistTextBlock.textStyleInteger
-            newChecklistTextBlock.frontWhitespaces = checklistTextBlock.frontWhitespaces
+            newChecklistTextBlock.frontWhitespaces = frontWhitespaces
             
             //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
             //        newChecklistTextBlock.attributes
@@ -616,13 +574,9 @@ extension Block {
             newChecklistTextBlock.addToBlockCollection(newblock)
             
         case .unOrderedText:
-            guard let unOrderedTextBlock = unOrderedTextBlock else { return }
-            
-            //2. unOrderedText 생성
             let newUnOrderedTextBlock = UnOrderedTextBlock(context: context)
             newUnOrderedTextBlock.text = text
-            newUnOrderedTextBlock.textStyleInteger = unOrderedTextBlock.textStyleInteger
-            newUnOrderedTextBlock.frontWhitespaces = unOrderedTextBlock.frontWhitespaces
+            newUnOrderedTextBlock.frontWhitespaces = frontWhitespaces
             
             //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
             //        newUnOrderedTextBlock.attributes
@@ -631,14 +585,12 @@ extension Block {
             newUnOrderedTextBlock.addToBlockCollection(newblock)
             
         case .orderedText:
-            guard let orderedTextBlock = orderedTextBlock else { return }
-            
-            //2. orderedText 생성
+            guard let num = orderedTextBlock?.num else { return }
+ 
             let newOrderedTextBlock = OrderedTextBlock(context: context)
             newOrderedTextBlock.text = text
-            newOrderedTextBlock.num = orderedTextBlock.num + 1
-            newOrderedTextBlock.textStyleInteger = orderedTextBlock.textStyleInteger
-            newOrderedTextBlock.frontWhitespaces = orderedTextBlock.frontWhitespaces
+            newOrderedTextBlock.num = num + 1
+            newOrderedTextBlock.frontWhitespaces = frontWhitespaces
             
             //TODO: 잘린 글자만큼 형광펜 범위를 조정해서 대입해줘야함
             //        newOrderedTextBlock.attributes
@@ -649,6 +601,9 @@ extension Block {
         default:
             return
         }
+        
+        //개행시 새 문단을 작성하는 경우라면 textStyle은 다시 바디를 유지해야한다.
+        newblock.textStyle = text.count != 0 ? self.textStyle : .body
         
     }
     

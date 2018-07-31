@@ -43,4 +43,17 @@ extension Note {
         
         self.managedObjectContext?.delete(self)
     }
+    
+    internal func deleteWithRelationshipIfNeeded() {
+        //note의 폴더 타입이 휴지통이라면 영구삭제, 아니라면 휴지통 폴더로 이동
+        guard let folderType = folder?.folderType,
+            let context = managedObjectContext else { return }
+        
+        switch folderType {
+        case .deleted:
+            deleteWithRelationship()
+        case .all, .custom, .locked:
+            folder = context.fetchFolder(type: .deleted)
+        }
+    }
 }

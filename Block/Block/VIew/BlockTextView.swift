@@ -9,7 +9,7 @@
 import UIKit
 
 class BlockTextView: UITextView {
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         layoutManager.delegate = self
@@ -34,6 +34,15 @@ class BlockTextView: UITextView {
             isEditable = true
             becomeFirstResponder()
         }
+    }
+    
+    override func paste(_ sender: Any?) {
+        guard let cell = superview?.superview as? TextBlockTableViewCell,
+            let block = cell.data as? Block,
+            let controller = cell.controller else { return }
+        
+        let pasteboardManager = PasteboardManager()
+        pasteboardManager.pasteParagraphs(currentBlock: block, in: controller)
     }
 
 }
