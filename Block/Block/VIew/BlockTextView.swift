@@ -35,6 +35,15 @@ class BlockTextView: UITextView {
             becomeFirstResponder()
         }
     }
+    
+    override func paste(_ sender: Any?) {
+        guard let cell = superview?.superview as? TextBlockTableViewCell,
+            let block = cell.data as? Block,
+            let controller = cell.controller else { return }
+        
+        let pasteboardManager = PasteboardManager()
+        pasteboardManager.pasteParagraphs(currentBlock: block, in: controller)
+    }
 
 }
 

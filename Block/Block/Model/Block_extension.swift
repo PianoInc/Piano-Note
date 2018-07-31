@@ -10,11 +10,19 @@ import Foundation
 import CoreData
 
 extension Block: TableDatable {
+    
     var type: BlockType {
         get {
-            return BlockType(rawValue: typeInteger) ?? .plainText
-        } set {
-            typeInteger = newValue.rawValue
+            if plainTextBlock != nil { return .plainText }
+            else if checklistTextBlock != nil { return .checklistText }
+            else if unOrderedTextBlock != nil { return .unOrderedText }
+            else if orderedTextBlock != nil { return .orderedText }
+            else if separatorBlock != nil { return .separator }
+            else if imageCollectionBlock != nil { return .imageCollection }
+            else if fileBlock != nil { return .file }
+            else if drawingBlock != nil { return .drawing }
+            else { return .comment }
+            
         }
     }
     
@@ -338,8 +346,6 @@ extension Block {
             let context = managedObjectContext
             else { return }
         
-        type = bullet.blockType
-        
         var bulletTextBlock: BulletTextBlockType
         switch bullet.type {
         case .orderedlist:
@@ -379,7 +385,6 @@ extension Block {
     internal func revertToPlain() {
         guard let context = managedObjectContext else { return }
         
-        type = .plainText
         modifiedDate = Date()
         
         //1. plainText를 생성하고
@@ -452,7 +457,6 @@ extension Block {
         let newblock = Block(context: context)
         newblock.order = order
         newblock.note = note
-        newblock.type = type
         
         order = createdOrder
         
@@ -546,7 +550,6 @@ extension Block {
         let newblock = Block(context: context)
         newblock.order = createdOrder
         newblock.note = note
-        newblock.type = type
         
         switch type {
         case .plainText:
