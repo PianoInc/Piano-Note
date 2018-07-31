@@ -161,6 +161,12 @@ struct PasteboardManager {
         
     }
     
+    public func allString(from blocks: [Block]) -> String {
+        let mAttr = NSMutableAttributedString()
+        blocks.forEach {mAttr.append(nsAttributedStringFrom(block: $0))}
+        return mAttr.string
+    }
+    
 }
 
 
