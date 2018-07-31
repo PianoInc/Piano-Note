@@ -35,18 +35,15 @@ extension BlockTableViewController {
     }
     
     @IBAction func tapCopyParagraphs(_ sender: Any) {
-        
         guard let controller = resultsController,
             let indexPaths = tableView.indexPathsForSelectedRows else { return }
-        
         let blocks = indexPaths.map { controller.object(at: $0) }
-        
-        let manager = PasteboardManager()
-        manager.copyParagraphs(blocks: blocks)
+        copy(blocks: blocks)
     }
     
     @IBAction func tapCopyAll(_ sender: Any) {
-        
+        guard let blocks = resultsController?.fetchedObjects else { return }
+        copy(blocks: blocks)
     }
     
     

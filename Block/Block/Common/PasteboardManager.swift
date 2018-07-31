@@ -84,7 +84,7 @@ struct PasteboardManager {
             
             //첫번째 문단은 일단 붙인다.
             let firstString = strArray.remove(at: 0)
-            currentBlock.text?.append(firstString)
+            currentBlock.text = (currentBlock.text ?? "") + firstString
             currentBlock.modifiedDate = Date()
             
             DispatchQueue.main.async {
