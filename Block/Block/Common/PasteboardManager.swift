@@ -116,17 +116,18 @@ struct PasteboardManager {
                         switch bullet.type {
                         case .checkist:
                             let checklistBlock = ChecklistTextBlock(context: context)
-                            checklistBlock.text = str
+                            checklistBlock.text = (str as NSString).substring(from: bullet.baselineIndex)
                             checklistBlock.addToBlockCollection(block)
                             
                         case .orderedlist:
                             let orderedListBlock = OrderedTextBlock(context: context)
-                            orderedListBlock.text = str
+                            orderedListBlock.num = Int64(bullet.string) ?? 0
+                            orderedListBlock.text = (str as NSString).substring(from: bullet.baselineIndex)
                             orderedListBlock.addToBlockCollection(block)
                             
                         case .unOrderedlist:
                             let unorderedBlock = UnOrderedTextBlock(context: context)
-                            unorderedBlock.text = str
+                            unorderedBlock.text = (str as NSString).substring(from: bullet.baselineIndex)
                             unorderedBlock.addToBlockCollection(block)
                         }
                     } else {

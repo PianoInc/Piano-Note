@@ -38,12 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             splitViewController.maximumPrimaryColumnWidth = 414
             splitViewController.minimumPrimaryColumnWidth = 320
             
+            
             if let vc = (splitViewController.viewControllers.first as? UINavigationController)?.topViewController as? FolderTableViewController {
                 vc.persistentContainer = persistentContainer
                 let context = persistentContainer.viewContext
                 let resultsController = context.folderResultsController()
                 vc.resultsController = resultsController
                 resultsController.delegate = vc
+                
             } else {
                 print("에러발생!! 스플릿뷰의 첫번째 컨트롤러가 폴더가 아니다!")
             }
@@ -107,4 +109,5 @@ extension AppDelegate : UISplitViewControllerDelegate {
         return true
     }
     
+
 }
