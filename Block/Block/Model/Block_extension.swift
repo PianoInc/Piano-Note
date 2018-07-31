@@ -10,11 +10,19 @@ import Foundation
 import CoreData
 
 extension Block: TableDatable {
+    
     var type: BlockType {
         get {
-            return BlockType(rawValue: typeInteger) ?? .plainText
-        } set {
-            typeInteger = newValue.rawValue
+            if plainTextBlock != nil { return .plainText }
+            else if checklistTextBlock != nil { return .checklistText }
+            else if unOrderedTextBlock != nil { return .unOrderedText }
+            else if orderedTextBlock != nil { return .orderedText }
+            else if separatorBlock != nil { return .separator }
+            else if imageCollectionBlock != nil { return .imageCollection }
+            else if fileBlock != nil { return .file }
+            else if drawingBlock != nil { return .drawing }
+            else { return .comment }
+            
         }
     }
     
@@ -122,71 +130,6 @@ extension Block: TableDatable {
             default:
                 ()
             }
-        }
-    }
-    
-    //TODO: 형광펜 data + 일정 data + 연락처 data 추가되면 attributes까지 입혀야함
-    
-    /**
-     attributedText에 데이터를 넣으면 알아서 디테일 블럭을 만들어준다.
-     split을 잘 해야한다.
-     
-     */
-    var attributedText: NSAttributedString? {
-        get {
-            //먼저 text에 attributes를 입힌다.
-            let attrString = NSAttributedString(string: text ?? "", attributes: [.font : font])
-            
-            
-            
-            
-            //다 입혔으면 타입에 따라 앞에 prefix를 붙여준다.
-            
-            //완성도를 위해 NSParagraphStyle까지 적절하게 세팅해준다.
-            
-            
-            switch type {
-            case .plainText:
-                return NSAttributedString(string: text ?? "", attributes: [.font : font])
-            case .checklistText:
-                return NSAttributedString(string: "- " + (text ?? ""), attributes: [.font : font])
-            case .unOrderedText:
-                return NSAttributedString(string: "* " + (text ?? ""), attributes: [.font : font])
-            case .orderedText:
-                let num = orderedTextBlock?.num ?? 0
-                return NSAttributedString(string: "\(num). ", attributes: [.font : font])
-            case .imageCollection:
-                //TODO: 이미지를 NSTextAttachment로 바꿔서 연달아 합쳐서 리턴해야함
-                return nil
-            case .separator:
-                return NSAttributedString(string: "---", attributes: [.font : font])
-            case .file:
-                //TODO: 파일을 NSTextAttachment로 바꿔서 리턴해야함
-                return nil
-            case .drawing:
-                //TODO: 이미지를 NSTextAttachment로 바꿔서 리턴해야함
-                return nil
-            case .comment:
-                //TODO: 댓글을 복사/붙여넣기 허용할 건지?? 고민해보고 결정하기
-                return nil
-            }
-        } set {
-            //이미지 추가될 때 로직 바꾸어야함
-            guard let string = newValue?.string else { return }
-            
-            //맨 앞이 - 로 되어있다면 체크리스트 타입
-            
-            //맨 앞이 * 로 되어있다면 순서없는 서식 타입
-            
-            //맨 앞이 숫자. 로 되어 있다면 순서있는 서식 타입
-            
-            
-            //TODO: 다음을 처리해야함: 이미지 attachment 배열 -> 이미지 컬렉션
-            
-            //TODO: 다음을 처리해야함: attachment data 타입: file -> 파일
-            
-            //TODO: 다음을 처리해야함: attachment data 타입: drawing -> 그리기
-            
         }
     }
     
@@ -403,8 +346,6 @@ extension Block {
             let context = managedObjectContext
             else { return }
         
-        type = bullet.blockType
-        
         var bulletTextBlock: BulletTextBlockType
         switch bullet.type {
         case .orderedlist:
@@ -444,7 +385,6 @@ extension Block {
     internal func revertToPlain() {
         guard let context = managedObjectContext else { return }
         
-        type = .plainText
         modifiedDate = Date()
         
         //1. plainText를 생성하고
@@ -517,7 +457,6 @@ extension Block {
         let newblock = Block(context: context)
         newblock.order = order
         newblock.note = note
-        newblock.type = type
         
         order = createdOrder
         
@@ -611,7 +550,6 @@ extension Block {
         let newblock = Block(context: context)
         newblock.order = createdOrder
         newblock.note = note
-        newblock.type = type
         
         switch type {
         case .plainText:

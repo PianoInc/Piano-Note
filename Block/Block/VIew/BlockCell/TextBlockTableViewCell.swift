@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TextBlockTableViewCell: UITableViewCell, BlockTableDataAcceptable, Detection {
     @IBOutlet weak var ibButton: UIButton!
@@ -32,6 +33,8 @@ class TextBlockTableViewCell: UITableViewCell, BlockTableDataAcceptable, Detecti
             }
         }
     }
+    
+    weak var controller: NSFetchedResultsController<Block>?
     
     var data: TableDatable? {
         didSet {

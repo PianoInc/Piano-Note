@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 /**
  클래스 이름 + 뷰 이름으로 identifier를 만들도록 정의
@@ -40,4 +41,5 @@ protocol NoteTableDataAcceptable: TableDataAcceptable {
 
 protocol BlockTableDataAcceptable: TableDataAcceptable {
     var state: BlockTableViewController.ViewControllerState? { get set }
+    var controller: NSFetchedResultsController<Block>? { get set }
 }

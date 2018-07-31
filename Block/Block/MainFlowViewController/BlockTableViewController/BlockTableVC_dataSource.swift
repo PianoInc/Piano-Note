@@ -24,6 +24,7 @@ extension BlockTableViewController: TableViewDataSource {
         var cell = tableView.dequeueReusableCell(withIdentifier: data.identifier) as! BlockTableDataAcceptable & UITableViewCell
         cell.data = data
         cell.state = state
+        cell.controller = resultsController
         
         return cell
     }

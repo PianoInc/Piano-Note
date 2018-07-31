@@ -41,6 +41,7 @@
 		7B148F421C620A2E7C4F1DF7A52A990B /* PasteboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12948BFA2D53FDA553511F4CF00CDBF6 /* PasteboardManager.swift */; };
 		8654A349F536C5232D017F04E4ED36F4 /* NotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 677226EE12C944122ABC49EA8783C4E2 /* NotificationView.xib */; };
 		8678777514B45940F06CF891CD18D821 /* BlockTableVC_property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3151EEDBED39974E6EA9B4D06AE77F77 /* BlockTableVC_property.swift */; };
+		8DA8B018E5848A21492E3B8A806391A4 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515AB035C4B71822CF3F87B29B714AE3 /* ThemeManager.swift */; };
 		8F3446B9498D4B7832A7A01FE8C5DBA0 /* TableViewAutoSystemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535607CDDE71A26C39A438C7E473031 /* TableViewAutoSystemProtocol.swift */; };
 		922CC5AFF2A88846F945A2180C1F8F07 /* ImagePickerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75DB09068450206331BDD46B51479C5 /* ImagePickerCollectionViewController.swift */; };
 		9856C29D20E85251E647C159DB06ED89 /* NSManagedObjectContext_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E929E302A72566429919AF580599A8 /* NSManagedObjectContext_extension.swift */; };
@@ -119,6 +120,7 @@
 		489A08FCF7871F2232B9EF98CA494DB0 /* NoteTableVC_action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableVC_action.swift; sourceTree = "<group>"; };
 		4A8A8EF3A8B4F67B573FD6AE77E28824 /* BlockType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockType.swift; sourceTree = "<group>"; };
 		4BD49890669222562AA90074970895C9 /* TextBlockType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBlockType.swift; sourceTree = "<group>"; };
+		515AB035C4B71822CF3F87B29B714AE3 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		55FF18EF7CA44CD7EF072BE139EC53EB /* BlockTableVC_dragDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableVC_dragDelegate.swift; sourceTree = "<group>"; };
 		560E10E6EF2E369606A544E9898D2C62 /* View_extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View_extension.swift; sourceTree = "<group>"; };
 		5CB059842C8C290E032AE5E44EE5EC9C /* SortTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortTableViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				12948BFA2D53FDA553511F4CF00CDBF6 /* PasteboardManager.swift */,
 				84A728C7450F1817C4C1A5CE976C54B4 /* PianoBullet.swift */,
+				515AB035C4B71822CF3F87B29B714AE3 /* ThemeManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				8F3446B9498D4B7832A7A01FE8C5DBA0 /* TableViewAutoSystemProtocol.swift in Sources */,
 				3142D6E71A255BDBF657B8FEA57112EE /* TextBlockTableViewCell.swift in Sources */,
 				5EC3900F2EE33D0B4E97B761C61581E9 /* TextBlockType.swift in Sources */,
+				8DA8B018E5848A21492E3B8A806391A4 /* ThemeManager.swift in Sources */,
 				02016619B3547FCAD04DFC96608DC272 /* UINavigationController_extension.swift in Sources */,
 				E2B09F60E96E7D272C86FA0953BCAB65 /* UITextView_extension.swift in Sources */,
 				E741F5F9EEFA56C2D802674531AE75F1 /* UnOrderedTextBlock_extension.swift in Sources */,

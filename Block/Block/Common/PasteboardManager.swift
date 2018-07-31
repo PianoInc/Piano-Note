@@ -6,7 +6,9 @@
 //  Copyright © 2018년 Piano. All rights reserved.
 //
 
-import Foundation
+import CoreData
+import MobileCoreServices
+import UIKit
 
 struct PasteboardManager {
     
@@ -24,41 +26,21 @@ struct PasteboardManager {
      # why
      빠른 편집의 한 기능으로 제공하기 위해
      */
-    static func copyParagraphs(blocks: [Block]) {
-        //1. 우선 blocks를 NSAttributedString으로 만들기 -> block.nsAttributedText
-        //2. 그 다음 붙일 때 개행을 삽입해주기
-        //3. 이걸 데이터로 변환하기
-        //4. 테스트해보기
-        
-        //우선은 텍스트밖에 없으므로 String으로 만든다.
-        var string = ""
+    public func copyParagraphs(blocks: [Block]) {
+        let mutableAttrString = NSMutableAttributedString()
         blocks.forEach { (block) in
-            switch block.type {
-            case .plainText:
-                let plainStr = (block.text ?? "") + "\n"
-                string.append(plainStr)
-            case .checklistText:
-                let checkStr = "- " + (block.text ?? "") + "\n"
-                string.append(checkStr)
-                
-            case .orderedText:
-                let orderStr = "\((block.orderedTextBlock?.num ?? 0)). "  + "\n"
-                string.append(orderStr)
-                
-            case .unOrderedText:
-                let unOrderStr = "* " + (block.text ?? "") + "\n"
-                string.append(unOrderStr)
-                
-            case .separator:
-                let separatorStr = "---" + "\n"
-                string.append(separatorStr)
-            default:
-                print("TODO: 데이터 추가되면 이곳 작업해줘야함")
-            }
+            let attrString = self.nsAttributedStringFrom(block: block)
+            mutableAttrString.append(attrString)
         }
         
-        PasteBoard.general.string = string
-        
+        do {
+            let data = try mutableAttrString.data(from: NSMakeRange(0, mutableAttrString.length), documentAttributes: [.documentType: NSAttributedString.DocumentType.rtfd])
+            let item: [String : Any] = [kUTTypeFlatRTFD as String: data,
+                                        kUTTypeUTF8PlainText as String: mutableAttrString.string]
+            Pasteboard.general.setItems([item], options: [:])
+        } catch {
+            print("copyParagraphs에서 에러 발생 \(error.localizedDescription)")
+        }
         
     }
     
@@ -87,9 +69,79 @@ struct PasteboardManager {
      # why
      텍스트뷰가 아닌 테이블 뷰 엔진에 맞는 데이터 구조로 변환시키기 위해
      */
-    static func pasteParagraphs(currentBlock: Block, to: Note) {
+    
+    public func pasteParagraphs(currentBlock: Block, in controller: NSFetchedResultsController<Block>) {
+        //TODO: Loading Indicator 여기서 킨 다음 메인 비동기 큐에서 해제해야함.
+        
+        guard let context = currentBlock.managedObjectContext,
+            let note = currentBlock.note else { return }
+        
+        DispatchQueue.global().async {
+            //Issue: 우선은 attachment는 받아들이지 못하므로, string으로 변환한 뒤 처리한다.
+            guard let string = self.transformAttrStringFromPasteboard()?.string else { return }
+            
+            var strArray = string.components(separatedBy: .newlines)
+            
+            //첫번째 문단은 일단 붙인다.
+            let firstString = strArray.remove(at: 0)
+            currentBlock.text?.append(firstString)
+            currentBlock.modifiedDate = Date()
+            
+            DispatchQueue.main.async {
+                //order를 구한다.
+                let currentOrder = currentBlock.order
+                let orderOffset: Double
+                if var indexPath = controller.indexPath(forObject: currentBlock),
+                    let count = controller.fetchedObjects?.count,
+                    count > indexPath.row + 1 {
+                    indexPath.row += 1
+                    let nextOrder = controller.object(at: indexPath).order
+                    orderOffset = (nextOrder - currentOrder) / Double(strArray.count + 1)
+                    
+                } else {
+                    orderOffset = 1
+                }
+                
+                var newOrder = currentOrder
+                //그 다음 부터는 블럭을 생성하고 그에 해당하는 디테일 블럭까지 생성한다.
+                strArray.forEach { (str) in
+                    
+                    let block = Block(context: context)
+                    newOrder += orderOffset
+                    block.order = newOrder
+                    block.note = note
+                    
+                    //detailBlock 생성
+                    if let bullet = PianoBullet(text: str, selectedRange: NSMakeRange(0, 0)) {
+                        switch bullet.type {
+                        case .checkist:
+                            let checklistBlock = ChecklistTextBlock(context: context)
+                            checklistBlock.text = str
+                            checklistBlock.addToBlockCollection(block)
+                            
+                        case .orderedlist:
+                            let orderedListBlock = OrderedTextBlock(context: context)
+                            orderedListBlock.text = str
+                            orderedListBlock.addToBlockCollection(block)
+                            
+                        case .unOrderedlist:
+                            let unorderedBlock = UnOrderedTextBlock(context: context)
+                            unorderedBlock.text = str
+                            unorderedBlock.addToBlockCollection(block)
+                        }
+                    } else {
+                        let plainBlock = PlainTextBlock(context: context)
+                        plainBlock.text = str
+                        plainBlock.addToBlockCollection(block)
+                    }
+                }
+            }
+        }
         
     }
+        
+        
+        
     
     /**
      # what
@@ -104,8 +156,122 @@ struct PasteboardManager {
      # why
      보통 외부에서 붙여넣기를 할 때, 외부에서 복사한 뒤, 메모 앱으로 와서 메모화면을 띄우고 붙여넣기 버튼을 누르는데 이 걸 자동화시키기 위함. 단, 붙여넣기
     */
-    static func suggestPasteIfNeeded() {
+    public func suggestPasteIfNeeded() {
         
     }
     
+}
+
+
+
+extension PasteboardManager {
+    private func transformAttrStringFromPasteboard() -> NSAttributedString? {
+        var attrString: NSAttributedString? = nil
+        
+        if let data = Pasteboard.general.data(forPasteboardType: "com.apple.flat-rtfd") {
+            
+            do {
+                attrString = try NSAttributedString(data: data, options: [.documentType:NSAttributedString.DocumentType.rtfd], documentAttributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+        } else if let data = Pasteboard.general.data(forPasteboardType: "com.apple/webarchive") {
+            do {
+                attrString = try NSAttributedString(data: data, options: [:], documentAttributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+        } else if let data = Pasteboard.general.data(forPasteboardType: "com.evernote.app.htmlData") {
+            do {
+                attrString = try NSAttributedString(data: data, options: [.documentType : NSAttributedString.DocumentType.html], documentAttributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+        } else if let data = Pasteboard.general.data(forPasteboardType: "Apple Web Archive pasteboard type") {
+            do {
+                attrString = try NSAttributedString(data: data, options: [.documentType : NSAttributedString.DocumentType.html], documentAttributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        return attrString
+    }
+    
+    private func nsAttributedStringFrom(block: Block) -> NSAttributedString {
+        
+        switch block.type {
+        case .plainText:
+            return attributedStringFrom(textBlock: block)
+            
+        case .unOrderedText:
+            let prefix = NSAttributedString(string: "* ", attributes: [.font: block.font])
+            let unorderedAttrString = attributedStringFrom(textBlock: block)
+            unorderedAttrString.insert(prefix, at: 0)
+            return unorderedAttrString
+            
+        case .orderedText:
+            let prefix = NSAttributedString(string: "\(block.orderedTextBlock?.num ?? 0). ", attributes: [.font: block.font])
+            let unorderedAttrString = attributedStringFrom(textBlock: block)
+            unorderedAttrString.insert(prefix, at: 0)
+            return unorderedAttrString
+            
+        case .checklistText:
+            let prefix = NSAttributedString(string: "- ", attributes: [.font: block.font])
+            let unorderedAttrString = attributedStringFrom(textBlock: block)
+            unorderedAttrString.insert(prefix, at: 0)
+            return unorderedAttrString
+            
+        case .separator:
+            return NSAttributedString(string: "---\n", attributes: [.font: block.font])
+            
+        case .imageCollection, .comment, .drawing, .file:
+            //TODO: 여기 작업해야함
+            fatalError("여기가 왜 호출되냐;; nsAttributedStringFrom(block: Block)")
+            
+        }
+        
+    }
+    
+    private func attributedStringFrom(textBlock: Block) -> NSMutableAttributedString {
+        let themeType = ThemeManager.ThemeType(rawValue: textBlock.note?.themeTypeInteger ?? 0)!
+        let themeManager = ThemeManager(type: themeType)
+        let attrString = NSMutableAttributedString(string: textBlock.text ?? "", attributes: [.font : textBlock.font])
+        
+        //1. 먼저 text에 attributes를 입힌다.
+        if let highlight = textBlock.highlight {
+            highlight.ranges.forEach { (range) in
+                attrString.addAttributes([.backgroundColor: themeManager.backgroundColor], range: range)
+            }
+        }
+        
+        if let event = textBlock.event {
+            event.ranges.forEach { (range) in
+                attrString.addAttributes([.link: event], range: range)
+            }
+        }
+        
+        if let contact = textBlock.contact {
+            contact.ranges.forEach { (range) in
+                attrString.addAttributes([.link: contact], range: range)
+            }
+        }
+        
+        if let address = textBlock.address {
+            address.ranges.forEach { (range) in
+                attrString.addAttributes([.link: address], range: range)
+            }
+        }
+        
+        if let link = textBlock.link {
+            link.ranges.forEach { (range) in
+                attrString.addAttributes([.link: link], range: range)
+            }
+        }
+        
+        //개행을 삽입해준다
+        let newLineAttrString = NSAttributedString(string: "\n")
+        attrString.append(newLineAttrString)
+        return attrString
+    }
 }
