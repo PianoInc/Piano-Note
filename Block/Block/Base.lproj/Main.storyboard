@@ -1517,7 +1517,7 @@
         <!--All Notes-->
         <scene sceneID="Vpe-yw-kkD">
             <objects>
-                <tableViewController storyboardIdentifier="NoteTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z4M-VK-h0l" customClass="NoteTableViewController" customModule="Block" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="NoteTableViewController" id="Z4M-VK-h0l" customClass="NoteTableViewController" customModule="Block" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="NoteTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XAg-if-Fwh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

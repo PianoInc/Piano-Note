@@ -23,6 +23,7 @@ class FolderTableViewController: UITableViewController {
             let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
             persistentContainer = container
             resultsController = container.viewContext.folderResultsController()
+            resultsController?.delegate = self
         }
 
         updateViews(for: state)
