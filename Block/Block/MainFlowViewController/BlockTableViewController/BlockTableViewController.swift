@@ -33,7 +33,7 @@ class BlockTableViewController: UIViewController {
 
         case .some(_):
             updateViews(for: state)
-            syncFetchData()
+            fetchData()
             setupTableView()
         }
     }
