@@ -150,3 +150,26 @@ extension BlockTableViewController {
         navigationController?.appearCopyNotificationView()
     }
 }
+
+extension BlockTableViewController: UIDataSourceModelAssociation {
+
+    func modelIdentifierForElement(at idx: IndexPath, in view: UIView) -> String? {
+        guard let resultsController = resultsController, !idx.isEmpty else { return nil }
+
+        let id = resultsController.object(at: idx).objectID
+            .uriRepresentation()
+            .absoluteString
+        return id
+    }
+
+    func indexPathForElement(withModelIdentifier identifier: String, in view: UIView) -> IndexPath? {
+        if let url = URL(string: identifier),
+            let id = persistentContainer.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url),
+            let block = persistentContainer.viewContext.object(with: id) as? Block {
+            print(resultsController?.indexPath(forObject: block), "🐶")
+            return resultsController?.indexPath(forObject: block)
+        }
+        return nil
+    }
+}
+

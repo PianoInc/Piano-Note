@@ -17,7 +17,18 @@ class FolderTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        switch resultsController {
+        // restoration 으로 만들어지는 경우
+        case .none:
+            let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+            persistentContainer = container
+            resultsController = container.viewContext.folderResultsController()
+        // 기본 흐름
+        case .some(_):
+            break
+        }
+
         updateViews(for: state)
         clearsSelectionOnViewWillAppear = true
     }
@@ -148,5 +159,25 @@ extension FolderTableViewController {
     
     private func save() {
         persistentContainer.viewContext.saveIfNeeded()
+    }
+}
+
+extension FolderTableViewController: UIDataSourceModelAssociation {
+
+    func modelIdentifierForElement(at idx: IndexPath, in view: UIView) -> String? {
+        guard let resultsController = resultsController, !idx.isEmpty else { return nil }
+
+        return resultsController.object(at: idx).objectID
+            .uriRepresentation()
+            .absoluteString
+    }
+
+    func indexPathForElement(withModelIdentifier identifier: String, in view: UIView) -> IndexPath? {
+        if let url = URL(string: identifier),
+            let id = persistentContainer.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url),
+            let folder = persistentContainer.viewContext.object(with: id) as? Folder {
+            return resultsController?.indexPath(forObject: folder)
+        }
+        return nil
     }
 }

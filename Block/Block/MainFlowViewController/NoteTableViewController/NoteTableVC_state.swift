@@ -9,7 +9,7 @@
 import Foundation
 
 extension NoteTableViewController {
-    enum ViewControllerState {
+    enum ViewControllerState: String {
         case normal
         case edit
         case deleted

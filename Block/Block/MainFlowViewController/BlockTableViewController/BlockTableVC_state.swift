@@ -9,7 +9,7 @@
 import Foundation
 
 extension BlockTableViewController {
-    enum ViewControllerState {
+    enum ViewControllerState: String {
         case normal
         case edit
         case typing
