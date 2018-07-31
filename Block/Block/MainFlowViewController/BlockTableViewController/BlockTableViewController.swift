@@ -15,9 +15,9 @@ class BlockTableViewController: UIViewController {
     
     @IBOutlet weak var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet weak var tableView: UITableView!
-    internal var persistentContainer: NSPersistentContainer!
-    internal var state: ViewControllerState!
-    internal var note: Note!
+    internal var persistentContainer: NSPersistentContainer?
+    internal var state: ViewControllerState?
+    internal var note: Note?
     internal var resultsController: NSFetchedResultsController<Block>?
     private var delayBlockQueue: [() -> Void] = []
     internal var cursorCache: (indexPath: IndexPath, selectedRange: NSRange)?
@@ -30,6 +30,7 @@ class BlockTableViewController: UIViewController {
             persistentContainer = container
 
         case .some(_):
+            guard let state = state else { return }
             updateViews(for: state)
             asyncFetchData()
             setupTableView()
@@ -38,6 +39,8 @@ class BlockTableViewController: UIViewController {
 
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
+        guard let note = note,
+            let state = state else { return }
         coder.encode(note.objectID.uriRepresentation(), forKey: "noteURI")
         coder.encode(state.rawValue, forKey: "BlockTableViewControllerState")
     }
@@ -45,12 +48,13 @@ class BlockTableViewController: UIViewController {
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
         if let url = coder.decodeObject(forKey: "noteURI") as? URL,
+            let persistentContainer = persistentContainer,
             let decodeState = coder.decodeObject(forKey: "BlockTableViewControllerState") as? String,
             let id = persistentContainer.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url),
             let note = persistentContainer.viewContext.object(with: id) as? Note {
 
             self.note = note
-            state = ViewControllerState(rawValue: decodeState)
+            self.state = ViewControllerState(rawValue: decodeState)
             resultsController = persistentContainer.viewContext.blockResultsController(note: note)
             resultsController?.delegate = self
             updateViews(for: state)
@@ -141,8 +145,8 @@ extension BlockTableViewController {
                 
             }
         }
-        note.title = title.count != 0 ? title : "새로운 메모를 작성해주세요"
-        note.subTitle = subtitle.count != 0 ? subtitle : "추가 텍스트 없음"
+        note?.title = title.count != 0 ? title : "새로운 메모를 작성해주세요"
+        note?.subTitle = subtitle.count != 0 ? subtitle : "추가 텍스트 없음"
     }
     
     private func deleteNoteIfNeeded() {
@@ -150,7 +154,7 @@ extension BlockTableViewController {
         guard let controller = resultsController,
             let count = controller.fetchedObjects?.count,
             count > 0, (count != 1 || controller.object(at: IndexPath(row: 0, section: 0)).text?.count != 0) else {
-                note.deleteWithRelationship()
+                self.note?.deleteWithRelationship()
                 return
         }
         
@@ -164,7 +168,7 @@ extension BlockTableViewController {
     }
     
     private func save() {
-        persistentContainer.viewContext.saveIfNeeded()
+        persistentContainer?.viewContext.saveIfNeeded()
     }
 }
 
