@@ -17,11 +17,22 @@ class NoteTableViewController: UITableViewController {
 
     var resultsController: NSFetchedResultsController<Note>?
     internal var delayBlockQueue: [(NoteTableViewController) -> Void] = []
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0(self) }
     }
+
+//    var searchController: UISearchController!
+    lazy var searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: searchResultsController)
+        return controller
+    }()
+
+    lazy var searchResultsController: UITableViewController? = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: "SearchResultsController") as? UITableViewController
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +46,11 @@ class NoteTableViewController: UITableViewController {
             asyncFetchData()
         }
         clearsSelectionOnViewWillAppear = true
+
+        // setup seach controller
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true
+        definesPresentationContext = true
     }
 
     override func encodeRestorableState(with coder: NSCoder) {
