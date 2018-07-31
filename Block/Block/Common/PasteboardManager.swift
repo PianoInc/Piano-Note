@@ -30,7 +30,6 @@ struct PasteboardManager {
         let mutableAttrString = NSMutableAttributedString()
         blocks.forEach { (block) in
             let attrString = self.nsAttributedStringFrom(block: block)
-            print(attrString.string)
             mutableAttrString.append(attrString)
         }
         
