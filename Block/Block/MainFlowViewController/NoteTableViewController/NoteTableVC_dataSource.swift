@@ -148,7 +148,6 @@ extension NoteTableViewController: UIDataSourceModelAssociation {
         if let url = URL(string: identifier),
             let id = persistentContainer.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url),
             let note = persistentContainer.viewContext.object(with: id) as? Note {
-            print(resultsController?.indexPath(forObject: note), "📝")
             return resultsController?.indexPath(forObject: note)
         }
         return nil

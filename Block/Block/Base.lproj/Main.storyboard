@@ -1507,6 +1507,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="Z4M-VK-h0l" kind="show" identifier="NoteTableViewController" id="moi-8E-hF0"/>
+                        <segue destination="Z4M-VK-h0l" kind="show" identifier="NoAnimationNoteViewController" customClass="NoAnimationPushSegue" customModule="Block" customModuleProvider="target" id="G5e-RA-gxg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uB4-0J-GnX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2133,4 +2134,7 @@
         <image name="test1" width="142" height="106"/>
         <image name="unCheck" width="20" height="21"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="G5e-RA-gxg"/>
+    </inferredMetricsTieBreakers>
 </document>

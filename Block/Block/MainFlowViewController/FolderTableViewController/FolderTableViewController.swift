@@ -18,19 +18,20 @@ class FolderTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        switch resultsController {
-        // restoration 으로 만들어지는 경우
-        case .none:
+        // for restoration
+        if resultsController == nil {
             let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
             persistentContainer = container
             resultsController = container.viewContext.folderResultsController()
-        // 기본 흐름
-        case .some(_):
-            break
         }
 
         updateViews(for: state)
         clearsSelectionOnViewWillAppear = true
+
+        // no restoration session, bypass this view conroller
+        if !(UIApplication.shared.delegate as! AppDelegate).isRestoreSession {
+            byPassCurrentViewController()
+        }
     }
 
     
@@ -159,6 +160,16 @@ extension FolderTableViewController {
     
     private func save() {
         persistentContainer.viewContext.saveIfNeeded()
+    }
+
+    private func byPassCurrentViewController() {
+        do {
+            try resultsController?.performFetch()
+        } catch {
+            print("FolderTableViewController를 fetch하는 데 에러 발생: \(error.localizedDescription)")
+        }
+        let folder = resultsController?.object(at: IndexPath(row: 0, section: 0))
+        performSegue(withIdentifier: "NoAnimationNoteViewController", sender: folder)
     }
 }
 

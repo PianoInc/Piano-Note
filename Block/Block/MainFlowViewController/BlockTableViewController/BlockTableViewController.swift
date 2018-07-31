@@ -45,6 +45,7 @@ class BlockTableViewController: UIViewController {
     }
 
     override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
         if let url = coder.decodeObject(forKey: "noteURI") as? URL,
             let decodeState = coder.decodeObject(forKey: "BlockTableViewControllerState") as? String,
             let id = persistentContainer.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url),
@@ -58,7 +59,6 @@ class BlockTableViewController: UIViewController {
             syncFetchData()
             setupTableView()
         }
-        super.decodeRestorableState(with: coder)
     }
 
     override func viewWillAppear(_ animated: Bool) {

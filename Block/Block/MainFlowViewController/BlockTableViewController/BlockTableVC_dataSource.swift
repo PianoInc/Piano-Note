@@ -166,7 +166,6 @@ extension BlockTableViewController: UIDataSourceModelAssociation {
         if let url = URL(string: identifier),
             let id = persistentContainer.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url),
             let block = persistentContainer.viewContext.object(with: id) as? Block {
-            print(resultsController?.indexPath(forObject: block), "🐶")
             return resultsController?.indexPath(forObject: block)
         }
         return nil
