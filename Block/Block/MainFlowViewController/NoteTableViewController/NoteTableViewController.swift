@@ -23,13 +23,15 @@ class NoteTableViewController: UITableViewController {
         delayBlockQueue.forEach{ $0(self) }
     }
 
-//    var searchController: UISearchController!
+    var searchResults = [SearchResult]()
+
     lazy var searchController: UISearchController = {
-        let controller = UISearchController(searchResultsController: searchResultsController)
+        let controller = UISearchController(searchResultsController: searchResultsViewController)
+        controller.searchResultsUpdater = self
         return controller
     }()
 
-    lazy var searchResultsController: UITableViewController? = {
+    lazy var searchResultsViewController: UITableViewController? = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: "SearchResultsController") as? UITableViewController
     }()
@@ -51,6 +53,8 @@ class NoteTableViewController: UITableViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = true
         definesPresentationContext = true
+        searchResultsViewController?.tableView.dataSource = self
+        searchResultsViewController?.tableView.delegate = self
     }
 
     override func encodeRestorableState(with coder: NSCoder) {
@@ -134,3 +138,38 @@ extension NoteTableViewController {
 }
 
 
+extension NoteTableViewController: UISearchResultsUpdating {
+    struct SearchResult {
+        var arributedStrings: [NSAttributedString] = []
+        // TODO: note identifier
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let keyword = searchController.searchBar.text,
+            let notes = resultsController?.fetchedObjects,
+            searchController.isActive else { return }
+
+        searchResults = notes.map { convert(note: $0, with: keyword) }
+            .filter { $0 != nil }
+            .map { $0! }
+        searchResultsViewController?.tableView.reloadData()
+    }
+
+    // 함수 이름 이상함
+    private func convert(note: Note, with keyword: String) -> SearchResult? {
+        guard let blocks = note.blockCollection?.allObjects as? [Block] else { return nil }
+        var result = SearchResult()
+
+        for block in blocks {
+            if let plain = block.plainTextBlock, let text = plain.text, text.contains(keyword) {
+                let attributedString = NSAttributedString(string: text)
+                // TODO: 하이라이트 해줘야 함.
+                result.arributedStrings.append(attributedString)
+            }
+        }
+        if result.arributedStrings.isEmpty {
+            return nil
+        }
+        return result
+    }
+}

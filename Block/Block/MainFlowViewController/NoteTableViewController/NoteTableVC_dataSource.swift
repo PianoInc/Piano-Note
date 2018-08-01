@@ -11,14 +11,27 @@ import UIKit
 extension NoteTableViewController {
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
+        if searchController.isActive {
+            return searchResults.count
+        }
         return resultsController?.sections?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive {
+            return searchResults[section].arributedStrings.count
+        }
         return resultsController?.sections?[section].numberOfObjects ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if searchController.isActive {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultBlockCell", for: indexPath)
+            let attributedString = searchResults[indexPath.section].arributedStrings[indexPath.row]
+            cell.textLabel?.attributedText = attributedString
+            return cell
+        }
+
         guard let data = resultsController?.object(at: indexPath) else { return UITableViewCell() }
         var cell = tableView.dequeueReusableCell(withIdentifier: data.identifier) as! NoteTableDataAcceptable & UITableViewCell
         cell.folder = folder
