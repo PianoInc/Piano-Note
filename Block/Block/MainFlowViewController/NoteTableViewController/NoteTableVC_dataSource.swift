@@ -152,14 +152,13 @@ extension NoteTableViewController {
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         guard searchController.isActive else { return 0 }
-        return 30
+        return 50
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard searchController.isActive else { return nil }
         if let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SearchResultSectionHeader") as? SearchResultSectionHeader {
             header.configure(note: searchResults[section].note)
-            header.backgroundColor = .white
             return header
         }
         return nil

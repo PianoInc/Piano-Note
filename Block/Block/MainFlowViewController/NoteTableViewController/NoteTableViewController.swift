@@ -144,6 +144,7 @@ extension NoteTableViewController: UISearchResultsUpdating {
         searchResultsViewController?.tableView.estimatedRowHeight = 140
         searchResultsViewController?.tableView.register(SearchResultSectionHeader.self, forHeaderFooterViewReuseIdentifier: "SearchResultSectionHeader")
         searchResultsViewController?.tableView.register(SearchResultSectionFooter.self, forHeaderFooterViewReuseIdentifier: "SearchResultSectionFooter")
+        searchResultsViewController?.tableView.backgroundColor = UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0)
     }
 
     struct SearchResult {

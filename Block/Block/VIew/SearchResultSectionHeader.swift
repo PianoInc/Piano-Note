@@ -11,19 +11,24 @@ import UIKit
 class SearchResultSectionHeader: UITableViewHeaderFooterView {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
         return label
     }()
 
     func configure(note: Note) {
         let margins = contentView.layoutMarginsGuide
-        backgroundColor = .white
-        backgroundView?.backgroundColor = .clear
+        backgroundView = UIView(frame: self.bounds)
+        backgroundView?.backgroundColor = .white
+
         titleLabel.text = note.title
 
         contentView.addSubview(titleLabel)
-        titleLabel.leftAnchor.constraint(equalTo: margins.leftAnchor)
-        titleLabel.centerYAnchor.constraint(equalTo: margins.centerYAnchor)
-        titleLabel.sizeToFit()
+
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+
     }
 }

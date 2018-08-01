@@ -1649,17 +1649,17 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6b-LS-XwN">
-                                            <rect key="frame" x="8" y="8" width="359" height="27.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <rect key="frame" x="16" y="11" width="343" height="22"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="Q6b-LS-XwN" secondAttribute="bottom" constant="8" id="XW4-6J-hCH"/>
-                                        <constraint firstAttribute="trailing" secondItem="Q6b-LS-XwN" secondAttribute="trailing" constant="8" id="cS9-rt-2Ul"/>
-                                        <constraint firstItem="Q6b-LS-XwN" firstAttribute="leading" secondItem="OCy-by-L0y" secondAttribute="leading" constant="8" id="ijP-nC-obL"/>
-                                        <constraint firstItem="Q6b-LS-XwN" firstAttribute="top" secondItem="OCy-by-L0y" secondAttribute="top" constant="8" id="keT-bz-cxu"/>
+                                        <constraint firstItem="Q6b-LS-XwN" firstAttribute="leading" secondItem="OCy-by-L0y" secondAttribute="leadingMargin" id="3vy-Ta-vKR"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Q6b-LS-XwN" secondAttribute="trailing" id="a1w-Gc-9m1"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Q6b-LS-XwN" secondAttribute="bottom" id="jpP-8N-LBg"/>
+                                        <constraint firstItem="Q6b-LS-XwN" firstAttribute="top" secondItem="OCy-by-L0y" secondAttribute="topMargin" id="qqh-OM-SRG"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
