@@ -51,10 +51,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 resultsController.delegate = vc
                 
             } else {
-                print("에러발생!! 스플릿뷰의 첫번째 컨트롤러가 폴더가 아니다!")
+                print("preserve로 복구가 진행중.")
             }
         }
         return true
+    }
+    
+    func application(_ application: UIApplication, viewControllerWithRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
+        print(identifierComponents)
+        return nil
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {

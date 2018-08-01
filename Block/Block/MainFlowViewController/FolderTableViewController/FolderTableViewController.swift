@@ -47,7 +47,7 @@ class FolderTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier, identifier == "NoteTableViewController" {
+        if let identifier = segue.identifier, identifier == "NoteTableViewController" || identifier == "NoAnimationNoteViewController" {
             guard let vc = segue.destination as? NoteTableViewController, let folder = sender as? Folder else { return }
             vc.folder = folder
             vc.persistentContainer = persistentContainer

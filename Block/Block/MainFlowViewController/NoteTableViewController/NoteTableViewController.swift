@@ -34,7 +34,15 @@ class NoteTableViewController: UITableViewController {
             updateViews(for: state)
             asyncFetchData()
         }
-        clearsSelectionOnViewWillAppear = true
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let displayMode = splitViewController?.displayMode,
+            displayMode == .allVisible {
+            clearsSelectionOnViewWillAppear = false
+        }
+        super.viewWillAppear(animated)
     }
 
     override func encodeRestorableState(with coder: NSCoder) {
@@ -73,16 +81,16 @@ class NoteTableViewController: UITableViewController {
             vc.preferredDisplayMode = .allVisible
             vc.maximumPrimaryColumnWidth = 414
             vc.minimumPrimaryColumnWidth = 320
-        } else if let identifier = segue.identifier, identifier == "BlockNavigationController" {
+        } else if let identifier = segue.identifier,
+            identifier == "BlockNavigationController" {
             guard let nav = segue.destination as? UINavigationController,
                 let vc = nav.topViewController as? BlockTableViewController,
                 let note = sender as? Note,
                 let folderType = note.folder?.folderType else { return }
+            
             let state: BlockTableViewController.ViewControllerState =
-                folderType !=
-                    .deleted ?
-                        .normal :
-                    .deleted
+                folderType != .deleted ?
+                        .normal : .deleted
             
             vc.state = state
             vc.note = note
