@@ -49,12 +49,7 @@ class NoteTableViewController: UITableViewController {
         }
         clearsSelectionOnViewWillAppear = true
 
-        // setup seach controller
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = true
-        definesPresentationContext = true
-        searchResultsViewController?.tableView.dataSource = self
-        searchResultsViewController?.tableView.delegate = self
+        setupSearchViewController()
     }
 
     override func encodeRestorableState(with coder: NSCoder) {
@@ -139,7 +134,20 @@ extension NoteTableViewController {
 
 
 extension NoteTableViewController: UISearchResultsUpdating {
+    private func setupSearchViewController() {
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true
+        definesPresentationContext = true
+        searchResultsViewController?.tableView.dataSource = self
+        searchResultsViewController?.tableView.delegate = self
+        searchResultsViewController?.tableView.rowHeight = UITableViewAutomaticDimension
+        searchResultsViewController?.tableView.estimatedRowHeight = 140
+        searchResultsViewController?.tableView.register(SearchResultSectionHeader.self, forHeaderFooterViewReuseIdentifier: "SearchResultSectionHeader")
+        searchResultsViewController?.tableView.register(SearchResultSectionFooter.self, forHeaderFooterViewReuseIdentifier: "SearchResultSectionFooter")
+    }
+
     struct SearchResult {
+        let note: Note
         var arributedStrings: [NSAttributedString] = []
         // TODO: note identifier
     }
@@ -158,7 +166,7 @@ extension NoteTableViewController: UISearchResultsUpdating {
     // 함수 이름 이상함
     private func convert(note: Note, with keyword: String) -> SearchResult? {
         guard let blocks = note.blockCollection?.allObjects as? [Block] else { return nil }
-        var result = SearchResult()
+        var result = SearchResult(note: note, arributedStrings: [])
 
         for block in blocks {
             if let plain = block.plainTextBlock, let text = plain.text, text.contains(keyword) {
