@@ -66,7 +66,7 @@ extension BlockTableViewController {
     }
     
     @IBAction func tapTheme(_ sender: Any) {
-        
+        performSegue(withIdentifier: "MarkTableViewController", sender: sender)
     }
     
     @IBAction func tapCompose(_ sender: Any) {
