@@ -149,7 +149,6 @@ extension NoteTableViewController: UISearchResultsUpdating {
     struct SearchResult {
         let note: Note
         var arributedStrings: [NSAttributedString] = []
-        // TODO: note identifier
     }
 
     func updateSearchResults(for searchController: UISearchController) {
@@ -169,9 +168,11 @@ extension NoteTableViewController: UISearchResultsUpdating {
         var result = SearchResult(note: note, arributedStrings: [])
 
         for block in blocks {
-            if let plain = block.plainTextBlock, let text = plain.text, text.contains(keyword) {
-                let attributedString = NSAttributedString(string: text)
-                // TODO: 하이라이트 해줘야 함.
+            if let plain = block.plainTextBlock,
+                let text = plain.text,
+                let range = text.lowercased().range(of: keyword.lowercased()) {
+                let attributedString = NSMutableAttributedString(string: text)
+                attributedString.addAttributes([NSAttributedStringKey.foregroundColor : self.view.tintColor], range: NSRange(range, in: text))
                 result.arributedStrings.append(attributedString)
             }
         }
