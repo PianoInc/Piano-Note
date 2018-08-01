@@ -81,9 +81,9 @@ class BlockTableViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0() }
-
-        let count = resultsController?.sections?.first?.numberOfObjects ?? 0
-        if count == 0 {
+        
+        if let count = resultsController?.sections?.first?.numberOfObjects,
+            count == 0 {
             tapBackground("firstWriting")
         }
 
@@ -122,7 +122,7 @@ extension BlockTableViewController {
     }
     
     //50글자를 채워야함. //50글자가 안된다면,
-    private func setNoteTitle() {
+    internal func setNoteTitle() {
         guard let controller = resultsController,
             let count = controller.sections?.first?.numberOfObjects,
             count > 0 else { return }
@@ -167,7 +167,7 @@ extension BlockTableViewController {
         tableView.dragInteractionEnabled = true
     }
     
-    private func save() {
+    internal func save() {
         persistentContainer?.viewContext.saveIfNeeded()
     }
 }

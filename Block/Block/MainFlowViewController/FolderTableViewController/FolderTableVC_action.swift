@@ -27,16 +27,12 @@ extension FolderTableViewController {
         showCreateFolderAlertVC()
     }
     
-    @IBAction func tapShop(_ sender: Any) {
-        performSegue(withIdentifier: "ShopMasterDetailVC", sender: nil)
-    }
-    
     @IBAction func tapFacebook(_ sender: Any) {
         performSegue(withIdentifier: "FacebookSplitViewController", sender: nil)
     }
     
     @IBAction func tapSetting(_ sender: Any) {
-        performSegue(withIdentifier: "SettingMasterDetailVC", sender: nil)
+        performSegue(withIdentifier: "SettingSplitViewController", sender: nil)
     }
     
     
