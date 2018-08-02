@@ -8,9 +8,13 @@
 
 import UIKit
 
-class CustomInputView: UIView {
+protocol InputViewDelegates: NSObjectProtocol {
+    func action(_ data: String)
+}
+
+class CustomInputView: UIView, InputViewDelegates {
     
-    var closeSelected: (() -> ())?
+    weak var delegates: MarkDelegates?
     
     private var inputHeight: CGFloat {
         let isPort = UIApplication.shared.statusBarOrientation.isPortrait
@@ -34,7 +38,7 @@ class CustomInputView: UIView {
     private func nonPayed() {
         let nib = Nib(nibName: "NonPayedEmojiView", bundle: nil)
         guard let view = nib.instantiate(withOwner: nil, options: nil).first as? NonPayedEmojiView else {return}
-        view.closeSelected = {self.closeSelected?()}
+        view.delegates = self
         addSubview(view)
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +47,10 @@ class CustomInputView: UIView {
         view.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
         layoutIfNeeded()
+    }
+    
+    func action(_ data: String) {
+        delegates?.action(data)
     }
     
 }

@@ -14,6 +14,7 @@
 		1C9D2E4F73410EDFB9CD78E60FB4618B /* ImageCollectionBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786C0FA1F69AE5E79C4B9CE88F877F07 /* ImageCollectionBlock_extension.swift */; };
 		1E394282B43E04EBB8A89546B77F7FB4 /* NonPayedEmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68963EC6A6DBD70B46F5D91EAA55159E /* NonPayedEmojiView.swift */; };
 		21E5524933B99B8A7B423B88EC2EB19D /* Block_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6899DD088C87EB4E74FF9AB4BA6E3F2 /* Block_extension.swift */; };
+		2FEDF151CDD4B72CB8AFDFC8EDAE1066 /* Color_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF44CA84604F00BC74FF9A0C5686A98 /* Color_extension.swift */; };
 		32096179A1C53C11BE23F6D4DCBD0AA6 /* BlockTableVC_action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634AEFCD50328D51CCE23B0A379F67E2 /* BlockTableVC_action.swift */; };
 		38BBAB69BFCC675C330E1BAAED420B37 /* MarkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C001CCC477C275E96D07E4CBC1B3FD1 /* MarkTableViewCell.swift */; };
 		3DF717FD8F715E15AD0D66790AB18A6A /* Cloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -133,6 +134,7 @@
 		4BD49890669222562AA90074970895C9 /* TextBlockType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBlockType.swift; sourceTree = "<group>"; };
 		4BD9E4F1666648164D59A79E55E6365B /* NoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		4C5E93D823ACB95D8752E80D7C223F8F /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		4CF44CA84604F00BC74FF9A0C5686A98 /* Color_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color_extension.swift; sourceTree = "<group>"; };
 		515AB035C4B71822CF3F87B29B714AE3 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		55FF18EF7CA44CD7EF072BE139EC53EB /* BlockTableVC_dragDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableVC_dragDelegate.swift; sourceTree = "<group>"; };
 		560E10E6EF2E369606A544E9898D2C62 /* View_extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View_extension.swift; sourceTree = "<group>"; };
@@ -246,26 +248,6 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		58603FCF88053CB4570AF1E6D4CD6585 /* MarkTableViewController */ = {
-			isa = PBXGroup;
-			children = (
-				3AADEB07B88C66FABA9077D06D2400E9 /* MarkTableViewController.swift */,
-			);
-			path = MarkTableViewController;
-			sourceTree = "<group>";
-		};
-		4CA543F12161FE684A9FB3E273D41071 /* Mark */ = {
-			isa = PBXGroup;
-			children = (
-				1AE7BD469B17FF67B816C3E3B6E7C280 /* CustomDisclosureIndicator.swift */,
-				F116B2D06867EEC9A6EEA663E83286EB /* CustomInputView.swift */,
-				5C001CCC477C275E96D07E4CBC1B3FD1 /* MarkTableViewCell.swift */,
-				68963EC6A6DBD70B46F5D91EAA55159E /* NonPayedEmojiView.swift */,
-				A8B24BE06047F1F0EFD6DAD3E2E5BD7A /* NonPayedEmojiView.xib */,
-			);
-			path = Mark;
-			sourceTree = "<group>";
-		};
 		1B3E93BF92F2FB3F0886FAC55C9F420D /* FolderTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +318,18 @@
 			path = FolderPickerTableViewController;
 			sourceTree = "<group>";
 		};
+		4CA543F12161FE684A9FB3E273D41071 /* Mark */ = {
+			isa = PBXGroup;
+			children = (
+				1AE7BD469B17FF67B816C3E3B6E7C280 /* CustomDisclosureIndicator.swift */,
+				F116B2D06867EEC9A6EEA663E83286EB /* CustomInputView.swift */,
+				5C001CCC477C275E96D07E4CBC1B3FD1 /* MarkTableViewCell.swift */,
+				68963EC6A6DBD70B46F5D91EAA55159E /* NonPayedEmojiView.swift */,
+				A8B24BE06047F1F0EFD6DAD3E2E5BD7A /* NonPayedEmojiView.xib */,
+			);
+			path = Mark;
+			sourceTree = "<group>";
+		};
 		50EB84BCC5388A3424CC8039B9244454 /* ImagePickerCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +348,14 @@
 				CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */,
 				3EC2017EEB55EDA604B73943706EA227 /* Facebook.framework */,
 			);
+			sourceTree = "<group>";
+		};
+		58603FCF88053CB4570AF1E6D4CD6585 /* MarkTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3AADEB07B88C66FABA9077D06D2400E9 /* MarkTableViewController.swift */,
+			);
+			path = MarkTableViewController;
 			sourceTree = "<group>";
 		};
 		67B95565E38F0A7BB44895AF195ED98B /* BlockCell */ = {
@@ -382,6 +384,7 @@
 		72B1AD043929504F1A24D277C8EB5288 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				4CF44CA84604F00BC74FF9A0C5686A98 /* Color_extension.swift */,
 				AC1836D0A2BFDE8DD6AF375F658868F9 /* DateFormatter_extension.swift */,
 				17DAA29DC735CABAB107CA113D60E199 /* Font_extension.swift */,
 				B7FF70D4124EC5257B182C46D710E35C /* String_extension.swift */,
@@ -593,6 +596,7 @@
 				21E5524933B99B8A7B423B88EC2EB19D /* Block_extension.swift in Sources */,
 				188B5014575095175CEB46E62EBEA72C /* BulletTextBlockType.swift in Sources */,
 				F9B8A72A9CA9F53FC0D48F9EFA0F85FC /* ChecklistTextBlock_extension.swift in Sources */,
+				2FEDF151CDD4B72CB8AFDFC8EDAE1066 /* Color_extension.swift in Sources */,
 				F35FC1915FA29946837D88B0285A3F8B /* CustomDisclosureIndicator.swift in Sources */,
 				AE2CA33DD576A827EBDF950EED7A8A51 /* CustomInputView.swift in Sources */,
 				991D445A419CB30EFD728E3D423D3888 /* DateFormatter_extension.swift in Sources */,

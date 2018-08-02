@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="landscape">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -13,14 +13,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="NonPayedEmojiView" customModule="Block" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="568" height="162"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a9y-JU-mZT">
-                    <rect key="frame" x="0.0" y="0.0" width="568" height="162"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xp3-LX-p7H">
-                            <rect key="frame" x="249" y="5" width="70" height="4"/>
+                            <rect key="frame" x="125" y="5" width="70" height="4"/>
                             <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="4" id="KvU-KO-Hm6"/>
@@ -33,41 +33,41 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <button opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLd-YQ-he8">
-                            <rect key="frame" x="540" y="8" width="20" height="20"/>
+                            <rect key="frame" x="292" y="8" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="0dv-Bi-zGW"/>
                                 <constraint firstAttribute="width" constant="20" id="RTG-Xu-UDV"/>
                             </constraints>
                             <state key="normal" image="close"/>
                             <connections>
-                                <action selector="dismiss" destination="iN0-l3-epB" eventType="touchUpInside" id="UkM-Le-ErD"/>
+                                <action selector="aHide" destination="iN0-l3-epB" eventType="touchUpInside" id="UdI-y7-uGf"/>
                             </connections>
                         </button>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xA9-Yv-bWe">
-                            <rect key="frame" x="0.0" y="38" width="568" height="87"/>
+                            <rect key="frame" x="0.0" y="38" width="320" height="141"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oW6-Jb-PQR" userLabel="ContentView">
-                                    <rect key="frame" x="0.0" y="0.0" width="1704" height="87"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="960" height="141"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hjS-IE-meI" userLabel="View1">
-                                            <rect key="frame" x="0.0" y="0.0" width="568" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cLT-bQ-7QX" userLabel="VView">
-                                                    <rect key="frame" x="283.5" y="0.0" width="1" height="87"/>
+                                                    <rect key="frame" x="159.5" y="0.0" width="1" height="141"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="NeL-dI-pJf"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OwT-o3-pCJ" userLabel="HView">
-                                                    <rect key="frame" x="0.0" y="43" width="568" height="1"/>
+                                                    <rect key="frame" x="0.0" y="70" width="320" height="1"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="4f4-yy-25t"/>
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8i-P4-DdL" userLabel="Button1">
-                                                    <rect key="frame" x="9.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="25.5" y="0.0" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="3u6-2f-aZh"/>
                                                         <constraint firstAttribute="height" constant="60" id="8mx-ff-QAe"/>
@@ -82,9 +82,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji1:" destination="iN0-l3-epB" eventType="touchUpInside" id="Aam-Q2-QOo"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xo2-gi-e7Z" userLabel="Button2">
-                                                    <rect key="frame" x="79.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="25.5" y="81" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="8Gp-zf-CVA"/>
                                                         <constraint firstAttribute="height" constant="60" id="jsX-Hl-h8w"/>
@@ -99,9 +102,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji2:" destination="iN0-l3-epB" eventType="touchUpInside" id="Xhm-IR-wFF"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEd-5e-vNL" userLabel="Button3">
-                                                    <rect key="frame" x="149.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="95.5" y="0.0" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="HxM-5e-HRP"/>
                                                         <constraint firstAttribute="width" constant="60" id="ojZ-AT-Fzq"/>
@@ -116,9 +122,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji3:" destination="iN0-l3-epB" eventType="touchUpInside" id="MN7-OB-CqF"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AGA-8k-7DD" userLabel="Button4">
-                                                    <rect key="frame" x="219.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="95.5" y="81" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="4uv-53-PBy"/>
                                                         <constraint firstAttribute="height" constant="60" id="Q0N-GV-YLX"/>
@@ -133,9 +142,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji4:" destination="iN0-l3-epB" eventType="touchUpInside" id="z7H-q7-VPG"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9c3-Qp-CHJ" userLabel="Button5">
-                                                    <rect key="frame" x="288.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="164.5" y="0.0" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="SBk-B0-fh3"/>
                                                         <constraint firstAttribute="width" constant="60" id="gfX-mx-2S8"/>
@@ -150,9 +162,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji5:" destination="iN0-l3-epB" eventType="touchUpInside" id="grv-FI-FeA"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4C-BB-R8M" userLabel="Button6">
-                                                    <rect key="frame" x="358.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="164.5" y="81" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="3Ry-wC-Xjc"/>
                                                         <constraint firstAttribute="width" constant="60" id="OF8-3I-z2B"/>
@@ -167,9 +182,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji6:" destination="iN0-l3-epB" eventType="touchUpInside" id="R1c-cq-w8l"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ys3-AT-Kpb" userLabel="Button7">
-                                                    <rect key="frame" x="428.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="234.5" y="0.0" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="ELD-m3-DYn"/>
                                                         <constraint firstAttribute="height" constant="60" id="mXL-7m-UI5"/>
@@ -184,9 +202,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji7:" destination="iN0-l3-epB" eventType="touchUpInside" id="ikj-sO-JH9"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUw-Xg-BNt" userLabel="Button8">
-                                                    <rect key="frame" x="498.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="234.5" y="81" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="NxP-fn-TTR"/>
                                                         <constraint firstAttribute="width" constant="60" id="aL9-em-NAI"/>
@@ -201,6 +222,9 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji8:" destination="iN0-l3-epB" eventType="touchUpInside" id="5Kx-aG-jpp"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -324,24 +348,24 @@
                                             </variation>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tc0-f3-CUb" userLabel="View2">
-                                            <rect key="frame" x="568" y="0.0" width="568" height="87"/>
+                                            <rect key="frame" x="320" y="0.0" width="320" height="141"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9y-9F-KtK" userLabel="VView">
-                                                    <rect key="frame" x="283.5" y="0.0" width="1" height="87"/>
+                                                    <rect key="frame" x="159.5" y="0.0" width="1" height="141"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="Imu-gt-ibu"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzd-0J-Ue0" userLabel="HView">
-                                                    <rect key="frame" x="0.0" y="43" width="568" height="1"/>
+                                                    <rect key="frame" x="0.0" y="70" width="320" height="1"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="ugY-Pf-9bp"/>
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOg-Ij-HMd" userLabel="Button1">
-                                                    <rect key="frame" x="9.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="25.5" y="0.0" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="1G6-OX-OQ3"/>
                                                         <constraint firstAttribute="width" constant="60" id="7kZ-na-eyc"/>
@@ -356,9 +380,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji9:" destination="iN0-l3-epB" eventType="touchUpInside" id="h3h-fp-NAh"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uI1-Hq-Qnv" userLabel="Button2">
-                                                    <rect key="frame" x="79.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="25.5" y="81" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="D6V-xm-kpE"/>
                                                         <constraint firstAttribute="width" constant="60" id="IpP-6p-KPJ"/>
@@ -373,9 +400,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji10:" destination="iN0-l3-epB" eventType="touchUpInside" id="S0g-x6-VBB"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LUs-kR-OmE" userLabel="Button3">
-                                                    <rect key="frame" x="149.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="95.5" y="0.0" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="283-uX-bqj"/>
                                                         <constraint firstAttribute="width" constant="60" id="aF9-3w-9BA"/>
@@ -390,9 +420,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji11:" destination="iN0-l3-epB" eventType="touchUpInside" id="XHp-f8-GKf"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDC-0h-E2L" userLabel="Button4">
-                                                    <rect key="frame" x="219.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="95.5" y="81" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="WsW-FR-Ev1"/>
                                                         <constraint firstAttribute="height" constant="60" id="kpD-r2-dwx"/>
@@ -407,9 +440,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji12:" destination="iN0-l3-epB" eventType="touchUpInside" id="FYi-sR-G8H"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7m3-0n-0o9" userLabel="Button5">
-                                                    <rect key="frame" x="288.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="164.5" y="0.0" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="d1g-3K-8fB"/>
                                                         <constraint firstAttribute="height" constant="60" id="e6M-S1-7TJ"/>
@@ -424,9 +460,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji13:" destination="iN0-l3-epB" eventType="touchUpInside" id="aR7-6F-LCd"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k17-cP-sb1" userLabel="Button6">
-                                                    <rect key="frame" x="358.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="164.5" y="81" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="cq1-ee-7JM"/>
                                                         <constraint firstAttribute="height" constant="60" id="f56-SY-F1z"/>
@@ -441,9 +480,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji14:" destination="iN0-l3-epB" eventType="touchUpInside" id="BpR-Pj-toX"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPJ-zJ-cis" userLabel="Button7">
-                                                    <rect key="frame" x="428.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="234.5" y="0.0" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="CsV-Nq-P49"/>
                                                         <constraint firstAttribute="width" constant="60" id="JRM-xF-URK"/>
@@ -458,9 +500,12 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji15:" destination="iN0-l3-epB" eventType="touchUpInside" id="LYg-2M-p4L"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRe-O2-RgW" userLabel="Button8">
-                                                    <rect key="frame" x="498.5" y="13.5" width="60" height="60"/>
+                                                    <rect key="frame" x="234.5" y="81" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="2np-ar-Rdr"/>
                                                         <constraint firstAttribute="width" constant="60" id="3Ld-7r-dwj"/>
@@ -475,6 +520,9 @@
                                                             <real key="value" value="0.29999999999999999"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="aEmoji16:" destination="iN0-l3-epB" eventType="touchUpInside" id="Cto-JH-piB"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -598,34 +646,16 @@
                                             </variation>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2B-Zg-EGp" userLabel="View3">
-                                            <rect key="frame" x="1136" y="0.0" width="568" height="87"/>
+                                            <rect key="frame" x="640" y="0.0" width="320" height="141"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✨ All emoji are available ✨" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZ0-Ve-d0x">
-                                                    <rect key="frame" x="0.0" y="3.5" width="568" height="21.5"/>
+                                                    <rect key="frame" x="0.0" y="24" width="320" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Learn more about " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fm-Sl-NMp">
-                                                    <rect key="frame" x="176.5" y="64.5" width="125" height="18"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="125" id="1Dp-GO-4xX"/>
-                                                        <constraint firstAttribute="height" constant="18" id="c3Z-Bm-ryH"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.56862745098039214" green="0.56862745098039214" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAy-Ea-R3u">
-                                                    <rect key="frame" x="301.5" y="64.5" width="94" height="18"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="18" id="R9R-n3-Cyq"/>
-                                                        <constraint firstAttribute="width" constant="94" id="rM5-35-e3Z"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Subscriptions"/>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p0b-cG-3aP">
-                                                    <rect key="frame" x="114" y="30" width="340" height="32"/>
+                                                    <rect key="frame" x="22.5" y="55.5" width="276.5" height="50"/>
                                                     <color key="backgroundColor" red="0.0" green="0.47450980392156861" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="340" id="2Om-J2-dZM"/>
@@ -757,7 +787,37 @@
                                                             <include reference="wn7-hp-yr3"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="aSubscript" destination="iN0-l3-epB" eventType="touchUpInside" id="sLY-Z5-1rV"/>
+                                                    </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Learn more about " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fm-Sl-NMp">
+                                                    <rect key="frame" x="53.5" y="115.5" width="125" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="125" id="1Dp-GO-4xX"/>
+                                                        <constraint firstAttribute="height" constant="18" id="c3Z-Bm-ryH"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.56862745098039214" green="0.56862745098039214" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAy-Ea-R3u">
+                                                    <rect key="frame" x="178.5" y="115.5" width="94" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="R9R-n3-Cyq"/>
+                                                        <constraint firstAttribute="width" constant="94" id="rM5-35-e3Z"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Subscriptions"/>
+                                                    <connections>
+                                                        <action selector="aMore" destination="iN0-l3-epB" eventType="touchUpInside" id="fby-sN-pCG"/>
+                                                    </connections>
+                                                </button>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚙ Setting &gt; General &gt; Keyboards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZd-Fb-m4c">
+                                                    <rect key="frame" x="43.5" y="115.5" width="235" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.56862745098039214" green="0.56862745098039214" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -769,16 +829,21 @@
                                                 <constraint firstItem="p0b-cG-3aP" firstAttribute="centerY" secondItem="O2B-Zg-EGp" secondAttribute="centerY" constant="2.5" id="GD0-8j-bNZ"/>
                                                 <constraint firstItem="p0b-cG-3aP" firstAttribute="centerY" secondItem="O2B-Zg-EGp" secondAttribute="centerY" constant="10" id="H6p-Tb-JAE"/>
                                                 <constraint firstItem="5fm-Sl-NMp" firstAttribute="centerX" secondItem="p0b-cG-3aP" secondAttribute="centerX" constant="-45" id="IaM-M9-lzP"/>
+                                                <constraint firstItem="VZd-Fb-m4c" firstAttribute="top" secondItem="p0b-cG-3aP" secondAttribute="bottom" constant="10" id="LNR-oc-EI5"/>
                                                 <constraint firstItem="p0b-cG-3aP" firstAttribute="leading" secondItem="O2B-Zg-EGp" secondAttribute="trailing" multiplier="0.07" id="Nba-sE-rov"/>
                                                 <constraint firstItem="lZ0-Ve-d0x" firstAttribute="leading" secondItem="O2B-Zg-EGp" secondAttribute="leading" id="OJC-08-hQ1"/>
                                                 <constraint firstItem="kAy-Ea-R3u" firstAttribute="top" secondItem="5fm-Sl-NMp" secondAttribute="top" id="ShF-LG-K4J"/>
                                                 <constraint firstItem="p0b-cG-3aP" firstAttribute="centerX" secondItem="O2B-Zg-EGp" secondAttribute="centerX" id="W11-oz-hIa"/>
+                                                <constraint firstItem="VZd-Fb-m4c" firstAttribute="top" secondItem="p0b-cG-3aP" secondAttribute="bottom" constant="2.5" id="X97-e3-53g"/>
+                                                <constraint firstItem="VZd-Fb-m4c" firstAttribute="centerX" secondItem="p0b-cG-3aP" secondAttribute="centerX" id="eSv-cl-HZY"/>
                                                 <constraint firstItem="5fm-Sl-NMp" firstAttribute="top" secondItem="p0b-cG-3aP" secondAttribute="bottom" constant="10" id="lNg-aP-KN7"/>
                                                 <constraint firstAttribute="trailing" secondItem="lZ0-Ve-d0x" secondAttribute="trailing" id="xLO-H6-qST"/>
                                             </constraints>
                                             <viewLayoutGuide key="safeArea" id="7tg-5c-8Jn"/>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="LNR-oc-EI5"/>
+                                                    <exclude reference="X97-e3-53g"/>
                                                     <exclude reference="059-i4-aEf"/>
                                                     <exclude reference="3dl-wL-yJc"/>
                                                     <exclude reference="CRk-XD-3En"/>
@@ -792,6 +857,7 @@
                                             </variation>
                                             <variation key="heightClass=compact-widthClass=compact">
                                                 <mask key="constraints">
+                                                    <include reference="X97-e3-53g"/>
                                                     <include reference="3dl-wL-yJc"/>
                                                     <include reference="GD0-8j-bNZ"/>
                                                     <include reference="W11-oz-hIa"/>
@@ -800,6 +866,7 @@
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
+                                                    <include reference="LNR-oc-EI5"/>
                                                     <include reference="059-i4-aEf"/>
                                                     <include reference="CRk-XD-3En"/>
                                                     <include reference="H6p-Tb-JAE"/>
@@ -813,14 +880,14 @@
                                     <constraints>
                                         <constraint firstItem="Tc0-f3-CUb" firstAttribute="leading" secondItem="hjS-IE-meI" secondAttribute="trailing" id="9Hc-gb-tyw"/>
                                         <constraint firstItem="hjS-IE-meI" firstAttribute="top" secondItem="oW6-Jb-PQR" secondAttribute="top" id="B8y-TQ-08E"/>
-                                        <constraint firstItem="O2B-Zg-EGp" firstAttribute="top" secondItem="oW6-Jb-PQR" secondAttribute="top" id="GMF-yt-bKH"/>
+                                        <constraint firstItem="O2B-Zg-EGp" firstAttribute="leading" secondItem="Tc0-f3-CUb" secondAttribute="trailing" id="Jiz-5G-16u"/>
                                         <constraint firstAttribute="bottom" secondItem="Tc0-f3-CUb" secondAttribute="bottom" id="N4O-bU-70r"/>
                                         <constraint firstItem="Tc0-f3-CUb" firstAttribute="top" secondItem="oW6-Jb-PQR" secondAttribute="top" id="PsP-Nl-bSj"/>
+                                        <constraint firstAttribute="trailing" secondItem="O2B-Zg-EGp" secondAttribute="trailing" id="fmi-0r-X6I"/>
                                         <constraint firstItem="hjS-IE-meI" firstAttribute="leading" secondItem="oW6-Jb-PQR" secondAttribute="leading" id="gH6-n6-EJS"/>
                                         <constraint firstAttribute="bottom" secondItem="hjS-IE-meI" secondAttribute="bottom" id="gQ5-qC-Iqu"/>
-                                        <constraint firstItem="O2B-Zg-EGp" firstAttribute="leading" secondItem="Tc0-f3-CUb" secondAttribute="trailing" id="tCB-DH-fmZ"/>
-                                        <constraint firstAttribute="trailing" secondItem="O2B-Zg-EGp" secondAttribute="trailing" id="tWG-GI-NuA"/>
-                                        <constraint firstAttribute="bottom" secondItem="O2B-Zg-EGp" secondAttribute="bottom" id="xAw-re-JhI"/>
+                                        <constraint firstItem="O2B-Zg-EGp" firstAttribute="top" secondItem="oW6-Jb-PQR" secondAttribute="top" id="xfX-TQ-Gk7"/>
+                                        <constraint firstAttribute="bottom" secondItem="O2B-Zg-EGp" secondAttribute="bottom" id="zOG-UJ-lwi"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -829,9 +896,9 @@
                                 <constraint firstItem="oW6-Jb-PQR" firstAttribute="top" secondItem="xA9-Yv-bWe" secondAttribute="top" id="0sj-JC-I6J"/>
                                 <constraint firstItem="hjS-IE-meI" firstAttribute="width" secondItem="xA9-Yv-bWe" secondAttribute="width" id="6PC-kv-UzF"/>
                                 <constraint firstItem="Tc0-f3-CUb" firstAttribute="width" secondItem="xA9-Yv-bWe" secondAttribute="width" id="80P-iZ-ZfK"/>
-                                <constraint firstItem="O2B-Zg-EGp" firstAttribute="height" secondItem="xA9-Yv-bWe" secondAttribute="height" id="CfA-HT-33o"/>
-                                <constraint firstItem="O2B-Zg-EGp" firstAttribute="width" secondItem="xA9-Yv-bWe" secondAttribute="width" id="QFL-VH-74H"/>
+                                <constraint firstItem="O2B-Zg-EGp" firstAttribute="width" secondItem="xA9-Yv-bWe" secondAttribute="width" id="APS-6R-hAg"/>
                                 <constraint firstItem="Tc0-f3-CUb" firstAttribute="height" secondItem="xA9-Yv-bWe" secondAttribute="height" id="haM-8t-H83"/>
+                                <constraint firstItem="O2B-Zg-EGp" firstAttribute="height" secondItem="xA9-Yv-bWe" secondAttribute="height" id="j76-9T-soG"/>
                                 <constraint firstAttribute="bottom" secondItem="oW6-Jb-PQR" secondAttribute="bottom" id="pSM-66-PHb"/>
                                 <constraint firstAttribute="trailing" secondItem="oW6-Jb-PQR" secondAttribute="trailing" id="phG-Z1-DL1"/>
                                 <constraint firstItem="oW6-Jb-PQR" firstAttribute="leading" secondItem="xA9-Yv-bWe" secondAttribute="leading" id="seV-M5-rMh"/>
@@ -842,7 +909,7 @@
                             </connections>
                         </scrollView>
                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="aFh-Mx-mF1">
-                            <rect key="frame" x="264" y="125" width="39" height="37"/>
+                            <rect key="frame" x="140" y="179" width="39" height="37"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="pageIndicatorTintColor" red="0.83137254901960789" green="0.83137254901960789" blue="0.83137254901960789" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="currentPageIndicatorTintColor" red="0.20392156862745098" green="0.49411764705882355" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -875,8 +942,13 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="bKe-Nl-gQJ"/>
             <connections>
+                <outlet property="learnLabel" destination="5fm-Sl-NMp" id="dDB-GG-o6f"/>
+                <outlet property="moreButton" destination="kAy-Ea-R3u" id="afs-fl-kFj"/>
                 <outlet property="pageConrol" destination="aFh-Mx-mF1" id="B8G-K1-Uao"/>
                 <outlet property="scrollView" destination="xA9-Yv-bWe" id="RzR-95-xQp"/>
+                <outlet property="settingLabel" destination="VZd-Fb-m4c" id="fNY-WE-7oc"/>
+                <outlet property="subscriptButton" destination="p0b-cG-3aP" id="0fs-or-7IX"/>
+                <outlet property="titleLabel" destination="lZ0-Ve-d0x" id="HEO-6s-pRp"/>
             </connections>
             <point key="canvasLocation" x="74" y="-336"/>
         </view>
