@@ -36,9 +36,13 @@ class NoteTableViewController: UITableViewController {
         return controller
     }()
 
-    lazy var searchResultsViewController: UITableViewController? = {
+    lazy var searchResultsViewController: SearchResultsViewController? = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: "SearchResultsController") as? UITableViewController
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "SearchResultsViewController") as? SearchResultsViewController {
+            viewController.loadView()
+            return viewController
+        }
+        return nil
     }()
 
     override func viewDidLoad() {

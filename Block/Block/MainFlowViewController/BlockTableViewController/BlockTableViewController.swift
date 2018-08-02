@@ -175,5 +175,22 @@ extension BlockTableViewController {
     internal func save() {
         persistentContainer?.viewContext.saveIfNeeded()
     }
+
+    // UIScrollViewDelegate
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        highlightSearchedBlock()
+    }
+
+    internal func highlightSearchedBlock() {
+        if let block = searchedBlock,
+            let indexPath = resultsController?.indexPath(forObject: block) {
+            tableView.allowsSelection = true
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: UITableViewScrollPosition.top)
+            tableView.deselectRow(at: indexPath, animated: true)
+            tableView.allowsSelection = false
+            searchedBlock = nil
+        }
+    }
 }
+
 

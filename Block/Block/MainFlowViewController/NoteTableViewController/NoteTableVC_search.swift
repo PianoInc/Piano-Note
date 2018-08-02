@@ -37,6 +37,21 @@ extension NoteTableViewController: UISearchResultsUpdating {
             .filter { $0 != nil }
             .map { $0! }
         searchResultsViewController?.tableView.reloadData()
+
+        showNoResultIndicator()
+    }
+
+    private func showNoResultIndicator() {
+        guard let searchResultsViewController = searchResultsViewController,
+        let resultsTableView = searchResultsViewController.tableView else { return }
+
+        if resultsTableView.numberOfSections == 0 {
+            searchResultsViewController.noResultIndicatorLabel.isHidden = false
+            resultsTableView.separatorStyle = .none
+        } else {
+            searchResultsViewController.noResultIndicatorLabel.isHidden = true
+            resultsTableView.separatorStyle = .singleLine
+        }
     }
 
     private func convert(note: Note, with keyword: String) -> SearchResult? {
