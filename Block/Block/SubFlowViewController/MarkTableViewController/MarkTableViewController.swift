@@ -19,10 +19,7 @@ class MarkTableViewController: UITableViewController {
                         "Uncheck", "", "Reset All Settings"]
     private var sIndexPath: IndexPath?
     private var canEmojiKeyboard: Bool {
-        for mode in UITextInputMode.activeInputModes where mode.primaryLanguage == "emoji" {
-            return true
-        }
-        return false
+        return UITextInputMode.activeInputModes.contains(where: {$0.primaryLanguage == "emoji"})
     }
     
     override func viewDidLoad() {
@@ -32,16 +29,13 @@ class MarkTableViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillHide), name: .UIKeyboardWillHide, object: nil)
     }
     
-    @objc private func KeyboardWillHide() {
-        print("KeyboardWillHide")
-        guard let blackView = navigationController?.view.subviews.first(where: {$0 is UIScrollView}) else {return}
+    @objc private func KeyboardWillHide(_ instant: Bool = false) {
         guard let textView = view.subviews.first(where: {$0 is UITextView}) else {return}
-        UIView.animate(withDuration: 0.2, animations: {
-            blackView.alpha = 0
-        }, completion: { _ in
-            blackView.removeFromSuperview()
+        DispatchQueue.main.asyncAfter(deadline: .now() + (instant ? 0 : 0.2)) {
             textView.removeFromSuperview()
-        })
+            guard let indexPaths = self.tableView.indexPathsForVisibleRows else {return}
+            indexPaths.forEach {self.tableView.deselectRow(at: $0, animated: false)}
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -72,12 +66,12 @@ extension MarkTableViewController: MarkDelegates {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
         if indexPath.row == 6 {
-            
+            KeyboardWillHide(true)
+            reset()
         } else {
             sIndexPath = indexPath
-            if false {
+            if StoreService.share.hasReceipt {
                 if canEmojiKeyboard {
                     let emojiTextView = EmojiTextView()
                     emojiTextView.delegate = self
@@ -89,35 +83,29 @@ extension MarkTableViewController: MarkDelegates {
             } else {
                 custom(InputView: .nonPayed)
             }
-            blackView()
         }
     }
     
     private func custom(InputView type: InputViewType) {
+        guard !view.subviews.contains(where: {$0 is UITextView}) else {return}
         let textView = UITextView()
         view.addSubview(textView)
-        
         let customInputView = CustomInputView(type)
         customInputView.delegates = self
         textView.inputView = customInputView
         textView.becomeFirstResponder()
     }
     
-    private func blackView() {
-        guard let naviView = navigationController?.view else {return}
-        let blackView = UIScrollView(frame: naviView.bounds)
-        blackView.contentSize = CGSize(width: blackView.bounds.width, height: blackView.bounds.height * 2)
-        blackView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
-        blackView.showsVerticalScrollIndicator = false
-        blackView.keyboardDismissMode = .interactive
-        blackView.alpha = 0
-        naviView.addSubview(blackView)
-        UIView.animate(withDuration: 0.2) {blackView.alpha = 1}
+    private func reset() {
+        (1...4).forEach {
+            guard let cell = tableView.cellForRow(at: IndexPath(item: $0, section: 0)) as? MarkTableViewCell else {return}
+            cell.emoji.text = ""
+        }
     }
     
     func action(_ data: String) {
         switch data {
-        case "hide": KeyboardWillHide()
+        case "hide": KeyboardWillHide(true)
         case "more": break
         case "subscript": break
         default: update(data)
@@ -128,8 +116,6 @@ extension MarkTableViewController: MarkDelegates {
         guard let indexPath = sIndexPath else {return}
         guard let cell = tableView.cellForRow(at: indexPath) as? MarkTableViewCell else {return}
         cell.emoji.text = emoji
-        KeyboardWillHide()
-        sIndexPath = nil
     }
     
 }
@@ -138,12 +124,12 @@ extension MarkTableViewController: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         textView.text = ""
-        return true
+        guard let containsEmoji = (text as AnyObject).value(forKey: "_containsEmoji") as? Bool else {return true}
+        return containsEmoji
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        print("textdid :", textView.text)
+        update(textView.text)
     }
     
 }
-

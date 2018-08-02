@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -326,7 +326,47 @@
                                                     <include reference="rV6-gd-heb"/>
                                                 </mask>
                                             </variation>
+                                            <variation key="heightClass=compact-widthClass=regular">
+                                                <mask key="constraints">
+                                                    <include reference="Cfn-Wp-qBi"/>
+                                                    <include reference="gZu-bO-5lE"/>
+                                                    <include reference="31K-zB-x5g"/>
+                                                    <include reference="ZnZ-1D-nur"/>
+                                                    <include reference="Buz-Yj-Ksv"/>
+                                                    <include reference="DMQ-cN-nEw"/>
+                                                    <include reference="86v-gf-Cs6"/>
+                                                    <include reference="cRF-xL-87B"/>
+                                                    <include reference="6Pm-dA-bSW"/>
+                                                    <include reference="uvY-As-Fks"/>
+                                                    <include reference="S7f-Dk-glM"/>
+                                                    <include reference="pTN-4h-xJq"/>
+                                                    <include reference="6Tw-b9-WB3"/>
+                                                    <include reference="mej-6h-SYo"/>
+                                                    <include reference="Jlk-c7-Dgt"/>
+                                                    <include reference="rV6-gd-heb"/>
+                                                </mask>
+                                            </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="gaz-rw-qib"/>
+                                                    <include reference="rQW-ez-MQ8"/>
+                                                    <include reference="TVB-fj-Zra"/>
+                                                    <include reference="taa-LP-vFf"/>
+                                                    <include reference="35v-xI-9Sm"/>
+                                                    <include reference="Iqy-Dg-b76"/>
+                                                    <include reference="HHw-bB-IdY"/>
+                                                    <include reference="Vkc-qg-uTp"/>
+                                                    <include reference="2vg-Yl-83S"/>
+                                                    <include reference="D6E-Ac-t82"/>
+                                                    <include reference="4CR-MS-sez"/>
+                                                    <include reference="asV-bB-3bj"/>
+                                                    <include reference="b3b-g3-vaz"/>
+                                                    <include reference="eij-Lz-2Mf"/>
+                                                    <include reference="cYt-uD-QlT"/>
+                                                    <include reference="esy-lC-i0h"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=regular">
                                                 <mask key="constraints">
                                                     <include reference="gaz-rw-qib"/>
                                                     <include reference="rQW-ez-MQ8"/>
@@ -578,38 +618,38 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="7A2-Fb-tSz"/>
                                                     <exclude reference="Jge-gq-H7T"/>
                                                     <exclude reference="czD-C6-tMu"/>
                                                     <exclude reference="qKm-Cf-zNc"/>
-                                                    <exclude reference="7A2-Fb-tSz"/>
-                                                    <exclude reference="FFS-DV-27C"/>
                                                     <exclude reference="EMh-im-XCU"/>
-                                                    <exclude reference="P8f-XC-O2w"/>
+                                                    <exclude reference="FFS-DV-27C"/>
                                                     <exclude reference="Nm4-cz-nyO"/>
+                                                    <exclude reference="P8f-XC-O2w"/>
                                                     <exclude reference="KLz-o8-fjh"/>
-                                                    <exclude reference="sfb-vj-qP0"/>
                                                     <exclude reference="QQa-y6-3Kq"/>
                                                     <exclude reference="UvO-JH-n2M"/>
-                                                    <exclude reference="hmk-KE-hss"/>
-                                                    <exclude reference="QE0-t5-tiK"/>
+                                                    <exclude reference="sfb-vj-qP0"/>
                                                     <exclude reference="JPD-M1-Hxr"/>
+                                                    <exclude reference="QE0-t5-tiK"/>
                                                     <exclude reference="Qt7-Yl-9Ow"/>
-                                                    <exclude reference="aGU-dd-cox"/>
-                                                    <exclude reference="pRG-hR-CVC"/>
+                                                    <exclude reference="hmk-KE-hss"/>
                                                     <exclude reference="EJw-i6-ega"/>
+                                                    <exclude reference="aGU-dd-cox"/>
                                                     <exclude reference="gnw-Lb-XIE"/>
-                                                    <exclude reference="NCu-1T-mgn"/>
+                                                    <exclude reference="pRG-hR-CVC"/>
                                                     <exclude reference="3hy-0B-dLG"/>
-                                                    <exclude reference="qM6-FC-GvX"/>
+                                                    <exclude reference="NCu-1T-mgn"/>
                                                     <exclude reference="nq0-TK-VeG"/>
+                                                    <exclude reference="qM6-FC-GvX"/>
                                                     <exclude reference="hwc-aR-CIb"/>
+                                                    <exclude reference="jwQ-Tb-aHx"/>
                                                     <exclude reference="pRE-o6-mlK"/>
                                                     <exclude reference="poK-Jb-kgh"/>
-                                                    <exclude reference="jwQ-Tb-aHx"/>
-                                                    <exclude reference="6Az-oV-wjx"/>
-                                                    <exclude reference="w4O-2a-Vbs"/>
                                                     <exclude reference="50a-Lw-GqM"/>
+                                                    <exclude reference="6Az-oV-wjx"/>
                                                     <exclude reference="p5c-Dm-KQk"/>
+                                                    <exclude reference="w4O-2a-Vbs"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=compact-widthClass=compact">
@@ -618,12 +658,12 @@
                                                     <include reference="czD-C6-tMu"/>
                                                     <include reference="FFS-DV-27C"/>
                                                     <include reference="P8f-XC-O2w"/>
-                                                    <include reference="sfb-vj-qP0"/>
                                                     <include reference="QQa-y6-3Kq"/>
-                                                    <include reference="hmk-KE-hss"/>
+                                                    <include reference="sfb-vj-qP0"/>
                                                     <include reference="Qt7-Yl-9Ow"/>
-                                                    <include reference="pRG-hR-CVC"/>
+                                                    <include reference="hmk-KE-hss"/>
                                                     <include reference="gnw-Lb-XIE"/>
+                                                    <include reference="pRG-hR-CVC"/>
                                                     <include reference="3hy-0B-dLG"/>
                                                     <include reference="nq0-TK-VeG"/>
                                                     <include reference="hwc-aR-CIb"/>
@@ -634,22 +674,42 @@
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
-                                                    <include reference="qKm-Cf-zNc"/>
                                                     <include reference="7A2-Fb-tSz"/>
+                                                    <include reference="qKm-Cf-zNc"/>
                                                     <include reference="EMh-im-XCU"/>
                                                     <include reference="Nm4-cz-nyO"/>
                                                     <include reference="KLz-o8-fjh"/>
                                                     <include reference="UvO-JH-n2M"/>
-                                                    <include reference="QE0-t5-tiK"/>
                                                     <include reference="JPD-M1-Hxr"/>
-                                                    <include reference="aGU-dd-cox"/>
+                                                    <include reference="QE0-t5-tiK"/>
                                                     <include reference="EJw-i6-ega"/>
+                                                    <include reference="aGU-dd-cox"/>
                                                     <include reference="NCu-1T-mgn"/>
                                                     <include reference="qM6-FC-GvX"/>
                                                     <include reference="pRE-o6-mlK"/>
                                                     <include reference="poK-Jb-kgh"/>
-                                                    <include reference="w4O-2a-Vbs"/>
                                                     <include reference="50a-Lw-GqM"/>
+                                                    <include reference="w4O-2a-Vbs"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <mask key="constraints">
+                                                    <include reference="7A2-Fb-tSz"/>
+                                                    <include reference="qKm-Cf-zNc"/>
+                                                    <include reference="EMh-im-XCU"/>
+                                                    <include reference="Nm4-cz-nyO"/>
+                                                    <include reference="KLz-o8-fjh"/>
+                                                    <include reference="UvO-JH-n2M"/>
+                                                    <include reference="JPD-M1-Hxr"/>
+                                                    <include reference="QE0-t5-tiK"/>
+                                                    <include reference="EJw-i6-ega"/>
+                                                    <include reference="aGU-dd-cox"/>
+                                                    <include reference="NCu-1T-mgn"/>
+                                                    <include reference="qM6-FC-GvX"/>
+                                                    <include reference="pRE-o6-mlK"/>
+                                                    <include reference="poK-Jb-kgh"/>
+                                                    <include reference="50a-Lw-GqM"/>
+                                                    <include reference="w4O-2a-Vbs"/>
                                                 </mask>
                                             </variation>
                                         </view>
@@ -657,13 +717,13 @@
                                             <rect key="frame" x="1328" y="0.0" width="664" height="149"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✨ All emoji are available ✨" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZ0-Ve-d0x">
-                                                    <rect key="frame" x="0.0" y="28" width="664" height="21.5"/>
+                                                    <rect key="frame" x="0.0" y="37" width="664" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p0b-cG-3aP">
-                                                    <rect key="frame" x="46.5" y="59.5" width="574" height="50"/>
+                                                    <rect key="frame" x="162" y="68.5" width="340" height="32.5"/>
                                                     <color key="backgroundColor" red="0.0" green="0.47450980392156861" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="340" id="2Om-J2-dZM"/>
@@ -678,46 +738,7 @@
                                                                     <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <font key="NSFont" size="17" name="HelveticaNeue-Bold"/>
                                                                     <font key="NSOriginalFont" size="17" name="HelveticaNeue-Bold"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="28">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="56">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="84">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="112">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="140">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="168">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="196">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="224">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="252">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="280">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="308">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="336">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                     <color key="NSUnderlineColor" red="0.050979999999999998" green="0.81176000000000004" blue="0.85489999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </attributes>
                                                             </fragment>
@@ -725,46 +746,7 @@
                                                                 <attributes>
                                                                     <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <font key="NSFont" size="17" name="HelveticaNeue"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="28">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="56">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="84">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="112">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="140">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="168">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="196">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="224">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="252">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="280">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="308">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                            <textTab alignment="left" location="336">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                     <color key="NSUnderlineColor" red="0.050979999999999998" green="0.81176000000000004" blue="0.85489999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </attributes>
                                                             </fragment>
@@ -795,12 +777,17 @@
                                                             <include reference="wn7-hp-yr3"/>
                                                         </mask>
                                                     </variation>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <mask key="constraints">
+                                                            <include reference="2Om-J2-dZM"/>
+                                                        </mask>
+                                                    </variation>
                                                     <connections>
                                                         <action selector="aSubscript" destination="iN0-l3-epB" eventType="touchUpInside" id="sLY-Z5-1rV"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Learn more about " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fm-Sl-NMp">
-                                                    <rect key="frame" x="226" y="119.5" width="125" height="18"/>
+                                                    <rect key="frame" x="225" y="111" width="125" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="125" id="1Dp-GO-4xX"/>
                                                         <constraint firstAttribute="height" constant="18" id="c3Z-Bm-ryH"/>
@@ -810,7 +797,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAy-Ea-R3u">
-                                                    <rect key="frame" x="351" y="119.5" width="94" height="18"/>
+                                                    <rect key="frame" x="350" y="111" width="94" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="R9R-n3-Cyq"/>
                                                         <constraint firstAttribute="width" constant="94" id="rM5-35-e3Z"/>
@@ -821,7 +808,7 @@
                                                     </connections>
                                                 </button>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚙ Setting &gt; General &gt; Keyboards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZd-Fb-m4c">
-                                                    <rect key="frame" x="216" y="119.5" width="235" height="18"/>
+                                                    <rect key="frame" x="215" y="111" width="235" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.56862745098039214" green="0.56862745098039214" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -850,8 +837,6 @@
                                             <viewLayoutGuide key="safeArea" id="7tg-5c-8Jn"/>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="LNR-oc-EI5"/>
-                                                    <exclude reference="X97-e3-53g"/>
                                                     <exclude reference="059-i4-aEf"/>
                                                     <exclude reference="3dl-wL-yJc"/>
                                                     <exclude reference="CRk-XD-3En"/>
@@ -859,26 +844,37 @@
                                                     <exclude reference="H6p-Tb-JAE"/>
                                                     <exclude reference="Nba-sE-rov"/>
                                                     <exclude reference="W11-oz-hIa"/>
+                                                    <exclude reference="LNR-oc-EI5"/>
+                                                    <exclude reference="X97-e3-53g"/>
                                                     <exclude reference="84i-oD-PNN"/>
                                                     <exclude reference="lNg-aP-KN7"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=compact-widthClass=compact">
                                                 <mask key="constraints">
-                                                    <include reference="X97-e3-53g"/>
                                                     <include reference="3dl-wL-yJc"/>
                                                     <include reference="GD0-8j-bNZ"/>
                                                     <include reference="W11-oz-hIa"/>
+                                                    <include reference="X97-e3-53g"/>
                                                     <include reference="84i-oD-PNN"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
-                                                    <include reference="LNR-oc-EI5"/>
                                                     <include reference="059-i4-aEf"/>
                                                     <include reference="CRk-XD-3En"/>
                                                     <include reference="H6p-Tb-JAE"/>
                                                     <include reference="Nba-sE-rov"/>
+                                                    <include reference="LNR-oc-EI5"/>
+                                                    <include reference="lNg-aP-KN7"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <mask key="constraints">
+                                                    <include reference="059-i4-aEf"/>
+                                                    <include reference="H6p-Tb-JAE"/>
+                                                    <include reference="W11-oz-hIa"/>
+                                                    <include reference="LNR-oc-EI5"/>
                                                     <include reference="lNg-aP-KN7"/>
                                                 </mask>
                                             </variation>

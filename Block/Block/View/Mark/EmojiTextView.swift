@@ -11,10 +11,7 @@ import UIKit
 class EmojiTextView: UITextView {
     
     override var textInputMode: UITextInputMode? {
-        for mode in UITextInputMode.activeInputModes where mode.primaryLanguage == "emoji" {
-            return mode
-        }
-        return nil
+        return UITextInputMode.activeInputModes.first(where: {$0.primaryLanguage == "emoji"})
     }
     
 }
