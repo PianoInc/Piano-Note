@@ -1678,17 +1678,26 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No search result 👻" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Sd-Qn-4Dw">
+                                <rect key="frame" x="111" y="323" width="152.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ur9-HK-03t" firstAttribute="leading" secondItem="hRA-56-7Wh" secondAttribute="leading" id="1eX-VG-5AX"/>
                             <constraint firstItem="ur9-HK-03t" firstAttribute="top" secondItem="hRA-56-7Wh" secondAttribute="top" id="4UA-fS-EFj"/>
                             <constraint firstItem="hRA-56-7Wh" firstAttribute="bottom" secondItem="ur9-HK-03t" secondAttribute="bottom" id="GzX-0o-ICW"/>
+                            <constraint firstItem="9Sd-Qn-4Dw" firstAttribute="centerY" secondItem="BgG-Uh-O2p" secondAttribute="centerY" id="dBU-4m-0yf"/>
                             <constraint firstAttribute="trailing" secondItem="ur9-HK-03t" secondAttribute="trailing" id="qBz-zb-eul"/>
+                            <constraint firstItem="9Sd-Qn-4Dw" firstAttribute="centerX" secondItem="BgG-Uh-O2p" secondAttribute="centerX" id="yAI-ZP-ur1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hRA-56-7Wh"/>
                     </view>
                     <connections>
+                        <outlet property="noResultIndicatorLabel" destination="9Sd-Qn-4Dw" id="DXt-kK-AMP"/>
                         <outlet property="tableView" destination="ur9-HK-03t" id="Fl5-Md-TZV"/>
                     </connections>
                 </viewController>

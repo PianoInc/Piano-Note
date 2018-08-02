@@ -10,4 +10,6 @@ import UIKit
 
 class SearchResultsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+
+    @IBOutlet weak var noResultIndicatorLabel: UILabel!
 }
