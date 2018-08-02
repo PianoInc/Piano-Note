@@ -11,6 +11,7 @@ import UIKit
 extension NoteTableViewController: UISearchResultsUpdating {
     struct SearchResult {
         let note: Note
+        var blocks: [Block]
         var arributedStrings: [NSAttributedString] = []
     }
 
@@ -40,15 +41,17 @@ extension NoteTableViewController: UISearchResultsUpdating {
 
     private func convert(note: Note, with keyword: String) -> SearchResult? {
         guard let blocks = note.blockCollection?.allObjects as? [Block] else { return nil }
-        var result = SearchResult(note: note, arributedStrings: [])
+        var result = SearchResult(note: note, blocks: [], arributedStrings: [])
 
         for block in blocks {
             if let plain = block.plainTextBlock,
                 let text = plain.text,
                 let range = text.lowercased().range(of: keyword.lowercased()) {
+
                 let attributedString = NSMutableAttributedString(string: text)
                 attributedString.addAttributes([NSAttributedStringKey.foregroundColor : self.view.tintColor], range: NSRange(range, in: text))
                 result.arributedStrings.append(attributedString)
+                result.blocks.append(block)
             }
         }
         if result.arributedStrings.isEmpty {

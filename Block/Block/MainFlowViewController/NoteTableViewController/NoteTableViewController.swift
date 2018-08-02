@@ -102,6 +102,10 @@ class NoteTableViewController: UITableViewController {
             vc.resultsController = resultsController
             resultsController.delegate = vc
 
+            if let block = searchResultsDelegate.selectedBlock {
+                vc.searchedBlock = block
+            }
+
         } else if let nav = segue.destination as? UINavigationController,
             let vc = nav.topViewController as? SortTableViewController  {
             vc.noteTableVC = self

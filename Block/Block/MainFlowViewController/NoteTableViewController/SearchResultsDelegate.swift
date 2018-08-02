@@ -13,6 +13,7 @@ class SearchResultsDelegate: NSObject {
     weak var noteTableViewController: NoteTableViewController?
     weak var resultsController: NSFetchedResultsController<Note>?
     var searchResults = [NoteTableViewController.SearchResult]()
+    var selectedBlock: Block?
 }
 
 extension SearchResultsDelegate: UITableViewDataSource {
@@ -37,6 +38,9 @@ extension SearchResultsDelegate: UITableViewDataSource {
 extension SearchResultsDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let noteTableVC = noteTableViewController else { return }
+        let note = searchResults[indexPath.section].note
+        let block = searchResults[indexPath.section].blocks[indexPath.row]
+        selectedBlock = block
         searchResults[indexPath.section].note.didSelectItem(fromVC: noteTableVC)
     }
 
