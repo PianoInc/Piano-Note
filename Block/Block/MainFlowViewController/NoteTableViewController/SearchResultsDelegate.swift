@@ -41,7 +41,7 @@ extension SearchResultsDelegate: UITableViewDelegate {
         let note = searchResults[indexPath.section].note
         let block = searchResults[indexPath.section].blocks[indexPath.row]
         selectedBlock = block
-        searchResults[indexPath.section].note.didSelectItem(fromVC: noteTableVC)
+        note.didSelectItem(fromVC: noteTableVC)
     }
 
 

@@ -12,9 +12,7 @@ import CoreData
 extension NoteTableViewController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        if !searchController.isActive {
-            tableView.beginUpdates()
-        }
+        tableView.beginUpdates()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
@@ -53,9 +51,7 @@ extension NoteTableViewController: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        if !searchController.isActive {
-            tableView.endUpdates()
-        }
+        tableView.endUpdates()
     }
     
 }

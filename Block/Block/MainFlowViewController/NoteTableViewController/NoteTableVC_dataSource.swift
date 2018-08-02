@@ -46,8 +46,7 @@ extension NoteTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard let note = resultsController?.object(at: indexPath),
-            !searchController.isActive else { return nil }
+        guard let note = resultsController?.object(at: indexPath) else { return nil }
         //normal이면 버튼 두개 생성(고정, 공유)
         //shared이면 버튼 한 개 생성(공유 취소)
         //pinned이면 버튼 한 개 생성(고정 취소)
@@ -97,8 +96,7 @@ extension NoteTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard let note = resultsController?.object(at: indexPath),
-            !searchController.isActive else { return nil }
+        guard let note = resultsController?.object(at: indexPath) else { return nil }
         //내보내기, 삭제
         let export = UIContextualAction(style: .normal, title:  "내보내기", handler: {[weak self](ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             success(true)
@@ -112,8 +110,6 @@ extension NoteTableViewController {
         let delete = UIContextualAction(style: .normal, title:  "삭제", handler: {[weak self](ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
             note.deleteWithRelationshipIfNeeded()
-
-
             success(true)
         })
         //        closeAction.image = UIImage(named: "tick")
