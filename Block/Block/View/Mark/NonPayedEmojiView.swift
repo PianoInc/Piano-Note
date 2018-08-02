@@ -21,6 +21,20 @@ class NonPayedEmojiView: UIView {
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var settingLabel: UILabel!
     
+    var type: InputViewType! {
+        didSet {settingToGuide()}
+    }
+    
+    private func settingToGuide() {
+        guard type == .payed else {return}
+        titleLabel.text = "🙅🏻‍♂️ Emoji Keyboard is not found 😥"
+        subscriptButton.backgroundColor = UIColor(hex6: "636a6e")
+        subscriptButton.setAttributedTitle(NSMutableAttributedString(string: "Add Emoji Keyboard", attributes: [.font : UIFont.systemFont(ofSize: 17, weight: .bold), .foregroundColor : UIColor.white]), for: .normal)
+        learnLabel.isHidden = true
+        moreButton.isHidden = true
+        settingLabel.isHidden = false
+    }
+    
     @IBAction private func aHide() {delegates?.action("hide")}
     @IBAction private func aSubscript() {delegates?.action("subscript")}
     @IBAction private func aMore() {delegates?.action("more")}

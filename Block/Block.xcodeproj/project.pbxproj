@@ -29,6 +29,7 @@
 		5307A7763A8AF55AEC5FEA227CB5B87C /* FacebookDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814168EA51BD4B5E39B7A30C544A337E /* FacebookDetailTableViewController.swift */; };
 		567802734F5A95ABF7B80DF69441F3E2 /* Block.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B52C1F77382585B87FAB91C0B7F86B0D /* Block.xcdatamodeld */; };
 		5796AC45FF1B897995445E7B6E14B234 /* FolderTableVC_state.swift in Sources */ = {isa = PBXBuildFile; fileRef = F120D872A3D185105F15F77E6F8CF065 /* FolderTableVC_state.swift */; };
+		5BED7F9882E2C60B90EF1D8F546E6C61 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ED56DA8CF54184DADC411E54CC4962 /* StoreService.swift */; };
 		5C4B907F62EB01F50C6AACB2A7D5F7DA /* NoteTableVC_action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489A08FCF7871F2232B9EF98CA494DB0 /* NoteTableVC_action.swift */; };
 		5EC3900F2EE33D0B4E97B761C61581E9 /* TextBlockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD49890669222562AA90074970895C9 /* TextBlockType.swift */; };
 		62EC65B42E68FFCA4935D05BE1868B06 /* Font_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DAA29DC735CABAB107CA113D60E199 /* Font_extension.swift */; };
@@ -82,6 +83,7 @@
 		E741F5F9EEFA56C2D802674531AE75F1 /* UnOrderedTextBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796E985D4DFA2739B8F9CF20A5680EB9 /* UnOrderedTextBlock_extension.swift */; };
 		EA26F51B4C259C92607779B8E341CE94 /* ImagePickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F4B6EE9252B27973283E18C84C9A0D /* ImagePickerCollectionViewCell.swift */; };
 		EC5F8D7BCC6FDFC99BF8FC3B81E5A424 /* NoteTableVC_dataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2913F6CB34415CFE75E5C6C573EBD08A /* NoteTableVC_dataSource.swift */; };
+		EC6F25682E51B54C258CE9D4A082EC17 /* EmojiTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D205109E68FC74E8A4093D1326A4AA9D /* EmojiTextView.swift */; };
 		F35FC1915FA29946837D88B0285A3F8B /* CustomDisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7BD469B17FF67B816C3E3B6E7C280 /* CustomDisclosureIndicator.swift */; };
 		F42F50779FA3AA6A2A464CE1CDBC7BCE /* BlockTableVC_state.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9394CC42E06C01FB38B81C12E475853 /* BlockTableVC_state.swift */; };
 		F454862FBB69F9F126650BC6BAC376BB /* Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */; };
@@ -155,6 +157,7 @@
 		815389907A9E81E80CA7A11F77A407E8 /* FacebookTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookTableViewController.swift; sourceTree = "<group>"; };
 		84A728C7450F1817C4C1A5CE976C54B4 /* PianoBullet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoBullet.swift; sourceTree = "<group>"; };
 		88DF69EDADBAAABA2D845EEE95454EC4 /* FileBlock_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileBlock_extension.swift; sourceTree = "<group>"; };
+		90ED56DA8CF54184DADC411E54CC4962 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
 		94022D2A9244B33401450E60CB4826A9 /* Block.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Block.entitlements; sourceTree = "<group>"; };
 		94E929E302A72566429919AF580599A8 /* NSManagedObjectContext_extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContext_extension.swift; sourceTree = "<group>"; };
 		96F4B6EE9252B27973283E18C84C9A0D /* ImagePickerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -177,6 +180,7 @@
 		CE84097EC525FA2FF1E2D667E27DB047 /* FolderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderTableViewController.swift; sourceTree = "<group>"; };
 		CE8E7B282E85FBE25CFB5D595B8238E6 /* HighlightData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightData.swift; sourceTree = "<group>"; };
 		CFCEF150F52E137528C93BC9507A1D14 /* SettingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDetailTableViewController.swift; sourceTree = "<group>"; };
+		D205109E68FC74E8A4093D1326A4AA9D /* EmojiTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextView.swift; sourceTree = "<group>"; };
 		D2B2C61D4789A041B2E70B8BC2FCFEA6 /* FolderPickerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderPickerTableViewController.swift; sourceTree = "<group>"; };
 		D3300D23731A1C60AAB7359D15942A9D /* FolderTableVC_FRC_delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableVC_FRC_delegate.swift; sourceTree = "<group>"; };
 		D6899DD088C87EB4E74FF9AB4BA6E3F2 /* Block_extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block_extension.swift; sourceTree = "<group>"; };
@@ -246,6 +250,14 @@
 				515AB035C4B71822CF3F87B29B714AE3 /* ThemeManager.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		B93F4825AED72384A725D83DDB658A06 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				90ED56DA8CF54184DADC411E54CC4962 /* StoreService.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		1B3E93BF92F2FB3F0886FAC55C9F420D /* FolderTableViewController */ = {
@@ -323,6 +335,7 @@
 			children = (
 				1AE7BD469B17FF67B816C3E3B6E7C280 /* CustomDisclosureIndicator.swift */,
 				F116B2D06867EEC9A6EEA663E83286EB /* CustomInputView.swift */,
+				D205109E68FC74E8A4093D1326A4AA9D /* EmojiTextView.swift */,
 				5C001CCC477C275E96D07E4CBC1B3FD1 /* MarkTableViewCell.swift */,
 				68963EC6A6DBD70B46F5D91EAA55159E /* NonPayedEmojiView.swift */,
 				A8B24BE06047F1F0EFD6DAD3E2E5BD7A /* NonPayedEmojiView.xib */,
@@ -406,6 +419,7 @@
 				0A14859DDDB3ABB86377328B30388A42 /* PlatformConvertible */,
 				0BC6A73085FB497699811C5B4A5FAA35 /* Protocol */,
 				2DB5B67C4D5988FF123D09EF064A94B3 /* SubFlowViewController */,
+				B93F4825AED72384A725D83DDB658A06 /* Util */,
 				EA696368337BC5A4BC071A142C69FA5B /* View */,
 				33720B9B9DBB4DEFE9A1C14AF314FF0F /* AppDelegate.swift */,
 				6AF3298A0D3C0394F569F658130DAA4A /* Assets.xcassets */,
@@ -603,6 +617,7 @@
 				A0AC495082382A253F01DA2C08890EA5 /* Detection.swift in Sources */,
 				9E30F3B26DDA12342F1C09FE1DEEEA9C /* DrawingBlockTableViewCell.swift in Sources */,
 				DBC3E497FFCFEE0E4EAADF64BEB2D741 /* DrawingBlock_extension.swift in Sources */,
+				EC6F25682E51B54C258CE9D4A082EC17 /* EmojiTextView.swift in Sources */,
 				5307A7763A8AF55AEC5FEA227CB5B87C /* FacebookDetailTableViewController.swift in Sources */,
 				A74F3A6B8FBAAB23131BE1F3CA9413BF /* FacebookTableViewController.swift in Sources */,
 				B28A17F7728159DADF7636992ED346D4 /* FileBlockTableViewCell.swift in Sources */,
@@ -643,6 +658,7 @@
 				49420E934747D47CE7A7E237177474FD /* SettingDetailTableViewController.swift in Sources */,
 				A9303277F05F7EB64D014DB75B14B9A5 /* SettingTableViewController.swift in Sources */,
 				6BE618DA046E0170A006B11B44F893E9 /* SortTableViewController.swift in Sources */,
+				5BED7F9882E2C60B90EF1D8F546E6C61 /* StoreService.swift in Sources */,
 				AEDC34CD523097D4624BF2D44AC87A67 /* String_extension.swift in Sources */,
 				8F3446B9498D4B7832A7A01FE8C5DBA0 /* TableViewAutoSystemProtocol.swift in Sources */,
 				DE5C1B802AEBB1153CA75588CAC7651B /* TextBlockTableViewCell.swift in Sources */,

@@ -12,6 +12,12 @@ protocol InputViewDelegates: NSObjectProtocol {
     func action(_ data: String)
 }
 
+enum InputViewType {
+    case nonPayed, payed
+}
+
+let EMOJI_GUIDE = "EMOJI_GUIDE"
+
 class CustomInputView: UIView, InputViewDelegates {
     
     weak var delegates: MarkDelegates?
@@ -28,17 +34,15 @@ class CustomInputView: UIView, InputViewDelegates {
         }
     }
     
-    convenience init() {
+    convenience init(_ type: InputViewType) {
         self.init(frame: .zero)
         backgroundColor = .white
         frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: inputHeight)
-        nonPayed()
-    }
-    
-    private func nonPayed() {
+        
         let nib = Nib(nibName: "NonPayedEmojiView", bundle: nil)
         guard let view = nib.instantiate(withOwner: nil, options: nil).first as? NonPayedEmojiView else {return}
         view.delegates = self
+        view.type = type
         addSubview(view)
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -47,6 +51,11 @@ class CustomInputView: UIView, InputViewDelegates {
         view.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
         layoutIfNeeded()
+        
+        guard !UserDefaults.standard.bool(forKey: EMOJI_GUIDE), type == .payed else {return}
+        let offset = CGPoint(x: view.scrollView.bounds.width * 2, y: 0)
+        view.scrollView.setContentOffset(offset, animated: false)
+        UserDefaults.standard.set(true, forKey: EMOJI_GUIDE)
     }
     
     func action(_ data: String) {

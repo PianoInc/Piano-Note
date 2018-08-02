@@ -18,6 +18,12 @@ class MarkTableViewController: UITableViewController {
                         "Unordered list", "Check",
                         "Uncheck", "", "Reset All Settings"]
     private var sIndexPath: IndexPath?
+    private var canEmojiKeyboard: Bool {
+        for mode in UITextInputMode.activeInputModes where mode.primaryLanguage == "emoji" {
+            return true
+        }
+        return false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +33,7 @@ class MarkTableViewController: UITableViewController {
     }
     
     @objc private func KeyboardWillHide() {
+        print("KeyboardWillHide")
         guard let blackView = navigationController?.view.subviews.first(where: {$0 is UIScrollView}) else {return}
         guard let textView = view.subviews.first(where: {$0 is UITextView}) else {return}
         UIView.animate(withDuration: 0.2, animations: {
@@ -70,24 +77,42 @@ extension MarkTableViewController: MarkDelegates {
             
         } else {
             sIndexPath = indexPath
-            let textView = UITextView()
-            view.addSubview(textView)
-            
-            let customInputView = CustomInputView()
-            customInputView.delegates = self
-            textView.inputView = customInputView
-            textView.becomeFirstResponder()
-            
-            guard let naviView = navigationController?.view else {return}
-            let blackView = UIScrollView(frame: naviView.bounds)
-            blackView.contentSize = CGSize(width: blackView.bounds.width, height: blackView.bounds.height * 2)
-            blackView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
-            blackView.showsVerticalScrollIndicator = false
-            blackView.keyboardDismissMode = .interactive
-            blackView.alpha = 0
-            naviView.addSubview(blackView)
-            UIView.animate(withDuration: 0.2) {blackView.alpha = 1}
+            if false {
+                if canEmojiKeyboard {
+                    let emojiTextView = EmojiTextView()
+                    emojiTextView.delegate = self
+                    view.addSubview(emojiTextView)
+                    emojiTextView.becomeFirstResponder()
+                } else {
+                    custom(InputView: .payed)
+                }
+            } else {
+                custom(InputView: .nonPayed)
+            }
+            blackView()
         }
+    }
+    
+    private func custom(InputView type: InputViewType) {
+        let textView = UITextView()
+        view.addSubview(textView)
+        
+        let customInputView = CustomInputView(type)
+        customInputView.delegates = self
+        textView.inputView = customInputView
+        textView.becomeFirstResponder()
+    }
+    
+    private func blackView() {
+        guard let naviView = navigationController?.view else {return}
+        let blackView = UIScrollView(frame: naviView.bounds)
+        blackView.contentSize = CGSize(width: blackView.bounds.width, height: blackView.bounds.height * 2)
+        blackView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+        blackView.showsVerticalScrollIndicator = false
+        blackView.keyboardDismissMode = .interactive
+        blackView.alpha = 0
+        naviView.addSubview(blackView)
+        UIView.animate(withDuration: 0.2) {blackView.alpha = 1}
     }
     
     func action(_ data: String) {
