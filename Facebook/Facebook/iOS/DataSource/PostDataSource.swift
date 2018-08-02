@@ -102,7 +102,6 @@ NSObject, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefe
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
         didSelectRowAt?(data[indexPath.row])
     }
     

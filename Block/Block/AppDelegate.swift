@@ -38,17 +38,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             splitViewController.maximumPrimaryColumnWidth = 414
             splitViewController.minimumPrimaryColumnWidth = 320
             
+            if let vc = (splitViewController.viewControllers.last as? UINavigationController)?.topViewController as? BlockTableViewController {
+                vc.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
+                vc.navigationItem.leftItemsSupplementBackButton = true
+            }
+            
             if let vc = (splitViewController.viewControllers.first as? UINavigationController)?.topViewController as? FolderTableViewController {
                 vc.persistentContainer = persistentContainer
                 let context = persistentContainer.viewContext
                 let resultsController = context.folderResultsController()
                 vc.resultsController = resultsController
                 resultsController.delegate = vc
+                
             } else {
-                print("에러발생!! 스플릿뷰의 첫번째 컨트롤러가 폴더가 아니다!")
+                print("preserve로 복구가 진행중.")
             }
         }
         return true
+    }
+    
+    func application(_ application: UIApplication, viewControllerWithRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
+        print(identifierComponents)
+        return nil
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -106,5 +117,4 @@ extension AppDelegate : UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return true
     }
-    
 }

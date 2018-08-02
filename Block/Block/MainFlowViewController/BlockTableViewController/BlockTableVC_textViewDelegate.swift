@@ -50,7 +50,7 @@ extension BlockTableViewController: UITextViewDelegate {
         guard let block = (textView.superview?.superview as? TableDataAcceptable)?.data as? Block,
             let indexPath = resultsController?.indexPath(forObject: block)
             else { return true }
-        
+        print("shouldChangeTextIn")
         switch typingSituation(textView, block: block, replacementText: text) {
         case .resetForm:
             block.revertToPlain()

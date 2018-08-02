@@ -15,6 +15,8 @@ class BlockTextView: UITextView {
         layoutManager.delegate = self
         textContainerInset = UIEdgeInsets.zero
         textContainer.lineFragmentPadding = 0
+        inputAssistantItem.leadingBarButtonGroups = []
+        inputAssistantItem.trailingBarButtonGroups = []
     }
     
     //TODO: 여기서 해당 지점의 attrText의 attr에 링크가 있는 지 판단하는게 옳은것인가?

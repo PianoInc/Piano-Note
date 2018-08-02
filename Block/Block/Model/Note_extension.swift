@@ -29,7 +29,7 @@ extension Note: TableDatable {
     }
     
     func didSelectItem(fromVC viewController: ViewController) {
-        viewController.performSegue(withIdentifier: "BlockTableViewController", sender: self)
+        viewController.performSegue(withIdentifier: "BlockNavigationController", sender: self)
         
     }
 }
