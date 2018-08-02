@@ -28,7 +28,6 @@ class CustomInputView: UIView {
         self.init(frame: .zero)
         backgroundColor = .white
         frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: inputHeight)
-        print(frame)
         nonPayed()
     }
     
