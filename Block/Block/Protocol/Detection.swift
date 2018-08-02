@@ -104,35 +104,34 @@ extension Detection where Self: BlockTableViewController {
             eventAuth(check: url.absoluteString) {
                 switch url.absoluteString {
                 case DETECT_EVENT:
-                    let eventStore = EKEventStore()
-                    let event = EKEvent(eventStore: eventStore)
-                    event.title = title
-                    event.startDate = eventDate
-                    event.calendar = eventStore.defaultCalendarForNewEvents
-                    let eventEditVC = EKEventEditViewController()
-                    eventEditVC.eventStore = eventStore
-                    eventEditVC.event = event
-                    eventEditVC.editViewDelegate = self
-                    self.navigationController?.pushViewController(eventEditVC, animated: true)
+                    self.eventAlert(DETECT_EVENT, target, title) {
+                        let eventStore = EKEventStore()
+                        let event = EKEvent(eventStore: eventStore)
+                        event.title = $0
+                        event.startDate = eventDate
+                        event.endDate = eventDate.addingTimeInterval(3600)
+                        event.calendar = eventStore.defaultCalendarForNewEvents
+                        do {
+                            try eventStore.save(event, span: .thisEvent, commit: true)
+                            self.eventResult(alert: "이벤트 등록 성공")
+                        } catch {
+                            self.eventResult(alert: "이벤트 등록 실패")
+                        }
+                    }
                 case DETECT_REMINDER:
-                    let actionSheet = UIAlertController(title: nil, message: target + title, preferredStyle: .actionSheet)
-                    let reminderAction = UIAlertAction(title: "미리알림 등록", style: .default) { _ in
+                    self.eventAlert(DETECT_REMINDER, target, title) {
                         let eventStore = EKEventStore()
                         let reminder = EKReminder(eventStore: eventStore)
-                        reminder.title = title
+                        reminder.title = $0
                         reminder.addAlarm(EKAlarm(absoluteDate: eventDate))
                         reminder.calendar = eventStore.defaultCalendarForNewReminders()
                         do {
                             try eventStore.save(reminder, commit: true)
-                            self.reminderResult(alert: "미리알림 등록 성공")
+                            self.eventResult(alert: "미리알림 등록 성공")
                         } catch {
-                            self.reminderResult(alert: "미리알림 등록 실패")
+                            self.eventResult(alert: "미리알림 등록 실패")
                         }
                     }
-                    let cancelAction = UIAlertAction(title: "취소", style: .cancel)
-                    actionSheet.addAction(reminderAction)
-                    actionSheet.addAction(cancelAction)
-                    self.present(actionSheet, animated: true)
                 default: break
                 }
             }
@@ -173,7 +172,24 @@ extension Detection where Self: BlockTableViewController {
         present(alert, animated: true)
     }
     
-    private func reminderResult(alert message: String) {
+    private func eventAlert(_ type: String, _ target: String, _ title: String, saveHandler: @escaping ((String) -> ())) {
+        let alertTitle = (type == DETECT_EVENT) ? "이벤트 등록" : "미리알림 등록"
+        let alert = UIAlertController(title: alertTitle, message: target, preferredStyle: .alert)
+        alert.addTextField(configurationHandler: { textField in
+            textField.clearButtonMode = .always
+            textField.text = title
+        })
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        let saveAction = UIAlertAction(title: "등록", style: .default) { _ in
+            let finalTitle = alert.textFields?.first?.text ?? title
+            saveHandler(finalTitle)
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(saveAction)
+        self.present(alert, animated: true)
+    }
+    
+    private func eventResult(alert message: String) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "확인", style: .cancel)
         alert.addAction(confirmAction)

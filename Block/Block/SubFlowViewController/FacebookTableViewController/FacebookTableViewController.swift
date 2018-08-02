@@ -21,14 +21,15 @@ class FacebookTableViewController: UITableViewController, FacebookPostDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? FacebookDetailTableViewController {
-            guard let postData = sender as? PostData else {return}
+        if let nav = segue.destination as? UINavigationController,
+            let vc = nav.topViewController as? FacebookDetailTableViewController {
+            guard let postData = sender as? PostData else { return }
             vc.postData = postData
         }
     }
     
     @IBAction func tapCancel(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
 }

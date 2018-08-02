@@ -84,7 +84,7 @@ struct PasteboardManager {
             
             //첫번째 문단은 일단 붙인다.
             let firstString = strArray.remove(at: 0)
-            currentBlock.text?.append(firstString)
+            currentBlock.text = (currentBlock.text ?? "") + firstString
             currentBlock.modifiedDate = Date()
             
             DispatchQueue.main.async {
@@ -116,17 +116,18 @@ struct PasteboardManager {
                         switch bullet.type {
                         case .checkist:
                             let checklistBlock = ChecklistTextBlock(context: context)
-                            checklistBlock.text = str
+                            checklistBlock.text = (str as NSString).substring(from: bullet.baselineIndex)
                             checklistBlock.addToBlockCollection(block)
                             
                         case .orderedlist:
                             let orderedListBlock = OrderedTextBlock(context: context)
-                            orderedListBlock.text = str
+                            orderedListBlock.num = Int64(bullet.string) ?? 0
+                            orderedListBlock.text = (str as NSString).substring(from: bullet.baselineIndex)
                             orderedListBlock.addToBlockCollection(block)
                             
                         case .unOrderedlist:
                             let unorderedBlock = UnOrderedTextBlock(context: context)
-                            unorderedBlock.text = str
+                            unorderedBlock.text = (str as NSString).substring(from: bullet.baselineIndex)
                             unorderedBlock.addToBlockCollection(block)
                         }
                     } else {
@@ -158,6 +159,12 @@ struct PasteboardManager {
     */
     public func suggestPasteIfNeeded() {
         
+    }
+    
+    public func allString(from blocks: [Block]) -> String {
+        let mAttr = NSMutableAttributedString()
+        blocks.forEach {mAttr.append(nsAttributedStringFrom(block: $0))}
+        return mAttr.string
     }
     
 }

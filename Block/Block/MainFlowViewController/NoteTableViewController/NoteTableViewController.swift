@@ -52,9 +52,15 @@ class NoteTableViewController: UITableViewController {
             updateViews(for: state)
             asyncFetchData()
         }
-        clearsSelectionOnViewWillAppear = true
-
         setupSearchViewController()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let displayMode = splitViewController?.displayMode,
+            displayMode == .allVisible {
+            clearsSelectionOnViewWillAppear = false
+        }
+        super.viewWillAppear(animated)
     }
 
     override func encodeRestorableState(with coder: NSCoder) {
@@ -86,13 +92,23 @@ class NoteTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let vc = segue.destination as? BlockTableViewController,
-            let note = sender as? Note, let folderType = note.folder?.folderType {
+        if let identifier = segue.identifier, identifier == "FilterSearchSplitViewController" {
+            guard let vc = segue.destination as? UISplitViewController else { return }
+            // FilterSearchSplitView
+            vc.delegate = self
+            vc.preferredDisplayMode = .allVisible
+            vc.maximumPrimaryColumnWidth = 414
+            vc.minimumPrimaryColumnWidth = 320
+        } else if let identifier = segue.identifier,
+            identifier == "BlockNavigationController" {
+            guard let nav = segue.destination as? UINavigationController,
+                let vc = nav.topViewController as? BlockTableViewController,
+                let note = sender as? Note,
+                let folderType = note.folder?.folderType else { return }
+            
             let state: BlockTableViewController.ViewControllerState =
-                folderType !=
-                .deleted ?
-                .normal :
-                .deleted
+                folderType != .deleted ?
+                        .normal : .deleted
             
             vc.state = state
             vc.note = note
@@ -105,10 +121,6 @@ class NoteTableViewController: UITableViewController {
             if let block = searchResultsDelegate.selectedBlock {
                 vc.searchedBlock = block
             }
-
-        } else if let nav = segue.destination as? UINavigationController,
-            let vc = nav.topViewController as? SortTableViewController  {
-            vc.noteTableVC = self
         }
     }
     
@@ -138,5 +150,12 @@ extension NoteTableViewController {
     
     private func save() {
         persistentContainer.viewContext.saveIfNeeded()
+    }
+}
+
+extension NoteTableViewController : UISplitViewControllerDelegate {
+    
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        return true
     }
 }

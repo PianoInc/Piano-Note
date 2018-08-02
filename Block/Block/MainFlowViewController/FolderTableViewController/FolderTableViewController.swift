@@ -23,6 +23,7 @@ class FolderTableViewController: UITableViewController {
             let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
             persistentContainer = container
             resultsController = container.viewContext.folderResultsController()
+            resultsController?.delegate = self
         }
 
         updateViews(for: state)
@@ -46,9 +47,8 @@ class FolderTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? NoteTableViewController,
-            let folder = sender as? Folder {
-            
+        if let identifier = segue.identifier, identifier == "NoteTableViewController" || identifier == "NoAnimationNoteViewController" {
+            guard let vc = segue.destination as? NoteTableViewController, let folder = sender as? Folder else { return }
             vc.folder = folder
             vc.persistentContainer = persistentContainer
             let state: NoteTableViewController.ViewControllerState
@@ -69,10 +69,17 @@ class FolderTableViewController: UITableViewController {
             let resultsController = context.noteResultsController(folder: folder)
             vc.resultsController = resultsController
             resultsController.delegate = vc
-        }
-        
-        // Facebook splitView
-        if let vc = segue.destination as? UISplitViewController {
+            
+        } else if let identifier = segue.identifier, identifier == "FacebookSplitViewController" {
+            guard let vc = segue.destination as? UISplitViewController else { return }
+            // Facebook splitView
+            vc.delegate = self
+            vc.preferredDisplayMode = .allVisible
+            vc.maximumPrimaryColumnWidth = 414
+            vc.minimumPrimaryColumnWidth = 320
+        } else if let identifier = segue.identifier, identifier == "SettingSplitViewController" {
+            guard let vc = segue.destination as? UISplitViewController else { return }
+            // Setting splitView
             vc.delegate = self
             vc.preferredDisplayMode = .allVisible
             vc.maximumPrimaryColumnWidth = 414

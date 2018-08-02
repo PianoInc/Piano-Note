@@ -33,20 +33,20 @@ extension FolderTableViewController {
     
     private func setNavbarForNormal() {
         navigationItem.title = "Folder"
+        let settingButton = BarButtonItem(title: "Setting", style: .plain, target: self, action: #selector(tapSetting(_:)))
         let editBtn = BarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tapEdit(_:)))
         self.navigationItem.setRightBarButton(editBtn, animated: true)
-        self.navigationItem.setLeftBarButton(nil, animated: true)
+        self.navigationItem.setLeftBarButton(settingButton, animated: true)
     }
     
     private func setToolbarForNormal() {
-        let shopBtn = BarButtonItem(title: "shop", style: .plain, target: self, action: #selector(tapShop(_:)))
         let facebookBtn = BarButtonItem(title: "facebook", style: .plain, target: self, action: #selector(tapFacebook(_:)))
         
         let newFolderBtn = BarButtonItem(title: "New Folder", style: .plain, target: self, action: #selector(tapNewFolder(_:)))
         let flexibleWidthBtn = BarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
         self.setToolbarItems(
-            [shopBtn, facebookBtn, flexibleWidthBtn, newFolderBtn],
+            [facebookBtn, flexibleWidthBtn, newFolderBtn],
             animated: true)
     }
     
