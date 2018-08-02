@@ -15,6 +15,13 @@ class NoteTableViewController: UITableViewController {
     var folder: Folder!
     var state: ViewControllerState!
 
+    lazy var searchResultsDelegate: SearchResultsDelegate = {
+        let delegate = SearchResultsDelegate()
+        delegate.noteTableViewController = self
+        delegate.resultsController = resultsController
+        return delegate
+    }()
+
     var resultsController: NSFetchedResultsController<Note>?
     internal var delayBlockQueue: [(NoteTableViewController) -> Void] = []
 
@@ -22,8 +29,6 @@ class NoteTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0(self) }
     }
-
-    var searchResults = [SearchResult]()
 
     lazy var searchController: UISearchController = {
         let controller = UISearchController(searchResultsController: searchResultsViewController)
@@ -129,57 +134,5 @@ extension NoteTableViewController {
     
     private func save() {
         persistentContainer.viewContext.saveIfNeeded()
-    }
-}
-
-
-extension NoteTableViewController: UISearchResultsUpdating {
-    private func setupSearchViewController() {
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = true
-        definesPresentationContext = true
-        searchResultsViewController?.tableView.dataSource = self
-        searchResultsViewController?.tableView.delegate = self
-        searchResultsViewController?.tableView.rowHeight = UITableViewAutomaticDimension
-        searchResultsViewController?.tableView.estimatedRowHeight = 140
-        searchResultsViewController?.tableView.register(SearchResultSectionHeader.self, forHeaderFooterViewReuseIdentifier: "SearchResultSectionHeader")
-        searchResultsViewController?.tableView.register(SearchResultSectionFooter.self, forHeaderFooterViewReuseIdentifier: "SearchResultSectionFooter")
-        searchResultsViewController?.tableView.backgroundColor = UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0)
-    }
-
-    struct SearchResult {
-        let note: Note
-        var arributedStrings: [NSAttributedString] = []
-    }
-
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let keyword = searchController.searchBar.text,
-            let notes = resultsController?.fetchedObjects,
-            searchController.isActive else { return }
-
-        searchResults = notes.map { convert(note: $0, with: keyword) }
-            .filter { $0 != nil }
-            .map { $0! }
-        searchResultsViewController?.tableView.reloadData()
-    }
-
-    // 함수 이름 이상함
-    private func convert(note: Note, with keyword: String) -> SearchResult? {
-        guard let blocks = note.blockCollection?.allObjects as? [Block] else { return nil }
-        var result = SearchResult(note: note, arributedStrings: [])
-
-        for block in blocks {
-            if let plain = block.plainTextBlock,
-                let text = plain.text,
-                let range = text.lowercased().range(of: keyword.lowercased()) {
-                let attributedString = NSMutableAttributedString(string: text)
-                attributedString.addAttributes([NSAttributedStringKey.foregroundColor : self.view.tintColor], range: NSRange(range, in: text))
-                result.arributedStrings.append(attributedString)
-            }
-        }
-        if result.arributedStrings.isEmpty {
-            return nil
-        }
-        return result
     }
 }

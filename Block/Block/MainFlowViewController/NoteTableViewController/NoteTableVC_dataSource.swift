@@ -11,28 +11,14 @@ import UIKit
 extension NoteTableViewController {
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if searchController.isActive {
-            return searchResults.count
-        }
         return resultsController?.sections?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.isActive {
-            return searchResults[section].arributedStrings.count
-        }
         return resultsController?.sections?[section].numberOfObjects ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if searchController.isActive {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultBlockCell", for: indexPath) as? SearchResultBlockCell {
-                let attributedString = searchResults[indexPath.section].arributedStrings[indexPath.row]
-                cell.label.attributedText = attributedString
-                return cell
-            }
-        }
-
         guard let data = resultsController?.object(at: indexPath) else { return UITableViewCell() }
         var cell = tableView.dequeueReusableCell(withIdentifier: data.identifier) as! NoteTableDataAcceptable & UITableViewCell
         cell.folder = folder
@@ -41,9 +27,6 @@ extension NoteTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if searchController.isActive {
-            return false
-        }
         return true
     }
     
@@ -59,11 +42,7 @@ extension NoteTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard !tableView.isEditing else { return }
-        if searchController.isActive {
-            searchResults[indexPath.section].note.didSelectItem(fromVC: self)
-        } else {
-            resultsController?.object(at: indexPath).didSelectItem(fromVC: self)
-        }
+        resultsController?.object(at: indexPath).didSelectItem(fromVC: self)
     }
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -144,36 +123,6 @@ extension NoteTableViewController {
         
         return UISwipeActionsConfiguration(actions: [delete, export])
     }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard searchController.isActive else { return 0 }
-        return 50
-    }
-
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        guard searchController.isActive else { return 0 }
-        return 50
-    }
-
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard searchController.isActive else { return nil }
-        if let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SearchResultSectionHeader") as? SearchResultSectionHeader {
-            header.configure(note: searchResults[section].note)
-            return header
-        }
-        return nil
-    }
-
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard searchController.isActive else { return nil }
-        if let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SearchResultSectionFooter") as? SearchResultSectionFooter {
-            footer.configure(note: searchResults[section].note)
-
-            return footer
-        }
-        return nil
-    }
-    
 }
 
 extension NoteTableViewController {
