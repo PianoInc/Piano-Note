@@ -15,13 +15,31 @@ class NoteTableViewController: UITableViewController {
     var folder: Folder!
     var state: ViewControllerState!
 
+    lazy var searchResultsDelegate: SearchResultsDelegate = {
+        let delegate = SearchResultsDelegate()
+        delegate.noteTableViewController = self
+        delegate.resultsController = resultsController
+        return delegate
+    }()
+
     var resultsController: NSFetchedResultsController<Note>?
     internal var delayBlockQueue: [(NoteTableViewController) -> Void] = []
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0(self) }
     }
+
+    lazy var searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: searchResultsViewController)
+        controller.searchResultsUpdater = self
+        return controller
+    }()
+
+    lazy var searchResultsViewController: UITableViewController? = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: "SearchResultsController") as? UITableViewController
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +52,7 @@ class NoteTableViewController: UITableViewController {
             updateViews(for: state)
             asyncFetchData()
         }
-        
+        setupSearchViewController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,7 +117,10 @@ class NoteTableViewController: UITableViewController {
             let resultsController = context.blockResultsController(note: note)
             vc.resultsController = resultsController
             resultsController.delegate = vc
-            
+
+            if let block = searchResultsDelegate.selectedBlock {
+                vc.searchedBlock = block
+            }
         }
     }
     
