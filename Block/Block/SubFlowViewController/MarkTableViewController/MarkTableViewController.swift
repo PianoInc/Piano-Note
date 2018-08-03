@@ -30,11 +30,11 @@ class MarkTableViewController: UITableViewController {
     }
     
     @objc private func KeyboardWillHide(_ instant: Bool = false) {
+        guard let indexPaths = self.tableView.indexPathsForVisibleRows else {return}
+        indexPaths.forEach {self.tableView.deselectRow(at: $0, animated: false)}
         guard let textView = view.subviews.first(where: {$0 is UITextView}) else {return}
         DispatchQueue.main.asyncAfter(deadline: .now() + (instant ? 0 : 0.2)) {
             textView.removeFromSuperview()
-            guard let indexPaths = self.tableView.indexPathsForVisibleRows else {return}
-            indexPaths.forEach {self.tableView.deselectRow(at: $0, animated: false)}
         }
     }
     
