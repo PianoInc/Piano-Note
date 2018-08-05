@@ -41,6 +41,7 @@
 		6BE618DA046E0170A006B11B44F893E9 /* SortTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB059842C8C290E032AE5E44EE5EC9C /* SortTableViewController.swift */; };
 		6CBB85AE237904CD8472CDFC2B94C9E0 /* NoteTableVC_state.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1602D1313FCB7748A3CDB2CC444E3 /* NoteTableVC_state.swift */; };
 		74F52B0A8ED2BD0B2C0575B6F81E6754 /* BlockTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39502855373C004639C509FB3E937D7 /* BlockTextView.swift */; };
+		76299A28B5428770D3F20487A8C14DE3 /* BlockTableVC_undoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1073E4E8065A5BE1302BCD06BE2458BE /* BlockTableVC_undoManager.swift */; };
 		7B148F421C620A2E7C4F1DF7A52A990B /* PasteboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12948BFA2D53FDA553511F4CF00CDBF6 /* PasteboardManager.swift */; };
 		7F3CE1447ABF739F431FD16C0E60F01E /* ImageBlockCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B278360A39792661FACF7FEA9D3D5F /* ImageBlockCollectionViewCell.swift */; };
 		8338358359261A8235211373B52736E5 /* SearchResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BF5A58FEB3F3D86916DB79AE08C2BF /* SearchResultsDelegate.swift */; };
@@ -121,6 +122,7 @@
 		0546C378091DE40093A45FB72E12664F /* NoteTableVC_search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableVC_search.swift; sourceTree = "<group>"; };
 		08A7918D3F3A8E3018AC5C35D414949C /* iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOS.swift; sourceTree = "<group>"; };
 		0AEB9F04C0487381311168453FF70E19 /* Pianote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pianote.xcdatamodel; sourceTree = "<group>"; };
+		1073E4E8065A5BE1302BCD06BE2458BE /* BlockTableVC_undoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableVC_undoManager.swift; sourceTree = "<group>"; };
 		11B278360A39792661FACF7FEA9D3D5F /* ImageBlockCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBlockCollectionViewCell.swift; sourceTree = "<group>"; };
 		12948BFA2D53FDA553511F4CF00CDBF6 /* PasteboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasteboardManager.swift; sourceTree = "<group>"; };
 		1365B1788320989665703066AE899293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -262,14 +264,6 @@
 				515AB035C4B71822CF3F87B29B714AE3 /* ThemeManager.swift */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		B93F4825AED72384A725D83DDB658A06 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				90ED56DA8CF54184DADC411E54CC4962 /* StoreService.swift */,
-			);
-			path = Util;
 			sourceTree = "<group>";
 		};
 		1B3E93BF92F2FB3F0886FAC55C9F420D /* FolderTableViewController */ = {
@@ -483,6 +477,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		B93F4825AED72384A725D83DDB658A06 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				90ED56DA8CF54184DADC411E54CC4962 /* StoreService.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		BF7FC98E7A4A574C94A7980874E0C967 /* BlockTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,6 +498,7 @@
 				3151EEDBED39974E6EA9B4D06AE77F77 /* BlockTableVC_property.swift */,
 				D9394CC42E06C01FB38B81C12E475853 /* BlockTableVC_state.swift */,
 				69069131F35B448510933C74EE522A85 /* BlockTableVC_textViewDelegate.swift */,
+				1073E4E8065A5BE1302BCD06BE2458BE /* BlockTableVC_undoManager.swift */,
 				BB833A61E9F64446F0F20EB245D80745 /* BlockTableViewController.swift */,
 			);
 			path = BlockTableViewController;
@@ -622,6 +625,7 @@
 				8678777514B45940F06CF891CD18D821 /* BlockTableVC_property.swift in Sources */,
 				F42F50779FA3AA6A2A464CE1CDBC7BCE /* BlockTableVC_state.swift in Sources */,
 				D2B4DF7836A84FCD3C7142BE0ED80615 /* BlockTableVC_textViewDelegate.swift in Sources */,
+				76299A28B5428770D3F20487A8C14DE3 /* BlockTableVC_undoManager.swift in Sources */,
 				F5B81D52BFBF75D9CDB8FE65A92A4F33 /* BlockTableViewController.swift in Sources */,
 				74F52B0A8ED2BD0B2C0575B6F81E6754 /* BlockTextView.swift in Sources */,
 				B5A9CE93285A39B2A9E0B95E8840B1C2 /* BlockType.swift in Sources */,

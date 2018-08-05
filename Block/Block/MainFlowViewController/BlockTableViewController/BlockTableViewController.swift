@@ -19,9 +19,18 @@ class BlockTableViewController: UIViewController {
     internal var state: ViewControllerState?
     internal var note: Note?
     internal var resultsController: NSFetchedResultsController<Block>?
-    private var delayBlockQueue: [() -> Void] = []
     internal var cursorCache: (indexPath: IndexPath, selectedRange: NSRange)?
+    private var delayBlockQueue: [() -> Void] = []
+    private let privateUndomanager = UndoManager()
     weak var searchedBlock: Block?
+    
+    override var undoManager: UndoManager? {
+        return privateUndomanager
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +83,8 @@ class BlockTableViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        view.endEditing(true)
+        resignFirstResponder()
         setNoteTitle()
         deleteNoteIfNeeded()
         save()
@@ -81,6 +92,7 @@ class BlockTableViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        becomeFirstResponder()
         delayBlockQueue.forEach{ $0() }
         
         if let count = resultsController?.sections?.first?.numberOfObjects,
