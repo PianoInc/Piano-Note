@@ -26,13 +26,22 @@ class NonPayedEmojiView: UIView {
     }
     
     private func settingToGuide() {
-        guard type == .payed else {return}
-        titleLabel.text = "🙅🏻‍♂️ Emoji Keyboard is not found 😥"
-        subscriptButton.backgroundColor = UIColor(hex6: "636a6e")
-        subscriptButton.setAttributedTitle(NSMutableAttributedString(string: "Add Emoji Keyboard", attributes: [.font : UIFont.systemFont(ofSize: 17, weight: .bold), .foregroundColor : UIColor.white]), for: .normal)
-        learnLabel.isHidden = true
-        moreButton.isHidden = true
-        settingLabel.isHidden = false
+        if type == .payed {
+            titleLabel.text = "emoji_02".loc
+            subscriptButton.backgroundColor = UIColor(hex6: "636a6e")
+            subscriptButton.setAttributedTitle(NSMutableAttributedString(string: "emoji_03".loc, attributes: [.font : UIFont.systemFont(ofSize: 17, weight: .semibold), .foregroundColor : UIColor.white]), for: .normal)
+            learnLabel.isHidden = true
+            moreButton.isHidden = true
+            settingLabel.isHidden = false
+            settingLabel.text = "emoji_06".loc
+        } else {
+            titleLabel.text = "emoji_01".loc
+            learnLabel.text = "emoji_04".loc
+            moreButton.setTitle("emoji_05".loc, for: .normal)
+            let sTitle = NSMutableAttributedString(string: "emoji_07".loc, attributes: [.font : UIFont.systemFont(ofSize: 17, weight: .regular), .foregroundColor : UIColor.white])
+            sTitle.addAttributes([.font : UIFont.systemFont(ofSize: 17, weight: .semibold)], range: NSMakeRange(0, 8))
+            subscriptButton.setAttributedTitle(sTitle, for: .normal)
+        }
     }
     
     @IBAction private func aHide() {delegates?.action("hide")}

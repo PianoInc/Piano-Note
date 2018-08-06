@@ -14,10 +14,12 @@ protocol MarkDelegates: NSObjectProtocol {
 
 class MarkTableViewController: UITableViewController {
     
-    private let data = ["Change the sign style to emoji", "Ordered list",
-                        "Unordered list", "Check",
-                        "Uncheck", "", "Apply to new notes", "Reset All Settings"]
     private var sIndexPath: IndexPath?
+    private var data: [String] {
+        var result = [String]()
+        (1...8).forEach {result.append("mark_0\($0)".loc)}
+        return result
+    }
     private var canEmojiKeyboard: Bool {
         return UITextInputMode.activeInputModes.contains(where: {$0.primaryLanguage == "emoji"})
     }
