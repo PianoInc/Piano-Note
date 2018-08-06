@@ -38,7 +38,8 @@ class AttachTypeTableViewController: UITableViewController {
         guard types.isEmpty else {return}
         let emptyLabel = UILabel(frame: view.bounds)
         emptyLabel.backgroundColor = .white
-        emptyLabel.text = "No have any Attachments."
+        emptyLabel.textAlignment = .center
+        emptyLabel.text = "attach_07".loc
         view.addSubview(emptyLabel)
         guard let naviFrame = navigationController?.navigationBar.frame else {return}
         guard let toolBarFrame = navigationController?.toolbar.frame else {return}
@@ -48,7 +49,24 @@ class AttachTypeTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let listVC = segue.destination as? AttachListTableViewController else {return}
         guard let type = sender as? AttachType else {return}
+        
+        var listData = [Block]()
+        for note in notes {
+            guard let blocks = note.blockCollection else {continue}
+            for block in blocks {
+                guard let block = block as? Block else {continue}
+                switch type {
+                case .address: if block.address != nil {listData.append(block)}
+                case .checklist: if block.type == .checklistText {listData.append(block)}
+                case .contact: if block.contact != nil {listData.append(block)}
+                case .event: if block.event != nil {listData.append(block)}
+                case .link: if block.link != nil {listData.append(block)}
+                }
+            }
+        }
+        
         listVC.type = type
+        listVC.data = listData
     }
     
 }

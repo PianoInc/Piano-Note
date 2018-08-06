@@ -2342,7 +2342,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93n-hp-6xZ">
-                                            <rect key="frame" x="32" y="16" width="311" height="24"/>
+                                            <rect key="frame" x="32" y="0.0" width="311" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" id="A9G-Hj-Zbf"/>
                                             </constraints>
@@ -2351,7 +2351,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJx-gU-e0B">
-                                            <rect key="frame" x="32" y="56" width="311" height="21"/>
+                                            <rect key="frame" x="32" y="0.0" width="311" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" id="Obp-6w-rOY"/>
                                             </constraints>
@@ -2360,7 +2360,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAv-yY-Zz0">
-                                            <rect key="frame" x="32" y="-29" width="311" height="17"/>
+                                            <rect key="frame" x="32" y="0.0" width="311" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" id="GNn-No-TjQ"/>
                                             </constraints>
@@ -2368,8 +2368,8 @@
                                             <color key="textColor" red="0.6705882352941176" green="0.6705882352941176" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ywv-DY-uI9">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="0.66666666666666663"/>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ywv-DY-uI9">
+                                            <rect key="frame" x="16" y="0.0" width="359" height="50"/>
                                             <color key="backgroundColor" red="0.7803921568627451" green="0.7803921568627451" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="0.5" id="4Gu-nT-6qT"/>
@@ -2383,7 +2383,7 @@
                                         <constraint firstItem="93n-hp-6xZ" firstAttribute="top" secondItem="Dtk-O2-jbg" secondAttribute="top" constant="16" id="Fvj-Xo-z9L"/>
                                         <constraint firstAttribute="bottom" secondItem="PAv-yY-Zz0" secondAttribute="bottom" constant="16" id="Gei-B7-VKa"/>
                                         <constraint firstItem="tJx-gU-e0B" firstAttribute="leading" secondItem="93n-hp-6xZ" secondAttribute="leading" id="O37-sO-yVP"/>
-                                        <constraint firstItem="tJx-gU-e0B" firstAttribute="top" secondItem="93n-hp-6xZ" secondAttribute="bottom" constant="16" id="UZL-iG-xKX"/>
+                                        <constraint firstItem="tJx-gU-e0B" firstAttribute="top" secondItem="93n-hp-6xZ" secondAttribute="bottom" constant="8" id="UZL-iG-xKX"/>
                                         <constraint firstItem="93n-hp-6xZ" firstAttribute="leading" secondItem="Dtk-O2-jbg" secondAttribute="leading" constant="32" id="XHd-xa-yn3"/>
                                         <constraint firstAttribute="trailing" secondItem="93n-hp-6xZ" secondAttribute="trailing" constant="32" id="Y80-Tf-tMP"/>
                                         <constraint firstItem="tJx-gU-e0B" firstAttribute="trailing" secondItem="93n-hp-6xZ" secondAttribute="trailing" id="fzc-5V-aj1"/>
@@ -2393,7 +2393,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="contantLabel" destination="tJx-gU-e0B" id="V1N-mb-5gU"/>
+                                    <outlet property="contentLabel" destination="tJx-gU-e0B" id="7ml-Xm-o90"/>
                                     <outlet property="dateLabel" destination="PAv-yY-Zz0" id="kAL-Yh-bdH"/>
                                     <outlet property="titleLabel" destination="93n-hp-6xZ" id="0TV-Xe-3I5"/>
                                 </connections>

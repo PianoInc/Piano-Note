@@ -11,9 +11,7 @@ import UIKit
 class AttachListTableViewController: UITableViewController {
     
     var type: AttachType!
-    private var data: [String] {
-        return ["", "", ""]
-    }
+    var data: [Block]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +28,12 @@ extension AttachListTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AttachListCell") as! AttachListCell
-        cell.titleLabel.text = "title"
-        cell.contantLabel.text = "asdasdasdasdsdfaasdfsdfdsafdsafdsafdsfdsfsdfsfsafasfadsfasfsfsfasfadsfsdfdsfads"
-        cell.dateLabel.text = "date"
+        cell.configure(with: data[indexPath.row], type: type)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         print(indexPath)
     }
     
