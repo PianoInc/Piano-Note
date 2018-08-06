@@ -103,8 +103,7 @@ class NoteTableViewController: UITableViewController {
             vc.preferredDisplayMode = .allVisible
             vc.maximumPrimaryColumnWidth = 414
             vc.minimumPrimaryColumnWidth = 320
-        } else if let identifier = segue.identifier,
-            identifier == "BlockNavigationController" {
+        } else if let identifier = segue.identifier, identifier == "BlockNavigationController" {
             guard let nav = segue.destination as? UINavigationController,
                 let vc = nav.topViewController as? BlockTableViewController,
                 let note = sender as? Note,
@@ -125,6 +124,25 @@ class NoteTableViewController: UITableViewController {
             if let block = searchResultsDelegate.selectedBlock {
                 vc.searchedBlock = block
             }
+        } else if let identifier = segue.identifier, identifier == "AttachTypeTableViewController" {
+            guard let vc = segue.destination as? AttachTypeTableViewController else {return}
+            
+            var types = [AttachType]()
+            guard let notes = self.resultsController?.fetchedObjects else {return}
+            for notes in notes {
+                guard let blocks = notes.blockCollection else {continue}
+                for block in blocks {
+                    guard let block = block as? Block else {continue}
+                    if block.address != nil && !types.contains(.address) {types.append(.address)}
+                    if block.type == .checklistText && !types.contains(.checklist) {types.append(.checklist)}
+                    if block.contact != nil && !types.contains(.contact) {types.append(.contact)}
+                    if block.event != nil && !types.contains(.event) {types.append(.event)}
+                    if block.link != nil && !types.contains(.link) {types.append(.link)}
+                }
+            }
+            
+            vc.notes = notes
+            vc.types = types
         }
     }
     
