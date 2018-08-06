@@ -15,3 +15,10 @@
 "mark_06" = "";
 "mark_07" = "Apply to new notes";
 "mark_08" = "Reset All Settings";
+
+"attach_01" = "Attachments";
+"attach_02" = "Address";
+"attach_03" = "Checklist";
+"attach_04" = "Contact";
+"attach_05" = "Event";
+"attach_06" = "Link";

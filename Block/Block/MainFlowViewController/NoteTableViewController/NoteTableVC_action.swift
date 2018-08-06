@@ -15,7 +15,7 @@ extension NoteTableViewController {
     }
     
     @IBAction func tapSortBlock(_ sender: Any) {
-        
+        performSegue(withIdentifier: "AttachTypeTableViewController", sender: self)
     }
     
     @IBAction func tapSortNote(_ sender: Any) {
