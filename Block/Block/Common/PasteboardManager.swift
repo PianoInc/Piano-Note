@@ -26,12 +26,13 @@ struct PasteboardManager {
      # why
      빠른 편집의 한 기능으로 제공하기 위해
      */
-    public func copyParagraphs(blocks: [Block]) {
+    public func copyParagraphs(blocks: [Block], attrStr: ((NSAttributedString) -> ())? = nil) {
         let mutableAttrString = NSMutableAttributedString()
         blocks.forEach { (block) in
             let attrString = self.nsAttributedStringFrom(block: block)
             mutableAttrString.append(attrString)
         }
+        attrStr?(mutableAttrString)
         
         do {
             let data = try mutableAttrString.data(from: NSMakeRange(0, mutableAttrString.length), documentAttributes: [.documentType: NSAttributedString.DocumentType.rtfd])
