@@ -37,15 +37,63 @@ extension BlockTableViewController {
     @IBAction func tapCopyParagraphs(_ sender: Any) {
         guard let controller = resultsController,
             let indexPaths = tableView.indexPathsForSelectedRows else { return }
-        let blocks = indexPaths.map { controller.object(at: $0) }
-        copy(blocks: blocks)
+        showLoadingView()
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else { return }
+            
+            let blocks = indexPaths.enumerated().map({ (arg) -> Block in
+                let (offset, indexPath) = arg
+                self.changeLoadingView(description: "복사중..", progress: "\(offset) / \(indexPaths.count)")
+                return controller.object(at: indexPath)
+            })
+            
+            self.copy(blocks: blocks)
+            self.removeLoadingView()
+        }
     }
     
-    @IBAction func tapCopyAll(_ sender: Any) {
-        guard let blocks = resultsController?.fetchedObjects else { return }
-        copy(blocks: blocks)
+    @IBAction func tapSelectAll(_ sender: Any) {
+        guard let count = resultsController?.fetchedObjects?.count else { return }
+        showLoadingView()
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else { return }
+            for i in 0 ..< count {
+                self.changeLoadingView(description: "전체 선택중..", progress: "\(i) / \(count)")
+                let indexPath = IndexPath(row: i, section: 0)
+                self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            }
+            
+            self.removeLoadingView()
+        }
     }
     
+    private func showLoadingView() {
+        guard let loadingView = splitViewController?.view.createSubviewIfNeeded(LoadingView.self) else { return }
+        splitViewController?.view.addSubview(loadingView)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        let topAnchor = loadingView.topAnchor.constraint(equalTo: view.topAnchor)
+        let leadingAnchor = loadingView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        let trailingAnchor = loadingView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        let bottomAnchor = loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        NSLayoutConstraint.activate([topAnchor, leadingAnchor, trailingAnchor, bottomAnchor])
+    }
+    
+    private func changeLoadingView(description: String, progress: String) {
+        guard let loadingView = splitViewController?.view.subView(LoadingView.self) else { return }
+        loadingView.descriptionLabel.text = description
+        loadingView.progressLabel.text = progress
+        RunLoop.main.run(until: Date(timeIntervalSinceNow: 0.0001))
+    }
+    
+    
+    
+    private func removeLoadingView() {
+        guard let loadingView = splitViewController?.view.subView(LoadingView.self) else { return }
+        loadingView.removeFromSuperview()
+    }
+
     
     
     @IBAction func tapTrash(_ sender: Any) {

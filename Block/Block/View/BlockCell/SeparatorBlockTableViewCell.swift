@@ -11,11 +11,6 @@ import UIKit
 class SeparatorBlockTableViewCell: UITableViewCell {
     @IBOutlet weak var ibImageView: UIImageView!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

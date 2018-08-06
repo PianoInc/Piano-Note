@@ -23,7 +23,6 @@ extension BlockTableViewController {
         setViews(state: state)
     }
     
-    
     private func setBarButtonItems(state: ViewControllerState) {
         switch state {
         case .normal:
@@ -73,15 +72,16 @@ extension BlockTableViewController {
     
     private func setNavbarForEdit() {
         navigationItem.title = ""
-        let doneBtn = BarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapFinishEdit(_:)))
-        let selectAllBtn = BarButtonItem(title: "전체 복사", style: .plain, target: self, action: #selector(tapCopyAll(_:)))
+        let cancelBtn = BarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(tapFinishEdit(_:)))
+        let selectAllBtn = BarButtonItem(title: "전체 선택", style: .plain, target: self, action: #selector(tapSelectAll(_:)))
         self.navigationItem.setHidesBackButton(true, animated: true)
         self.navigationItem.setLeftBarButton(selectAllBtn, animated: true)
-        self.navigationItem.setRightBarButton(doneBtn, animated: true)
+        self.navigationItem.setRightBarButton(cancelBtn, animated: true)
     }
     
     private func setToolbarForEdit() {
         let copyBtn = BarButtonItem(title: "복사하기", style: .plain, target: self, action: #selector(tapCopyParagraphs(_:)))
+        
         let deleteBtn = BarButtonItem(title: "삭제하기", style: .plain, target: self, action: #selector(tapDeleteParagraphs(_:)))
         let flexibleWidthBtn = BarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         self.setToolbarItems([deleteBtn, flexibleWidthBtn, copyBtn], animated: true)

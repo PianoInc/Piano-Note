@@ -10,5 +10,5 @@ import UIKit
 
 class ImageBlockCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ibImageView: UIImageView!
-    
+
 }

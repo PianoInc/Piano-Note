@@ -149,6 +149,20 @@ extension NSManagedObjectContext {
                 deletedFolder.name = "Recently Deleted"
                 deletedFolder.typeInteger = 3
                 
+                let note = Note(context: self)
+                note.title = "hello"
+                note.folder = allFolder
+                
+                for i in 0...2000 {
+                    let block = Block(context: self)
+                    block.note = note
+                    
+                    let textBlock = PlainTextBlock(context: self)
+                    textBlock.text = "\(i)아나진자아나카나아나아아난안아아나진자아나카나아나아아난안아아나진자아나카나아나아아난안아아나진자아나카나아나아아난안아아나진자아나카나아나아아난안아아나진자아나카나아나아아난안아아나진자아나카나아나아아난안아아나진자아나카나아나아아난안아"
+                    
+                    block.plainTextBlock = textBlock
+                }
+                
                 guard hasChanges else { return }
                 try save()
                 

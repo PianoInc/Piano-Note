@@ -17,7 +17,9 @@ class BlockTextView: UITextView {
         textContainer.lineFragmentPadding = 0
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
+
     }
+
     
     //TODO: 여기서 해당 지점의 attrText의 attr에 링크가 있는 지 판단하는게 옳은것인가?
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

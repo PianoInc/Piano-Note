@@ -13,13 +13,8 @@ class FileBlockTableViewCell: UITableViewCell {
     @IBOutlet weak var ibTitleLabel: UILabel!
     @IBOutlet weak var ibSizeLabel: UILabel!
     @IBOutlet weak var ibDateLabel: UILabel!
-    
+ 
     @IBAction func tapShare(_ sender: Any) {
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

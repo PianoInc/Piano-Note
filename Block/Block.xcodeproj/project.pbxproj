@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		02016619B3547FCAD04DFC96608DC272 /* UINavigationController_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE66842EE01751F022017994D59FBB4 /* UINavigationController_extension.swift */; };
 		12430E8C3BFA001862E71722D0209B4A /* FolderTableVC_action.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A71CC96CC921C516CCD9B4A9672323 /* FolderTableVC_action.swift */; };
+		127C3676DB30E730809417E670C9730E /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FD6F96E6A3D84C38747DE3EAAF5D1E9 /* LoadingView.xib */; };
 		188B5014575095175CEB46E62EBEA72C /* BulletTextBlockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FCF8E8AF7DDBC58833538DAFFB8509 /* BulletTextBlockType.swift */; };
 		19FC6A7A79E1C67A895DCBE11983C220 /* BlockTableVC_FRC_delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC27F044BE615660A1CC4108E6DA2CE /* BlockTableVC_FRC_delegate.swift */; };
 		1C9D2E4F73410EDFB9CD78E60FB4618B /* ImageCollectionBlock_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786C0FA1F69AE5E79C4B9CE88F877F07 /* ImageCollectionBlock_extension.swift */; };
@@ -61,6 +62,8 @@
 		B8D6A2767DA9A8A413BC1E7F92319BED /* FolderPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B2C61D4789A041B2E70B8BC2FCFEA6 /* FolderPickerTableViewController.swift */; };
 		BA0DF86E07D5E62853789594063E92CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 324AEFF89DC61A7224C39A438E70247B /* LaunchScreen.storyboard */; };
 		BFA7E9950EE98D4535513617D64F46E3 /* iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A7918D3F3A8E3018AC5C35D414949C /* iOS.swift */; };
+		C5CBB760D655DC8870E23A0D18E1EEAC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDAFA2E5F5B8E2110A522C0EC6D05F3 /* LoadingView.swift */; };
+		C8EB6AD68D6FD40DAF49C99663EBB03D /* FolderTableVC_dataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1793D115077ED215DB3AE9A06A32E6 /* FolderTableVC_dataSource.swift */; };
 		CE32085CFA421A3611A69A632621ABE0 /* BlockTableVC_dropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3B1F02DD63A073B482E5D3B3AC62DF /* BlockTableVC_dropDelegate.swift */; };
 		CE4D09CC81253F50E0B52418FF9B91D0 /* SeparatorBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7EC84AFBA6D06F3F04C242132A385 /* SeparatorBlockTableViewCell.swift */; };
 		D2B4DF7836A84FCD3C7142BE0ED80615 /* BlockTableVC_textViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69069131F35B448510933C74EE522A85 /* BlockTableVC_textViewDelegate.swift */; };
@@ -105,6 +108,7 @@
 		0418061186E1974067E15921095FCD70 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
 		08A7918D3F3A8E3018AC5C35D414949C /* iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOS.swift; sourceTree = "<group>"; };
 		0AEB9F04C0487381311168453FF70E19 /* Pianote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pianote.xcdatamodel; sourceTree = "<group>"; };
+		0DDAFA2E5F5B8E2110A522C0EC6D05F3 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		11B278360A39792661FACF7FEA9D3D5F /* ImageBlockCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBlockCollectionViewCell.swift; sourceTree = "<group>"; };
 		12948BFA2D53FDA553511F4CF00CDBF6 /* PasteboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasteboardManager.swift; sourceTree = "<group>"; };
 		1365B1788320989665703066AE899293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 		99F740AC6F1CD900544EA0E007D600A3 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		9C3B1F02DD63A073B482E5D3B3AC62DF /* BlockTableVC_dropDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableVC_dropDelegate.swift; sourceTree = "<group>"; };
 		9EFC7EB31AA8299C3D2FB5188EFCC0AA /* Block.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Block.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FD6F96E6A3D84C38747DE3EAAF5D1E9 /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		A39502855373C004639C509FB3E937D7 /* BlockTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTextView.swift; sourceTree = "<group>"; };
 		A75DB09068450206331BDD46B51479C5 /* ImagePickerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerCollectionViewController.swift; sourceTree = "<group>"; };
 		AB03E11856499D5BBE8C4BB46CA88A5E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -176,6 +181,7 @@
 		DFE249070DD293370EC84FE6C61BFA1F /* BlockTableVC_implement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableVC_implement.swift; sourceTree = "<group>"; };
 		E1FCF8E8AF7DDBC58833538DAFFB8509 /* BulletTextBlockType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletTextBlockType.swift; sourceTree = "<group>"; };
 		E9C0225E81079A46AB72FEB46C9B5DDD /* UITextView_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView_extension.swift; sourceTree = "<group>"; };
+		EC1793D115077ED215DB3AE9A06A32E6 /* FolderTableVC_dataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableVC_dataSource.swift; sourceTree = "<group>"; };
 		F120D872A3D185105F15F77E6F8CF065 /* FolderTableVC_state.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableVC_state.swift; sourceTree = "<group>"; };
 		F1F9DFD0CF98BDCB3D512FAE236A2E8A /* TextBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextBlockTableViewCell.swift; sourceTree = "<group>"; };
 		F3A71CC96CC921C516CCD9B4A9672323 /* FolderTableVC_action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableVC_action.swift; sourceTree = "<group>"; };
@@ -239,6 +245,7 @@
 			children = (
 				D3300D23731A1C60AAB7359D15942A9D /* FolderTableVC_FRC_delegate.swift */,
 				F3A71CC96CC921C516CCD9B4A9672323 /* FolderTableVC_action.swift */,
+				EC1793D115077ED215DB3AE9A06A32E6 /* FolderTableVC_dataSource.swift */,
 				F120D872A3D185105F15F77E6F8CF065 /* FolderTableVC_state.swift */,
 				CE84097EC525FA2FF1E2D667E27DB047 /* FolderTableViewController.swift */,
 			);
@@ -303,19 +310,6 @@
 			path = FolderPickerTableViewController;
 			sourceTree = "<group>";
 		};
-		EA696368337BC5A4BC071A142C69FA5B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				67B95565E38F0A7BB44895AF195ED98B /* BlockCell */,
-				A39502855373C004639C509FB3E937D7 /* BlockTextView.swift */,
-				0418061186E1974067E15921095FCD70 /* FolderTableViewCell.swift */,
-				4BD9E4F1666648164D59A79E55E6365B /* NoteTableViewCell.swift */,
-				4C5E93D823ACB95D8752E80D7C223F8F /* NotificationView.swift */,
-				DA3A7C06528F57E2D3E9EAF2CBA8BD6B /* NotificationView.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		50EB84BCC5388A3424CC8039B9244454 /* ImagePickerCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,6 +328,19 @@
 				CC4921DAF25F3DDD708CC57659240534 /* Cloud.framework */,
 				3EC2017EEB55EDA604B73943706EA227 /* Facebook.framework */,
 			);
+			sourceTree = "<group>";
+		};
+		67B95565E38F0A7BB44895AF195ED98B /* BlockCell */ = {
+			isa = PBXGroup;
+			children = (
+				BA93157472DA650E2978AB7AE4EF9153 /* DrawingBlockTableViewCell.swift */,
+				FA2814C881EA59405704CA7A18A7AADB /* FileBlockTableViewCell.swift */,
+				11B278360A39792661FACF7FEA9D3D5F /* ImageBlockCollectionViewCell.swift */,
+				2CECEB6016F32C9AD114D3DF703D536E /* ImageCollectionBlockTableViewCell.swift */,
+				1AB7EC84AFBA6D06F3F04C242132A385 /* SeparatorBlockTableViewCell.swift */,
+				F1F9DFD0CF98BDCB3D512FAE236A2E8A /* TextBlockTableViewCell.swift */,
+			);
+			path = BlockCell;
 			sourceTree = "<group>";
 		};
 		6944E1A674B664BAB6DEB92204150418 /* MainFlowViewController */ = {
@@ -381,19 +388,6 @@
 				703AC252F9ABE71223163F7F630407E0 /* NoAnimationPushSegue.swift */,
 			);
 			path = Block;
-			sourceTree = "<group>";
-		};
-		67B95565E38F0A7BB44895AF195ED98B /* BlockCell */ = {
-			isa = PBXGroup;
-			children = (
-				BA93157472DA650E2978AB7AE4EF9153 /* DrawingBlockTableViewCell.swift */,
-				FA2814C881EA59405704CA7A18A7AADB /* FileBlockTableViewCell.swift */,
-				11B278360A39792661FACF7FEA9D3D5F /* ImageBlockCollectionViewCell.swift */,
-				2CECEB6016F32C9AD114D3DF703D536E /* ImageCollectionBlockTableViewCell.swift */,
-				1AB7EC84AFBA6D06F3F04C242132A385 /* SeparatorBlockTableViewCell.swift */,
-				F1F9DFD0CF98BDCB3D512FAE236A2E8A /* TextBlockTableViewCell.swift */,
-			);
-			path = BlockCell;
 			sourceTree = "<group>";
 		};
 		AABEB4A36F886CCF7332F6E25D570C30 /* FacebookDetailTableViewController */ = {
@@ -455,6 +449,21 @@
 				5CB059842C8C290E032AE5E44EE5EC9C /* SortTableViewController.swift */,
 			);
 			path = SortTableViewController;
+			sourceTree = "<group>";
+		};
+		EA696368337BC5A4BC071A142C69FA5B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				67B95565E38F0A7BB44895AF195ED98B /* BlockCell */,
+				A39502855373C004639C509FB3E937D7 /* BlockTextView.swift */,
+				0418061186E1974067E15921095FCD70 /* FolderTableViewCell.swift */,
+				0DDAFA2E5F5B8E2110A522C0EC6D05F3 /* LoadingView.swift */,
+				9FD6F96E6A3D84C38747DE3EAAF5D1E9 /* LoadingView.xib */,
+				4BD9E4F1666648164D59A79E55E6365B /* NoteTableViewCell.swift */,
+				4C5E93D823ACB95D8752E80D7C223F8F /* NotificationView.swift */,
+				DA3A7C06528F57E2D3E9EAF2CBA8BD6B /* NotificationView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -528,6 +537,7 @@
 			files = (
 				4294093C8AC9EE4A2155BBB1D0D43774 /* Assets.xcassets in Resources */,
 				BA0DF86E07D5E62853789594063E92CE /* LaunchScreen.storyboard in Resources */,
+				127C3676DB30E730809417E670C9730E /* LoadingView.xib in Resources */,
 				A7947047B4A5D97C56F98EF07C7352C5 /* Main.storyboard in Resources */,
 				8FF22BFB944FF443A82757EBF37ADC3C /* NotificationView.xib in Resources */,
 			);
@@ -569,6 +579,7 @@
 				B8D6A2767DA9A8A413BC1E7F92319BED /* FolderPickerTableViewController.swift in Sources */,
 				D3F5096BE3B2CDA3520D4FFFC842248B /* FolderTableVC_FRC_delegate.swift in Sources */,
 				12430E8C3BFA001862E71722D0209B4A /* FolderTableVC_action.swift in Sources */,
+				C8EB6AD68D6FD40DAF49C99663EBB03D /* FolderTableVC_dataSource.swift in Sources */,
 				5796AC45FF1B897995445E7B6E14B234 /* FolderTableVC_state.swift in Sources */,
 				A8FD4A118F09C16DEAACBEC95F4C6AC3 /* FolderTableViewCell.swift in Sources */,
 				995EF9071138C6DB7AF60731BAF15389 /* FolderTableViewController.swift in Sources */,
@@ -580,6 +591,7 @@
 				1C9D2E4F73410EDFB9CD78E60FB4618B /* ImageCollectionBlock_extension.swift in Sources */,
 				EA26F51B4C259C92607779B8E341CE94 /* ImagePickerCollectionViewCell.swift in Sources */,
 				922CC5AFF2A88846F945A2180C1F8F07 /* ImagePickerCollectionViewController.swift in Sources */,
+				C5CBB760D655DC8870E23A0D18E1EEAC /* LoadingView.swift in Sources */,
 				9856C29D20E85251E647C159DB06ED89 /* NSManagedObjectContext_extension.swift in Sources */,
 				4C7C3BAC369BD0858340F828A26E4F3C /* NSPersistentContainer_extension.swift in Sources */,
 				FC8D6614C5AB1550F315CA9CAF349CCA /* NoAnimationPushSegue.swift in Sources */,

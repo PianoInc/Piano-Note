@@ -12,7 +12,7 @@ class ImageCollectionBlockTableViewCell: UITableViewCell {
     
     @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    
+
 }
 
 /*
