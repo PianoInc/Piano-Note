@@ -129,8 +129,8 @@ class NoteTableViewController: UITableViewController {
             
             var types = [AttachType]()
             guard let notes = self.resultsController?.fetchedObjects else {return}
-            for notes in notes {
-                guard let blocks = notes.blockCollection else {continue}
+            for note in notes {
+                guard let blocks = note.blockCollection else {continue}
                 for block in blocks {
                     guard let block = block as? Block else {continue}
                     if block.address != nil && !types.contains(.address) {types.append(.address)}
