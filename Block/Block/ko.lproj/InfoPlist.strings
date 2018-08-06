@@ -1,0 +1,8 @@
+
+CFBundleDisplayName = "Block";
+
+NSCalendarsUsageDescription = "Calendars";
+
+NSContactsUsageDescription = "Contacts";
+
+NSRemindersUsageDescription = "Reminders";

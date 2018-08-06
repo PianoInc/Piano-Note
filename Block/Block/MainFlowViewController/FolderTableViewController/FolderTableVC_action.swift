@@ -49,10 +49,10 @@ extension FolderTableViewController {
     }
     
     func showCreateFolderAlertVC() {
-        let alert = UIAlertController(title: "Add Folder".localized, message: "AddFolderMessage".localized, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add Folder".loc, message: "AddFolderMessage".loc, preferredStyle: .alert)
         
-        let cancel = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
-        let ok = UIAlertAction(title: "Create".localized, style: .default) { [weak self](action) in
+        let cancel = UIAlertAction(title: "Cancel".loc, style: .cancel, handler: nil)
+        let ok = UIAlertAction(title: "Create".loc, style: .default) { [weak self](action) in
             guard let `self` = self,
                 let text = alert.textFields?.first?.text else { return }
             
@@ -70,7 +70,7 @@ extension FolderTableViewController {
         alert.addAction(ok)
         
         alert.addTextField { (textField) in
-            textField.placeholder = "Folder Name".localized
+            textField.placeholder = "Folder Name".loc
             textField.returnKeyType = .done
             textField.enablesReturnKeyAutomatically = true
             textField.addTarget(self, action: #selector(self.textChanged), for: .editingChanged)
