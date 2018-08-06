@@ -16,7 +16,7 @@ class MarkTableViewController: UITableViewController {
     
     private let data = ["Change the sign style to emoji", "Ordered list",
                         "Unordered list", "Check",
-                        "Uncheck", "", "Reset All Settings"]
+                        "Uncheck", "", "Apply to new notes", "Reset All Settings"]
     private var sIndexPath: IndexPath?
     private var canEmojiKeyboard: Bool {
         return UITextInputMode.activeInputModes.contains(where: {$0.primaryLanguage == "emoji"})
@@ -26,10 +26,10 @@ class MarkTableViewController: UITableViewController {
         super.viewDidLoad()
         navigationItem.title = "Sign Style"
         tableView.contentInset.bottom = 55
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
     }
     
-    @objc private func KeyboardWillHide(_ instant: Bool = false) {
+    @objc private func keyboardWillHide(_ instant: Bool = false) {
         guard let indexPaths = self.tableView.indexPathsForVisibleRows else {return}
         indexPaths.forEach {self.tableView.deselectRow(at: $0, animated: false)}
         guard let textView = view.subviews.first(where: {$0 is UITextView}) else {return}
@@ -66,8 +66,9 @@ extension MarkTableViewController: MarkDelegates {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 6 {
-            KeyboardWillHide(true)
+        guard indexPath.row != 6 else {return}
+        if indexPath.row == 7 {
+            keyboardWillHide(true)
             reset()
         } else {
             sIndexPath = indexPath
@@ -105,7 +106,7 @@ extension MarkTableViewController: MarkDelegates {
     
     func action(_ data: String) {
         switch data {
-        case "hide": KeyboardWillHide(true)
+        case "hide": keyboardWillHide(true)
         case "more": break
         case "subscript": break
         default: update(data)

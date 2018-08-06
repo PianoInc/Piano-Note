@@ -46,7 +46,13 @@ extension BlockTableViewController {
         copy(blocks: blocks)
     }
     
-    
+    @IBAction func tapExport(_ sender: Any) {
+        guard let blocks = resultsController?.fetchedObjects else {return}
+        copy(blocks: blocks) {
+            let activityVC = UIActivityViewController(activityItems: [$0], applicationActivities: nil)
+            self.present(activityVC, animated: true)
+        }
+    }
     
     @IBAction func tapTrash(_ sender: Any) {
         
