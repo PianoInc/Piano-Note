@@ -3,6 +3,10 @@
     <entity name="Block" representedClassName="Block" syncable="YES" codeGenerationType="class">
         <attribute name="ckMetaData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="hasAddress" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="hasContact" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="hasEvent" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="hasLink" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" defaultDateTimeInterval="553945620" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
@@ -166,7 +170,7 @@
         <relationship name="blockCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Block" inverseName="unOrderedTextBlock" inverseEntity="Block" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Block" positionX="-45" positionY="72" width="128" height="270"/>
+        <element name="Block" positionX="-45" positionY="72" width="128" height="330"/>
         <element name="ChecklistTextBlock" positionX="763" positionY="-102" width="128" height="270"/>
         <element name="Comment" positionX="178" positionY="60" width="128" height="150"/>
         <element name="DrawingBlock" positionX="405" positionY="6" width="128" height="150"/>
@@ -178,8 +182,8 @@
         <element name="Note" positionX="-263" positionY="282" width="128" height="210"/>
         <element name="OrderedTextBlock" positionX="576" positionY="99" width="128" height="270"/>
         <element name="PlainTextBlock" positionX="565" positionY="-270" width="128" height="240"/>
+        <element name="SeparatorBlock" positionX="-360" positionY="-279" width="128" height="60"/>
         <element name="Tag" positionX="-108" positionY="495" width="128" height="120"/>
         <element name="UnOrderedTextBlock" positionX="556" positionY="-432" width="128" height="270"/>
-        <element name="SeparatorBlock" positionX="-360" positionY="-279" width="128" height="60"/>
     </elements>
 </model>

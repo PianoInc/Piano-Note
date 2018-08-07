@@ -149,6 +149,21 @@ extension NSManagedObjectContext {
                 deletedFolder.name = "Recently Deleted"
                 deletedFolder.typeInteger = 3
                 
+                let note1 = Note(context: self)
+                note1.folder = allFolder
+                note1.title = "선택받은 메모"
+                note1.modifiedDate = Date()
+                
+                for i in 0...100000 {
+                    let Block1 = Block(context: self)
+                    Block1.order = Double(i)
+                    Block1.note = note1
+                    let plainTextBlock1 = PlainTextBlock(context: self)
+                    plainTextBlock1.text = "010-1234-1234 \(i)번째 state는 단순히 뷰의 상태를 바꾸기 위한 값으로만 쓰여야 한다. 즉 didSet을 무조건 써야 하고, 이게 불가능한 상황(viewLoad같은 곳에서 state를 참조해서 뷰를 변화시키는 행위)이 있다하면 state를 쓰지 않는다."
+                    plainTextBlock1.addToBlockCollection(Block1)
+                    Block1.contact = Contact(ranges: [NSMakeRange(0, 13)])
+                }
+                
                 guard hasChanges else { return }
                 try save()
                 

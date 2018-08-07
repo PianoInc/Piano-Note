@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
 class AttachListTableViewController: UITableViewController {
     
+    var resultsController: NSFetchedResultsController<Block>?
     var type: AttachType!
-    var data: [Block]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "attach_0\(type.rawValue + 2)".loc
+        DispatchQueue.main.async {
+            try? self.resultsController?.performFetch()
+            self.tableView.reloadData()
+        }
     }
     
 }
@@ -23,12 +27,13 @@ class AttachListTableViewController: UITableViewController {
 extension AttachListTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return resultsController?.sections?[section].numberOfObjects ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let data = resultsController?.object(at: indexPath) else {return UITableViewCell()}
         let cell = tableView.dequeueReusableCell(withIdentifier: "AttachListCell") as! AttachListCell
-        cell.configure(with: data[indexPath.row], type: type)
+        cell.configure(with: data, type: type)
         return cell
     }
     
@@ -38,4 +43,3 @@ extension AttachListTableViewController {
     }
     
 }
-

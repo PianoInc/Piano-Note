@@ -1,25 +1,25 @@
 
-"emoji_01" = "✨ All emoji are available ✨";
-"emoji_02" = "🙅🏻‍♂️ Emoji Keyboard is not found 😥";
-"emoji_03" = "Add Emoji Keyboard";
-"emoji_04" = "Learn more about";
-"emoji_05" = "Subscriptions";
-"emoji_06" = "⚙ Setting > General > Keyboards";
-"emoji_07" = "USD 1.64 Monthly Subscription";
+"emoji_00" = "✨ All emoji are available ✨";
+"emoji_01" = "🙅🏻‍♂️ Emoji Keyboard is not found 😥";
+"emoji_02" = "Add Emoji Keyboard";
+"emoji_03" = "Learn more about";
+"emoji_04" = "Subscriptions";
+"emoji_05" = "⚙ Setting > General > Keyboards";
+"emoji_06" = "USD 1.64 Monthly Subscription";
 
-"mark_01" = "Change the sign style to emoji";
-"mark_02" = "Ordered list";
-"mark_03" = "Unordered list";
-"mark_04" = "Check";
-"mark_05" = "Uncheck";
-"mark_06" = "";
-"mark_07" = "Apply to new notes";
-"mark_08" = "Reset All Settings";
+"mark_00" = "Change the sign style to emoji";
+"mark_01" = "Ordered list";
+"mark_02" = "Unordered list";
+"mark_03" = "Check";
+"mark_04" = "Uncheck";
+"mark_05" = "";
+"mark_06" = "Apply to new notes";
+"mark_07" = "Reset All Settings";
 
-"attach_01" = "Attachments";
-"attach_02" = "Address";
-"attach_03" = "Checklist";
-"attach_04" = "Contact";
-"attach_05" = "Event";
-"attach_06" = "Link";
-"attach_07" = "No have any Attachments.";
+"attach_00" = "Address";
+"attach_01" = "Checklist";
+"attach_02" = "Contact";
+"attach_03" = "Event";
+"attach_04" = "Link";
+"attach_05" = "Attachments";
+"attach_06" = "No have any Attachments.";

@@ -17,7 +17,7 @@ class MarkTableViewController: UITableViewController {
     private var sIndexPath: IndexPath?
     private var data: [String] {
         var result = [String]()
-        (1...8).forEach {result.append("mark_0\($0)".loc)}
+        (0...7).forEach {result.append("mark_0\($0)".loc)}
         return result
     }
     private var canEmojiKeyboard: Bool {
