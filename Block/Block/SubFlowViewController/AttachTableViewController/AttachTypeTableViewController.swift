@@ -19,28 +19,25 @@ enum AttachType: Int {
 
 class AttachTypeTableViewController: UITableViewController {
     
+    private var data: [String] {return (0...4).map({"attach_0\($0)".loc})}
+    
     var notes = [Note]()
     var types = [AttachType]()
     
-    private var data: [String] {
-        var result = [String]()
-        (2...6).forEach {result.append("attach_0\($0)".loc)}
-        return result
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "attach_01".loc
-        empty()
+        navigationItem.title = "attach_05".loc
+        ifDataEmpty()
     }
     
-    private func empty() {
+    private func ifDataEmpty() {
         guard types.isEmpty else {return}
         let emptyLabel = UILabel(frame: view.bounds)
         emptyLabel.backgroundColor = .white
         emptyLabel.textAlignment = .center
-        emptyLabel.text = "attach_07".loc
+        emptyLabel.text = "attach_06".loc
         view.addSubview(emptyLabel)
+        
         guard let naviFrame = navigationController?.navigationBar.frame else {return}
         guard let toolBarFrame = navigationController?.toolbar.frame else {return}
         emptyLabel.frame.size.height = toolBarFrame.minY - naviFrame.maxY
@@ -48,25 +45,26 @@ class AttachTypeTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let listVC = segue.destination as? AttachListTableViewController else {return}
-        guard let type = sender as? AttachType else {return}
+        guard let row = sender as? Int, let type = AttachType(rawValue: row) else {return}
         
-        var listData = [Block]()
-        for note in notes {
-            guard let blocks = note.blockCollection else {continue}
-            for block in blocks {
-                guard let block = block as? Block else {continue}
-                switch type {
-                case .address: if block.address != nil {listData.append(block)}
-                case .checklist: if block.type == .checklistText {listData.append(block)}
-                case .contact: if block.contact != nil {listData.append(block)}
-                case .event: if block.event != nil {listData.append(block)}
-                case .link: if block.link != nil {listData.append(block)}
-                }
-            }
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let request: NSFetchRequest<Block> = Block.fetchRequest()
+        
+        request.fetchBatchSize = 20
+        var predicate = ""
+        switch type {
+        case .address: predicate = "hasAddress == true"
+        case .checklist: predicate = "checklistTextBlock != nil"
+        case .contact: predicate = "hasContact == true"
+        case .event: predicate = "hasEvent == true"
+        case .link: predicate = "hasLink == true"
         }
+        request.predicate = NSPredicate(format: "note IN %@ AND \(predicate)", notes)
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Block.modifiedDate), ascending: false)]
         
         listVC.type = type
-        listVC.data = listData
+        listVC.navigationItem.title = "attach_0\(row)".loc
+        listVC.resultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: "Attach_" + "attach_0\(row)".loc)
     }
     
 }
@@ -87,7 +85,7 @@ extension AttachTypeTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        performSegue(withIdentifier: "AttachListTableViewController", sender: AttachType(rawValue: indexPath.row))
+        performSegue(withIdentifier: "AttachListTableViewController", sender: indexPath.row)
     }
     
 }

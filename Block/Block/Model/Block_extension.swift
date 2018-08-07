@@ -220,6 +220,7 @@ extension Block: TableDatable {
                 return nil
             }
         } set {
+            hasEvent = newValue != nil
             switch type {
             case .plainText:
                 plainTextBlock?.event = newValue
@@ -250,6 +251,7 @@ extension Block: TableDatable {
                 return nil
             }
         } set {
+            hasContact = newValue != nil
             switch type {
             case .plainText:
                 plainTextBlock?.contact = newValue
@@ -280,6 +282,7 @@ extension Block: TableDatable {
                 return nil
             }
         } set {
+            hasAddress = newValue != nil
             switch type {
             case .plainText:
                 plainTextBlock?.address = newValue
@@ -310,6 +313,7 @@ extension Block: TableDatable {
                 return nil
             }
         } set {
+            hasLink = newValue != nil
             switch type {
             case .plainText:
                 plainTextBlock?.link = newValue

@@ -14,28 +14,28 @@ class NoteTableViewController: UITableViewController {
     var persistentContainer: NSPersistentContainer!
     var folder: Folder!
     var state: ViewControllerState!
-
+    
     lazy var searchResultsDelegate: SearchResultsDelegate = {
         let delegate = SearchResultsDelegate()
         delegate.noteTableViewController = self
         delegate.resultsController = resultsController
         return delegate
     }()
-
+    
     var resultsController: NSFetchedResultsController<Note>?
     internal var delayBlockQueue: [(NoteTableViewController) -> Void] = []
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0(self) }
     }
-
+    
     lazy var searchController: UISearchController = {
         let controller = UISearchController(searchResultsController: searchResultsViewController)
         controller.searchResultsUpdater = self
         return controller
     }()
-
+    
     lazy var searchResultsViewController: SearchResultsViewController? = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "SearchResultsViewController") as? SearchResultsViewController {
@@ -44,14 +44,14 @@ class NoteTableViewController: UITableViewController {
         }
         return nil
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         switch resultsController {
         case .none:
             let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
             persistentContainer = container
-
+            
         case .some(_):
             updateViews(for: state)
             asyncFetchData()
@@ -68,20 +68,20 @@ class NoteTableViewController: UITableViewController {
         }
         super.viewWillAppear(animated)
     }
-
+    
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
         coder.encode(folder.objectID.uriRepresentation(), forKey: "folderURI")
         coder.encode(state.rawValue, forKey: "NoteTableViewControllerState")
     }
-
+    
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
         if let url = coder.decodeObject(forKey: "folderURI") as? URL,
             let decodeState = coder.decodeObject(forKey: "NoteTableViewControllerState") as? String,
             let id = persistentContainer.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url),
             let folder = persistentContainer.viewContext.object(with: id) as? Folder {
-
+            
             self.folder = folder
             state = ViewControllerState(rawValue: decodeState)
             resultsController = persistentContainer.viewContext.noteResultsController(folder: folder)
@@ -90,7 +90,7 @@ class NoteTableViewController: UITableViewController {
             syncFetchData()
         }
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         save()
@@ -113,7 +113,7 @@ class NoteTableViewController: UITableViewController {
             
             let state: BlockTableViewController.ViewControllerState =
                 folderType != .deleted ?
-                        .normal : .deleted
+                    .normal : .deleted
             
             vc.state = state
             vc.note = note
@@ -122,30 +122,32 @@ class NoteTableViewController: UITableViewController {
             let resultsController = context.blockResultsController(note: note)
             vc.resultsController = resultsController
             resultsController.delegate = vc
-
+            
             if let block = searchResultsDelegate.selectedBlock {
                 vc.searchedBlock = block
             }
         } else if let identifier = segue.identifier, identifier == "AttachTypeTableViewController" {
             guard let vc = segue.destination as? AttachTypeTableViewController else {return}
+            guard let notes = self.resultsController?.fetchedObjects else {return}
             
             var types = [AttachType]()
-            guard let notes = self.resultsController?.fetchedObjects else {return}
-            for note in notes {
-                guard let blocks = note.blockCollection else {continue}
-                for block in blocks {
-                    guard let block = block as? Block else {continue}
-                    if block.address != nil && !types.contains(.address) {types.append(.address)}
-                    if block.type == .checklistText && !types.contains(.checklist) {types.append(.checklist)}
-                    if block.contact != nil && !types.contains(.contact) {types.append(.contact)}
-                    if block.event != nil && !types.contains(.event) {types.append(.event)}
-                    if block.link != nil && !types.contains(.link) {types.append(.link)}
-                }
-            }
+            if contain(attach: "hasAddress == true", using: notes) {types.append(.address)}
+            if contain(attach: "checklistTextBlock != nil", using: notes) {types.append(.checklist)}
+            if contain(attach: "hasContact == true", using: notes) {types.append(.contact)}
+            if contain(attach: "hasEvent == true", using: notes) {types.append(.event)}
+            if contain(attach: "hasLink == true", using: notes) {types.append(.link)}
             
             vc.notes = notes
             vc.types = types
         }
+    }
+    
+    private func contain(attach predicate: String, using notes: [Note]) -> Bool {
+        let request: NSFetchRequest<Block> = Block.fetchRequest()
+        request.fetchBatchSize = 1
+        request.predicate = NSPredicate(format: "note IN %@ AND \(predicate)", notes)
+        guard let fetch = try? persistentContainer.viewContext.fetch(request) else {return false}
+        return !fetch.isEmpty
     }
     
 }
@@ -162,7 +164,7 @@ extension NoteTableViewController {
             self?.tableView.reloadData()
         }
     }
-
+    
     private func syncFetchData() {
         do {
             try self.resultsController?.performFetch()
