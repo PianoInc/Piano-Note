@@ -17,7 +17,7 @@ class DrawingBlockTableViewCell: UITableViewCell {
     
     @IBOutlet weak var ibImageView: UIImageView!
     var state: ViewState = .readOnly
-    
+
     
     
     @IBAction func tapEdit(_ sender: Any) {
@@ -29,6 +29,6 @@ class DrawingBlockTableViewCell: UITableViewCell {
     }
     
     @IBAction func tapColor(_ sender: Any) {
-    }
+    } 
 
 }

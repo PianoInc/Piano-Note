@@ -1914,7 +1914,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="BlockTableView" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6yE-WC-Umq">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="BlockTableView" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6yE-WC-Umq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -1943,6 +1943,7 @@
                                                 <textView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="지금부터 나는 메모를 할 것이다. 너도 동참하거라 zpffoffofoffoff" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fF-z1-bIf" customClass="BlockTextView" customModule="Block" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="5" width="345" height="87"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <gestureRecognizers/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -1962,7 +1963,7 @@
                                                 <constraint firstItem="qvW-5k-UKr" firstAttribute="top" secondItem="XND-hK-E6t" secondAttribute="top" constant="5" id="tYm-Zs-eXc"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="ibButton" destination="qvW-5k-UKr" id="xho-pP-E1O"/>
                                             <outlet property="ibButtonLeadingAnchor" destination="3BJ-iz-USw" id="Dyq-Tb-E7U"/>
@@ -2249,7 +2250,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-3938" y="-1267"/>
+            <point key="canvasLocation" x="-3938.4000000000001" y="-1267.4662668665669"/>
         </scene>
         <!--Attach Type Table View Controller-->
         <scene sceneID="7V8-J6-jaI">
@@ -2569,7 +2570,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="2Er-Eh-HsQ"/>
         <segue reference="bpq-rJ-caE"/>
-        <segue reference="Plj-E7-1iM"/>
+        <segue reference="fSm-C7-naA"/>
         <segue reference="aYA-gJ-wLg"/>
         <segue reference="moi-8E-hF0"/>
     </inferredMetricsTieBreakers>

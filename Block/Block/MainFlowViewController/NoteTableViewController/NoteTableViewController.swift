@@ -60,9 +60,11 @@ class NoteTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let displayMode = splitViewController?.displayMode,
-            displayMode == .allVisible {
+        if let isViewDidLoad = (splitViewController?.viewControllers.last as? UINavigationController)?.topViewController?.isViewLoaded,
+            isViewDidLoad {
             clearsSelectionOnViewWillAppear = false
+        } else {
+            clearsSelectionOnViewWillAppear = true
         }
         super.viewWillAppear(animated)
     }
