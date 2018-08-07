@@ -22,6 +22,29 @@ class AttachListTableViewController: UITableViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier, identifier == "BlockNavigationController" {
+            guard let nav = segue.destination as? UINavigationController,
+                let vc = nav.topViewController as? BlockTableViewController,
+                let block = sender as? Block,
+                let note = block.note,
+                let folderType = note.folder?.folderType else { return }
+            let state: BlockTableViewController.ViewControllerState =
+                folderType != .deleted ?
+                    .normal : .deleted
+            vc.state = state
+            vc.note = note
+            vc.searchedBlock = block
+            let persistentContainer = (UIApplication.shared.delegate as? AppDelegate)!.persistentContainer
+            vc.persistentContainer = persistentContainer
+            let context = persistentContainer.viewContext
+            let resultsController = context.blockResultsController(note: note)
+            vc.resultsController = resultsController
+            resultsController.delegate = vc
+            
+        }
+    }
+    
 }
 
 extension AttachListTableViewController {
@@ -39,7 +62,8 @@ extension AttachListTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        print(indexPath)
+        guard let data = resultsController?.object(at: indexPath) else {return}
+        performSegue(withIdentifier: "BlockNavigationController", sender: data)
     }
     
 }
