@@ -15,13 +15,35 @@ class NoteTableViewController: UITableViewController {
     var folder: Folder!
     var state: ViewControllerState!
 
+    lazy var searchResultsDelegate: SearchResultsDelegate = {
+        let delegate = SearchResultsDelegate()
+        delegate.noteTableViewController = self
+        delegate.resultsController = resultsController
+        return delegate
+    }()
+
     var resultsController: NSFetchedResultsController<Note>?
     internal var delayBlockQueue: [(NoteTableViewController) -> Void] = []
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0(self) }
     }
+
+    lazy var searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: searchResultsViewController)
+        controller.searchResultsUpdater = self
+        return controller
+    }()
+
+    lazy var searchResultsViewController: SearchResultsViewController? = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "SearchResultsViewController") as? SearchResultsViewController {
+            viewController.loadView()
+            return viewController
+        }
+        return nil
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +56,7 @@ class NoteTableViewController: UITableViewController {
             updateViews(for: state)
             asyncFetchData()
         }
-        
+        setupSearchViewController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,8 +105,7 @@ class NoteTableViewController: UITableViewController {
             vc.preferredDisplayMode = .allVisible
             vc.maximumPrimaryColumnWidth = 414
             vc.minimumPrimaryColumnWidth = 320
-        } else if let identifier = segue.identifier,
-            identifier == "BlockNavigationController" {
+        } else if let identifier = segue.identifier, identifier == "BlockNavigationController" {
             guard let nav = segue.destination as? UINavigationController,
                 let vc = nav.topViewController as? BlockTableViewController,
                 let note = sender as? Note,
@@ -101,7 +122,29 @@ class NoteTableViewController: UITableViewController {
             let resultsController = context.blockResultsController(note: note)
             vc.resultsController = resultsController
             resultsController.delegate = vc
+
+            if let block = searchResultsDelegate.selectedBlock {
+                vc.searchedBlock = block
+            }
+        } else if let identifier = segue.identifier, identifier == "AttachTypeTableViewController" {
+            guard let vc = segue.destination as? AttachTypeTableViewController else {return}
             
+            var types = [AttachType]()
+            guard let notes = self.resultsController?.fetchedObjects else {return}
+            for note in notes {
+                guard let blocks = note.blockCollection else {continue}
+                for block in blocks {
+                    guard let block = block as? Block else {continue}
+                    if block.address != nil && !types.contains(.address) {types.append(.address)}
+                    if block.type == .checklistText && !types.contains(.checklist) {types.append(.checklist)}
+                    if block.contact != nil && !types.contains(.contact) {types.append(.contact)}
+                    if block.event != nil && !types.contains(.event) {types.append(.event)}
+                    if block.link != nil && !types.contains(.link) {types.append(.link)}
+                }
+            }
+            
+            vc.notes = notes
+            vc.types = types
         }
     }
     

@@ -149,9 +149,9 @@ extension BlockTableViewController: TableViewDelegate {
 }
 
 extension BlockTableViewController {
-    func copy(blocks: [Block]) {
+    func copy(blocks: [Block], _ attrStr: ((NSAttributedString) -> ())? = nil) {
         let pasteboardManager = PasteboardManager()
-        pasteboardManager.copyParagraphs(blocks: blocks)
+        pasteboardManager.copyParagraphs(blocks: blocks, attrStr: attrStr)
         navigationController?.appearCopyNotificationView()
     }
 }

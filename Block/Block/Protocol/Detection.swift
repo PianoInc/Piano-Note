@@ -48,10 +48,6 @@ extension Detection where Self: BlockTableViewController {
         
         if let matches = detector?.matches(in: text, options: .reportCompletion, range: NSMakeRange(0, text.count)) {
             for match in matches {
-                var title = (text as NSString).substring(from: match.range.location + match.range.length)
-                if title.isEmpty {title = (text as NSString).substring(to: match.range.location)}
-                if title.isEmpty {title = " "}
-                
                 switch match.resultType {
                 case .address: address.ranges.append(match.range)
                 case .date: event.ranges.append(match.range)
@@ -70,8 +66,7 @@ extension Detection where Self: BlockTableViewController {
     
     func interact(_ textView: UITextView, url: URL, range: NSRange) -> Bool {
         guard let text = textView.text, !text.isEmpty else {return true}
-        var title = (text as NSString).substring(from: range.location + range.length)
-        if title.isEmpty {title = (text as NSString).substring(to: range.location)}
+        let title = (text as NSString).replacingCharacters(in: range, with: "")
         let target = (text as NSString).substring(with: range)
         
         guard let dataDetector = target.dataDetector else {return true}
@@ -104,7 +99,7 @@ extension Detection where Self: BlockTableViewController {
             eventAuth(check: url.absoluteString) {
                 switch url.absoluteString {
                 case DETECT_EVENT:
-                    self.eventAlert(DETECT_EVENT, target, title) {
+                    self.eventAlert(DETECT_EVENT, eventDate, title) {
                         let eventStore = EKEventStore()
                         let event = EKEvent(eventStore: eventStore)
                         event.title = $0
@@ -119,7 +114,7 @@ extension Detection where Self: BlockTableViewController {
                         }
                     }
                 case DETECT_REMINDER:
-                    self.eventAlert(DETECT_REMINDER, target, title) {
+                    self.eventAlert(DETECT_REMINDER, eventDate, title) {
                         let eventStore = EKEventStore()
                         let reminder = EKReminder(eventStore: eventStore)
                         reminder.title = $0
@@ -172,9 +167,11 @@ extension Detection where Self: BlockTableViewController {
         present(alert, animated: true)
     }
     
-    private func eventAlert(_ type: String, _ target: String, _ title: String, saveHandler: @escaping ((String) -> ())) {
+    private func eventAlert(_ type: String, _ target: Date, _ title: String, saveHandler: @escaping ((String) -> ())) {
         let alertTitle = (type == DETECT_EVENT) ? "이벤트 등록" : "미리알림 등록"
-        let alert = UIAlertController(title: alertTitle, message: target, preferredStyle: .alert)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy. M. d. aa h:mm"
+        let alert = UIAlertController(title: alertTitle, message: formatter.string(from: target), preferredStyle: .alert)
         alert.addTextField(configurationHandler: { textField in
             textField.clearButtonMode = .always
             textField.text = title

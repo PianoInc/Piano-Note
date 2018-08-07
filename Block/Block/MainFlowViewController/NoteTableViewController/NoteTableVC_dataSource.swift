@@ -110,9 +110,6 @@ extension NoteTableViewController {
         let delete = UIContextualAction(style: .normal, title:  "삭제", handler: {[weak self](ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
             note.deleteWithRelationshipIfNeeded()
-            
-            
-            
             success(true)
         })
         //        closeAction.image = UIImage(named: "tick")
@@ -122,9 +119,6 @@ extension NoteTableViewController {
         
         return UISwipeActionsConfiguration(actions: [delete, export])
     }
-    
-    
-    
 }
 
 extension NoteTableViewController {
