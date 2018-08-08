@@ -10,8 +10,8 @@ import UIKit
 
 class SettingHeaderView: UIView {
     
-    convenience init(width: CGFloat) {
-        self.init(frame: CGRect(x: 0, y: 0, width: width, height: width * 0.8))
+    convenience init(size: CGFloat) {
+        self.init(frame: CGRect(x: 0, y: 0, width: size, height: size))
         backgroundColor = .white
         guard let view = addSubviewIfNeeded(SettingHeaderDetailView.self) else {return}
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -26,7 +26,18 @@ class SettingHeaderView: UIView {
 
 class SettingHeaderDetailView: UIView {
     
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var upgradeLabel: UILabel!
+    @IBOutlet weak var trialButton: UIButton!
+    
     private var previousOffset: CGPoint = .zero
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        priceLabel.text = "setting_01".loc
+        upgradeLabel.text = "setting_02".loc
+        trialButton.setTitle("setting_03".loc, for: .normal)
+    }
     
 }
 

@@ -141,6 +141,11 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="priceLabel" destination="pd4-ay-85m" id="ShQ-L8-LPO"/>
+                <outlet property="trialButton" destination="WBg-f9-d5L" id="03T-Vo-hAU"/>
+                <outlet property="upgradeLabel" destination="MsU-Qe-y9L" id="4y4-9V-B0y"/>
+            </connections>
             <point key="canvasLocation" x="33.5" y="54"/>
         </view>
     </objects>
