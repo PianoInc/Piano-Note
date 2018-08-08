@@ -48,6 +48,19 @@ extension View {
         return nil
     }
     
+    internal func addSubviewIfNeeded<T: View>(_ type: T.Type) -> T? {
+        let type = String(describing: type)
+        if let view = self.viewWithTag(type.hashValue) as? T {return view}
+        
+        let nib = Nib(nibName: type, bundle: nil)
+        if let view = nib.instantiate(withOwner: nil, options: nil).first as? T {
+            view.tag = type.hashValue
+            addSubview(view)
+            return view
+        }
+        return nil
+    }
+    
 }
 
 extension UIView {

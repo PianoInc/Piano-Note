@@ -51,20 +51,22 @@ class AttachTypeTableViewController: UITableViewController {
         let request: NSFetchRequest<Block> = Block.fetchRequest()
         
         request.fetchBatchSize = 20
-        var predicate = ""
-        switch type {
-        case .address: predicate = "hasAddress == true"
-        case .checklist: predicate = "checklistTextBlock != nil"
-        case .contact: predicate = "hasContact == true"
-        case .event: predicate = "hasEvent == true"
-        case .link: predicate = "hasLink == true"
-        }
-        request.predicate = NSPredicate(format: "note IN %@ AND \(predicate)", notes)
+        request.predicate = predicate(with: type)
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Block.modifiedDate), ascending: false)]
         
         listVC.type = type
         listVC.navigationItem.title = "attach_0\(row)".loc
         listVC.resultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: "Attach_" + "attach_0\(row)".loc)
+    }
+    
+    private func predicate(with type: AttachType) -> NSPredicate {
+        switch type {
+        case .address: return NSPredicate(format: "note IN %@ AND hasAddress == true", notes)
+        case .checklist: return NSPredicate(format: "note IN %@ AND checklistTextBlock != nil", notes)
+        case .contact: return NSPredicate(format: "note IN %@ AND hasContact == true", notes)
+        case .event: return NSPredicate(format: "note IN %@ AND hasEvent == true", notes)
+        case .link: return NSPredicate(format: "note IN %@ AND hasLink == true", notes)
+        }
     }
     
 }
