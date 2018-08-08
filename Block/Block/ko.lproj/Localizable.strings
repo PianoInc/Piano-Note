@@ -23,3 +23,26 @@
 "attach_04" = "Link";
 "attach_05" = "Attachments";
 "attach_06" = "No have any Attachments.";
+
+"setting_00" = "Setting";
+"setting_01" = "1 month free trial, usd 2.29 per month";
+"setting_02" = "Piano Pro Upgrade";
+"setting_03" = "Free Trial";
+"setting_04" = "Typing";
+"setting_05" = "App";
+"setting_06" = "Notification";
+
+"setting_typing_00" = "Typewriter Mode";
+"setting_typing_01" = "Text Size and Width";
+"setting_typing_02" = "Capitalization";
+"setting_typing_03" = "Correction";
+"setting_typing_04" = "Smart Dashes";
+"setting_typing_05" = "Smart Insert";
+"setting_typing_06" = "Smart Quotes";
+"setting_typing_07" = "Spell Checking";
+
+"setting_app_00" = "Usage";
+"setting_app_01" = "Write a Review";
+"setting_app_02" = "Version & License";
+
+"setting_notification_00" = "Event Notification";

@@ -85,6 +85,7 @@ class FolderTableViewController: UITableViewController {
             vc.preferredDisplayMode = .allVisible
             vc.maximumPrimaryColumnWidth = 414
             vc.minimumPrimaryColumnWidth = 320
+            vc.navigationItem.title = "setting_00".loc
         }
     }
     
