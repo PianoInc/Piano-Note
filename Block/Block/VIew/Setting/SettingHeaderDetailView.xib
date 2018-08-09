@@ -42,6 +42,9 @@
                             <real key="value" value="14"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="actionWithTrial:" destination="iN0-l3-epB" eventType="touchUpInside" id="BcD-ZO-w7Z"/>
+                    </connections>
                 </button>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Bx-Kz-Wqd">
                     <rect key="frame" x="20" y="80" width="335" height="192"/>
@@ -51,7 +54,21 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xs8-3E-6Lh" userLabel="View1">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="192"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fv6-7h-kEQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="192"/>
+                                            <connections>
+                                                <action selector="actionWithDetail:" destination="iN0-l3-epB" eventType="touchUpInside" id="lD7-K2-zD7"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                     <color key="backgroundColor" red="0.78345424109999995" green="0.4941176471" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="fv6-7h-kEQ" firstAttribute="leading" secondItem="Xs8-3E-6Lh" secondAttribute="leading" id="2uf-HI-my3"/>
+                                        <constraint firstAttribute="bottom" secondItem="fv6-7h-kEQ" secondAttribute="bottom" id="M4B-RB-G0I"/>
+                                        <constraint firstItem="fv6-7h-kEQ" firstAttribute="top" secondItem="Xs8-3E-6Lh" secondAttribute="top" id="c3i-hE-gR4"/>
+                                        <constraint firstAttribute="trailing" secondItem="fv6-7h-kEQ" secondAttribute="trailing" id="t7c-K2-Cmg"/>
+                                    </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                             <real key="value" value="10"/>
@@ -60,7 +77,21 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XyO-HK-Bbi" userLabel="View2">
                                     <rect key="frame" x="345" y="0.0" width="335" height="192"/>
+                                    <subviews>
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4T2-FC-XHE">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="192"/>
+                                            <connections>
+                                                <action selector="actionWithDetail:" destination="iN0-l3-epB" eventType="touchUpInside" id="DTZ-D0-MoI"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                     <color key="backgroundColor" red="0.1375558036" green="1" blue="0.66755022320000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="4T2-FC-XHE" secondAttribute="bottom" id="Cii-cI-UQC"/>
+                                        <constraint firstAttribute="trailing" secondItem="4T2-FC-XHE" secondAttribute="trailing" id="eLc-v7-ZGT"/>
+                                        <constraint firstItem="4T2-FC-XHE" firstAttribute="top" secondItem="XyO-HK-Bbi" secondAttribute="top" id="nIW-yb-MSE"/>
+                                        <constraint firstItem="4T2-FC-XHE" firstAttribute="leading" secondItem="XyO-HK-Bbi" secondAttribute="leading" id="qAx-Yu-T2S"/>
+                                    </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                             <real key="value" value="10"/>
@@ -69,7 +100,21 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9te-fS-jXp" userLabel="View3">
                                     <rect key="frame" x="690" y="0.0" width="335" height="192"/>
+                                    <subviews>
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="48Y-zE-mQY">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="192"/>
+                                            <connections>
+                                                <action selector="actionWithDetail:" destination="iN0-l3-epB" eventType="touchUpInside" id="mun-3l-cF1"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="48Y-zE-mQY" secondAttribute="trailing" id="JuB-lL-uUf"/>
+                                        <constraint firstAttribute="bottom" secondItem="48Y-zE-mQY" secondAttribute="bottom" id="VRY-8v-2Pd"/>
+                                        <constraint firstItem="48Y-zE-mQY" firstAttribute="leading" secondItem="9te-fS-jXp" secondAttribute="leading" id="haP-ZK-PzM"/>
+                                        <constraint firstItem="48Y-zE-mQY" firstAttribute="top" secondItem="9te-fS-jXp" secondAttribute="top" id="m7g-bM-4DB"/>
+                                    </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                             <real key="value" value="10"/>

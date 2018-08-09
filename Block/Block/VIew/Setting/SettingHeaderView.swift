@@ -32,11 +32,22 @@ class SettingHeaderDetailView: UIView {
     
     private var previousOffset: CGPoint = .zero
     
+    var trialSelected: (() -> ())?
+    var detailSelected: ((Int) -> ())?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         priceLabel.text = "setting_01".loc
         upgradeLabel.text = "setting_02".loc
         trialButton.setTitle("setting_03".loc, for: .normal)
+    }
+    
+    @IBAction private func action(trial: UIButton) {
+        trialSelected?()
+    }
+    
+    @IBAction private func action(detail: UIButton) {
+        detailSelected?(detail.tag)
     }
     
 }

@@ -32,6 +32,7 @@
 		49420E934747D47CE7A7E237177474FD /* SettingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF150F52E137528C93BC9507A1D14 /* SettingDetailTableViewController.swift */; };
 		4C7C3BAC369BD0858340F828A26E4F3C /* NSPersistentContainer_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD6106924C9368C67B0FE06297E61BF /* NSPersistentContainer_extension.swift */; };
 		4CF5FB546F87C8C56EE5F16802CDE6FD /* MarkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AADEB07B88C66FABA9077D06D2400E9 /* MarkTableViewController.swift */; };
+		4E012F7C6EE1D933D54E3BB08EFD5B91 /* SettingSubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F21CFF81C92E2ABDEB9712AAD1B76F /* SettingSubscribeViewController.swift */; };
 		4F5D157B8CC9DF7FB7C997C8C287EF57 /* BlockTableVC_keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D75FA8E7310CA23F71F114D8085EA9 /* BlockTableVC_keyboard.swift */; };
 		567802734F5A95ABF7B80DF69441F3E2 /* Block.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B52C1F77382585B87FAB91C0B7F86B0D /* Block.xcdatamodeld */; };
 		5796AC45FF1B897995445E7B6E14B234 /* FolderTableVC_state.swift in Sources */ = {isa = PBXBuildFile; fileRef = F120D872A3D185105F15F77E6F8CF065 /* FolderTableVC_state.swift */; };
@@ -151,6 +152,7 @@
 		33720B9B9DBB4DEFE9A1C14AF314FF0F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34AF01164A6C3A1730411C18FEC426E1 /* SettingHeaderDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SettingHeaderDetailView.xib; path = Block/VIew/Setting/SettingHeaderDetailView.xib; sourceTree = SOURCE_ROOT; };
 		3535607CDDE71A26C39A438C7E473031 /* TableViewAutoSystemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewAutoSystemProtocol.swift; sourceTree = "<group>"; };
+		39F21CFF81C92E2ABDEB9712AAD1B76F /* SettingSubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSubscribeViewController.swift; sourceTree = "<group>"; };
 		3AADEB07B88C66FABA9077D06D2400E9 /* MarkTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkTableViewController.swift; sourceTree = "<group>"; };
 		3EC2017EEB55EDA604B73943706EA227 /* Facebook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Facebook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D75FA8E7310CA23F71F114D8085EA9 /* BlockTableVC_keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableVC_keyboard.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				CFCEF150F52E137528C93BC9507A1D14 /* SettingDetailTableViewController.swift */,
+				39F21CFF81C92E2ABDEB9712AAD1B76F /* SettingSubscribeViewController.swift */,
 				23BB4A0854718BD99247A748525886A6 /* SettingTableViewController.swift */,
 			);
 			path = SettingTableViewController;
@@ -743,6 +746,7 @@
 				B5E8622DFFC472132DB6D5A8727FD54A /* SettingDetailTableViewCell.swift in Sources */,
 				49420E934747D47CE7A7E237177474FD /* SettingDetailTableViewController.swift in Sources */,
 				341F21BED7B876BCEB718A478DB94526 /* SettingHeaderView.swift in Sources */,
+				4E012F7C6EE1D933D54E3BB08EFD5B91 /* SettingSubscribeViewController.swift in Sources */,
 				42C73EA01F923A88B23D43B015CDD87E /* SettingTableViewCell.swift in Sources */,
 				A9303277F05F7EB64D014DB75B14B9A5 /* SettingTableViewController.swift in Sources */,
 				6BE618DA046E0170A006B11B44F893E9 /* SortTableViewController.swift in Sources */,
