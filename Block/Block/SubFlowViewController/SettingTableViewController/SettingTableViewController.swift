@@ -21,16 +21,31 @@ class SettingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.tableHeaderView = SettingHeaderView(size: headerSize)
+        let headerView = SettingHeaderView(size: headerSize)
+        tableView.tableHeaderView = headerView
+        guard let detailView = headerView.subView(SettingHeaderDetailView.self) else {return}
+        detailView.trialSelected = {
+            // TODO...
+        }
+        detailView.detailSelected = {
+            self.performSegue(withIdentifier: "SettingSubscribeViewController", sender: $0)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let naviVC = segue.destination as? UINavigationController else {return}
-        guard let detailVC = naviVC.viewControllers.first as? SettingDetailTableViewController else {return}
-        guard let type = sender as? String else {return}
+        if segue.identifier == "SettingDetailTableViewController" {
+            guard let naviVC = segue.destination as? UINavigationController else {return}
+            guard let detailVC = naviVC.viewControllers.first as? SettingDetailTableViewController else {return}
+            guard let type = sender as? String else {return}
+            detailVC.type = type
+            detailVC.navigationItem.title = type
+        } else if segue.identifier == "SettingSubscribeViewController" {
+            guard let subscribeVC = segue.destination as? SettingSubscribeViewController else {return}
+            guard let type = sender as? Int else {return}
+            subscribeVC.type = type
+            subscribeVC.navigationItem.title = "setting_subscribe_00".loc
+        }
         
-        detailVC.navigationItem.title = type
-        detailVC.type = type
     }
     
     @IBAction func tapCancel(_ sender: Any) {
