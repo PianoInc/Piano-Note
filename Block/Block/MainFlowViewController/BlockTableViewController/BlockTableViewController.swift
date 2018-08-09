@@ -21,14 +21,14 @@ class BlockTableViewController: UIViewController {
     private var delayBlockQueue: [() -> Void] = []
     internal var cursorCache: (indexPath: IndexPath, selectedRange: NSRange)?
     weak var searchedBlock: Block?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         switch resultsController {
         case .none:
             let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
             persistentContainer = container
-
+            
         case .some(_):
             guard let state = state else { return }
             updateViews(for: state)
@@ -36,7 +36,7 @@ class BlockTableViewController: UIViewController {
             setupTableView()
         }
     }
-
+    
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
         guard let note = note,
@@ -44,7 +44,7 @@ class BlockTableViewController: UIViewController {
         coder.encode(note.objectID.uriRepresentation(), forKey: "noteURI")
         coder.encode(state.rawValue, forKey: "BlockTableViewControllerState")
     }
-
+    
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
         if let url = coder.decodeObject(forKey: "noteURI") as? URL,
@@ -52,7 +52,7 @@ class BlockTableViewController: UIViewController {
             let decodeState = coder.decodeObject(forKey: "BlockTableViewControllerState") as? String,
             let id = persistentContainer.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url),
             let note = persistentContainer.viewContext.object(with: id) as? Note {
-
+            
             self.note = note
             self.state = ViewControllerState(rawValue: decodeState)
             resultsController = persistentContainer.viewContext.blockResultsController(note: note)
@@ -62,7 +62,7 @@ class BlockTableViewController: UIViewController {
             setupTableView()
         }
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         registerKeyboardNotification()
     }
@@ -77,7 +77,7 @@ class BlockTableViewController: UIViewController {
         deleteNoteIfNeeded()
         save()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delayBlockQueue.forEach{ $0() }
@@ -86,7 +86,7 @@ class BlockTableViewController: UIViewController {
             count == 0 {
             tapBackground("firstWriting")
         }
-
+        
         if let block = searchedBlock,
             let indexPath = resultsController?.indexPath(forObject: block) {
             tableView.scrollToRow(at: indexPath, at: .top, animated: true)
@@ -94,10 +94,18 @@ class BlockTableViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let nav = segue.destination as? UINavigationController,
-            let vc = nav.topViewController as? FolderPickerTableViewController, let barButtonItem = sender as? UIBarButtonItem {
-            vc.popoverPresentationController?.barButtonItem = barButtonItem
-            
+        if segue.identifier == "FolderPickerTableViewController" {
+            guard let naviVC = segue.destination as? UINavigationController else {return}
+            guard let folderVC = naviVC.topViewController as? FolderPickerTableViewController else {return}
+            guard let barButtonItem = sender as? UIBarButtonItem else {return}
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+
+            let context = appDelegate.persistentContainer.viewContext
+            let resultsController = context.folderResultsController()
+            resultsController.delegate = folderVC
+            folderVC.resultsController = resultsController
+            folderVC.note = note
+            folderVC.popoverPresentationController?.barButtonItem = barButtonItem
         }
     }
 }
@@ -115,7 +123,7 @@ extension BlockTableViewController {
             self?.tableView.reloadData()
         }
     }
-
+    
     private func syncFetchData() {
         do {
             try self.resultsController?.performFetch()
@@ -174,12 +182,12 @@ extension BlockTableViewController {
     internal func save() {
         persistentContainer?.viewContext.saveIfNeeded()
     }
-
+    
     // UIScrollViewDelegate
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         highlightSearchedBlock()
     }
-
+    
     internal func highlightSearchedBlock() {
         if let block = searchedBlock,
             let indexPath = resultsController?.indexPath(forObject: block) {
@@ -191,5 +199,3 @@ extension BlockTableViewController {
         }
     }
 }
-
-

@@ -269,15 +269,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" textLabel="yWE-w1-RHb" style="IBUITableViewCellStyleDefault" id="obd-pK-FRq">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" textLabel="yWE-w1-RHb" style="IBUITableViewCellStyleDefault" id="obd-pK-FRq">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="obd-pK-FRq" id="bng-Ja-mEG">
-                                    <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="커스텀 폴더 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yWE-w1-RHb">
-                                            <rect key="frame" x="16" y="0.0" width="319" height="43.5"/>
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
@@ -294,7 +294,11 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="onj-Hc-DW9"/>
-                        <barButtonItem title="New Folder" id="wl5-dO-Udk"/>
+                        <barButtonItem title="New Folder" id="wl5-dO-Udk">
+                            <connections>
+                                <action selector="newfolder:" destination="c1v-IH-88z" id="DqP-vB-FQI"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Folder" id="sw6-ov-qSk">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="4Kt-Wm-6sZ">
@@ -1993,7 +1997,7 @@
                     <connections>
                         <outlet property="tableView" destination="6yE-WC-Umq" id="cnx-1F-0eb"/>
                         <outlet property="tapGestureRecognizer" destination="AQo-dj-kB8" id="Wmw-m3-SSa"/>
-                        <segue destination="QGn-Fu-X3u" kind="popoverPresentation" popoverAnchorView="6yE-WC-Umq" id="GoG-GS-Ite">
+                        <segue destination="QGn-Fu-X3u" kind="popoverPresentation" identifier="FolderPickerTableViewController" popoverAnchorView="6yE-WC-Umq" id="GoG-GS-Ite">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                         <segue destination="ZfE-0y-VCy" kind="presentation" identifier="ImagePickerCollectionViewController" id="z6M-fZ-UVH"/>

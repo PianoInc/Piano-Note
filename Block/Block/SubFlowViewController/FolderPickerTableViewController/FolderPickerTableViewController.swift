@@ -7,77 +7,129 @@
 //
 
 import UIKit
+import CoreData
 
 class FolderPickerTableViewController: UITableViewController {
     
-    weak var BlockTableViewController: BlockTableViewController?
-
+    var note: Note?
+    var resultsController: NSFetchedResultsController<Folder>?
+    var context: NSManagedObjectContext {
+        return resultsController?.managedObjectContext ??
+            (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        DispatchQueue.main.async {
+            try? self.resultsController?.performFetch()
+            self.tableView.reloadData()
+            
+            self.toolbarItems?.last?.isEnabled = false
+            guard let fetchedObjects = self.resultsController?.fetchedObjects, !fetchedObjects.isEmpty else {return}
+            self.toolbarItems?.last?.isEnabled = true
+        }
     }
     
     @IBAction func tapDone(_ sender: UIBarButtonItem) {
-        
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
+    
+    @IBAction func newfolder(_ sender: UIBarButtonItem) {
+        showCreateFolderAlertVC()
+    }
+    
+    func showCreateFolderAlertVC() {
+        let alert = UIAlertController(title: "Add Folder".loc, message: "AddFolderMessage".loc, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel".loc, style: .cancel, handler: nil)
+        let ok = UIAlertAction(title: "Create".loc, style: .default) { action in
+            guard let text = alert.textFields?.first?.text else {return}
+            let lastOrder = self.resultsController?.fetchedObjects?.filter({$0.typeInteger == 3}).last?.order ?? 0
+            let newFolder = Folder(context: self.context)
+            newFolder.name = text
+            newFolder.order = lastOrder + 1
+            newFolder.folderType = .custom
+        }
+        ok.isEnabled = false
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        alert.addTextField { (textField) in
+            textField.returnKeyType = .done
+            textField.enablesReturnKeyAutomatically = true
+            textField.addTarget(self, action: #selector(self.textChanged), for: .editingChanged)
+        }
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func textChanged(sender: AnyObject) {
+        let tf = sender as! UITextField
+        var resp : UIResponder! = tf
+        while !(resp is UIAlertController) {resp = resp.next}
+        let alert = resp as! UIAlertController
+        guard let contain = resultsController?.fetchedObjects?.contains(where: {$0.name == tf.text}) else {return}
+        alert.actions[1].isEnabled = (tf.text != "") && !contain
+    }
+    
 }
 
 extension FolderPickerTableViewController {
-    // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return resultsController?.sections?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return resultsController?.sections?[section].numberOfObjects ?? 0
     }
     
-    /*
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let data = resultsController?.object(at: indexPath) else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell") else {return UITableViewCell()}
+        cell.textLabel?.text = data.name
+        return cell
+    }
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        guard let folder = resultsController?.sections?[indexPath.section].objects?[indexPath.row] as? Folder else {return}
+        note?.folder = folder
+    }
     
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
+}
+
+extension FolderPickerTableViewController: NSFetchedResultsControllerDelegate {
     
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
     
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .delete:
+            guard let indexPath = indexPath else {return}
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        case .insert:
+            guard let newIndexPath = newIndexPath else {return}
+            tableView.insertRows(at: [newIndexPath], with: .fade)
+        case .update:
+            guard let indexPath = indexPath, let folder = controller.object(at: indexPath) as? Folder,
+                let cell = tableView.cellForRow(at: indexPath) as? FolderTableViewCell else {return}
+            cell.data = folder
+        case .move:
+            guard let indexPath = indexPath, let newIndexPath = newIndexPath else {return}
+            tableView.moveRow(at: indexPath, to: newIndexPath)
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .delete: tableView.deleteSections(IndexSet(integersIn: sectionIndex...sectionIndex), with: .fade)
+        case .insert: tableView.insertSections(IndexSet(integersIn: sectionIndex...sectionIndex), with: .fade)
+        default: break
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
 }

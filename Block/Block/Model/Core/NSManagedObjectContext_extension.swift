@@ -143,11 +143,11 @@ extension NSManagedObjectContext {
                 
                 let lockedFolder = Folder(context: self)
                 lockedFolder.name = "Locked"
-                lockedFolder.typeInteger = 2
+                lockedFolder.typeInteger = 1
                 
                 let deletedFolder = Folder(context: self)
                 deletedFolder.name = "Recently Deleted"
-                deletedFolder.typeInteger = 3
+                deletedFolder.typeInteger = 2
                 
                 let note = Note(context: self)
                 note.title = "hello"

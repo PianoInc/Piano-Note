@@ -78,6 +78,5 @@ extension FolderTableViewController {
         
         present(alert, animated: true, completion: nil)
     }
-    
 
 }

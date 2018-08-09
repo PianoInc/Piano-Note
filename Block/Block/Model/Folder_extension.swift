@@ -12,9 +12,9 @@ extension Folder: TableDatable {
     
     enum FolderType: Int64 {
         case all = 0
-        case custom = 1
-        case locked = 2
-        case deleted = 3
+        case locked = 1
+        case deleted = 2
+        case custom = 3
     }
     
     var folderType: FolderType {
