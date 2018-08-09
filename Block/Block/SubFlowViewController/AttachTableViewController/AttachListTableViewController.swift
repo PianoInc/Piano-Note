@@ -49,6 +49,10 @@ class AttachListTableViewController: UITableViewController {
 
 extension AttachListTableViewController {
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return resultsController?.sections?.count ?? 0
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return resultsController?.sections?[section].numberOfObjects ?? 0
     }

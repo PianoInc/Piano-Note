@@ -35,7 +35,7 @@ class SettingTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SettingDetailTableViewController" {
             guard let naviVC = segue.destination as? UINavigationController else {return}
-            guard let detailVC = naviVC.viewControllers.first as? SettingDetailTableViewController else {return}
+            guard let detailVC = naviVC.topViewController as? SettingDetailTableViewController else {return}
             guard let type = sender as? String else {return}
             detailVC.type = type
             detailVC.navigationItem.title = type
